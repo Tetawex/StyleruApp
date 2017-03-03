@@ -1,6 +1,6 @@
 package org.styleru.styleruapp;
 
-import android.content.Intent;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -8,11 +8,32 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
+import android.app.FragmentTransaction;
+
+
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
+
+import org.styleru.styleruapp.fragments.FragmentDirect;
+import org.styleru.styleruapp.fragments.FragmentEvents;
+import org.styleru.styleruapp.fragments.FragmentPeople;
+import org.styleru.styleruapp.fragments.FragmentProjects;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+
+    FragmentDirect fdirect;
+    FragmentEvents fevents;
+    FragmentPeople fpeople;
+    FragmentProjects fprojects;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,17 +59,25 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        fdirect = new FragmentDirect();
+        fevents = new FragmentEvents();
+        fpeople = new FragmentPeople();
+        fprojects = new FragmentProjects();
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        if (drawer.isDrawerOpen(GravityCompat.START)) {
-//            drawer.closeDrawer(GravityCompat.START);
-//        } else {
-//            super.onBackPressed();
-//        }
-//    }
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
 
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
@@ -77,22 +106,27 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        FragmentTransaction ftrans = getFragmentManager().beginTransaction();
+
 
         if (id == R.id.nav_people) {
+           ftrans.replace(R.id.container, fpeople);
 
         } else if (id == R.id.nav_projects) {
-            Intent intent = new Intent(getApplication(),Projects.class);
-            startActivity(intent);
-            finish();
+            ftrans.replace(R.id.container, fprojects);
+
         } else if (id == R.id.nav_direct) {
-
+            ftrans.replace(R.id.container, fdirect);
         } else if (id == R.id.nav_events) {
-
+            ftrans.replace(R.id.container, fevents);
 
         }
+        ftrans.commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 }
