@@ -2,20 +2,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@mipmap/avatar"
+            android:id="@+id/nav_people"
+            android:icon="@drawable/avatar"
             android:title="Люди" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@mipmap/screen_2"
+            android:id="@+id/nav_projects"
+            android:icon="@drawable/screen_2"
             android:title="Проекты" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@mipmap/explore_icon"
+            android:id="@+id/nav_direct"
+            android:icon="@drawable/explore_icon"
             android:title="Направления" />
         <item
-            android:id="@+id/nav_manage"
-            android:icon="@mipmap/monthly_calendar"
+            android:id="@+id/nav_events"
+            android:icon="@drawable/monthly_calendar"
             android:title="Мероприятия" />
 
 
