@@ -1,9 +1,8 @@
 package org.styleru.styleruapp.fragments;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +12,12 @@ import org.styleru.styleruapp.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link FragmentPeople.OnFragmentInteractionListener} interface
+ * {@link ProjectsFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link FragmentPeople#newInstance} factory method to
+ * Use the {@link ProjectsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentPeople extends Fragment {
+public class ProjectsFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,7 +29,7 @@ public class FragmentPeople extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public FragmentPeople() {
+    public ProjectsFragment() {
         // Required empty public constructor
     }
 
@@ -40,11 +39,11 @@ public class FragmentPeople extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentPeople.
+     * @return A new instance of fragment ProjectsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static FragmentPeople newInstance(String param1, String param2) {
-        FragmentPeople fragment = new FragmentPeople();
+    public static ProjectsFragment newInstance(String param1, String param2) {
+        ProjectsFragment fragment = new ProjectsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -65,7 +64,7 @@ public class FragmentPeople extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fragment_people, container, false);
+        return inflater.inflate(R.layout.fragment_fragment_projects, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

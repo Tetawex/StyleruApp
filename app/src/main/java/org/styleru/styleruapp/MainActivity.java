@@ -9,25 +9,24 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.app.FragmentTransaction;
 
 
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
-import org.styleru.styleruapp.fragments.FragmentDirect;
-import org.styleru.styleruapp.fragments.FragmentEvents;
-import org.styleru.styleruapp.fragments.FragmentPeople;
-import org.styleru.styleruapp.fragments.FragmentProjects;
+import org.styleru.styleruapp.fragments.DirectionsFragment;
+import org.styleru.styleruapp.fragments.EventsFragment;
+import org.styleru.styleruapp.fragments.PeopleFragment;
+import org.styleru.styleruapp.fragments.ProjectsFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
 
-    FragmentDirect fdirect;
-    FragmentEvents fevents;
-    FragmentPeople fpeople;
-    FragmentProjects fprojects;
+    DirectionsFragment fdirect;
+    EventsFragment fevents;
+    PeopleFragment fpeople;
+    ProjectsFragment fprojects;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -60,10 +59,10 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        fdirect = new FragmentDirect();
-        fevents = new FragmentEvents();
-        fpeople = new FragmentPeople();
-        fprojects = new FragmentProjects();
+        fdirect = new DirectionsFragment();
+        fevents = new EventsFragment();
+        fpeople = new PeopleFragment();
+        fprojects = new ProjectsFragment();
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
@@ -106,7 +105,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        FragmentTransaction ftrans = getFragmentManager().beginTransaction();
+        final android.support.v4.app.FragmentTransaction ftrans = getSupportFragmentManager().beginTransaction();
 
 
         if (id == R.id.nav_people) {
