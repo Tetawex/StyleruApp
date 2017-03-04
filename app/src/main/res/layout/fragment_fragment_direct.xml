@@ -1,36 +1,30 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_height="match_parent"
-    android:background="#ccddffff"
-    tools:context="org.styleru.styleruapp.fragments.DirectionsFragment">
-
-    <!-- TODO: Update blank fragment layout -->
+    android:layout_width="match_parent"
+    android:paddingTop="0dp">
     <ScrollView
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
-        android:background="@drawable/directbut"
         android:layout_width="match_parent"
-        android:layout_height="150dp">
-       <LinearLayout
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-           android:layout_height="wrap_content"
-           android:layout_width="40dp"
-           android:text="asd">
-       </TextView>
-           <LinearLayout
-               android:layout_height="wrap_content"
-               android:layout_width="wrap_content"
-               android:orientation="vertical"
-               android:background="#F2F211">
-           </LinearLayout>
-
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp">
+            <include
+                android:id="@+id/d1"
+                layout="@layout/card_direct"
+                />
+            <include
+                android:id="@+id/d1"
+                layout="@layout/card_direct"
+                />
+            <include
+                android:id="@+id/d1"
+                layout="@layout/card_direct"
+                />
         </LinearLayout>
-
     </ScrollView>
-
 </FrameLayout>
