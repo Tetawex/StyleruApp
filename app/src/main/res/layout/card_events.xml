@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:paddingTop="10dp"
             android:layout_height="35dp"
-            android:background="@drawable/topround"
+
             android:text="Общая встреча организации"
             android:textSize="18dp"
             android:textColor="#1f545d"
@@ -83,7 +83,7 @@
                         android:layout_width="20dp"
                         android:layout_marginLeft="10dp"
                         android:layout_height="match_parent"
-                        android:background="@drawable/calendar"/>
+                        android:background="@drawable/monthly_calendar"/>
                 <TextView
 
                     android:layout_width="match_parent"
@@ -140,12 +140,16 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/rightbotround"
                 android:orientation="horizontal">
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
             <TextView
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:textColor="#1f545d"
                 android:paddingLeft="10dp"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:layout_width="70dp"
 
                 android:layout_height="match_parent"
@@ -157,9 +161,13 @@
                     android:layout_height="20dp"
                     android:layout_gravity="center"
                     android:background="@drawable/run_baybe"/>
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
             
             </LinearLayout>
-            </LinearLayout>
+        </LinearLayout>
 
 
 

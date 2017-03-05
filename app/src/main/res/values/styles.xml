@@ -25,8 +25,13 @@
         <!--<item name="android:imeActionId">6</item>-->
     <!--</style>-->
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textColorPrimary">@color/colorDarkCyan</item>
+        <item name="android:textColorSecondary">@color/colorDarkCyan</item>
+        <item name="actionMenuTextColor">@color/colorDarkCyan</item>
+    </style>
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
+    </style>
 
 </resources>
