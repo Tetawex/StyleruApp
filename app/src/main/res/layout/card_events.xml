@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="360dp"
+    app:cardBackgroundColor="#FFFFFF"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="2dp"
+    android:layout_marginRight="15dp"
+    app:cardCornerRadius="20dp"
+    android:layout_marginLeft="15dp">
+
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:paddingTop="10dp"
+            android:layout_height="35dp"
+            android:background="@drawable/topround"
+            android:text="Общая встреча организации"
+            android:textSize="18dp"
+            android:textColor="#1f545d"
+            android:textStyle="bold"
+            android:paddingLeft="20dp"
+
+            />
+        <LinearLayout
+            android:layout_height="150dp"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="#a9a9a9">
+            <TextView
+                android:layout_marginTop="10dp"
+                android:textColor="#FFFFFF"
+                android:layout_width="match_parent"
+                android:layout_height="18dp"
+
+                android:text="10 февраля,"
+                android:gravity="center"/>
+            <TextView
+                android:layout_marginTop="7dp"
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:text="10:00"
+                android:textColor="#60d0d1"
+                android:gravity="center"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:textSize="25dp"
+                android:textColor="#FFFFFF"
+                android:text="Общая встреча     организации"
+                android:gravity="center"/>
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingRight="18dp"
+                android:text="By Аня Подображных"
+                android:textStyle="italic"
+                android:gravity="right"/>
+        <LinearLayout
+           android:orientation="horizontal"
+            android:paddingTop="20dp"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+            <LinearLayout
+                android:layout_width="180dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/leftbotround"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="19dp"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/calendar"/>
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="5dp"
+                    android:text="10 февраля"
+                    android:gravity="bottom"
+                    android:textColor="#1f545d"
+                   />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="19dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/explore_icon"/>
+                <TextView
+                    android:paddingLeft="5dp"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="10:00"
+                    android:textColor="#1f545d"
+                    />
+                    </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="19dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_height="15dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/position"/>
+                <TextView
+                    android:paddingLeft="12dp"
+
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:text="Кирпичная, 33"
+                    android:textColor="#1f545d"
+                    />
+                        </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/rightbotround"
+                android:orientation="horizontal">
+            <TextView
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="#1f545d"
+                android:paddingLeft="10dp"
+                android:textSize="18dp"
+                android:layout_width="70dp"
+
+                android:layout_height="match_parent"
+
+                android:text="Пойду" />
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/run_baybe"/>
+            
+            </LinearLayout>
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+
+
+
+
+
+
+
+    </android.support.v7.widget.CardView>
