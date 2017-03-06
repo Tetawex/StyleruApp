@@ -1,30 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="360dp"
+    android:layout_height="wrap_content"
     app:cardBackgroundColor="#FFFFFF"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginTop="2dp"
-    android:layout_marginRight="15dp"
-    app:cardCornerRadius="20dp"
-    android:layout_marginLeft="15dp">
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginLeft="16dp"
+    app:cardCornerRadius="20dp">
 
     <LinearLayout android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
         <TextView
             android:layout_width="match_parent"
-            android:paddingTop="10dp"
-            android:layout_height="35dp"
-
+            android:layout_margin="4dp"
+            android:layout_height="wrap_content"
             android:text="Общая встреча организации"
-            android:textSize="18dp"
-            android:textColor="#1f545d"
+            android:textSize="18sp"
+            android:textColor="@color/colorDarkCyan"
             android:textStyle="bold"
-            android:paddingLeft="20dp"
+            android:paddingLeft="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="0dp"/>
 
-            />
-        <LinearLayout
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:scaleType = "centerCrop"
+            android:padding="16dp"
+            android:layout_margin="4dp"
+            android:layout_gravity="center"
+            android:src="@drawable/placeholder_sample"
+            android:id="@+id/imageView" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:paddingRight="16dp"
+            android:text="By Аня Подображных"
+            android:textStyle="italic"
+            android:gravity="right|center"/>
+
+        <!--<LinearLayout
             android:layout_height="150dp"
             android:layout_width="match_parent"
             android:orientation="vertical"
@@ -64,81 +85,86 @@
                 android:text="By Аня Подображных"
                 android:textStyle="italic"
                 android:gravity="right"/>
+                -->
         <LinearLayout
            android:orientation="horizontal"
-            android:paddingTop="20dp"
-            android:layout_height="match_parent"
+            android:layout_height="96dp"
             android:layout_width="match_parent">
             <LinearLayout
-                android:layout_width="180dp"
+                android:layout_width="176dp"
                 android:layout_height="match_parent"
-                android:background="@drawable/leftbotround"
+                android:background="@color/colorPrimary"
+                android:paddingLeft="16dp"
                 android:orientation="vertical">
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="19dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_marginLeft="10dp"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_margin="4dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/calendar"/>
+                    <TextView
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/monthly_calendar"/>
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingLeft="5dp"
-                    android:text="10 февраля"
-                    android:gravity="bottom"
-                    android:textColor="#1f545d"
-                   />
+                        android:paddingLeft="0dp"
+                        android:text="10 февраля"
+                        android:gravity="left|center"
+                        android:textColor="@color/colorDarkCyan" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="19dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_marginLeft="10dp"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_margin="4dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/oval4"/>
+                    <TextView
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/explore_icon"/>
-                <TextView
-                    android:paddingLeft="5dp"
-
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="10:00"
-                    android:textColor="#1f545d"
-                    />
-                    </LinearLayout>
+                        android:paddingLeft="0dp"
+                        android:text="10:00"
+                        android:textSize="20sp"
+                        android:gravity="left|center"
+                        android:textColor="#1f545d" />
+                </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="19dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <ImageView
-                        android:layout_width="10dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_height="15dp"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
                         android:layout_gravity="center"
-                        android:background="@drawable/position"/>
-                <TextView
-                    android:paddingLeft="12dp"
+                        android:layout_margin="4dp"
+                        android:src="@drawable/position"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingLeft="0dp"
+                        android:text="Кирпичная, 33"
+                        android:gravity="left|center"
+                        android:textColor="@color/colorDarkCyan" />
+                </LinearLayout>
 
-                    android:layout_height="match_parent"
-                    android:layout_width="match_parent"
-                    android:text="Кирпичная, 33"
-                    android:textColor="#1f545d"
-                    />
-                        </LinearLayout>
-
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/rightbotround"
+                android:background="@color/colorPrimaryDark"
                 android:orientation="horizontal">
                 <Space
                     android:layout_width="0dp"
@@ -147,25 +173,24 @@
             <TextView
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:textColor="#1f545d"
-                android:paddingLeft="10dp"
-                android:textSize="18sp"
-                android:layout_width="70dp"
+                android:textColor="@color/colorDarkCyan"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
 
-                android:layout_height="match_parent"
-
-                android:text="Пойду" />
+                android:layout_height="wrap_content"
+                android:textStyle=""
+                android:text="@string/go" />
+                <!--Не уверен, писать капсом или нет, можем потом обсудить еще-->
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_height="20dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_gravity="center"
-                    android:background="@drawable/run_baybe"/>
+                    android:src="@drawable/run_baybe"/>
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_weight="1"/>
-            
+
             </LinearLayout>
         </LinearLayout>
 
@@ -175,10 +200,4 @@
         </LinearLayout>
 
 
-
-
-
-
-
-
-    </android.support.v7.widget.CardView>
+</android.support.v7.widget.CardView>

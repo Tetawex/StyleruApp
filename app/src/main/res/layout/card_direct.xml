@@ -1,58 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="180dp"
+    android:layout_height="wrap_content"
     app:cardBackgroundColor="#f7f7f7"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginTop="5dp"
-    android:layout_marginRight="2dp"
-    app:cardCornerRadius="10dp"
-
-    android:layout_marginLeft="2dp">
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    app:cardCornerRadius="10dp">
 
     <LinearLayout android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="110dp"
+            android:layout_width="0dp"
+            android:layout_weight="0.4"
             android:layout_height="match_parent"
             android:layout_marginLeft="0dp"
-            android:background="@drawable/leftround">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="35dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="35dp"
+            android:gravity="center"
+            android:background="#E1E100">
+            <ImageView
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:scaleType="fitCenter"
                 android:background="@drawable/circle">
-            </LinearLayout>
+            </ImageView>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="0.6"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingRight="10dp"
+            android:paddingRight="16dp"
             android:layout_marginLeft="0dp"
             android:background="#FFFFFF">
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
                 android:text="Проектный отдел"
                 android:layout_marginTop="8dp"
                 android:textColor="#2dc6c4"
                android:gravity="right"
-                android:textSize="19dp"/>
+                android:textSize="16sp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:text="Аня Подображных"
                 android:gravity="right"
-                android:textSize="17dp"
+                android:textSize="16sp"
                 android:layout_marginTop="18dp"
                 android:textAppearance="@style/TextAppearance.AppCompat"
                 android:fontFamily="sans-serif" />
@@ -78,7 +78,8 @@
                 android:layout_gravity="right"
                 android:text="Подробнее"
                 android:textColor="#FFFFFF"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:textStyle="italic"
                 android:textSize="16dp"
                 android:background="@drawable/round"
