@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
 import org.ocpsoft.prettytime.PrettyTime;
 import org.styleru.styleruapp.R;
 import org.styleru.styleruapp.model.dto.EventsItem;
@@ -44,8 +45,10 @@ public class EventsRecyclerAdapter extends BaseRecyclerAdapter<EventsItem> {
         EventsItem item= getData().get(position);
         EventsViewHolder holder=(EventsViewHolder) uncastedHolder;
 
-        //Надо отрефакторить
-        holder.date.setText(new PrettyTime().format(new DateTime(item.getDateTime()).toDate()));
+        DateTime itemDateTime=new DateTime(item.getDateTime());
+
+        String fullDateTimeString=itemDateTime.toString(DateTimeFormat.longDate());
+        holder.date.setText(fullDateTimeString.substring(0, fullDateTimeString.length() - 8));
 
         holder.time.setText(new DateTime(item.getDateTime()).toString("HH:mm"));
         holder.location.setText(item.getLocation());
