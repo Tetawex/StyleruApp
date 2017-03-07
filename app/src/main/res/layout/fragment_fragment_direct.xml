@@ -1,30 +1,30 @@
 <FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_height="match_parent"
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:orientation="vertical"
+android:layout_height="match_parent"
+android:layout_width="match_parent"
+android:paddingTop="0dp">
+<ScrollView
     android:layout_width="match_parent"
-    android:paddingTop="0dp">
-    <ScrollView
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:paddingLeft="0dp"
-            android:paddingRight="0dp">
-            <include
-                android:id="@+id/d1"
-                layout="@layout/card_direct"
-                />
-            <include
-                android:id="@+id/d1"
-                layout="@layout/card_direct"
-                />
-            <include
-                android:id="@+id/d1"
-                layout="@layout/card_direct"
-                />
-        </LinearLayout>
-    </ScrollView>
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp">
+        <include
+            android:id="@+id/d1"
+            layout="@layout/card_direct"
+            />
+        <include
+            android:id="@+id/d1"
+            layout="@layout/card_direct"
+            />
+        <include
+            android:id="@+id/d1"
+            layout="@layout/card_direct"
+            />
+    </LinearLayout>
+</ScrollView>
 </FrameLayout>
