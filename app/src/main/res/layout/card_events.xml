@@ -14,6 +14,8 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <TextView
+            android:id="@+id/title"
+
             android:layout_width="match_parent"
             android:layout_margin="4dp"
             android:layout_height="wrap_content"
@@ -26,16 +28,22 @@
             android:paddingBottom="0dp"/>
 
         <ImageView
+            android:id="@+id/image"
+
             android:layout_width="match_parent"
-            android:layout_height="160dp"
+            android:layout_height="176dp"
             android:scaleType = "centerCrop"
-            android:padding="16dp"
+            android:paddingTop="16dp"
+            android:paddingRight="16dp"
+            android:paddingLeft="16dp"
+            android:paddingBottom="0dp"
             android:layout_margin="4dp"
             android:layout_gravity="center"
-            android:src="@drawable/placeholder_sample"
-            android:id="@+id/imageView" />
+            android:src="@drawable/placeholder_sample" />
 
         <TextView
+            android:id="@+id/subtitle"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -111,6 +119,8 @@
                         android:layout_gravity="center"
                         android:src="@drawable/calendar"/>
                     <TextView
+                        android:id="@+id/date"
+
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:paddingLeft="0dp"
@@ -129,6 +139,8 @@
                         android:layout_gravity="center"
                         android:src="@drawable/oval4"/>
                     <TextView
+                        android:id="@+id/time"
+
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:paddingLeft="0dp"
@@ -148,6 +160,8 @@
                         android:layout_margin="4dp"
                         android:src="@drawable/position"/>
                     <TextView
+                        android:id="@+id/location"
+
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:paddingLeft="0dp"

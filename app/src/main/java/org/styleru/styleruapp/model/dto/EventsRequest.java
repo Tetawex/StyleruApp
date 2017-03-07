@@ -8,6 +8,11 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class EventsRequest {
+    public EventsRequest(String token, int batchSize, int offset) {
+        this.token = token;
+        this.batchSize = batchSize;
+        this.offset = offset;
+    }
 
     @SerializedName("token")
     @Expose

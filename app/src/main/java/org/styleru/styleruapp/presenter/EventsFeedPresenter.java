@@ -5,5 +5,6 @@ package org.styleru.styleruapp.presenter;
  */
 
 public interface EventsFeedPresenter extends Presenter{
-
+    void onEventsAppend(int offset,int batchSize);
+    void onEventsUpdate(int batchSize);
 }
