@@ -8,7 +8,7 @@
     android:layout_marginBottom="8dp"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
-    app:cardCornerRadius="10dp">
+    app:cardCornerRadius="15dp">
 
     <LinearLayout android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,7 +20,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="0dp"
             android:gravity="center"
-            android:background="#E1E100">
+            android:background="@drawable/leftround">
             <ImageView
                 android:layout_width="96dp"
                 android:layout_height="96dp"

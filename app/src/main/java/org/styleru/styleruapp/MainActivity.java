@@ -1,6 +1,5 @@
 package org.styleru.styleruapp;
 
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -9,7 +8,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-
 
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -27,6 +25,7 @@ public class MainActivity extends AppCompatActivity
     EventsFragment fevents;
     PeopleFragment fpeople;
     ProjectsFragment fprojects;
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -129,3 +128,28 @@ public class MainActivity extends AppCompatActivity
 
 
 }
+//    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//    setSupportActionBar(toolbar);
+//
+//
+//    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//    ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+//            this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//drawer.setDrawerListener(toggle);
+//        toggle.syncState();
+//
+//        if (id == R.id.nav_people) {
+//        ftrans.replace(R.id.container, fpeople);
+//        toolbar.setTitle("Профиль человека");
+//        } else if (id == R.id.nav_projects) {
+//        ftrans.replace(R.id.container, fprojects);
+//        toolbar.setTitle("Проекты");
+//        } else if (id == R.id.nav_direct) {
+//        ftrans.replace(R.id.container, fdirect);
+//        toolbar.setTitle("Направления");
+//        } else if (id == R.id.nav_events) {
+//        ftrans.replace(R.id.container, fevents);
+//        toolbar.setTitle("Мероприятия");
+//
+//        }
+//        ftrans.commit();
