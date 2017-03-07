@@ -12,10 +12,10 @@ import android.view.MenuItem;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
-import org.styleru.styleruapp.fragments.DirectionsFragment;
-import org.styleru.styleruapp.fragments.EventsFragment;
-import org.styleru.styleruapp.fragments.PeopleFragment;
-import org.styleru.styleruapp.fragments.ProjectsFragment;
+import org.styleru.styleruapp.view.fragments.DirectionsFragment;
+import org.styleru.styleruapp.view.fragments.EventsFragment;
+import org.styleru.styleruapp.view.fragments.PeopleFragment;
+import org.styleru.styleruapp.view.fragments.ProjectsFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
