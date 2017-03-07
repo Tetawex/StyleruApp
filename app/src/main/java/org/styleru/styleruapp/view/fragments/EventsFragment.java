@@ -3,44 +3,26 @@ package org.styleru.styleruapp.view.fragments;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import org.styleru.styleruapp.R;
-import org.styleru.styleruapp.model.dto.EventsItem;
 import org.styleru.styleruapp.presenter.EventsFeedPresenter;
 import org.styleru.styleruapp.presenter.EventsFeedPresenterImpl;
-import org.styleru.styleruapp.util.EndlessRecyclerViewScrollListener;
 import org.styleru.styleruapp.view.EventsView;
-import org.styleru.styleruapp.view.adapter.recycler.EventsRecyclerAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
- * A screen responsible for viewing event feed, implements corresponding interface
+ * A screen responsible for viewing event feed, implements corresponding interfaace
  */
 public class EventsFragment extends Fragment implements EventsView {
-    private static final int DEFAULT_BATCH_SIZE=5;
+
     private EventsFeedPresenter presenter;
     private OnFragmentInteractionListener mListener;
-    private EndlessRecyclerViewScrollListener recyclerViewScrollListener;
-    private EventsRecyclerAdapter recyclerAdapter;
-
-    @BindView(R.id.recycler)
-    protected RecyclerView recyclerView;
-    @BindView(R.id.swipe)
-    protected SwipeRefreshLayout swipeRefreshLayout;
-
 
     public EventsFragment() {
+        // Required empty public constructor
+        presenter=new EventsFeedPresenterImpl(this);
     }
 
     public static EventsFragment newInstance() {
@@ -56,41 +38,8 @@ public class EventsFragment extends Fragment implements EventsView {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_fragment_events, container, false);
-        ButterKnife.bind(this,view);
-        //Адаптер
-        //Тут можно сделать поддержку вертикальной ориентации, использовав GridLayoutManager
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        //Адаптер для ресайклера
-        recyclerAdapter=new EventsRecyclerAdapter(getContext(),new ArrayList<EventsItem>());
-        recyclerView.setAdapter(recyclerAdapter);
-
-        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark,
-                R.color.colorPrimary);
-
-        //Добавляем листенер для ресайклера, чтобы понять, когда загружать новый фид
-        recyclerViewScrollListener = new EndlessRecyclerViewScrollListener(
-                (LinearLayoutManager) recyclerView.getLayoutManager()) {
-            @Override
-            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-                presenter.onEventsAppend(recyclerAdapter.getItemCount(),DEFAULT_BATCH_SIZE);
-            }
-        };
-        recyclerView.addOnScrollListener(recyclerViewScrollListener);
-
-        //Рефреш-лэйаут сверху
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh()
-            {
-                presenter.onEventsUpdate(DEFAULT_BATCH_SIZE);
-
-            }
-        });
-        presenter=new EventsFeedPresenterImpl(this);
-        presenter.onEventsUpdate(DEFAULT_BATCH_SIZE);
-        return view;
-
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_fragment_events, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -100,20 +49,30 @@ public class EventsFragment extends Fragment implements EventsView {
         }
     }
 
-    /*@Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }*/
+//    @Override
+//    public void onAttach(Context context) {
+//        super.onAttach(context);
+//        if (context instanceof OnFragmentInteractionListener) {
+//            mListener = (OnFragmentInteractionListener) context;
+//        } else {
+//            throw new RuntimeException(context.toString()
+//                    + " must implement OnFragmentInteractionListener");
+//        }
+//    }
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void appendData(int offset, int batchSize) {
+
+    }
+
+    @Override
+    public void updateData(int batchSize) {
+
     }
 
     @Override
@@ -131,22 +90,16 @@ public class EventsFragment extends Fragment implements EventsView {
 
     }
 
-    @Override
-    public void appendData(List<EventsItem> data) {
-        recyclerAdapter.appendDataWithNotify(data);
-    }
-
-    @Override
-    public void setData(List<EventsItem> data) {
-        recyclerAdapter.setDataWithNotify(data);
-    }
-
-    public void onDataUpdated()
-    {
-        swipeRefreshLayout.setRefreshing(false);
-        recyclerViewScrollListener.resetState();
-    }
-
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     * <p>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
