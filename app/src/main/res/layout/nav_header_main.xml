@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="120dp"
+    android:layout_height="wrap_content"
     android:background="#FFFFFF"
     android:gravity="bottom"
     android:orientation="horizontal"
@@ -12,51 +12,59 @@
     android:paddingTop="0dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     android:weightSum="1">
-
-
    <LinearLayout
-       android:paddingTop="25dp"
+       android:layout_marginTop="48dp"
+       android:layout_marginBottom="24dp"
+       android:layout_marginLeft="@dimen/anya_margin"
        android:layout_width="wrap_content"
-       android:layout_height="match_parent">
-
-   <LinearLayout android:layout_height="60dp"
-       android:layout_marginTop="5dp"
-       android:paddingTop="20dp"
-       android:paddingLeft="20dp"
-       android:layout_width="60dp"
-       android:background="@drawable/circle">
-
-
-
-   </LinearLayout>
-   <LinearLayout
-       android:layout_width="wrap_content"
-       android:layout_height="80dp"
-       android:orientation="vertical">
-
-      <TextView android:layout_height="40dp"
-          android:paddingTop="10dp"
+       android:layout_height="match_parent"
+       android:orientation="horizontal">
+      <LinearLayout
           android:layout_width="wrap_content"
-          android:paddingLeft="20dp"
+          android:layout_height="wrap_content">
+         <Space
+             android:layout_width="0dp"
+             android:layout_height="0dp"
+             android:layout_weight="1"/>
+      <FrameLayout
+         android:background="@drawable/circle_gray"
+         android:layout_height="48dp"
+         android:layout_width="48dp">
+      </FrameLayout>
+         <Space
+             android:layout_width="0dp"
+             android:layout_height="0dp"
+             android:layout_weight="1"/>
+      </LinearLayout>
+   <LinearLayout
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginLeft="16dp"
+       android:orientation="vertical">
+      <Space
+          android:layout_width="0dp"
+          android:layout_height="0dp"
+          android:layout_weight="1"/>
+      <TextView
+          android:layout_height="wrap_content"
+          android:layout_width="wrap_content"
           android:text="Аня"
-          android:textSize="21dp"
+          android:textSize="20sp"
           android:textColor="#435c60"
           android:id="@+id/your_name">
          </TextView>
-      <TextView android:layout_height="40dp"
+      <TextView
+          android:layout_height="wrap_content"
           android:layout_width="wrap_content"
-          android:paddingLeft="18dp"
           android:text="+7(980)688-58-58"
-          android:textSize="15dp"
+          android:textSize="16sp"
           android:textColor="#6acdc6"
           android:id="@+id/your_phone">
       </TextView>
-
-
-
-
-
-
+      <Space
+          android:layout_width="0dp"
+          android:layout_height="0dp"
+          android:layout_weight="1"/>
    </LinearLayout>
    </LinearLayout>
 </LinearLayout>

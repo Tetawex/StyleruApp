@@ -4,8 +4,8 @@
     android:layout_height="wrap_content"
     app:cardBackgroundColor="#FFFFFF"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginTop="8dp"
-    android:layout_marginBottom="8dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginBottom="0dp"
     android:layout_marginRight="16dp"
     android:layout_marginLeft="16dp"
     app:cardPreventCornerOverlap="false"
@@ -43,12 +43,12 @@
             android:layout_marginTop="10dp"
             android:text="Иванов Иван Иванович"
             android:textStyle="bold"
-            android:textSize="14dp"
+            android:textSize="14sp"
             android:textColor="#436060"
             android:gravity="right"/>
         <TextView android:layout_width="match_parent"
             android:layout_height="18dp"
-            android:textSize="13dp"
+            android:textSize="13sp"
             android:layout_marginTop="3dp"
             android:text="Веб-дизайнер"
             android:textStyle="normal"
@@ -59,44 +59,9 @@
             android:layout_marginTop="0dp"
             android:text=" +7(980)688-58-58"
             android:textStyle="normal"
-            android:textSize="14dp"
+            android:textSize="14sp"
             android:textColor="#436060"
             android:gravity="right"/>
-
-
-
-
-
-
-
-
-
-
-
-
-
     </LinearLayout>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       </LinearLayout>
     </android.support.v7.widget.CardView>
