@@ -52,7 +52,7 @@ public class EventsRecyclerAdapter extends BaseRecyclerAdapter<EventsItem> {
 
         holder.time.setText(new DateTime(item.getDateTime()).toString("HH:mm"));
         holder.location.setText(item.getLocation());
-        if(item.getImageUrl()!="") {
+        if(!(item.getImageUrl()).equals("")) {
             Glide
                     .with(context)
                     .load(item.getImageUrl())

@@ -32,12 +32,18 @@ public class TestEventsModelImpl implements EventsModel {
             item.setTitle("Общая встреча организации");
             item.setSubtitle("By Аня Подображных");
             item.setId(id);
-            
-            item.setImageUrl("");
-            if(random.nextBoolean())
+
+            int r=random.nextInt(4);
+            if(r==1)
                 item.setImageUrl("http://1fichier.com/?zou0jfiprx");
+            else if(r==2)
+                item.setImageUrl("https://1fichier.com/?knglu55wha");
+            else if(r==3)
+                item.setImageUrl("https://1fichier.com/?df9sro0hk4");
+            else
+                item.setImageUrl("");
             item.setLocation("Кирпичная, 33");
-            item.setDateTime("2017-"+(random.nextInt(6)+3)+"-23T18:25:43.511Z");
+            item.setDateTime("2017-"+(random.nextInt(6)+3)+"-23T"+(random.nextInt(9)+10)+":00:43.511Z");
 
             return item;
 
