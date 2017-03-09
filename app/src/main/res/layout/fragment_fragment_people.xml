@@ -1,29 +1,36 @@
 <FrameLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_height="match_parent"
     android:layout_width="match_parent">
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_height="match_parent"
+        <!--<LinearLayout-->
+            <!--android:orientation="vertical"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:paddingLeft="0dp"-->
+            <!--android:paddingRight="0dp">-->
+            <!--<include-->
+                <!--android:id="@+id/d1"-->
+                <!--layout="@layout/card_people"-->
+                <!--/>-->
+            <!--<include-->
+                <!--android:id="@+id/d1"-->
+                <!--layout="@layout/card_people"-->
+                <!--/>-->
+            <!--<include-->
+                <!--android:id="@+id/d1"-->
+                <!--layout="@layout/card_people"-->
+                <!--/>-->
+        <!--</LinearLayout>-->
+        <android.support.design.widget.TabLayout
             android:layout_width="match_parent"
-            android:paddingLeft="0dp"
-            android:paddingRight="0dp">
-            <include
-                android:id="@+id/d1"
-                layout="@layout/card_people"
-                />
-            <include
-                android:id="@+id/d1"
-                layout="@layout/card_people"
-                />
-            <include
-                android:id="@+id/d1"
-                layout="@layout/card_people"
-                />
-        </LinearLayout>
-    </ScrollView>
+            android:layout_height="wrap_content"
+            android:id="@+id/tabLayout"
+            app:tabGravity="fill">
+        </android.support.design.widget.TabLayout>
+        <android.support.v4.view.ViewPager
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/viewPager"></android.support.v4.view.ViewPager>
 </FrameLayout>
