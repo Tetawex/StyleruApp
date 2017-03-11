@@ -2,10 +2,11 @@ package org.styleru.styleruapp.view.fragments;
 
 import android.net.Uri;
 import android.os.Bundle;
-
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,9 @@ public class PeopleFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    AllPeopleFragment frag1;
+    PersonFragment frag2;
+    FragmentTransaction fTrans;
     TabLayout tabLayout;
     ViewPager viewPager;
     ViewPagerAdapter viewPagerAdapter;
@@ -60,8 +64,10 @@ public class PeopleFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
+
             mParam2 = getArguments().getString(ARG_PARAM2);
 
         }
@@ -70,13 +76,13 @@ public class PeopleFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_fragment_people, container, false);
         tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
         viewPager = (ViewPager) view.findViewById(R.id.viewPager);
         viewPagerAdapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
         viewPagerAdapter.addFragments(new PersonFragment(),"Мой профиль");
         viewPagerAdapter.addFragments(new AllPeopleFragment(),"Все люди");
-
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
 
@@ -104,11 +110,31 @@ public class PeopleFragment extends Fragment {
 //        }
 //    }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
+
+
+@Override
+public void onDestroyView() {
+    super.onDestroyView();
+
+    Log.d("FRAG","desview1");
+    viewPagerAdapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
+    Log.d("FRAG","fr1");
+
+    Log.d("FRAG","fr2");
+    viewPagerAdapter.destroyItem(new PersonFragment());
+    viewPagerAdapter.destroyItem(new AllPeopleFragment());
+    Log.d("FRAG","desview2");
+    getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
+    tabLayout.setupWithViewPager(viewPager);
+
+//
+}
+
+//    @Override
+//    public void onDetach() {
+//        super.onDetach();
+//        mListener = null;
+//    }
 
     /**
      * This interface must be implemented by activities that contain this
