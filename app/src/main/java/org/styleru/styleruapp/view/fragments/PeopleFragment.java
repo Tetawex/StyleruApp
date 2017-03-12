@@ -6,11 +6,13 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.styleru.styleruapp.MainActivity;
 import org.styleru.styleruapp.R;
 import org.styleru.styleruapp.view.adapter.tab.ViewPagerAdapter;
 
@@ -78,6 +80,13 @@ public class PeopleFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_fragment_people, container, false);
+        MainActivity activity = (MainActivity) getActivity();
+        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
+        activity.setSupportActionBar(toolbar);
+        activity.getSupportActionBar().show();
+        toolbar.setTitle("Люди");
+
+
         tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
         viewPager = (ViewPager) view.findViewById(R.id.viewPager);
         viewPagerAdapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
@@ -124,8 +133,8 @@ public void onDestroyView() {
     viewPagerAdapter.destroyItem(new PersonFragment());
     viewPagerAdapter.destroyItem(new AllPeopleFragment());
     Log.d("FRAG","desview2");
-    getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
-    tabLayout.setupWithViewPager(viewPager);
+//    getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
+//    tabLayout.setupWithViewPager(viewPager);
 
 //
 }

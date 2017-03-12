@@ -4,7 +4,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -15,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.styleru.styleruapp.MainActivity;
 import org.styleru.styleruapp.R;
 
 /**
@@ -78,20 +78,22 @@ public class DirectionsFragment extends Fragment{
 //        activity.setSupportActionBar(toolbarInstance);
         Log.d("FRAME","2");
         View view = inflater.inflate(R.layout.fragment_fragment_direct, container, false);
-        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-        Log.d("FRAME","3");
+        MainActivity activity = (MainActivity) getActivity();
+        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
+        activity.setSupportActionBar(toolbar);
+        activity.getSupportActionBar().show();
 
+
+        toolbar.setTitle("Направления");
+        Log.d("FRAME","3");
         //set toolbar appearance
 
         //for crate home button
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        activity.setSupportActionBar(toolbar);
         Log.d("FRAME","4");
 
-        if(activity.getSupportActionBar() != null){
-            Log.d("FRAME","+");
-        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);}
-        Log.d("FRAME","5");
+
+
+
         return view;
 
     }
@@ -143,7 +145,8 @@ public boolean onOptionsItemSelected(MenuItem item) {
         // TODO Add your menu entries here
 
 Log.d("FRAME","1");
-        MenuInflater inflater1 = getActivity().getMenuInflater();
+        MainActivity activity = (MainActivity) getActivity();
+        MenuInflater inflater1 = activity.getMenuInflater();
         menu.add(2, 4, 4,"item4").setCheckable(true);
         Log.d("FRAME","1");
         inflater1.inflate(R.menu.main, menu);

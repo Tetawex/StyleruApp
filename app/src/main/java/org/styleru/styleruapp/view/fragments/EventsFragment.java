@@ -6,10 +6,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.styleru.styleruapp.MainActivity;
 import org.styleru.styleruapp.R;
 import org.styleru.styleruapp.model.dto.EventsItem;
 import org.styleru.styleruapp.presenter.EventsFeedPresenter;
@@ -57,6 +59,14 @@ public class EventsFragment extends Fragment implements EventsView {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_fragment_events, container, false);
+        MainActivity activity = (MainActivity) getActivity();
+        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
+        activity.setSupportActionBar(toolbar);
+        activity.getSupportActionBar().show();
+        toolbar.setTitle("События");
+
+
+
         ButterKnife.bind(this,view);
         //Адаптер
         //Тут можно сделать поддержку вертикальной ориентации, использовав GridLayoutManager
