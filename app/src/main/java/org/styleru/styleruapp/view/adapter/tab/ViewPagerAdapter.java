@@ -5,25 +5,23 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.ArrayList;
-
+import java.util.List;
 
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {
-    ArrayList<Fragment> fragments = new ArrayList<>();
-    ArrayList<String> tabTitles = new ArrayList<>();
+    private List<Fragment> fragments = new ArrayList<>();
+    private List<String> tabTitles = new ArrayList<>();
 
-    public void addFragments(Fragment fragments, String titles) {
+    public void addFragments(Fragment fragment, String title) {
 
-        this.fragments.add(fragments);
-        this.tabTitles.add(titles);
+        this.fragments.add(fragment);
+        this.tabTitles.add(title);
 
     }
 
 
     public ViewPagerAdapter(FragmentManager fm) {
         super(fm);
-
-
     }
 
     @Override
@@ -42,7 +40,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     }
 
 
-    public void destroyItem(Fragment fragments) {
-        this.fragments.remove(fragments);
+    public void destroyItem(Fragment fragment) {
+        this.fragments.remove(fragment);
     }
 }

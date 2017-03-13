@@ -16,6 +16,7 @@ import org.styleru.styleruapp.R;
 import org.styleru.styleruapp.model.dto.EventsItem;
 import org.styleru.styleruapp.presenter.EventsFeedPresenter;
 import org.styleru.styleruapp.presenter.EventsFeedPresenterImpl;
+import org.styleru.styleruapp.presenter.EventsViewHolderListener;
 import org.styleru.styleruapp.util.EndlessRecyclerViewScrollListener;
 import org.styleru.styleruapp.view.EventsView;
 import org.styleru.styleruapp.view.adapter.recycler.EventsRecyclerAdapter;
@@ -29,12 +30,13 @@ import butterknife.ButterKnife;
 /**
  * A screen responsible for viewing event feed, implements corresponding interface
  */
-public class EventsFragment extends Fragment implements EventsView {
-    private static final int DEFAULT_BATCH_SIZE=5;
-    private EventsFeedPresenter presenter;
+public class EventsFragment extends Fragment implements EventsView{
+    private static final int DEFAULT_BATCH_SIZE=5;//глобальные переменные - признак некачественного кода
     private OnFragmentInteractionListener mListener;
     private EndlessRecyclerViewScrollListener recyclerViewScrollListener;
     private EventsRecyclerAdapter recyclerAdapter;
+
+    private EventsFeedPresenter presenter;
 
     @BindView(R.id.recycler)
     protected RecyclerView recyclerView;
@@ -151,11 +153,21 @@ public class EventsFragment extends Fragment implements EventsView {
         recyclerAdapter.setDataWithNotify(data);
     }
 
+    @Override
+    public void changeEventState(int id) {
+
+    }
+
     public void onDataUpdated()
     {
         swipeRefreshLayout.setRefreshing(false);
         recyclerViewScrollListener.resetState();
     }
+
+    /*@Override
+    public void onGoButtonClicked(boolean desiredStatus, int serverId, int viewId) {
+
+    }*/
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name

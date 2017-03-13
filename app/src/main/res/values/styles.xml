@@ -24,7 +24,10 @@
         <!--<item name="queryHint">@string/search_hint</item>-->
         <!--<item name="android:imeActionId">6</item>-->
     <!--</style>-->
-
+    <style name="AttendantsListButton" parent="Theme.AppCompat">
+        <item name="colorButtonNormal">@color/colorPrimary</item>
+        <item name="colorControlHighlight">@color/colorAccent</item>
+    </style>
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:textColorPrimary">@color/colorDarkCyan</item>
         <item name="android:textColorSecondary">@color/colorDarkCyan</item>

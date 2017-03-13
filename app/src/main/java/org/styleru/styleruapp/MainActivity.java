@@ -18,14 +18,21 @@ import org.styleru.styleruapp.view.fragments.EventsFragment;
 import org.styleru.styleruapp.view.fragments.PeopleFragment;
 import org.styleru.styleruapp.view.fragments.ProjectsFragment;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private DirectionsFragment fdirect;
+    private EventsFragment fevents;
+    private PeopleFragment fpeople;
+    private ProjectsFragment fprojects;
 
-    DirectionsFragment fdirect;
-    EventsFragment fevents;
-    PeopleFragment fpeople;
-    ProjectsFragment fprojects;
+    @BindView(R.id.toolbar)
+    public Toolbar toolbar;
+    @BindView(R.id.drawer_layout)
+    public DrawerLayout drawer;
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -38,8 +45,8 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle("АКТИВИТИ");
 
@@ -53,7 +60,6 @@ public class MainActivity extends AppCompatActivity
 //            }
 //        });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         toggle.setDrawerIndicatorEnabled(true);

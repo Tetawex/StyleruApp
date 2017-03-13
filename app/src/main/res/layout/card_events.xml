@@ -11,35 +11,35 @@
     app:cardPreventCornerOverlap="false"
     app:cardCornerRadius="15dp">
 
-    <LinearLayout android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <TextView
             android:id="@+id/title"
 
             android:layout_width="match_parent"
-            android:layout_margin="4dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
             android:text="Общая встреча организации"
-            android:textSize="18sp"
             android:textColor="@color/colorDarkCyan"
-            android:textStyle="bold"
-            android:paddingLeft="16dp"
-            android:paddingTop="8dp"
-            android:paddingBottom="0dp"/>
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/image"
 
-            android:layout_width="match_parent"
-            android:layout_height="176dp"
-            android:scaleType = "centerCrop"
-            android:paddingTop="16dp"
-            android:paddingRight="16dp"
-            android:paddingLeft="16dp"
-            android:paddingBottom="0dp"
-            android:layout_margin="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:adjustViewBounds="true"
+            android:paddingBottom="0dp"
+            android:scaleType="fitCenter"
             android:src="@drawable/placeholder_sample" />
 
         <TextView
@@ -47,13 +47,22 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="right|center"
             android:paddingRight="16dp"
             android:text="By Аня Подображных"
-            android:textStyle="italic"
-            android:gravity="right|center"/>
+            android:textStyle="italic" />
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="#C4EDEE"
+            android:textAllCaps="false"
+            android:text="Списки пришедших на мероприятие" />
         <!--<LinearLayout
             android:layout_height="150dp"
             android:layout_width="match_parent"
@@ -96,123 +105,139 @@
                 android:gravity="right"/>
                 -->
         <LinearLayout
-           android:orientation="horizontal"
+            android:layout_width="match_parent"
             android:layout_height="96dp"
-            android:layout_width="match_parent">
+            android:orientation="horizontal">
+
             <LinearLayout
-                android:layout_width="176dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@drawable/leftbotround"
-                android:paddingLeft="16dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingLeft="16dp">
+
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" />
+
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <ImageView
                         android:layout_width="16dp"
                         android:layout_height="16dp"
-                        android:layout_margin="4dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/calendar"/>
+                        android:layout_margin="4dp"
+                        android:src="@drawable/calendar" />
+
                     <TextView
                         android:id="@+id/date"
 
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:gravity="left|center"
                         android:paddingLeft="0dp"
                         android:text="10 февраля"
-                        android:gravity="left|center"
                         android:textColor="@color/colorDarkCyan" />
                 </LinearLayout>
+
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <ImageView
                         android:layout_width="16dp"
                         android:layout_height="16dp"
-                        android:layout_margin="4dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/oval4"/>
+                        android:layout_margin="4dp"
+                        android:src="@drawable/oval4" />
+
                     <TextView
                         android:id="@+id/time"
 
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:gravity="left|center"
                         android:paddingLeft="0dp"
                         android:text="10:00"
-                        android:textSize="15sp"
-                        android:gravity="left|center"
-                        android:textColor="#1f545d" />
+                        android:textColor="#1f545d"
+                        android:textSize="15sp" />
                 </LinearLayout>
+
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <ImageView
                         android:layout_width="16dp"
                         android:layout_height="16dp"
                         android:layout_gravity="center"
                         android:layout_margin="4dp"
-                        android:src="@drawable/position"/>
+                        android:src="@drawable/position" />
+
                     <TextView
                         android:id="@+id/location"
 
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:paddingLeft="0dp"
-                        android:text="Кирпичная, 33"
+                        android:layout_marginRight="16dp"
                         android:gravity="left|center"
+                        android:text="Старая Басманная, 33"
                         android:textColor="@color/colorDarkCyan" />
                 </LinearLayout>
 
                 <Space
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
             </LinearLayout>
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/rightbotround"
-                android:orientation="horizontal">
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"/>
-            <TextView
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:textColor="@color/colorDarkCyan"
-                android:textSize="16sp"
-                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/background_button_go_0"
+                    android:clickable="true"
+                    android:orientation="horizontal">
 
-                android:layout_height="wrap_content"
-                android:textStyle=""
-                android:text="@string/go" />
-                <!--Не уверен, писать капсом или нет, можем потом обсудить еще-->
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/run_baybe"/>
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"/>
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
 
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="@string/go"
+
+                        android:textColor="@color/colorDarkCyan"
+                        android:textSize="16sp"
+                        android:textStyle="" />
+                    <!--Не уверен, писать капсом или нет, можем потом обсудить еще-->
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/run_baybe" />
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+                </LinearLayout>
+            </FrameLayout>
         </LinearLayout>
 
 
-
-
-        </LinearLayout>
+    </LinearLayout>
 
 
 </android.support.v7.widget.CardView>

@@ -54,6 +54,11 @@ public class EventsFeedPresenterImpl implements EventsFeedPresenter {
     }
 
     @Override
+    public void onEventStatusChange(int id, boolean desiredStatus) {
+
+    }
+
+    @Override
     public void onStop() {
 
     }
