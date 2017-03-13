@@ -15,7 +15,6 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 import org.styleru.styleruapp.view.fragments.DirectionsFragment;
 import org.styleru.styleruapp.view.fragments.EventsFragment;
-import org.styleru.styleruapp.view.fragments.MainPageFragment;
 import org.styleru.styleruapp.view.fragments.PeopleFragment;
 import org.styleru.styleruapp.view.fragments.ProjectsFragment;
 
@@ -27,7 +26,6 @@ public class MainActivity extends AppCompatActivity
     EventsFragment fevents;
     PeopleFragment fpeople;
     ProjectsFragment fprojects;
-    MainPageFragment fmain;
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -58,6 +56,7 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        toggle.setDrawerIndicatorEnabled(true);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
@@ -68,9 +67,8 @@ public class MainActivity extends AppCompatActivity
         fevents = new EventsFragment();
         fpeople = new PeopleFragment();
         fprojects = new ProjectsFragment();
-        fmain = new MainPageFragment();
         final android.support.v4.app.FragmentTransaction ftrans = getSupportFragmentManager().beginTransaction();
-        ftrans.add(R.id.container, fmain);
+        ftrans.add(R.id.container, fevents);
         ftrans.commit();
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -117,18 +115,14 @@ public class MainActivity extends AppCompatActivity
 
 
         if (id == R.id.nav_people) {
-            ftrans.remove(fmain);
            ftrans.replace(R.id.container, fpeople);
 
         } else if (id == R.id.nav_projects) {
-            ftrans.remove(fmain);
             ftrans.replace(R.id.container, fprojects);
 
         } else if (id == R.id.nav_direct) {
-            ftrans.remove(fmain);
             ftrans.replace(R.id.container, fdirect);
         } else if (id == R.id.nav_events) {
-            ftrans.remove(fmain);
             ftrans.replace(R.id.container, fevents);
 
         }

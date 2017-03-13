@@ -82,8 +82,6 @@ public class PeopleFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_fragment_people, container, false);
         MainActivity activity = (MainActivity) getActivity();
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
-        activity.setSupportActionBar(toolbar);
-        activity.getSupportActionBar().show();
         toolbar.setTitle("Люди");
 
 
