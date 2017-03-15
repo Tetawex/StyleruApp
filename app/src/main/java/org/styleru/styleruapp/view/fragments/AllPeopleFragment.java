@@ -32,7 +32,7 @@ public class AllPeopleFragment extends Fragment {
         Log.d("FRAG","people");
         setHasOptionsMenu(true);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_allpeople, container, false);
+        return inflater.inflate(R.layout.fragment_profile_all, container, false);
     }
     @Override
     public void onDestroyView() {

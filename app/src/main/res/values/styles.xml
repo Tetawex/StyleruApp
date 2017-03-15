@@ -29,9 +29,9 @@
         <item name="colorControlHighlight">@color/colorAccent</item>
     </style>
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
-        <item name="android:textColorPrimary">@color/colorDarkCyan</item>
-        <item name="android:textColorSecondary">@color/colorDarkCyan</item>
-        <item name="actionMenuTextColor">@color/colorDarkCyan</item>
+        <item name="android:textColorPrimary">@color/colorPrimaryDarker</item>
+        <item name="android:textColorSecondary">@color/colorPrimaryDarker</item>
+        <item name="actionMenuTextColor">@color/colorPrimaryDarker</item>
     </style>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">

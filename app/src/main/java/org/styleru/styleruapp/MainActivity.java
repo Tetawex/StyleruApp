@@ -23,11 +23,10 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
-    private DirectionsFragment fdirect;
-    private EventsFragment fevents;
-    private PeopleFragment fpeople;
-    private ProjectsFragment fprojects;
+    private DirectionsFragment directionsFragment;
+    private EventsFragment eventsFragment;
+    private PeopleFragment peopleFragment;
+    private ProjectsFragment projectsFragment;
 
     @BindView(R.id.toolbar)
     public Toolbar toolbar;
@@ -51,15 +50,6 @@ public class MainActivity extends AppCompatActivity
         toolbar.setTitle("АКТИВИТИ");
 
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         toggle.setDrawerIndicatorEnabled(true);
@@ -69,13 +59,14 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        fdirect = new DirectionsFragment();
-        fevents = new EventsFragment();
-        fpeople = new PeopleFragment();
-        fprojects = new ProjectsFragment();
-        final android.support.v4.app.FragmentTransaction ftrans = getSupportFragmentManager().beginTransaction();
-        ftrans.add(R.id.container, fevents);
-        ftrans.commit();
+        directionsFragment = new DirectionsFragment();
+        eventsFragment = new EventsFragment();
+        peopleFragment = new PeopleFragment();
+        projectsFragment = new ProjectsFragment();
+        final android.support.v4.app.FragmentTransaction transaction
+                = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, new EventsFragment());
+        transaction.commit();
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
@@ -117,22 +108,22 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        final android.support.v4.app.FragmentTransaction ftrans = getSupportFragmentManager().beginTransaction();
-
+        final android.support.v4.app.FragmentTransaction transaction
+                = getSupportFragmentManager().beginTransaction();
 
         if (id == R.id.nav_people) {
-           ftrans.replace(R.id.container, fpeople);
+           transaction.replace(R.id.container, new PeopleFragment());
 
         } else if (id == R.id.nav_projects) {
-            ftrans.replace(R.id.container, fprojects);
+            transaction.replace(R.id.container, new ProjectsFragment());
 
         } else if (id == R.id.nav_direct) {
-            ftrans.replace(R.id.container, fdirect);
+            transaction.replace(R.id.container, new DirectionsFragment());
         } else if (id == R.id.nav_events) {
-            ftrans.replace(R.id.container, fevents);
+            transaction.replace(R.id.container, new EventsFragment());
 
         }
-        ftrans.commit();
+        transaction.commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -152,16 +143,16 @@ public class MainActivity extends AppCompatActivity
 //        toggle.syncState();
 //
 //        if (id == R.id.nav_people) {
-//        ftrans.replace(R.id.container, fpeople);
+//        ftrans.replace(R.id.container, peopleFragment);
 //        toolbar.setTitle("Профиль человека");
 //        } else if (id == R.id.nav_projects) {
-//        ftrans.replace(R.id.container, fprojects);
+//        ftrans.replace(R.id.container, projectsFragment);
 //        toolbar.setTitle("Проекты");
 //        } else if (id == R.id.nav_direct) {
-//        ftrans.replace(R.id.container, fdirect);
+//        ftrans.replace(R.id.container, directionsFragment);
 //        toolbar.setTitle("Направления");
 //        } else if (id == R.id.nav_events) {
-//        ftrans.replace(R.id.container, fevents);
+//        ftrans.replace(R.id.container, eventsFragment);
 //        toolbar.setTitle("Мероприятия");
 //
 //        }

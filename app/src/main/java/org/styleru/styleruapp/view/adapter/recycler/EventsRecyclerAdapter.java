@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
@@ -52,17 +53,21 @@ public class EventsRecyclerAdapter extends BaseRecyclerAdapter<EventsItem> {
 
         holder.time.setText(new DateTime(item.getDateTime()).toString("HH:mm"));
         holder.location.setText(item.getLocation());
+        holder.image.setAdjustViewBounds(true);
         if(!(item.getImageUrl()).equals("")) {
+            holder.image.setVisibility(View.VISIBLE);
             Glide
-                    .with(context)//Загрузка изображения внутри адаптера - это неправильное архитектурное решение, возможно, следует подыскать другого разработчика для выполнения данного проекта т.к. текущий совершенно не разбирается в паттерне MVP и в архитектуре вообще
+                    .with(context)
                     .load(item.getImageUrl())
-                    .placeholder(R.color.colorPrimary)
+                    .placeholder(R.drawable.placeholder_loading)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .into(holder.image);
         }
-        else holder.image.setVisibility(View.GONE);
+        else
+            holder.image.setVisibility(View.GONE);
     }
 
-    static class EventsViewHolder extends RecyclerView.ViewHolder {
+    class EventsViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.title)
         TextView title;
 
