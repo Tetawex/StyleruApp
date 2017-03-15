@@ -83,15 +83,18 @@ public class PeopleFragment extends Fragment {
         MainActivity activity = (MainActivity) getActivity();
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         toolbar.setTitle("Люди");
-
-
         tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
         viewPager = (ViewPager) view.findViewById(R.id.viewPager);
         viewPagerAdapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
+        Log.d("FRAG","supman");
         viewPagerAdapter.addFragments(new PersonFragment(),"Мой профиль");
+        Log.d("FRAG","adfr1");
         viewPagerAdapter.addFragments(new AllPeopleFragment(),"Все люди");
+        Log.d("FRAG","adfr2");
         viewPager.setAdapter(viewPagerAdapter);
+        Log.d("FRAG","adfr3");
         tabLayout.setupWithViewPager(viewPager);
+        Log.d("FRAG","adfr4");
 
 
 
