@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--<color name="colorPrimary">#C6F4F4</color>-->
-    <color name="colorPrimary">#ffffff</color>
-    <color name="colorPrimaryDark">#96c3c3</color>
+    <color name="colorPrimary">#C6F4F4</color>
+    <color name="colorPrimaryDark">#7CD2D2</color>
     <color name="colorAccent">#2DC6C4</color>
-    <color name="colorPrimaryDarker">#295D65</color>
 
-    <color name="colorImagePlaceholder">#F2F2F2</color>
-    <color name="colorFragmentBackground">#EEE</color>
+    <color name="colorDarkCyan">#295D65</color>
 </resources>

@@ -52,10 +52,8 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
         this.data.addAll(data);
         notifyDataSetChanged();
     }
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
+
+
     @Override
     public int getItemCount()
     {

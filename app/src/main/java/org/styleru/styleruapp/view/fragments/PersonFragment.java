@@ -24,7 +24,7 @@ public class PersonFragment extends Fragment {
                              Bundle savedInstanceState) {
         Log.d("FRAG","person");
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile_mine, container, false);
+        return inflater.inflate(R.layout.fragment_person, container, false);
     }
     @Override
     public void onStop() {

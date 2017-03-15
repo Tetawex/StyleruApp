@@ -32,8 +32,8 @@ public class EventsFeedPresenterImpl implements EventsFeedPresenter {
 
     @Override
     public void onEventsAppend(int offset, int batchSize) {
-        currentId=offset;
-        disposable = model.getData(new EventsRequest("87vg430f7g237fg283f",batchSize,currentId))
+        currentId+=batchSize;
+        disposable = model.getData(new EventsRequest("87vg430f7g237fg283f",currentId,batchSize))
                 // .flatMap(Observable::from)
                 //.toList()
                 .subscribe(response -> view.appendData(response.getData()),
@@ -43,30 +43,14 @@ public class EventsFeedPresenterImpl implements EventsFeedPresenter {
                                 disposable.dispose();
                             }
                         });
-        currentId+=batchSize;
+        view.onDataUpdated();
     }
 
     @Override
     public void onEventsUpdate(int batchSize) {
         currentId=0;
-        disposable = model.getData(new EventsRequest("87vg430f7g237fg283f",batchSize,currentId))
-                // .flatMap(Observable::from)
-                //.toList()
-                .subscribe(response ->
-                        {
-                            view.setData(response.getData());
-                            view.onDataUpdated();
-                        },
-                        throwable ->
-                        {
-                            view.showError(throwable);
-                        },
-                        () -> {
-                            if(!disposable.isDisposed()) {
-                                disposable.dispose();
-                            }
-                        });
-        currentId+=batchSize;
+        view.setData(new ArrayList<EventsItem>());
+        onEventsAppend(currentId,batchSize);
     }
 
     @Override

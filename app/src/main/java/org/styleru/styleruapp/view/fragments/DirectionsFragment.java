@@ -68,14 +68,14 @@ public class DirectionsFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 //        setHasOptionsMenu(true);
-//        View view = inflater.inflate(R.layout.fragment_departments, container, false);
+//        View view = inflater.inflate(R.layout.fragment_fragment_direct, container, false);
 //        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar) ;
 ////        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Направления");
 //        AppCompatActivity activity = (AppCompatActivity) getActivity();
 //
 //        activity.setSupportActionBar(toolbarInstance);
         Log.d("FRAME","2");
-        View view = inflater.inflate(R.layout.fragment_departments, container, false);
+        View view = inflater.inflate(R.layout.fragment_fragment_direct, container, false);
         MainActivity activity = (MainActivity) getActivity();
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         activity.setSupportActionBar(toolbar);
