@@ -4,7 +4,11 @@
     <item
         android:id="@+id/action_search"
         android:title="@android:string/search_go"
+<<<<<<< HEAD
         android:icon="@drawable/avatar"
+=======
+        android:icon="@drawable/ic_avatar"
+>>>>>>> parent of 2a60caa... Revert "Очень много изменений..."
         yourapp:showAsAction="always|collapseActionView"
         yourapp:actionViewClass="android.support.v7.widget.SearchView" />
     <item

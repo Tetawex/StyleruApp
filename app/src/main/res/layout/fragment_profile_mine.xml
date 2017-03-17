@@ -25,7 +25,11 @@
                          android:layout_height="0dp"
                          android:layout_weight="1"/>
                      <FrameLayout
+<<<<<<< HEAD:app/src/main/res/layout/fragment_person.xml
                          android:background="@drawable/circle_gray"
+=======
+                         android:background="@drawable/shape_circle_gray"
+>>>>>>> parent of 2a60caa... Revert "Очень много изменений...":app/src/main/res/layout/fragment_profile_mine.xml
                          android:layout_height="65dp"
                          android:layout_width="65dp">
                      </FrameLayout>

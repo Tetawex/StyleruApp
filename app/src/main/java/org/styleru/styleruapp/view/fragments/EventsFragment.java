@@ -29,9 +29,14 @@ import butterknife.ButterKnife;
 /**
  * A screen responsible for viewing event feed, implements corresponding interface
  */
+<<<<<<< HEAD
 public class EventsFragment extends Fragment implements EventsView {
     private static final int DEFAULT_BATCH_SIZE=5;
     private EventsFeedPresenter presenter;
+=======
+public class EventsFragment extends Fragment implements EventsView{
+    private static final int DEFAULT_BATCH_SIZE=10;//глобальные переменные - признак некачественного кода
+>>>>>>> parent of 2a60caa... Revert "Очень много изменений..."
     private OnFragmentInteractionListener mListener;
     private EndlessRecyclerViewScrollListener recyclerViewScrollListener;
     private EventsRecyclerAdapter recyclerAdapter;
@@ -58,7 +63,8 @@ public class EventsFragment extends Fragment implements EventsView {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_fragment_events, container, false);
+        super.onCreateView(inflater,container,savedInstanceState);
+        View view=inflater.inflate(R.layout.fragment_events, container, false);
         MainActivity activity = (MainActivity) getActivity();
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         activity.setSupportActionBar(toolbar);
@@ -100,7 +106,6 @@ public class EventsFragment extends Fragment implements EventsView {
         presenter=new EventsFeedPresenterImpl(this);
         presenter.onEventsUpdate(DEFAULT_BATCH_SIZE);
         return view;
-
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -148,6 +153,7 @@ public class EventsFragment extends Fragment implements EventsView {
 
     @Override
     public void setData(List<EventsItem> data) {
+        onDataUpdated();
         recyclerAdapter.setDataWithNotify(data);
     }
 

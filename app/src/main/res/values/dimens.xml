@@ -8,4 +8,11 @@
     <dimen name="fab_margin">60dp</dimen>
     <dimen name="anya_margin">16dp</dimen>
 
+    <dimen name="event_image_margin">16dp</dimen>
+    <dimen name="event_image_height">160dp</dimen>
+
+    <dimen name="primary_margin">8dp</dimen>
+    <dimen name="secondary_margin">16dp</dimen>
+    <dimen name="tertiary_margin">24dp</dimen>
+    <dimen name="quaternary_margin">48dp</dimen>
 </resources>

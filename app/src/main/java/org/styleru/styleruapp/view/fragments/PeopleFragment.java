@@ -79,7 +79,7 @@ public class PeopleFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_fragment_people, container, false);
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
         MainActivity activity = (MainActivity) getActivity();
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         toolbar.setTitle("Люди");

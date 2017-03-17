@@ -9,7 +9,7 @@
     android:layout_marginRight="16dp"
     android:layout_marginLeft="16dp"
     app:cardPreventCornerOverlap="false"
-    app:cardCornerRadius="15dp">
+    app:cardCornerRadius="2dp">
 
     <LinearLayout android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,6 +21,10 @@
             android:layout_margin="4dp"
             android:layout_height="wrap_content"
             android:text="Общая встреча организации"
+<<<<<<< HEAD
+=======
+            android:textColor="@color/colorPrimaryDarker"
+>>>>>>> parent of 2a60caa... Revert "Очень много изменений..."
             android:textSize="18sp"
             android:textColor="@color/colorDarkCyan"
             android:textStyle="bold"
@@ -32,11 +36,19 @@
             android:id="@+id/image"
 
             android:layout_width="match_parent"
+<<<<<<< HEAD
             android:layout_height="176dp"
             android:scaleType = "centerCrop"
             android:paddingTop="16dp"
             android:paddingRight="16dp"
             android:paddingLeft="16dp"
+=======
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/event_image_margin"
+            android:layout_marginRight="@dimen/event_image_margin"
+            android:adjustViewBounds="true"
+>>>>>>> parent of 2a60caa... Revert "Очень много изменений..."
             android:paddingBottom="0dp"
             android:layout_margin="4dp"
             android:layout_gravity="center"
@@ -44,7 +56,7 @@
 
         <TextView
             android:id="@+id/subtitle"
-
+            android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -54,6 +66,18 @@
             android:textStyle="italic"
             android:gravity="right|center"/>
 
+<<<<<<< HEAD
+=======
+        <!--<Button
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="#C4EDEE"
+            android:textAllCaps="false"
+            android:text="Списки пришедших на мероприятие" />-->
+>>>>>>> parent of 2a60caa... Revert "Очень много изменений..."
         <!--<LinearLayout
             android:layout_height="150dp"
             android:layout_width="match_parent"
@@ -102,9 +126,16 @@
             <LinearLayout
                 android:layout_width="176dp"
                 android:layout_height="match_parent"
+<<<<<<< HEAD
                 android:background="@drawable/leftbotround"
                 android:paddingLeft="16dp"
                 android:orientation="vertical">
+=======
+                android:background="@color/colorPrimary"
+                android:orientation="vertical"
+                android:paddingLeft="16dp">
+
+>>>>>>> parent of 2a60caa... Revert "Очень много изменений..."
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -117,8 +148,13 @@
                         android:layout_width="16dp"
                         android:layout_height="16dp"
                         android:layout_margin="4dp"
+<<<<<<< HEAD
                         android:layout_gravity="center"
                         android:src="@drawable/calendar"/>
+=======
+                        android:src="@drawable/ic_calendar" />
+
+>>>>>>> parent of 2a60caa... Revert "Очень много изменений..."
                     <TextView
                         android:id="@+id/date"
 
@@ -126,8 +162,12 @@
                         android:layout_height="match_parent"
                         android:paddingLeft="0dp"
                         android:text="10 февраля"
+<<<<<<< HEAD
                         android:gravity="left|center"
                         android:textColor="@color/colorDarkCyan" />
+=======
+                        android:textColor="@color/colorPrimaryDarker" />
+>>>>>>> parent of 2a60caa... Revert "Очень много изменений..."
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -137,8 +177,13 @@
                         android:layout_width="16dp"
                         android:layout_height="16dp"
                         android:layout_margin="4dp"
+<<<<<<< HEAD
                         android:layout_gravity="center"
                         android:src="@drawable/oval4"/>
+=======
+                        android:src="@drawable/ic_clock" />
+
+>>>>>>> parent of 2a60caa... Revert "Очень много изменений..."
                     <TextView
                         android:id="@+id/time"
 
@@ -146,9 +191,14 @@
                         android:layout_height="match_parent"
                         android:paddingLeft="0dp"
                         android:text="10:00"
+<<<<<<< HEAD
                         android:textSize="15sp"
                         android:gravity="left|center"
                         android:textColor="#1f545d" />
+=======
+                        android:textColor="@color/colorPrimaryDarker"
+                        android:textSize="15sp" />
+>>>>>>> parent of 2a60caa... Revert "Очень много изменений..."
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -159,7 +209,12 @@
                         android:layout_height="16dp"
                         android:layout_gravity="center"
                         android:layout_margin="4dp"
+<<<<<<< HEAD
                         android:src="@drawable/position"/>
+=======
+                        android:src="@drawable/ic_location" />
+
+>>>>>>> parent of 2a60caa... Revert "Очень много изменений..."
                     <TextView
                         android:id="@+id/location"
 
@@ -168,7 +223,12 @@
                         android:paddingLeft="0dp"
                         android:text="Кирпичная, 33"
                         android:gravity="left|center"
+<<<<<<< HEAD
                         android:textColor="@color/colorDarkCyan" />
+=======
+                        android:text="Старая Басманная, 33"
+                        android:textColor="@color/colorPrimaryDarker" />
+>>>>>>> parent of 2a60caa... Revert "Очень много изменений..."
                 </LinearLayout>
 
                 <Space
@@ -178,6 +238,7 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
+<<<<<<< HEAD
                 android:layout_height="match_parent"
                 android:background="@drawable/rightbotround"
                 android:orientation="horizontal">
@@ -191,6 +252,15 @@
                 android:textColor="@color/colorDarkCyan"
                 android:textSize="16sp"
                 android:layout_width="wrap_content"
+=======
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorPrimaryDark"
+                    android:clickable="true"
+                    android:orientation="horizontal">
+>>>>>>> parent of 2a60caa... Revert "Очень много изменений..."
 
                 android:layout_height="wrap_content"
                 android:textStyle=""
@@ -209,6 +279,18 @@
             </LinearLayout>
         </LinearLayout>
 
+<<<<<<< HEAD
+=======
+                        android:textColor="@color/colorPrimaryDarker"
+                        android:textSize="16sp"
+                        android:textStyle="" />
+                    <!--Не уверен, писать капсом или нет, можем потом обсудить еще-->
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_button_go_0" />
+>>>>>>> parent of 2a60caa... Revert "Очень много изменений..."
 
 
 
