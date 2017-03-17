@@ -27,7 +27,7 @@
                 android:layout_width="55dp"
                 android:layout_height="55dp"
                 android:scaleType="fitCenter"
-                android:background="@drawable/background_circle">
+                android:background="@drawable/circle">
             </ImageView>
         </LinearLayout>
     <LinearLayout

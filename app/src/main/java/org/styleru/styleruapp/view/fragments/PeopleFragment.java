@@ -9,9 +9,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -100,7 +97,6 @@ public class PeopleFragment extends Fragment {
         Log.d("FRAG","adfr4");
 
 
-
         // Inflate the layout for this fragment
         return view;
 
@@ -126,24 +122,23 @@ public class PeopleFragment extends Fragment {
 
 
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+@Override
+public void onDestroyView() {
+    super.onDestroyView();
 
-        Log.d("FRAG","desview1");
-        viewPagerAdapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
-        Log.d("FRAG","fr1");
+    Log.d("FRAG","desview1");
+    viewPagerAdapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
+    Log.d("FRAG","fr1");
 
-        Log.d("FRAG","fr2");
-        viewPagerAdapter.destroyItem(new PersonFragment());
-        viewPagerAdapter.destroyItem(new AllPeopleFragment());
-        Log.d("FRAG","desview2");
-    //    getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
-    //    tabLayout.setupWithViewPager(viewPager);
+    Log.d("FRAG","fr2");
+    viewPagerAdapter.destroyItem(new PersonFragment());
+    viewPagerAdapter.destroyItem(new AllPeopleFragment());
+    Log.d("FRAG","desview2");
+//    getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
+//    tabLayout.setupWithViewPager(viewPager);
 
-    //
-    }
-
+//
+}
 
 //    @Override
 //    public void onDetach() {

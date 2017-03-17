@@ -15,29 +15,19 @@ import io.reactivex.Observable;
  */
 
 public class TestEventsModelImpl implements EventsModel {
-    private TestEventsItemFactory testEventsItemFactory;
-
-    public TestEventsModelImpl() {
-        testEventsItemFactory = new TestEventsItemFactory();
-    }
-
     @Override
     public Observable<EventsResponse> getData(EventsRequest request) {
-        if(request.getOffset()<=5)
-            testEventsItemFactory.reset();
         EventsResponse eventsResponse=new EventsResponse();
         List<EventsItem> list=new ArrayList<EventsItem>();
         for(int i=0;i<request.getBatchSize();i++)
-            list.add(testEventsItemFactory.generateRandomItem(request.getOffset()+i));
+            list.add(TestEventsItemFactory.generateRandomItem(request.getOffset()+i));
         eventsResponse.setData(list);
         return Observable.just(eventsResponse);
     }
-    private class TestEventsItemFactory{
-        private Random random=new Random(1234);
-        public void reset(){
-            random=new Random(1234);
-        }
-        private EventsItem generateRandomItem(int id){
+    private static class TestEventsItemFactory{
+        private static EventsItem generateRandomItem(int id){
+            Random random=new Random();
+
             EventsItem item=new EventsItem();
             item.setTitle("Общая встреча организации");
             item.setSubtitle("By Аня Подображных");

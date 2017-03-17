@@ -54,9 +54,9 @@ public class EventsRecyclerAdapter extends BaseRecyclerAdapter<EventsItem> {
         holder.location.setText(item.getLocation());
         if(!(item.getImageUrl()).equals("")) {
             Glide
-                    .with(context)//Загрузка изображения внутри адаптера - это неправильное архитектурное решение, возможно, следует подыскать другого разработчика для выполнения данного проекта т.к. текущий совершенно не разбирается в паттерне MVP и в архитектуре вообще
+                    .with(context)
                     .load(item.getImageUrl())
-                    .placeholder(R.color.colorPrimary)
+                    .placeholder(R.drawable.circle)
                     .into(holder.image);
         }
         else holder.image.setVisibility(View.GONE);

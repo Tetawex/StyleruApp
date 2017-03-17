@@ -11,6 +11,5 @@ import java.util.List;
 public interface EventsView extends View{
     void appendData(List<EventsItem> data);
     void setData(List<EventsItem> data);
-    void changeEventState(int id);
     void onDataUpdated();
 }
