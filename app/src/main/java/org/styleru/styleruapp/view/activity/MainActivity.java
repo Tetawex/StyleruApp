@@ -32,10 +32,10 @@ public class MainActivity extends AppCompatActivity
 
     private ActionBarDrawerToggle toggle;
 
+    @BindView(R.id.appbar)
+    public AppBarLayout appBarLayout;
     @BindView(R.id.toolbar)
     public Toolbar toolbar;
-    @BindView(R.id.appbarlayout)
-    public AppBarLayout appBarLayout;
     @BindView(R.id.drawer_layout)
     public DrawerLayout drawer;
 
@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         switchFragment(R.id.nav_events);
+
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
