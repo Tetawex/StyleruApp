@@ -27,11 +27,7 @@
                 android:layout_width="96dp"
                 android:layout_height="96dp"
                 android:scaleType="fitCenter"
-<<<<<<< HEAD
-                android:background="@drawable/circle">
-=======
                 android:background="@drawable/shape_circle_white">
->>>>>>> parent of 2a60caa... Revert "Очень много изменений..."
             </ImageView>
         </LinearLayout>
 
@@ -73,19 +69,6 @@
                 android:textSize="13sp"
                 android:layout_height="wrap_content" />
             <Button
-<<<<<<< HEAD
-                android:layout_width="130dp"
-                android:layout_height="28dp"
-                android:layout_marginRight="0dp"
-                android:layout_gravity="right"
-                android:text="Подробнее"
-                android:textColor="#FFFFFF"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:textStyle="italic"
-                android:textSize="16dp"
-                android:background="@drawable/round"
-=======
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
                 android:paddingTop="16dp"
@@ -95,7 +78,6 @@
                 android:textColor="#2dc6c4"
                 android:textStyle="normal"
                 android:textSize="14sp"
->>>>>>> parent of 2a60caa... Revert "Очень много изменений..."
                 android:fontFamily="sans-serif-medium" />
 
 

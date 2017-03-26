@@ -1,34 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:yourapp="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_search"
         android:title="@android:string/search_go"
-<<<<<<< HEAD
-        android:icon="@drawable/avatar"
-=======
-        android:icon="@drawable/ic_avatar"
->>>>>>> parent of 2a60caa... Revert "Очень много изменений..."
-        yourapp:showAsAction="always|collapseActionView"
-        yourapp:actionViewClass="android.support.v7.widget.SearchView" />
-    <item
-        android:id="@+id/action_edit"
-        android:title=""
-        android:icon="@drawable/ic_menu_camera"
-        yourapp:showAsAction="ifRoom" />
-    <item
-        android:id="@+id/action_micro"
-        android:title="microphone"
-        android:icon="@drawable/ic_menu_gallery"
-        yourapp:showAsAction="always" />
-    <item
-        android:id="@+id/action_remove"
-        android:title="remove"
-        android:icon="@drawable/ic_menu_manage"
-        yourapp:showAsAction="always" />
-    <item
-        android:id="@+id/action_sort"
-        android:title="sort_ab"
-        android:icon="@drawable/ic_menu_send"
-        yourapp:showAsAction="always" />
+        android:icon="@drawable/ic_search"
+        app:showAsAction="always|collapseActionView"
+        app:actionViewClass="android.support.v7.widget.SearchView" />
 </menu>

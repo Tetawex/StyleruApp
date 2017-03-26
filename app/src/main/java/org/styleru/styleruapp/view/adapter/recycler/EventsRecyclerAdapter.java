@@ -59,12 +59,8 @@ public class EventsRecyclerAdapter extends BaseRecyclerAdapter<EventsItem> {
             Glide
                     .with(context)
                     .load(item.getImageUrl())
-<<<<<<< HEAD
-                    .placeholder(R.drawable.circle)
-=======
                     .placeholder(R.drawable.placeholder_loading)
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
->>>>>>> parent of 2a60caa... Revert "Очень много изменений..."
                     .into(holder.image);
         }
         else

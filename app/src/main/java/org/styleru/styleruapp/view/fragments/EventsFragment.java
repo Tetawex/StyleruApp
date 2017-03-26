@@ -11,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import org.styleru.styleruapp.MainActivity;
+import org.styleru.styleruapp.view.activity.MainActivity;
 import org.styleru.styleruapp.R;
 import org.styleru.styleruapp.model.dto.EventsItem;
 import org.styleru.styleruapp.presenter.EventsFeedPresenter;
@@ -29,17 +29,13 @@ import butterknife.ButterKnife;
 /**
  * A screen responsible for viewing event feed, implements corresponding interface
  */
-<<<<<<< HEAD
-public class EventsFragment extends Fragment implements EventsView {
-    private static final int DEFAULT_BATCH_SIZE=5;
-    private EventsFeedPresenter presenter;
-=======
 public class EventsFragment extends Fragment implements EventsView{
     private static final int DEFAULT_BATCH_SIZE=10;//глобальные переменные - признак некачественного кода
->>>>>>> parent of 2a60caa... Revert "Очень много изменений..."
     private OnFragmentInteractionListener mListener;
     private EndlessRecyclerViewScrollListener recyclerViewScrollListener;
     private EventsRecyclerAdapter recyclerAdapter;
+
+    private EventsFeedPresenter presenter;
 
     @BindView(R.id.recycler)
     protected RecyclerView recyclerView;
@@ -157,11 +153,21 @@ public class EventsFragment extends Fragment implements EventsView{
         recyclerAdapter.setDataWithNotify(data);
     }
 
+    @Override
+    public void changeEventState(int id) {
+
+    }
+
     public void onDataUpdated()
     {
         swipeRefreshLayout.setRefreshing(false);
         recyclerViewScrollListener.resetState();
     }
+
+    /*@Override
+    public void onGoButtonClicked(boolean desiredStatus, int serverId, int viewId) {
+
+    }*/
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name

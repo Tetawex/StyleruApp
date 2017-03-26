@@ -3,14 +3,18 @@ package org.styleru.styleruapp.view.fragments;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import org.styleru.styleruapp.MainActivity;
+import org.styleru.styleruapp.view.activity.MainActivity;
 import org.styleru.styleruapp.R;
 
 /**
@@ -58,33 +62,43 @@ public class ProjectsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-
-        inflater.inflate(R.menu.menu_activity_main, menu);
-
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+//        setHasOptionsMenu(true);
+//        View view = inflater.inflate(R.layout.fragment_departments, container, false);
+//        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar) ;
+////        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Направления");
+//        AppCompatActivity activity = (AppCompatActivity) getActivity();
+//
+//        activity.setSupportActionBar(toolbarInstance);
+        Log.d("FRAME","2");
         View view = inflater.inflate(R.layout.fragment_projects, container, false);
         MainActivity activity = (MainActivity) getActivity();
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         activity.setSupportActionBar(toolbar);
-        setHasOptionsMenu(true);
-        toolbar.setTitle("Проекты");
         activity.getSupportActionBar().show();
+
+
+        toolbar.setTitle("Проекты");
+        setHasOptionsMenu(true);
+
+        Log.d("FRAME","3");
+        //set toolbar appearance
+
+        //for crate home button
+        Log.d("FRAME","4");
+
+
+
+
         return view;
+
     }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -92,23 +106,65 @@ public class ProjectsFragment extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
-
+    //        @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.main, menu);
+//        return true;
+//    }
+//@Override
+//public boolean onOptionsItemSelected(MenuItem item) {
+//
+//    return super.onOptionsItemSelected(item);
+//}
 //    @Override
-//    public void onAttach(Context context) {
-//        super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
+//    public void onDetach() {
+//        super.onDetach();
+//        mListener = null;
+//    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+//    switch (item.getItemId()) {
+//        case R.id.:
+//            return true;
+//
+//
+//
+//        case R.id.action_search:
+//            return true;
+//
+
 //    }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
+        return super.onOptionsItemSelected(item);
     }
+
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+
+        // TODO Add your menu entries here
+
+        Log.d("FRAME","1");
+        MainActivity activity = (MainActivity) getActivity();
+        MenuInflater inflater1 = activity.getMenuInflater();;
+        Log.d("FRAME","1");
+        inflater1.inflate(R.menu.main, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        Log.d("FRAME","1");
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        searchView.setQueryHint("Поиск");
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater inflater = getActivity().getMenuInflater();
+//        inflater.inflate(R.menu.menu_activity_main, menu);
+//        return true;
+//    }
+
+
+
 
     /**
      * This interface must be implemented by activities that contain this

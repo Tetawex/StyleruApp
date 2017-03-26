@@ -26,11 +26,7 @@
              android:layout_height="0dp"
              android:layout_weight="1"/>
       <FrameLayout
-<<<<<<< HEAD
-         android:background="@drawable/circle_gray"
-=======
          android:background="@drawable/shape_circle_gray"
->>>>>>> parent of 2a60caa... Revert "Очень много изменений..."
          android:layout_height="48dp"
          android:layout_width="48dp">
       </FrameLayout>

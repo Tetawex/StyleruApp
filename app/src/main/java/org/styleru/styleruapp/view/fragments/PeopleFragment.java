@@ -5,16 +5,21 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import org.styleru.styleruapp.MainActivity;
+import org.styleru.styleruapp.view.activity.MainActivity;
 import org.styleru.styleruapp.R;
-import org.styleru.styleruapp.view.adapter.tab.ViewPagerAdapter;
+import org.styleru.styleruapp.view.adapter.tab.ViewPagerAdapter2;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,12 +38,11 @@ public class PeopleFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    AllPeopleFragment frag1;
-    PersonFragment frag2;
+    ProfileFragmentTabOverall frag2;
     FragmentTransaction fTrans;
     TabLayout tabLayout;
     ViewPager viewPager;
-    ViewPagerAdapter viewPagerAdapter;
+    ViewPagerAdapter2 viewPagerAdapter;
     private OnFragmentInteractionListener mListener;
 
     public PeopleFragment() {
@@ -79,24 +83,11 @@ public class PeopleFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_people, container, false);
         MainActivity activity = (MainActivity) getActivity();
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         toolbar.setTitle("Люди");
-        tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
-        viewPager = (ViewPager) view.findViewById(R.id.viewPager);
-        viewPagerAdapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
-        Log.d("FRAG","supman");
-        viewPagerAdapter.addFragments(new PersonFragment(),"Мой профиль");
-        Log.d("FRAG","adfr1");
-        viewPagerAdapter.addFragments(new AllPeopleFragment(),"Все люди");
-        Log.d("FRAG","adfr2");
-        viewPager.setAdapter(viewPagerAdapter);
-        Log.d("FRAG","adfr3");
-        tabLayout.setupWithViewPager(viewPager);
-        Log.d("FRAG","adfr4");
-
-
+        setHasOptionsMenu(true);
         // Inflate the layout for this fragment
         return view;
 
@@ -109,6 +100,22 @@ public class PeopleFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+
+        // TODO Add your menu entries here
+
+        Log.d("FRAME","1");
+        MainActivity activity = (MainActivity) getActivity();
+        MenuInflater inflater1 = activity.getMenuInflater();;
+        Log.d("FRAME","1");
+        inflater1.inflate(R.menu.main, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        Log.d("FRAME","1");
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        searchView.setQueryHint("Поиск");
+        super.onCreateOptionsMenu(menu, inflater);
+    }
 //    @Override
 //    public void onAttach(Context context) {
 //        super.onAttach(context);
@@ -122,23 +129,17 @@ public class PeopleFragment extends Fragment {
 
 
 
-@Override
-public void onDestroyView() {
-    super.onDestroyView();
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
 
-    Log.d("FRAG","desview1");
-    viewPagerAdapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
-    Log.d("FRAG","fr1");
+        Log.d("FRAG","desview2");
+    //    getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
+    //    tabLayout.setupWithViewPager(viewPager);
 
-    Log.d("FRAG","fr2");
-    viewPagerAdapter.destroyItem(new PersonFragment());
-    viewPagerAdapter.destroyItem(new AllPeopleFragment());
-    Log.d("FRAG","desview2");
-//    getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
-//    tabLayout.setupWithViewPager(viewPager);
+    //
+    }
 
-//
-}
 
 //    @Override
 //    public void onDetach() {

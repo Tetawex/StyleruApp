@@ -27,11 +27,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:scaleType="fitCenter"
-<<<<<<< HEAD
-                android:background="@drawable/circle">
-=======
                 android:background="@drawable/shape_circle_white">
->>>>>>> parent of 2a60caa... Revert "Очень много изменений..."
             </ImageView>
         </LinearLayout>
     <LinearLayout
