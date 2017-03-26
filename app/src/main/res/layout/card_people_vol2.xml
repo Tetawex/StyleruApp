@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_margin="8dp"
+            android:layout_gravity="center"
+            android:src="@drawable/placeholder_person"
+            android:adjustViewBounds="true"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center|left"
+                    android:layout_margin="8dp">
+                    <TextView android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Иванов Иван Иванович"
+                        android:textStyle="bold"
+                        android:textSize="14sp"
+                        android:textColor="#436060" />
+                    <TextView android:layout_width="wrap_content"
+                        android:layout_height="18dp"
+                        android:textSize="13sp"
+                        android:layout_marginTop="4dp"
+                        android:text="Веб-дизайнер"
+                        android:textStyle="normal"
+                        android:textColor="#3bb9cd" />
+                    <TextView android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text=" +7(980)688-58-58"
+                        android:textStyle="normal"
+                        android:textSize="14sp"
+                        android:textColor="#436060" />
+                </LinearLayout>
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorFragmentBackground"/>
+            </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
