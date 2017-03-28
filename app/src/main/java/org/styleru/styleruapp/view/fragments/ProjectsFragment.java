@@ -150,7 +150,7 @@ public class ProjectsFragment extends Fragment {
         MainActivity activity = (MainActivity) getActivity();
         MenuInflater inflater1 = activity.getMenuInflater();;
         Log.d("FRAME","1");
-        inflater1.inflate(R.menu.main, menu);
+        inflater1.inflate(R.menu.menu_activity_main, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
         Log.d("FRAME","1");
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);

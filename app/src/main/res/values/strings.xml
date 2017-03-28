@@ -8,10 +8,12 @@
 
     <string name="profile">Профиль</string>
     <string name="projects">Проекты</string>
-    <string name="departments">Отдел</string>
+    <string name="departments">Отделы</string>
     <string name="events">Мероприятия</string>
     <string name="people">Люди</string>
     <string name="timeline">Таймлайн</string>
+
+    <string name="hint_people">Поиск по именам и ключевым словам</string>
 
     <string name="go">ПОЙДУ</string>
 </resources>

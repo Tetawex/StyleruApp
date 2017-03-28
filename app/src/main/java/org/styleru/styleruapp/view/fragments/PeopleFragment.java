@@ -1,5 +1,8 @@
 package org.styleru.styleruapp.view.fragments;
 
+import android.app.SearchManager;
+import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -21,21 +24,8 @@ import org.styleru.styleruapp.view.activity.MainActivity;
 import org.styleru.styleruapp.R;
 import org.styleru.styleruapp.view.adapter.tab.ViewPagerAdapter2;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link PeopleFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link PeopleFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class PeopleFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
     ProfileFragmentTabOverall frag2;
@@ -49,20 +39,9 @@ public class PeopleFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment PeopleFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static PeopleFragment newInstance(String param1, String param2) {
         PeopleFragment fragment = new PeopleFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -70,13 +49,6 @@ public class PeopleFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-
-            mParam2 = getArguments().getString(ARG_PARAM2);
-
-        }
     }
 
     @Override
@@ -109,11 +81,16 @@ public class PeopleFragment extends Fragment {
         MainActivity activity = (MainActivity) getActivity();
         MenuInflater inflater1 = activity.getMenuInflater();;
         Log.d("FRAME","1");
-        inflater1.inflate(R.menu.main, menu);
+        inflater1.inflate(R.menu.menu_activity_main, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
         Log.d("FRAME","1");
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-        searchView.setQueryHint("Поиск");
+
+        //Да, именно так и нужно работать с лэйаутами в андроиде
+        searchView.setMaxWidth(40000);
+        SearchManager searchManager = (SearchManager) getActivity()
+                .getSystemService(Context.SEARCH_SERVICE);
+        searchView.setSearchableInfo( searchManager.getSearchableInfo(getActivity().getComponentName()) );
         super.onCreateOptionsMenu(menu, inflater);
     }
 //    @Override
@@ -126,8 +103,6 @@ public class PeopleFragment extends Fragment {
 //                    + " must implement OnFragmentInteractionListener");
 //        }
 //    }
-
-
 
     @Override
     public void onDestroyView() {
@@ -147,16 +122,6 @@ public class PeopleFragment extends Fragment {
 //        mListener = null;
 //    }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);

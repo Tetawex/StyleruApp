@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
         <item
             android:id="@+id/nav_events"
             android:icon="@drawable/ic_event_note"
-            android:title="Мероприятия" />
+            android:title="@string/events" />
         <item
             android:id="@+id/nav_people"
             android:icon="@drawable/ic_group"
-            android:title="Люди" />
+            android:title="@string/people" />
         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_person"
-            android:title="Профиль" />
+            android:title="@string/profile" />
         <item
             android:id="@+id/nav_departments"
             android:icon="@drawable/ic_open_with"
-            android:title="Направления" />
+            android:title="@string/departments" />
         <item
             android:id="@+id/nav_projects"
             android:icon="@drawable/ic_tv"
-            android:title="Проекты" />
+            android:title="@string/projects" />
 
 </menu>
