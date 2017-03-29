@@ -50,7 +50,6 @@ public class ProfileFragment extends Fragment {
 
         ButterKnife.bind(this,view);
         setupViewPager(viewPager);
-
         if(android.os.Build.VERSION.SDK_INT >= 21)
             tabLayout.setElevation(TypedValue.applyDimension(TypedValue.
                     COMPLEX_UNIT_DIP, 2, getResources().getDisplayMetrics()));

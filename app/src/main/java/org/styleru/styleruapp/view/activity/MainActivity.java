@@ -13,7 +13,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.LinearLayout;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -23,7 +24,6 @@ import org.styleru.styleruapp.view.fragments.DepartmentsFragment;
 import org.styleru.styleruapp.view.fragments.EventsFragment;
 import org.styleru.styleruapp.view.fragments.PeopleFragment;
 import org.styleru.styleruapp.view.fragments.ProfileFragment;
-import org.styleru.styleruapp.view.fragments.ProfileFragmentTabOverall;
 import org.styleru.styleruapp.view.fragments.ProjectsFragment;
 
 import butterknife.BindView;
@@ -32,8 +32,9 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    static{
-        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);}
+    static {
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+    }
 
     private ActionBarDrawerToggle toggle;
 
@@ -43,12 +44,13 @@ public class MainActivity extends AppCompatActivity
     public Toolbar toolbar;
     @BindView(R.id.drawer_layout)
     public DrawerLayout drawer;
-
+    public Button butset;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
+    private View.OnClickListener a;
 
 
     @Override
@@ -73,7 +75,32 @@ public class MainActivity extends AppCompatActivity
         switchFragment(R.id.nav_events);
 
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+//        navigationView.setOnClickListener(OnClickyes());
+
+//        butset = (Button) findViewById(R.id.btn_settings);
+//        butset.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getApplication(), SettingsActivity.class);
+//                startActivity(intent);
+//                finish();
+//            }
+//        });
+
     }
+
+//    private View.OnClickListener OnClickyes() {
+//        butset = (Button) findViewById(R.id.btn_settings);
+//        butset.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getApplication(), SettingsActivity.class);
+//                startActivity(intent);
+//                finish();
+//            }
+//        });
+//        return a;
+//    }
 
     @Override
     public void onBackPressed() {
@@ -114,6 +141,7 @@ public class MainActivity extends AppCompatActivity
         final android.support.v4.app.FragmentTransaction transaction
                 = getSupportFragmentManager().beginTransaction();
         switch(id) {
+
             case(R.id.nav_people):
                 setAppBarElevation(4);
                 transaction.replace(R.id.container, new PeopleFragment());

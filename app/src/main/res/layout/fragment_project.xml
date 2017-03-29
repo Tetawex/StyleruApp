@@ -1,0 +1,133 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:textStyle="bold"
+                android:text="Описание проекта:"
+                android:textColor="@color/colorGrey"
+
+                android:textSize="16dp"/>
+            <LinearLayout android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:text="Менеджер проекта:"
+                android:textColor="@color/colorGrey"
+                android:textSize="14dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="10dp"
+                    android:text="Анна Подображных"
+                    android:textColor="@color/colorBlue"
+                    android:textSize="14dp" />
+                </LinearLayout>
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:text="Начало проекта:"
+                android:textColor="@color/colorGrey"
+                android:textSize="14dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingLeft="10dp"
+                android:text="27.08.2015"
+                android:textColor="@color/colorBlue"
+                android:textSize="14dp" />
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:text="Дедоайн:"
+                    android:textColor="@color/colorGrey"
+                    android:textSize="14dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="10dp"
+                    android:text="13.03.2016"
+                    android:textColor="@color/colorBlue"
+                    android:textSize="14dp" />
+            </LinearLayout>
+            <TextView
+                android:paddingTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:text="Прогресс выполнения проекта"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/colorGrey"
+                android:gravity="center"/>
+
+
+            <TextView
+                android:paddingTop="70dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="16dp"
+                android:text="Участники:"
+                android:textColor="@color/colorGrey" />
+            <include
+                android:id="@+id/d1"
+                layout="@layout/card_members_project" />
+            <include
+                android:id="@+id/d1"
+                layout="@layout/card_members_project" />
+            <include
+                android:id="@+id/d1"
+                layout="@layout/card_members_project" />
+            <include
+                android:id="@+id/d1"
+                layout="@layout/card_members_project" />
+            <include
+                android:id="@+id/d1"
+                layout="@layout/card_members_project" />
+            <include
+                android:id="@+id/d1"
+                layout="@layout/card_members_project" />
+            <include
+                android:id="@+id/d1"
+                layout="@layout/card_members_project" />
+            <include
+                android:id="@+id/d1"
+                layout="@layout/card_members_project" />
+            <include
+                android:id="@+id/d1"
+                layout="@layout/card_members_project" />
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

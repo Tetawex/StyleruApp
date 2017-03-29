@@ -68,17 +68,6 @@
                 android:text="podobraznykh@styleru.net"
                 android:textSize="13sp"
                 android:layout_height="wrap_content" />
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:paddingTop="16dp"
-                android:layout_gravity="bottom|right"
-                android:text="ПОДРОБНЕЕ"
-                android:background="@null"
-                android:textColor="#2dc6c4"
-                android:textStyle="normal"
-                android:textSize="14sp"
-                android:fontFamily="sans-serif-medium" />
 
 
 
