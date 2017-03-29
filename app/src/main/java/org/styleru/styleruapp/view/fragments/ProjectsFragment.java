@@ -4,6 +4,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -13,49 +16,49 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import org.styleru.styleruapp.model.dto.EventsItem;
+import org.styleru.styleruapp.model.dto.ProjectsItem;
+import org.styleru.styleruapp.presenter.EventsPresenter;
+import org.styleru.styleruapp.presenter.EventsPresenterImpl;
+import org.styleru.styleruapp.presenter.ProjectsPresenter;
+import org.styleru.styleruapp.presenter.ProjectsPresenterImpl;
+import org.styleru.styleruapp.util.EndlessRecyclerViewScrollListener;
+import org.styleru.styleruapp.view.ProjectsView;
 import org.styleru.styleruapp.view.activity.MainActivity;
 import org.styleru.styleruapp.R;
+import org.styleru.styleruapp.view.adapter.recycler.EventsRecyclerAdapter;
+import org.styleru.styleruapp.view.adapter.recycler.ProjectsRecyclerAdapter;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ProjectsFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ProjectsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class ProjectsFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+import java.util.ArrayList;
+import java.util.List;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-    private OnFragmentInteractionListener mListener;
+public class ProjectsFragment extends Fragment implements ProjectsView{
+    private static final int DEFAULT_BATCH_SIZE=10;//глобальные переменные - признак плохого кода
+    private EventsFragment.OnFragmentInteractionListener mListener;
+    private EndlessRecyclerViewScrollListener recyclerViewScrollListener;
+    private ProjectsRecyclerAdapter recyclerAdapter;
+    private String requestString="";
+
+    private ProjectsPresenter presenter;
+
+    @BindView(R.id.recycler)
+    protected RecyclerView recyclerView;
+    @BindView(R.id.swipe)
+    protected SwipeRefreshLayout swipeRefreshLayout;
+    @BindView(R.id.progressbar)
+    protected View progressbar;
 
     public ProjectsFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ProjectsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static ProjectsFragment newInstance(String param1, String param2) {
         ProjectsFragment fragment = new ProjectsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
         return fragment;
     }
 
@@ -68,14 +71,6 @@ public class ProjectsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-//        setHasOptionsMenu(true);
-//        View view = inflater.inflate(R.layout.fragment_departments, container, false);
-//        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar) ;
-////        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Направления");
-//        AppCompatActivity activity = (AppCompatActivity) getActivity();
-//
-//        activity.setSupportActionBar(toolbarInstance);
-        Log.d("FRAME","2");
         View view = inflater.inflate(R.layout.fragment_projects, container, false);
         MainActivity activity = (MainActivity) getActivity();
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
@@ -86,17 +81,41 @@ public class ProjectsFragment extends Fragment {
         toolbar.setTitle("Проекты");
         setHasOptionsMenu(true);
 
-        Log.d("FRAME","3");
-        //set toolbar appearance
+        ButterKnife.bind(this,view);
+        progressbar.setVisibility(View.VISIBLE);
+        //Адаптер
+        //Тут можно сделать поддержку вертикальной ориентации, использовав GridLayoutManager
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        //Адаптер для ресайклера
+        recyclerAdapter=new ProjectsRecyclerAdapter(getContext(),new ArrayList<ProjectsItem>());
+        recyclerView.setAdapter(recyclerAdapter);
 
-        //for crate home button
-        Log.d("FRAME","4");
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark,
+                R.color.colorPrimary);
 
+        //Добавляем листенер для ресайклера, чтобы понять, когда загружать новый фид
+        recyclerViewScrollListener = new EndlessRecyclerViewScrollListener(
+                (LinearLayoutManager) recyclerView.getLayoutManager()) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                presenter.onProjectsAppend(recyclerAdapter
+                        .getItemCount(),DEFAULT_BATCH_SIZE,requestString);
+            }
+        };
+        recyclerView.addOnScrollListener(recyclerViewScrollListener);
 
+        //Рефреш-лэйаут сверху
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh()
+            {
+                presenter.onProjectsUpdate(DEFAULT_BATCH_SIZE,requestString);
 
-
+            }
+        });
+        presenter=new ProjectsPresenterImpl(this);
+        presenter.onProjectsUpdate(DEFAULT_BATCH_SIZE,requestString);
         return view;
-
     }
 
 
@@ -106,37 +125,8 @@ public class ProjectsFragment extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
-    //        @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.main, menu);
-//        return true;
-//    }
-//@Override
-//public boolean onOptionsItemSelected(MenuItem item) {
-//
-//    return super.onOptionsItemSelected(item);
-//}
-//    @Override
-//    public void onDetach() {
-//        super.onDetach();
-//        mListener = null;
-//    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-//    switch (item.getItemId()) {
-//        case R.id.:
-//            return true;
-//
-//
-//
-//        case R.id.action_search:
-//            return true;
-//
-
-//    }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -146,36 +136,52 @@ public class ProjectsFragment extends Fragment {
 
         // TODO Add your menu entries here
 
-        Log.d("FRAME","1");
         MainActivity activity = (MainActivity) getActivity();
         MenuInflater inflater1 = activity.getMenuInflater();;
-        Log.d("FRAME","1");
         inflater1.inflate(R.menu.menu_activity_main, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
-        Log.d("FRAME","1");
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setQueryHint("Поиск");
         super.onCreateOptionsMenu(menu, inflater);
     }
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater inflater = getActivity().getMenuInflater();
-//        inflater.inflate(R.menu.menu_activity_main, menu);
-//        return true;
-//    }
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
 
+    @Override
+    public void showError(Throwable throwable) {
+        Toast.makeText(getContext(),throwable.getMessage(),Toast.LENGTH_SHORT);
+    }
 
+    @Override
+    public void startProgressBar() {
+        progressbar.setVisibility(View.VISIBLE);
+    }
 
+    @Override
+    public void stopProgressBar() {
+        progressbar.setVisibility(View.GONE);
+    }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+    @Override
+    public void appendData(List<ProjectsItem> data) {
+        recyclerAdapter.appendDataWithNotify(data);
+    }
+
+    @Override
+    public void setData(List<ProjectsItem> data) {
+        onDataUpdated();
+        recyclerAdapter.setDataWithNotify(data);
+    }
+
+    public void onDataUpdated()
+    {
+        swipeRefreshLayout.setRefreshing(false);
+        recyclerViewScrollListener.resetState();
+    }
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);

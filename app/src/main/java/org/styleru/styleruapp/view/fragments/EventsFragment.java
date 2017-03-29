@@ -10,12 +10,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import org.styleru.styleruapp.view.activity.MainActivity;
 import org.styleru.styleruapp.R;
 import org.styleru.styleruapp.model.dto.EventsItem;
-import org.styleru.styleruapp.presenter.EventsFeedPresenter;
-import org.styleru.styleruapp.presenter.EventsFeedPresenterImpl;
+import org.styleru.styleruapp.presenter.EventsPresenter;
+import org.styleru.styleruapp.presenter.EventsPresenterImpl;
 import org.styleru.styleruapp.util.EndlessRecyclerViewScrollListener;
 import org.styleru.styleruapp.view.EventsView;
 import org.styleru.styleruapp.view.adapter.recycler.EventsRecyclerAdapter;
@@ -35,12 +36,14 @@ public class EventsFragment extends Fragment implements EventsView{
     private EndlessRecyclerViewScrollListener recyclerViewScrollListener;
     private EventsRecyclerAdapter recyclerAdapter;
 
-    private EventsFeedPresenter presenter;
+    private EventsPresenter presenter;
 
     @BindView(R.id.recycler)
     protected RecyclerView recyclerView;
     @BindView(R.id.swipe)
     protected SwipeRefreshLayout swipeRefreshLayout;
+    @BindView(R.id.progressbar)
+    protected View progressbar;
 
 
     public EventsFragment() {
@@ -60,6 +63,7 @@ public class EventsFragment extends Fragment implements EventsView{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreateView(inflater,container,savedInstanceState);
+
         View view=inflater.inflate(R.layout.fragment_events, container, false);
         MainActivity activity = (MainActivity) getActivity();
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
@@ -68,8 +72,8 @@ public class EventsFragment extends Fragment implements EventsView{
         toolbar.setTitle("События");
 
 
-
         ButterKnife.bind(this,view);
+        progressbar.setVisibility(View.VISIBLE);
         //Адаптер
         //Тут можно сделать поддержку вертикальной ориентации, использовав GridLayoutManager
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -99,28 +103,11 @@ public class EventsFragment extends Fragment implements EventsView{
 
             }
         });
-        presenter=new EventsFeedPresenterImpl(this);
+        presenter=new EventsPresenterImpl(this);
         presenter.onEventsUpdate(DEFAULT_BATCH_SIZE);
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    /*@Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }*/
     @Override
     public void onDetach() {
         super.onDetach();
@@ -129,17 +116,17 @@ public class EventsFragment extends Fragment implements EventsView{
 
     @Override
     public void showError(Throwable throwable) {
-
+        Toast.makeText(getContext(),throwable.getMessage(),Toast.LENGTH_SHORT);
     }
 
     @Override
     public void startProgressBar() {
-
+        progressbar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void stopProgressBar() {
-
+        progressbar.setVisibility(View.GONE);
     }
 
     @Override
@@ -163,11 +150,6 @@ public class EventsFragment extends Fragment implements EventsView{
         swipeRefreshLayout.setRefreshing(false);
         recyclerViewScrollListener.resetState();
     }
-
-    /*@Override
-    public void onGoButtonClicked(boolean desiredStatus, int serverId, int viewId) {
-
-    }*/
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
