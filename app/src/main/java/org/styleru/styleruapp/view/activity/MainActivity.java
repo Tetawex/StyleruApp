@@ -74,6 +74,12 @@ public class MainActivity extends AppCompatActivity
 
         switchFragment(R.id.nav_events);
 
+
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_LOW_PROFILE;
+        decorView.setSystemUiVisibility(uiOptions);
+
+
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 //        navigationView.setOnClickListener(OnClickyes());
 

@@ -1,17 +1,10 @@
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:cardBackgroundColor="#FFFFFF"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginTop="5dp"
-    android:layout_marginBottom="0dp"
-    android:layout_marginRight="7dp"
-    android:layout_marginLeft="7dp"
-    app:cardPreventCornerOverlap="false"
-    app:cardCornerRadius="0dp">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:paddingTop="0dp"
+    android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
-        android:paddingTop="0dp"
+        android:paddingTop="5dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
@@ -28,6 +21,7 @@
             android:layout_weight="0.5"
             android:textSize="13dp"
             android:gravity="center"
+            android:textColor="@color/styleru"
             android:text="Менеджер приложения"/>
     </LinearLayout>
-</android.support.v7.widget.CardView>
+</LinearLayout>

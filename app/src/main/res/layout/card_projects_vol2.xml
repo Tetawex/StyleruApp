@@ -5,8 +5,8 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_marginLeft="16dp"
-    android:layout_marginRight="8dp"
-    android:layout_marginTop="8dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginTop="16dp"
     >
 
     <LinearLayout
@@ -53,11 +53,14 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#ccffbb"
+                android:layout_height="21dp"
+                android:background="@drawable/rectangle_9"
                 android:padding="2dp"
+                android:layout_marginBottom="2dp"
                 android:text="Свободная вакансия"
                 android:textColor="#295d29"
+                android:gravity="right"
+                android:layout_gravity="center"
                 android:textSize="14sp" />
             <TextView
                 android:id="@+id/textView"

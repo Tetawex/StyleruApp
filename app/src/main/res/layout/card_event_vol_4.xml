@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="#FFFFFF"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="16dp"
+    android:layout_marginBottom="0dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginLeft="8dp"
+    app:cardPreventCornerOverlap="false"
+    app:cardCornerRadius="2dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#FFFFFF">
+        <ImageView
+            android:layout_width="match_parent"
+            android:src="@drawable/kotik"
+            android:id="@+id/image"
+            android:scaleType="fitCenter"
+            android:layout_height="180dp">
+        <TextView
+            android:paddingTop="25dp"
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:text="Общий сбор"
+            android:textSize="25dp"
+            android:paddingLeft="15dp"
+            android:paddingBottom="15dp"
+            android:textColor="#FFFFFF"/>
+        </ImageView>
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        <TextView
+            android:paddingTop="10dp"
+            android:layout_width="match_parent"
+            android:id="@+id/date"
+            android:layout_height="wrap_content"
+            android:text="10 февраля, 10:00"
+            android:textSize="15dp"
+            android:textColor="#D0D0D0"/>
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:paddingTop="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Кирпичная, 33"
+            android:id="@+id/location"
+            android:textSize="15dp"
+            android:textColor="#9A9A9A"/>
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <TextView
+                android:paddingTop="20dp"
+                android:layout_width="match_parent"
+                android:textAllCaps="true"
+                android:id="@+id/info"
+                android:paddingBottom="20dp"
+                android:layout_height="wrap_content"
+                android:text="ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
+                android:layout_weight="0.3"
+                android:textSize="12dp"
+                android:layout_marginRight="30dp"
+                android:textColor="#111111"/>
+            <Button
+                android:height="30dp"
+                android:layout_width="match_parent"
+                android:layout_weight="0.7"
+                android:text="Пойти"
+                android:background="#BDE8E8"
+                android:layout_marginRight="20dp"
+                android:layout_gravity="bottom"
+                android:textColor="#FFFFFF"
+                android:layout_marginBottom="10dp"
+                android:textAllCaps="true"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+
+
+
+
+
+
+</android.support.v7.widget.CardView>
