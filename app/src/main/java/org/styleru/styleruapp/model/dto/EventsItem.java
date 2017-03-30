@@ -27,6 +27,9 @@ public class EventsItem {
     @SerializedName("location")
     @Expose
     private String location;
+    @SerializedName("attendants")
+    @Expose
+    private boolean viewAttendants;
 
     public Integer getId() {
         return id;
@@ -76,4 +79,11 @@ public class EventsItem {
         this.location = location;
     }
 
+    public boolean isViewAttendants() {
+        return viewAttendants;
+    }
+
+    public void setViewAttendants(boolean viewAttendants) {
+        this.viewAttendants = viewAttendants;
+    }
 }

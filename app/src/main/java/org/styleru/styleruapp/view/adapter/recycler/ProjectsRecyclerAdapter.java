@@ -6,6 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.styleru.styleruapp.R;
 import org.styleru.styleruapp.model.dto.ProjectsItem;
 
@@ -14,13 +17,17 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static java.security.AccessController.getContext;
+
 /**
  * Created by tetawex on 07.03.17.
  */
 
 public class ProjectsRecyclerAdapter extends BaseRecyclerAdapter<ProjectsItem> {
+    private DateTimeFormatter formatter;
     public ProjectsRecyclerAdapter(Context context, List<ProjectsItem> data) {
         super(context, data);
+        formatter = DateTimeFormat.forPattern("dd.MM.yyyy");
     }
 
     @Override
@@ -28,7 +35,6 @@ public class ProjectsRecyclerAdapter extends BaseRecyclerAdapter<ProjectsItem> {
         View view=inflater.inflate(R.layout.card_projects_vol2,parent,false);
         ProjectsViewHolder  holder;
         holder = new ProjectsViewHolder(view);
-
         return holder;
     }
 
@@ -37,21 +43,29 @@ public class ProjectsRecyclerAdapter extends BaseRecyclerAdapter<ProjectsItem> {
         ProjectsItem item= getData().get(position);
         ProjectsViewHolder holder=(ProjectsViewHolder) uncastedHolder;
 
-        holder.title.setText(item.getName());
+        DateTime itemDateTime=new DateTime(item.getEndDateTime());
+        if(item.isVacantPlaces())
+            holder.vacant.setVisibility(View.VISIBLE);
+        else
+            holder.vacant.setVisibility(View.INVISIBLE);
+        holder.name.setText(item.getName());
+        holder.managerName.setText(item.getManagerName());
+        holder.date.setText(context.getString(R.string.until)+" "+itemDateTime.toString(formatter));
+        holder.managerName.setText(item.getManagerName());
     }
 
     class ProjectsViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.proj_adm)
-        TextView title;
+        @BindView(R.id.name)
+        TextView name;
 
-        @BindView(R.id.proj_deadline)
-        TextView subtitle;
+        @BindView(R.id.vacant)
+        TextView vacant;
 
-        @BindView(R.id.proj_name)
+        @BindView(R.id.date)
         TextView date;
 
-        @BindView(R.id.proj_vacation)
-        TextView time;
+        @BindView(R.id.manager_name)
+        TextView managerName;
 
         public ProjectsViewHolder(View view) {
             super(view);

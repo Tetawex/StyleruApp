@@ -13,7 +13,7 @@
     <string name="people">Люди</string>
     <string name="timeline">Таймлайн</string>
 
+        <string name="until">до</string>
     <string name="hint_people">Поиск по именам и ключевым словам</string>
-
     <string name="go">ПОЙДУ</string>
 </resources>

@@ -47,9 +47,9 @@ public class TestProjectsModelImpl implements ProjectsModel {
             else
                 item.setName("StyleruApp");
             if(random.nextBoolean())
-                item.setName("Сергей Мосяков");
+                item.setManagerName("Сергей Мосяков");
             else
-                item.setName("Ринат Зубаидулин");
+                item.setManagerName("Ринат Зубаидулин");
             item.setId(id);
 
             item.setVacantPlaces(random.nextBoolean());
