@@ -4,14 +4,8 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
 import org.styleru.styleruapp.R;
 import org.styleru.styleruapp.model.dto.ProjectsItem;
 
@@ -31,7 +25,7 @@ public class ProjectsRecyclerAdapter extends BaseRecyclerAdapter<ProjectsItem> {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view=inflater.inflate(R.layout.card_events,parent,false);
+        View view=inflater.inflate(R.layout.card_projects_vol2,parent,false);
         ProjectsViewHolder  holder;
         holder = new ProjectsViewHolder(view);
 
@@ -47,23 +41,17 @@ public class ProjectsRecyclerAdapter extends BaseRecyclerAdapter<ProjectsItem> {
     }
 
     class ProjectsViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.title)
+        @BindView(R.id.proj_adm)
         TextView title;
 
-        @BindView(R.id.subtitle)
+        @BindView(R.id.proj_deadline)
         TextView subtitle;
 
-        @BindView(R.id.date)
+        @BindView(R.id.proj_name)
         TextView date;
 
-        @BindView(R.id.time)
+        @BindView(R.id.proj_vacation)
         TextView time;
-
-        @BindView(R.id.location)
-        TextView location;
-
-        @BindView(R.id.image)
-        ImageView image;
 
         public ProjectsViewHolder(View view) {
             super(view);

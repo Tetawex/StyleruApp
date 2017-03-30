@@ -26,6 +26,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-light"
                 android:text="БИ-WEB"
+                android:id="@+id/proj_name"
                 android:layout_marginBottom="2dp"
                 android:textColor="#000000"
                 android:textSize="20sp" />
@@ -36,7 +37,7 @@
                 android:layout_weight="1" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/proj_adm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Сережа Мосяков"
@@ -60,14 +61,16 @@
                 android:text="Свободная вакансия"
                 android:textColor="#295d29"
                 android:gravity="right"
+                android:id="@+id/proj_vacation"
                 android:layout_gravity="center"
                 android:textSize="14sp" />
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/proj_deadline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="до 15.01.2017"
+
                 android:textColor="#ABABAB"
                 android:textSize="13sp" />
         </LinearLayout>

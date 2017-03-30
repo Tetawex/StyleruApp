@@ -40,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (isOnline()){
                     Intent intent = new Intent(getApplication(), MainActivity.class);
                     startActivity(intent);
+                    Toast.makeText(getApplicationContext(), "Добро пожаловать, хозяин", Toast.LENGTH_LONG).show();
                     finish();
                 }
                 else{

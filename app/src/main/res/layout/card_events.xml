@@ -54,56 +54,7 @@
             android:text="By Аня Подображных"
             android:textStyle="italic" />
 
-        <!--<Button
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:background="#C4EDEE"
-            android:textAllCaps="false"
-            android:text="Списки пришедших на мероприятие" />-->
-        <!--<LinearLayout
-            android:layout_height="150dp"
-            android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:background="#a9a9a9">
-            <TextView
-                android:layout_marginTop="10dp"
-                android:textColor="#FFFFFF"
-                android:layout_width="match_parent"
-                android:layout_height="18dp"
 
-                android:text="10 февраля,"
-                android:gravity="center"/>
-            <TextView
-                android:layout_marginTop="7dp"
-                android:layout_width="match_parent"
-                android:layout_height="15dp"
-                android:text="10:00"
-                android:textColor="#60d0d1"
-                android:gravity="center"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:textSize="25dp"
-                android:textColor="#FFFFFF"
-                android:text="Общая встреча     организации"
-                android:gravity="center"/>
-            </LinearLayout>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:paddingRight="18dp"
-                android:text="By Аня Подображных"
-                android:textStyle="italic"
-                android:gravity="right"/>
-                -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="96dp"
@@ -164,6 +115,7 @@
                         android:gravity="left|center"
                         android:paddingLeft="0dp"
                         android:text="10:00"
+                        android:id="@+id/time"
                         android:textColor="@color/colorPrimaryDarker"
                         android:textSize="15sp" />
                 </LinearLayout>

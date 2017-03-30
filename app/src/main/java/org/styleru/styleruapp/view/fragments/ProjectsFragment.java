@@ -9,7 +9,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,17 +17,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import org.styleru.styleruapp.model.dto.EventsItem;
+import org.styleru.styleruapp.R;
 import org.styleru.styleruapp.model.dto.ProjectsItem;
-import org.styleru.styleruapp.presenter.EventsPresenter;
-import org.styleru.styleruapp.presenter.EventsPresenterImpl;
 import org.styleru.styleruapp.presenter.ProjectsPresenter;
 import org.styleru.styleruapp.presenter.ProjectsPresenterImpl;
 import org.styleru.styleruapp.util.EndlessRecyclerViewScrollListener;
 import org.styleru.styleruapp.view.ProjectsView;
 import org.styleru.styleruapp.view.activity.MainActivity;
-import org.styleru.styleruapp.R;
-import org.styleru.styleruapp.view.adapter.recycler.EventsRecyclerAdapter;
 import org.styleru.styleruapp.view.adapter.recycler.ProjectsRecyclerAdapter;
 
 import java.util.ArrayList;
@@ -137,7 +132,7 @@ public class ProjectsFragment extends Fragment implements ProjectsView{
         // TODO Add your menu entries here
 
         MainActivity activity = (MainActivity) getActivity();
-        MenuInflater inflater1 = activity.getMenuInflater();;
+        MenuInflater inflater1 = activity.getMenuInflater();
         inflater1.inflate(R.menu.menu_activity_main, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
