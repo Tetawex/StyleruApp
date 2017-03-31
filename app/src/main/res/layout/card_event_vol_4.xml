@@ -18,10 +18,17 @@
         android:background="#FFFFFF">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:background="@drawable/kotik"
-            android:id="@+id/image"
+            android:id="@+id/image_holder"
             android:scaleType="fitCenter"
             android:layout_height="180dp">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/image"
+                android:src="@drawable/kotik"
+                android:scaleType="fitXY"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true" />
         <TextView
             android:paddingTop="25dp"
             android:id="@+id/title1"
@@ -47,15 +54,17 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="10dp">
+
             <TextView
-                android:paddingTop="0dp"
                 android:id="@+id/title2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingTop="0dp"
                 android:text=""
-                android:textSize="25dp"
-                android:textColor="#111111"/>
-<LinearLayout
+                android:textColor="#111111"
+                android:textSize="25dp" />
+
+            <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <LinearLayout
@@ -71,15 +80,16 @@
                 android:textColor="#D0D0D0"
 
                 android:textSize="15dp" />
-         <TextView
-        android:id="@+id/time"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-             android:paddingLeft="1dp"
-        android:paddingTop="10dp"
-        android:text="10:00"
-        android:textColor="#D0D0D0"
-        android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="1dp"
+            android:paddingTop="10dp"
+            android:text="10:00"
+            android:textColor="#D0D0D0"
+            android:textSize="15dp" />
     </LinearLayout>
     <TextView
         android:layout_width="match_parent"
@@ -124,7 +134,7 @@
                     android:paddingBottom="20dp"
                     android:paddingTop="20dp"
                     android:text="Oh my god, what course"
-                    android:textAllCaps="true"
+                    android:textAllCaps="false"
                     android:textColor="#515151"
                     android:textSize="12dp" />
 

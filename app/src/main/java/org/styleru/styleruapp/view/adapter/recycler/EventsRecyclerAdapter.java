@@ -6,8 +6,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
@@ -27,12 +30,9 @@ public class EventsRecyclerAdapter extends BaseRecyclerAdapter<EventsItem> {
     public EventsRecyclerAdapter(Context context, List<EventsItem> data) {
         super(context, data);
     }
-public RelativeLayout rel;
-    public Bitmap myBitmap;
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view=inflater.inflate(R.layout.card_event_vol_4,parent,false);
-        rel = (RelativeLayout) view.findViewById(R.id.image);
         EventsViewHolder  holder;
         holder = new EventsViewHolder(view);
 
@@ -51,30 +51,18 @@ public RelativeLayout rel;
 
         holder.time.setText(new DateTime(item.getDateTime().replace(' ','T')).toString("HH:mm"));
         if(!(item.getImageUrl()).equals("")) {
-            rel.setVisibility(View.VISIBLE);
+            holder.imageHolder.setVisibility(View.VISIBLE);
 
             holder.title2.setText("");
             holder.title1.setText(item.getTitle());
+            Glide
+                    .with(context)
+                    .load(item.getImageUrl())
+                    .into(holder.image);
         }
         else {
-            rel.setVisibility(View.GONE);
+            holder.imageHolder.setVisibility(View.GONE);
             holder.title2.setText(item.getTitle());
-//            try {
-//                Bitmap myBitmap = Glide.with(context)
-//                        .load(item.getImageUrl())
-//                        .asBitmap()
-//                        .centerCrop()
-//                        .into(500, 500)
-//                        .get();
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            } catch (ExecutionException e) {
-//                e.printStackTrace();
-//            }
-//            rel.setBackground(new BitmapDrawable(context.getResources(), myBitmap));
-
-
-
             holder.title1.setText("");
         }
 
@@ -111,6 +99,12 @@ public RelativeLayout rel;
 
         @BindView(R.id.location)
         TextView location;
+
+        @BindView(R.id.image_holder)
+        View imageHolder;
+
+        @BindView(R.id.image)
+        ImageView image;
 
         @BindView(R.id.attendance)
         Button attendance;
