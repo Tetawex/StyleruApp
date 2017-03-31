@@ -19,10 +19,10 @@ public class EventsRequest {
     private String token;
     @SerializedName("batch_size")
     @Expose
-    private Integer batchSize;
+    private int batchSize;
     @SerializedName("offset")
     @Expose
-    private Integer offset;
+    private int offset;
 
     public String getToken() {
         return token;
@@ -32,20 +32,19 @@ public class EventsRequest {
         this.token = token;
     }
 
-    public Integer getBatchSize() {
+    public int getBatchSize() {
         return batchSize;
     }
 
-    public void setBatchSize(Integer batchSize) {
+    public void setBatchSize(int batchSize) {
         this.batchSize = batchSize;
     }
 
-    public Integer getOffset() {
+    public int getOffset() {
         return offset;
     }
 
-    public void setOffset(Integer offset) {
+    public void setOffset(int offset) {
         this.offset = offset;
     }
-
 }

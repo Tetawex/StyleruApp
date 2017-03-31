@@ -14,6 +14,9 @@ public class SubdepartmentsRequest {
         this.offset = offset;
     }
 
+    @SerializedName("department_id")
+    @Expose
+    private String departmentId;
     @SerializedName("token")
     @Expose
     private String token;
@@ -48,4 +51,11 @@ public class SubdepartmentsRequest {
         this.offset = offset;
     }
 
+    public String getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(String departmentId) {
+        this.departmentId = departmentId;
+    }
 }

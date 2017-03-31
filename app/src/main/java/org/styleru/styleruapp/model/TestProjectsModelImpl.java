@@ -53,7 +53,7 @@ public class TestProjectsModelImpl implements ProjectsModel {
             item.setId(id);
 
             item.setVacantPlaces(random.nextBoolean());
-            item.setEndDateTime("2017-"+(random.nextInt(6)+3)+"-23T"+(random.nextInt(9)+10)+":00:43.511Z");
+            item.setEndDateTime("2017-"+(random.nextInt(6)+3)+"-23");
 
             return item;
 

@@ -68,7 +68,7 @@ public class TestEventsModelImpl implements EventsModel {
             else
                 item.setImageUrl("");
             item.setLocation("Кирпичная, "+(random.nextInt(80)+10));
-            item.setDateTime("2017-"+(random.nextInt(6)+3)+"-23T"+(random.nextInt(9)+10)+":00:43.511Z");
+            item.setDateTime("2017-"+(random.nextInt(6)+3)+"-23 "+(random.nextInt(9)+10)+":00:43");
 
             return item;
 

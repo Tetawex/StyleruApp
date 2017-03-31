@@ -5,4 +5,5 @@ package org.styleru.styleruapp.model.dto;
  */
 
 public class ProfileResponseTimeline {
+
 }

@@ -19,33 +19,9 @@ public class DepartmentsRequest {
     private String token;
     @SerializedName("batch_size")
     @Expose
-    private Integer batchSize;
+    private int batchSize;
     @SerializedName("offset")
     @Expose
-    private Integer offset;
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public Integer getBatchSize() {
-        return batchSize;
-    }
-
-    public void setBatchSize(Integer batchSize) {
-        this.batchSize = batchSize;
-    }
-
-    public Integer getOffset() {
-        return offset;
-    }
-
-    public void setOffset(Integer offset) {
-        this.offset = offset;
-    }
+    private int offset;
 
 }

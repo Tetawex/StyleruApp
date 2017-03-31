@@ -46,12 +46,12 @@ public class EventsRecyclerAdapter extends BaseRecyclerAdapter<EventsItem> {
         EventsItem item= getData().get(position);
         EventsViewHolder holder=(EventsViewHolder) uncastedHolder;
 
-        DateTime itemDateTime=new DateTime(item.getDateTime());
+        DateTime itemDateTime=new DateTime(item.getDateTime().replace(' ','T'));
 
         String fullDateTimeString=itemDateTime.toString(DateTimeFormat.longDate());
         holder.date.setText(fullDateTimeString.substring(0, fullDateTimeString.length() - 8));
 
-        holder.time.setText(new DateTime(item.getDateTime()).toString("HH:mm"));
+        holder.time.setText(new DateTime(item.getDateTime().replace(' ','T')).toString("HH:mm"));
         holder.location.setText(item.getLocation());
         holder.image.setAdjustViewBounds(true);
         if(!(item.getImageUrl()).equals("")) {

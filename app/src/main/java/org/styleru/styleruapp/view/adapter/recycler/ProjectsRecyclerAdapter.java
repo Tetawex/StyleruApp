@@ -51,7 +51,6 @@ public class ProjectsRecyclerAdapter extends BaseRecyclerAdapter<ProjectsItem> {
         holder.name.setText(item.getName());
         holder.managerName.setText(item.getManagerName());
         holder.date.setText(context.getString(R.string.until)+" "+itemDateTime.toString(formatter));
-        holder.managerName.setText(item.getManagerName());
     }
 
     class ProjectsViewHolder extends RecyclerView.ViewHolder {
