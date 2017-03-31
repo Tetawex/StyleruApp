@@ -11,7 +11,10 @@ public class EventsItem {
 
     @SerializedName("id")
     @Expose
-    private Integer id;
+    private int id;
+    @SerializedName("status")
+    @Expose
+    private int status;
     @SerializedName("title")
     @Expose
     private String title;
@@ -27,17 +30,12 @@ public class EventsItem {
     @SerializedName("location")
     @Expose
     private String location;
+    @SerializedName("author")
+    @Expose
+    private String  author;
     @SerializedName("attendants")
     @Expose
     private boolean viewAttendants;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getTitle() {
         return title;
@@ -85,5 +83,25 @@ public class EventsItem {
 
     public void setViewAttendants(boolean viewAttendants) {
         this.viewAttendants = viewAttendants;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 }

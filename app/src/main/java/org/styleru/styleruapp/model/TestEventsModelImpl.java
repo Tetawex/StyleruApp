@@ -43,8 +43,10 @@ public class TestEventsModelImpl implements EventsModel {
         private EventsItem generateRandomItem(int id){
             EventsItem item=new EventsItem();
             item.setTitle("Общая встреча организации");
-            item.setSubtitle("By Аня Подображных");
+            item.setSubtitle("Lorem ipsum dolor кiт amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.");
             item.setId(id);
+            item.setViewAttendants(random.nextBoolean());
+            item.setAuthor("By Аня Подображных");
 
             int r=random.nextInt(5);
             if(r==1)
@@ -57,7 +59,7 @@ public class TestEventsModelImpl implements EventsModel {
                 item.setImageUrl("https://1fichier.com/?7y42cmkp7b");
             else
                 item.setImageUrl("");
-            item.setLocation("Кирпичная, 33");
+            item.setLocation("Кирпичная, "+(random.nextInt(80)+10));
             item.setDateTime("2017-"+(random.nextInt(6)+3)+"-23T"+(random.nextInt(9)+10)+":00:43.511Z");
 
             return item;

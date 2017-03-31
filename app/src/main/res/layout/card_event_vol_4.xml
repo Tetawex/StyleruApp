@@ -38,71 +38,78 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1"/>
+
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingLeft="10dp"
-            android:layout_height="wrap_content">
-        <TextView
-            android:paddingTop="10dp"
-            android:layout_width="match_parent"
-            android:id="@+id/date2"
-            android:layout_height="wrap_content"
-            android:text="10 февраля, 10:00"
-            android:textSize="15dp"
-            android:textColor="#D0D0D0"/>
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:paddingLeft="10dp">
 
-        <TextView
-            android:paddingTop="3dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Кирпичная, 33"
-            android:id="@+id/location2"
-            android:textSize="15dp"
-            android:textColor="#9A9A9A"/>
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content">
             <TextView
-                android:paddingTop="20dp"
+                android:id="@+id/date2"
                 android:layout_width="match_parent"
-                android:textAllCaps="true"
-                android:id="@+id/info2"
-                android:paddingBottom="20dp"
                 android:layout_height="wrap_content"
-                android:text="ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
-                android:layout_weight="0.3"
-                android:textSize="12dp"
-                android:layout_marginRight="30dp"
-                android:textColor="#111111"/>
+                android:paddingTop="10dp"
+                android:text="10 февраля, 10:00"
+                android:textColor="#D0D0D0"
+                android:textSize="15dp" />
 
-            <Button
-                android:id="@+id/button2"
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/location2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginBottom="10dp"
-                android:layout_marginRight="20dp"
-                android:layout_weight="0.7"
-                android:height="30dp"
-                android:background="#BDE8E8"
-                android:text="Пойти"
-                android:textAllCaps="true"
-                android:textColor="#FFFFFF" />
-        </LinearLayout>
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
+                android:paddingTop="3dp"
+                android:text="Кирпичная, 33"
+                android:textColor="#9A9A9A"
+                android:textSize="15dp" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/info2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="30dp"
+                    android:layout_weight="0.3"
+                    android:paddingBottom="20dp"
+                    android:paddingTop="20dp"
+                    android:text="ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
+                    android:textAllCaps="true"
+                    android:textColor="#111111"
+                    android:textSize="12dp" />
+
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="0.7"
+                    android:height="30dp"
+                    android:background="#BDE8E8"
+                    android:text="Пойти"
+                    android:textAllCaps="true"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
 
             <Button
                 android:id="@+id/button"
