@@ -9,6 +9,6 @@ import io.reactivex.Observable;
  * Created by tetawex on 29.03.17.
  */
 
-public interface ProjectsModel {
+public interface ProjectsModel extends Model{
     Observable<ProjectsResponse> getData(ProjectsRequest request);
 }

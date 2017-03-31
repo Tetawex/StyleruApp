@@ -11,6 +11,9 @@ public class EventStateChangeResponse {
     @SerializedName("new_state")
     @Expose
     private int newState;
+    @SerializedName("id")
+    @Expose
+    private int id;
 
     public int getNewState() {
         return newState;
@@ -18,5 +21,12 @@ public class EventStateChangeResponse {
 
     public void setNewState(int newState) {
         this.newState = newState;
+    }
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

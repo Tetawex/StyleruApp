@@ -2,6 +2,8 @@ package org.styleru.styleruapp.model;
 
 import android.util.Log;
 
+import org.styleru.styleruapp.model.dto.EventStateChangeRequest;
+import org.styleru.styleruapp.model.dto.EventStateChangeResponse;
 import org.styleru.styleruapp.model.dto.EventsItem;
 import org.styleru.styleruapp.model.dto.EventsRequest;
 import org.styleru.styleruapp.model.dto.EventsResponse;
@@ -35,6 +37,12 @@ public class TestEventsModelImpl implements EventsModel {
         Log.d("test",eventsResponse.getData().size()+"");
         return Observable.just(eventsResponse);
     }
+
+    @Override
+    public Observable<EventStateChangeResponse> getChangedState(EventStateChangeRequest request) {
+        return null;
+    }
+
     private class TestEventsItemFactory{
         private Random random=new Random(12345);
         public void reset(){

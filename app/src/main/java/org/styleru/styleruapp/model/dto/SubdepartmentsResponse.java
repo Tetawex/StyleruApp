@@ -3,24 +3,22 @@ package org.styleru.styleruapp.model.dto;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import org.styleru.styleruapp.view.EventsView;
-
 import java.util.List;
 
 /**
- * Created by tetawex on 06.03.17.
+ * Created by Tetawex on 31.03.2017.
  */
 
-public class EventsResponse {
-    @Expose
+public class SubdepartmentsResponse {
     @SerializedName("data")
-    private List<EventsItem> data;
+    @Expose
+    private List<DepartmentsItem> data;
 
-    public List<EventsItem> getData() {
+    public List<DepartmentsItem> getData() {
         return data;
     }
 
-    public void setData(List<EventsItem> data) {
+    public void setData(List<DepartmentsItem> data) {
         this.data = data;
     }
 }

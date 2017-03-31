@@ -1,32 +1,62 @@
 package org.styleru.styleruapp.model.dto;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class SignUpResponse {
+    @Expose
     @SerializedName("user_id")
-    private final int userId;
-
-    @SerializedName("user_active")
-    private final boolean userActive;
-
-    @SerializedName("status_code")
-    private final int statusCode;
-
-    public SignUpResponse(int userId, boolean userActive, int statusCode) {
-        this.userId = userId;
-        this.userActive = userActive;
-        this.statusCode = statusCode;
-    }
+    private int userId;
+    @Expose
+    @SerializedName("img_url")
+    private String imageUrl;
+    @Expose
+    @SerializedName("first_name")
+    private String firstName;
+    @Expose
+    @SerializedName("last_name")
+    private String lastName;
+    @Expose
+    @SerializedName("token")
+    private String token;
 
     public int getUserId() {
         return userId;
     }
 
-    public boolean isUserActive() {
-        return userActive;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public int getStatusCode() {
-        return statusCode;
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

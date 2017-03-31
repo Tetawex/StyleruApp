@@ -11,6 +11,9 @@ import java.util.List;
  */
 
 public class DepartmentsItem {
+    @SerializedName("id")
+    @Expose
+    private int id;
     @SerializedName("name")
     @Expose
     private String name;
@@ -23,9 +26,6 @@ public class DepartmentsItem {
     @SerializedName("email")
     @Expose
     private String email;
-    @SerializedName("subdepartments")
-    @Expose
-    private List<Subdepartment> subdepartments = Collections.emptyList();
 
     public String getName() {
         return name;
@@ -59,12 +59,11 @@ public class DepartmentsItem {
         this.email = email;
     }
 
-    public List<Subdepartment> getSubdepartments() {
-        return subdepartments;
+    public int getId() {
+        return id;
     }
 
-    public void setSubdepartments(List<Subdepartment> subdepartments) {
-        this.subdepartments = subdepartments;
+    public void setId(int id) {
+        this.id = id;
     }
-
 }

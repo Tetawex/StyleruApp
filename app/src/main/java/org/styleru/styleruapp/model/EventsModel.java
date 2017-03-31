@@ -1,5 +1,7 @@
 package org.styleru.styleruapp.model;
 
+import org.styleru.styleruapp.model.dto.EventStateChangeRequest;
+import org.styleru.styleruapp.model.dto.EventStateChangeResponse;
 import org.styleru.styleruapp.model.dto.EventsRequest;
 import org.styleru.styleruapp.model.dto.EventsResponse;
 
@@ -12,4 +14,5 @@ import io.reactivex.Observable;
 
 public interface EventsModel extends Model {
     Observable<EventsResponse> getData(EventsRequest request);
+    Observable<EventStateChangeResponse> getChangedState(EventStateChangeRequest request);
 }

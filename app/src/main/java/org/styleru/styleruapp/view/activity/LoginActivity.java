@@ -18,7 +18,7 @@ import org.styleru.styleruapp.R;
  * Created by Пользователь on 13.03.2017.
  */
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity{
 
 
     Button btn;
