@@ -9,7 +9,7 @@ import org.styleru.styleruapp.model.dto.support.Settings;
  * Created by Tetawex on 31.03.2017.
  */
 
-public class SettingsGetResponse {
+public class SettingsDownloadResponse {
     @SerializedName("settings")
     @Expose
     private Settings settings;
