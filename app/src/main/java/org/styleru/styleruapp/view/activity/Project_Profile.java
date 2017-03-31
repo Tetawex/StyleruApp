@@ -3,7 +3,8 @@ package org.styleru.styleruapp.view.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -14,11 +15,22 @@ import org.styleru.styleruapp.R;
  */
 
 public class Project_Profile extends AppCompatActivity {
-Button need;
-    Button back1;
+
+
+    Button need;
+    Toolbar tool;
+
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.project_profile);
+
+        tool = (Toolbar) findViewById(R.id.toolbar_proj_prof);
+        tool.setTitle("Проект");
+        setSupportActionBar(tool);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         need = (Button) findViewById(R.id.needed);
         need.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -27,17 +39,25 @@ Button need;
                 startActivity(intent);
             }
         });
+    }
 
-        Log.d("BUT","2");
-        back1 = (Button) findViewById(R.id.back3);
-        Log.d("BUT","3");
-        back1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("BUT","1");
-                finish();
-            }
-        });
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        finish();
+        return super.onOptionsItemSelected(item);
+    }
 
+
+    @Override
+    public void onStop() {
+        super.onStop();
     }
 }
+
+
+
+
+
+
+
+

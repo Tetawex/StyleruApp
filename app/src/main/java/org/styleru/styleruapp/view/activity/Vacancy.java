@@ -2,6 +2,8 @@ package org.styleru.styleruapp.view.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.Button;
 
 import org.styleru.styleruapp.R;
@@ -14,22 +16,30 @@ public class Vacancy extends AppCompatActivity {
 
 
     Button back;
+    Toolbar tool;
 
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.vacancy);
+        setContentView(R.layout.activity_vacancy);
 
-//        back = (Button) findViewById(R.id.back);
-//        back.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                finish();
-//            }
-//        });
+        tool = (Toolbar) findViewById(R.id.toolbar_vac);
+        tool.setTitle("Вакансии");
+        setSupportActionBar(tool);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        finish();
+        return super.onOptionsItemSelected(item);
+    }
+
+
     @Override
     public void onStop() {
         super.onStop();

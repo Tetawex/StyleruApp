@@ -1,29 +1,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_height="match_parent">
 
-    <LinearLayout android:layout_height="55dp"
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar1"
         android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:background="@color/styleru">
-        <Button
-            android:layout_width="30dp"
-            android:layout_marginTop="3dp"
-            android:id="@+id/back3"
-            android:layout_marginLeft="10dp"
-            android:layout_height="30dp"
-            android:background="@drawable/arrow_back"/>
-        <TextView android:layout_width="match_parent"
-            android:paddingLeft="30dp"
-            android:layout_marginTop="6dp"
-            android:paddingTop="10dp"
-            android:textSize="20dp"
-            android:layout_height="wrap_content"
-            android:textColor="#FFFFFF"
-            android:text="Styleru.org">
-        </TextView>
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_proj_prof"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:titleTextColor="#FFFFFF"
+            app:subtitleTextColor="#FFFFFF"
+            android:background="#7CD2D2"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+    </android.support.design.widget.AppBarLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:paddingTop="5dp"
