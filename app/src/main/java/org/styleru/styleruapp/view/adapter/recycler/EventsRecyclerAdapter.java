@@ -1,13 +1,11 @@
 package org.styleru.styleruapp.view.adapter.recycler;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -55,6 +53,7 @@ public class EventsRecyclerAdapter extends BaseRecyclerAdapter<EventsItem> {
 
             holder.title2.setText("");
             holder.title1.setText(item.getTitle());
+
             Glide
                     .with(context)
                     .load(item.getImageUrl())
@@ -63,7 +62,10 @@ public class EventsRecyclerAdapter extends BaseRecyclerAdapter<EventsItem> {
         else {
             holder.imageHolder.setVisibility(View.GONE);
             holder.title2.setText(item.getTitle());
+            holder.title2   .setTextSize(25);
+            holder.title2.setPadding(0,30,0,0);
             holder.title1.setText("");
+
         }
 
         if(item.isViewAttendants()) {

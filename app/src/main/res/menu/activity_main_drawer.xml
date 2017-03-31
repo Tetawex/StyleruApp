@@ -3,23 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
         <item
             android:id="@+id/nav_events"
-            android:icon="@drawable/ic_calendar"
+            android:icon="@drawable/menu_events"
             android:title="@string/events" />
         <item
             android:id="@+id/nav_people"
-            android:icon="@drawable/ic_avatar"
+            android:icon="@drawable/menu_people"
             android:title="@string/people" />
         <item
             android:id="@+id/nav_profile"
-            android:icon="@drawable/ic_avatar"
+            android:icon="@drawable/menu_profile"
             android:title="@string/profile" />
         <item
             android:id="@+id/nav_departments"
-            android:icon="@drawable/ic_location"
-            android:title="@string/departments" />
+            android:icon="@drawable/menu_directions"
+            android:title="@string/direct" />
         <item
             android:id="@+id/nav_projects"
-            android:icon="@drawable/ic_greater_calendar"
+            android:icon="@drawable/menu_projects"
             android:title="@string/projects" />
 
 </menu>

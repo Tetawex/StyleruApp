@@ -16,4 +16,6 @@
         <string name="until">до</string>
     <string name="hint_people">Поиск по именам и ключевым словам</string>
     <string name="go">ПОЙДУ</string>
-</resources>
+        <string name="вшкусе">Направления</string>
+        <string name="direct">Направления</string>
+    </resources>
