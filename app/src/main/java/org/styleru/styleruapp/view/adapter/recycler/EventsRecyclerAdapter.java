@@ -1,23 +1,19 @@
 package org.styleru.styleruapp.view.adapter.recycler;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerViewAccessibilityDelegate;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
-import org.ocpsoft.prettytime.PrettyTime;
 import org.styleru.styleruapp.R;
 import org.styleru.styleruapp.model.dto.EventsItem;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -31,10 +27,12 @@ public class EventsRecyclerAdapter extends BaseRecyclerAdapter<EventsItem> {
     public EventsRecyclerAdapter(Context context, List<EventsItem> data) {
         super(context, data);
     }
-
+public RelativeLayout rel;
+    public Bitmap myBitmap;
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view=inflater.inflate(R.layout.card_events,parent,false);
+        View view=inflater.inflate(R.layout.card_event_vol_4,parent,false);
+        rel = (RelativeLayout) view.findViewById(R.id.image);
         EventsViewHolder  holder;
         holder = new EventsViewHolder(view);
 
@@ -52,27 +50,58 @@ public class EventsRecyclerAdapter extends BaseRecyclerAdapter<EventsItem> {
         holder.date.setText(fullDateTimeString.substring(0, fullDateTimeString.length() - 8));
 
         holder.time.setText(new DateTime(item.getDateTime().replace(' ','T')).toString("HH:mm"));
-        holder.location.setText(item.getLocation());
-        holder.image.setAdjustViewBounds(true);
         if(!(item.getImageUrl()).equals("")) {
-            holder.image.setVisibility(View.VISIBLE);
-            Glide
-                    .with(context)
-                    .load(item.getImageUrl())
-                    .placeholder(R.drawable.placeholder_loading)
-                    .diskCacheStrategy(DiskCacheStrategy.NONE)
-                    .into(holder.image);
+            rel.setVisibility(View.VISIBLE);
+
+            holder.title2.setText("");
+            holder.title1.setText(item.getTitle());
         }
-        else
-            holder.image.setVisibility(View.GONE);
+        else {
+            rel.setVisibility(View.GONE);
+            holder.title2.setText(item.getTitle());
+//            try {
+//                Bitmap myBitmap = Glide.with(context)
+//                        .load(item.getImageUrl())
+//                        .asBitmap()
+//                        .centerCrop()
+//                        .into(500, 500)
+//                        .get();
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            } catch (ExecutionException e) {
+//                e.printStackTrace();
+//            }
+//            rel.setBackground(new BitmapDrawable(context.getResources(), myBitmap));
+
+
+
+            holder.title1.setText("");
+        }
+
+        if(item.isViewAttendants()) {
+            holder.attendance.setVisibility(View.GONE);
+        }
+        else {
+            holder.attendance.setVisibility(View.VISIBLE);
+        }
+
+        holder.author.setText(item.getAuthor());
+        holder.subtitle.setText(item.getSubtitle());
+        holder.location.setText(item.getLocation());
     }
 
     class EventsViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.title)
-        TextView title;
+        @BindView(R.id.title1)
+        TextView title1;
+
+        @BindView(R.id.title2)
+        TextView title2;
 
         @BindView(R.id.subtitle)
         TextView subtitle;
+
+        @BindView(R.id.author)
+        TextView author;
 
         @BindView(R.id.date)
         TextView date;
@@ -83,8 +112,9 @@ public class EventsRecyclerAdapter extends BaseRecyclerAdapter<EventsItem> {
         @BindView(R.id.location)
         TextView location;
 
-        @BindView(R.id.image)
-        ImageView image;
+        @BindView(R.id.attendance)
+        Button attendance;
+
 
         public EventsViewHolder(View view) {
             super(view);
