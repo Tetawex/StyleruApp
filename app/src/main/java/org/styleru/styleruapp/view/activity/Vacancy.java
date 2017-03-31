@@ -2,7 +2,6 @@ package org.styleru.styleruapp.view.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.Button;
 
 import org.styleru.styleruapp.R;
@@ -21,13 +20,13 @@ public class Vacancy extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vacancy);
 
-        back = (Button) findViewById(R.id.back);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+//        back = (Button) findViewById(R.id.back);
+//        back.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                finish();
+//            }
+//        });
 
 
     }
