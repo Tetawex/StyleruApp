@@ -1,7 +1,5 @@
 package org.styleru.styleruapp.model;
 
-import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
-
 import org.styleru.styleruapp.model.dto.LoginRequest;
 import org.styleru.styleruapp.model.dto.LoginResponse;
 import org.styleru.styleruapp.model.dto.ValidateTokenRequest;

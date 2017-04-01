@@ -3,6 +3,7 @@ package org.styleru.styleruapp.view.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -15,6 +16,7 @@ import org.styleru.styleruapp.model.cache.Singletons;
 import org.styleru.styleruapp.model.dto.LoginResponse;
 import org.styleru.styleruapp.presenter.LoginPresenter;
 import org.styleru.styleruapp.presenter.LoginPresenterImpl;
+import org.styleru.styleruapp.util.Md5Hash;
 import org.styleru.styleruapp.view.LoginView;
 
 import butterknife.BindView;
@@ -52,7 +54,8 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.onLogin(login.getText().toString(),password.getText().toString());
+                presenter.onLogin(login.getText().toString(),
+                        Md5Hash.md5(Md5Hash.md5(password.getText().toString())));//double hash means double security
             }
         });
         presenter.onValidateToken();
@@ -60,7 +63,8 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
 
     @Override
     public void showError(Throwable throwable) {
-        Toast.makeText(this,R.string.err_no_internet,Toast.LENGTH_LONG).show();
+        Toast.makeText(this,throwable.getMessage(),Toast.LENGTH_LONG).show();
+        Log.e("auth",throwable.getMessage());
     }
 
     @Override

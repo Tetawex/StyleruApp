@@ -1,6 +1,7 @@
 package org.styleru.styleruapp.presenter;
 
 import org.styleru.styleruapp.model.LoginModel;
+import org.styleru.styleruapp.model.LoginModelImpl;
 import org.styleru.styleruapp.model.TestLoginModelImpl;
 import org.styleru.styleruapp.model.cache.Singletons;
 import org.styleru.styleruapp.model.cache.UserInfo;
@@ -24,7 +25,7 @@ public class LoginPresenterImpl implements LoginPresenter {
 
     public LoginPresenterImpl(LoginView view) {
         this.view=view;
-        model=new TestLoginModelImpl();
+        model=new LoginModelImpl();
     }
 
     @Override

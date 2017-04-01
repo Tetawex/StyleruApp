@@ -14,9 +14,6 @@ public class ProjectsItem {
     @SerializedName("name")
     @Expose
     private String name;
-    @SerializedName("surname")
-    @Expose
-    private String surname;
     @SerializedName("manager_name")
     @Expose
     private String managerName;
@@ -67,11 +64,4 @@ public class ProjectsItem {
         this.endDateTime = endDateTime;
     }
 
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
 }
