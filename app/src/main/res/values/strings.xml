@@ -3,7 +3,6 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <string name="action_settings">Settings</string>
 
     <string name="profile">Профиль</string>
@@ -12,6 +11,7 @@
     <string name="events">Мероприятия</string>
     <string name="people">Люди</string>
     <string name="timeline">Таймлайн</string>
+        <string name="err_no_internet">Ошибка. Проверьте подключение к интернету</string>
 
         <string name="until">до</string>
     <string name="hint_people">Поиск по именам и ключевым словам</string>

@@ -1,9 +1,6 @@
 package org.styleru.styleruapp.view.activity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -13,46 +10,73 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import org.styleru.styleruapp.R;
+import org.styleru.styleruapp.StyleruApplication;
+import org.styleru.styleruapp.model.cache.Singletons;
+import org.styleru.styleruapp.model.dto.LoginResponse;
+import org.styleru.styleruapp.presenter.LoginPresenter;
+import org.styleru.styleruapp.presenter.LoginPresenterImpl;
+import org.styleru.styleruapp.view.LoginView;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by Пользователь on 13.03.2017.
  */
 
-public class LoginActivity extends AppCompatActivity{
+public class LoginActivity extends AppCompatActivity implements LoginView{
 
-
-    Button btn;
+    @BindView(R.id.progressbar)
+    View progressbar;
+    @BindView(R.id.login_button)
+    Button button;
+    @BindView(R.id.login_edit)
     EditText login;
+    @BindView(R.id.password_edit)
     EditText password;
 
+    private LoginPresenter presenter;
+
+    @Override
+    public void onBackPressed() {
+        // disable going back to the MainActivity
+        moveTaskToBack(true);
+    }
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_menu);
+        setContentView(R.layout.activity_login);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        login = (EditText) findViewById(R.id.log) ;
-        password = (EditText) findViewById(R.id.pass) ;
-        btn = (Button) findViewById(R.id.login);
-        btn.setOnClickListener(new View.OnClickListener() {
+        ButterKnife.bind(this);
+        presenter=new LoginPresenterImpl(this);
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isOnline()){
-                    Intent intent = new Intent(getApplication(), MainActivity.class);
-                    startActivity(intent);
-                    Toast.makeText(getApplicationContext(), "Добро пожаловать, хозяин", Toast.LENGTH_LONG).show();
-                    finish();
-                }
-                else{
-                    Toast.makeText(getApplicationContext(), "No internet connection", Toast.LENGTH_LONG).show();
-                }
+                presenter.onLogin(login.getText().toString(),password.getText().toString());
             }
         });
+        presenter.onValidateToken();
     }
-    public boolean isOnline() {
-        ConnectivityManager cm =
-                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        return netInfo != null && netInfo.isConnectedOrConnecting();
+
+    @Override
+    public void showError(Throwable throwable) {
+        Toast.makeText(this,R.string.err_no_internet,Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void startProgressBar() {
+        progressbar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void stopProgressBar() {
+        progressbar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void switchToMainPage() {
+        Intent intent = new Intent(getApplication(), MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

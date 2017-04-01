@@ -16,10 +16,9 @@
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
         app:itemTextColor="#202020"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/navigation_drawer_width"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:itemTextAppearance="@style/NavDrawerTextStyle"
 
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_main"

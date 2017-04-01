@@ -1,9 +1,12 @@
 package org.styleru.styleruapp.view.activity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.NavigationView;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,11 +18,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import org.styleru.styleruapp.R;
+import org.styleru.styleruapp.model.cache.Singletons;
+import org.styleru.styleruapp.model.cache.UserInfo;
 import org.styleru.styleruapp.view.fragments.DepartmentsFragment;
 import org.styleru.styleruapp.view.fragments.EventsFragment;
 import org.styleru.styleruapp.view.fragments.PeopleFragment;
@@ -37,6 +46,10 @@ public class MainActivity extends AppCompatActivity
     }
 
     private ActionBarDrawerToggle toggle;
+
+    public ImageView imageView;
+    public TextView name;
+    public TextView email;
 
     @BindView(R.id.appbar)
     public AppBarLayout appBarLayout;
@@ -71,15 +84,34 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View headerView = navigationView.getHeaderView(0);
+        imageView =(ImageView) headerView.findViewById(R.id.user_image);
+        name=(TextView) headerView.findViewById(R.id.name);
+        email=(TextView) headerView.findViewById(R.id.email);
 
         switchFragment(R.id.nav_events);
 
+        UserInfo info = Singletons.getUserInfo();
+        name.setText(info.getFirstName()+" "+info.getLastName());
+        email.setText(info.getEmail());
+        Glide
+                .with(this)
+                .load(info.getImageUrl())
+                .asBitmap().centerCrop()
+                .placeholder(R.drawable.placeholder_loading_circled)
+                .into(new BitmapImageViewTarget(imageView) {
+            @Override
+            protected void setResource(Bitmap resource) {
+                RoundedBitmapDrawable circularBitmapDrawable =
+                        RoundedBitmapDrawableFactory.create(getResources(), resource);
+                circularBitmapDrawable.setCircular(true);
+                imageView.setImageDrawable(circularBitmapDrawable);
+            }
+        });
 
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_LOW_PROFILE;
-        decorView.setSystemUiVisibility(uiOptions);
-
-
+        //decorView.setSystemUiVisibility(uiOptions); Зачем это?
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 //        navigationView.setOnClickListener(OnClickyes());
 
