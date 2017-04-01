@@ -21,5 +21,10 @@
             android:id="@+id/nav_projects"
             android:icon="@drawable/menu_projects"
             android:title="@string/projects" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/menu_settings"
+            android:title="@string/settings"/>
+
 
 </menu>

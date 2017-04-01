@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         View headerView = navigationView.getHeaderView(0);
@@ -180,26 +181,29 @@ public class MainActivity extends AppCompatActivity
                 = getSupportFragmentManager().beginTransaction();
         switch(id) {
 
-            case(R.id.nav_people):
+            case (R.id.nav_people):
                 setAppBarElevation(4);
                 transaction.replace(R.id.container, new PeopleFragment());
                 break;
-            case(R.id.nav_departments):
+            case (R.id.nav_departments):
                 setAppBarElevation(4);
                 transaction.replace(R.id.container, new DepartmentsFragment());
                 break;
-            case(R.id.nav_events):
+            case (R.id.nav_events):
                 setAppBarElevation(4);
                 transaction.replace(R.id.container, new EventsFragment());
                 break;
-            case(R.id.nav_profile):
+            case (R.id.nav_profile):
                 setAppBarElevation(0);
                 transaction.replace(R.id.container, new ProfileFragment());
                 break;
-            case(R.id.nav_projects):
+            case (R.id.nav_projects):
                 setAppBarElevation(4);
                 transaction.replace(R.id.container, new ProjectsFragment());
                 break;
+            case (R.id.nav_settings):
+                Intent intent = new Intent(getApplication(), SettingsActivity.class);
+                startActivity(intent);
         }
         transaction.commit();
 

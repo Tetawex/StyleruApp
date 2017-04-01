@@ -32,16 +32,16 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.activity.SettingsActivity"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="stateHidden">
         </activity>
         <activity android:name=".view.activity.Project_Profile"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="stateHidden">
 
         </activity>
         <activity android:name=".view.activity.Vacancy"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="stateHidden">
         </activity>
     </application>

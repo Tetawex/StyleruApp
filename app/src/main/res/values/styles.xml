@@ -2,8 +2,10 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Base.Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
+        <item name="drawerArrowStyle">@style/DrawerArrowToggle</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorControlNormal">#111111</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
     <style
@@ -11,41 +13,64 @@
         parent="Base.Theme.AppCompat.Light.DarkActionBar"/>
 
     <style name="AppTheme.NoActionBar">
+        <item name="drawerArrowStyle">@style/DrawerArrowToggle</item>
         <item name="windowActionBar">false</item>
+        <item name="colorControlNormal">#111111</item>
         <item name="windowNoTitle">true</item>
         <item name="android:textColorHint">@color/colorAccent</item>
     </style>
 
     <style name="AttendantsListButton" parent="Theme.AppCompat">
+        <item name="drawerArrowStyle">@style/DrawerArrowToggle</item>
         <item name="colorButtonNormal">@color/colorPrimary</item>
+        <item name="colorControlNormal">#111111</item>
         <item name="colorControlHighlight">@color/colorAccent</item>
     </style>
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:textColorPrimary">@color/colorPrimaryDarker</item>
         <item name="android:textColorSecondary">@color/colorPrimaryDarker</item>
+        <item name="drawerArrowStyle">@style/DrawerArrowToggle</item>
+
+        <item name="colorControlNormal">#111111</item>
         <item name="actionMenuTextColor">@color/colorPrimaryDarker</item>
     </style>
     <style name="FilledButton" parent="Widget.AppCompat.Button.Colored">
         <item name="backgroundTint">@drawable/button_background_selector</item>
+        <item name="drawerArrowStyle">@style/DrawerArrowToggle</item>
         <item name="android:textColor">@drawable/button_text_selector</item>
+        <item name="colorControlNormal">#111111</item>
     </style>
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
-<item name="android:textColor">#FFFFFF</item>
- <item name="colorControlNormal">#FFFFFF</item>
-        <item name="colorButtonNormal">#FFFFFF</item>
-        <item name="colorControlHighlight">#FFFFFF</item>
-        <item name="colorSwitchThumbNormal">#FFFFFF</item>
-        <item name="android:color">#FFFFFF</item>
-    </style>
+<item name="android:textColor">@color/texttoolbar</item>
+ <item name="colorControlNormal">@color/texttoolbar</item>
+        <item name="drawerArrowStyle">@style/DrawerArrowToggle</item>
+        <item name="colorButtonNormal">@color/texttoolbar</item>
 
+        <item name="colorControlHighlight">@color/texttoolbar</item>
+        <item name="colorSwitchThumbNormal">@color/texttoolbar</item>
+        <item name="android:color">@color/texttoolbar</item>
+        <item name="actionBarItemBackground">@color/texttoolbar</item>
+
+    </style>
     <style name="MyMaterialTheme" parent="MyMaterialTheme.Base">
-
+        <item name="colorControlNormal">#111111</item>
+        <item name="drawerArrowStyle">@style/DrawerArrowToggle</item>
     </style>
+
+
+
+    <style name="DrawerArrowToggle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <!-- Ваш цвет -->
+        <item name="color">#111111</item>
+    </style>
+f
 
     <style name="MyMaterialTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="windowNoTitle">true</item>
+        <item name="colorControlNormal">#111111</item>
         <item name="windowActionBar">false</item>
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/texttoolbar</item>
+        <item name="drawerArrowStyle">@style/DrawerArrowToggle</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>

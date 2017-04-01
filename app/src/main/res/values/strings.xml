@@ -18,4 +18,5 @@
     <string name="go">ПОЙДУ</string>
         <string name="вшкусе">Направления</string>
         <string name="direct">Направления</string>
+        <string name="settings">Настройки</string>
     </resources>

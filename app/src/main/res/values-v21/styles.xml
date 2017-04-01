@@ -6,6 +6,8 @@
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowTranslucentStatus">false</item>
+        <item name="drawerArrowStyle">@style/DrawerArrowToggle</item>
+
     </style>
 
 

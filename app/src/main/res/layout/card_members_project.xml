@@ -22,7 +22,7 @@
             
             android:textSize="13dp"
             android:gravity="center"
-            android:textColor="@color/colortoolbar"
+            android:textColor="#7cd2d2"
             android:text="Менеджер приложения"/>
     </LinearLayout>
 </LinearLayout>
