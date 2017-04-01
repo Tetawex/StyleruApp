@@ -5,37 +5,49 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginTop="20dp"
     android:layout_marginBottom="0dp"
-    android:layout_marginRight="8dp"
-    android:layout_marginLeft="8dp">
-
-
+    android:layout_marginRight="16dp"
+    android:orientation="horizontal"
+    android:layout_marginLeft="16dp">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="0.35"
+    android:orientation="vertical">
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textColor="#212121"
+    android:textSize="19dp"
+    android:text="БИ-WEB"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#7D7D7D"
+        android:text="Веб-дизайнер"/>
+</LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:layout_weight="0.33"
-            android:text="Web-разработка"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.33"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:textColor="#6cc9c8"
-            android:text="Vidal"/>
-        <TextView
+        android:layout_weight="0.65"
+        android:orientation="vertical">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:background="#FFFFB8"
+    android:layout_marginTop="10dp"
+    android:paddingTop="0dp"
+    android:layout_height="30dp">
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:textSize="13dp"
-        android:layout_weight="0.33"
-        android:text="В процессе"/>
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="В разработке"/>
+
+
+
+</LinearLayout>
 
 
 

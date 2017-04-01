@@ -5,12 +5,12 @@
     <color name="colorPrimaryDark">#96c3c3</color>
     <color name="colorAccent">#2DC6C4</color>
     <color name="colorPrimaryDarker">#295D65</color>
-    <color name="colorToolbar">#ffffff</color>
     <color name="colorImagePlaceholder">#F2F2F2</color>
     <color name="colorFragmentBackground">#EEE</color>
     <color name="colorGrey">#647375</color>
     <color name="colorGrey_dark">#687779</color>
     <color name="colorBlue">#6eb2bd</color>
-    <color name="styleru">#7CD2D2</color>
+    <color name="colortoolbar">#7CD2D2</color>
+
 
 </resources>

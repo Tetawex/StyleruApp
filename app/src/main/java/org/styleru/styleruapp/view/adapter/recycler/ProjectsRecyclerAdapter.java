@@ -51,14 +51,23 @@ public View view;
         ProjectsItem item= getData().get(position);
         ProjectsViewHolder holder=(ProjectsViewHolder) uncastedHolder;
 
+
+
+
         DateTime itemDateTime=new DateTime(item.getEndDateTime());
+        holder.date.setText(context.getString(R.string.until)+" "+itemDateTime.toString(formatter));
+
+
+
+
+
         if(item.isVacantPlaces())
             holder.vacant.setVisibility(View.VISIBLE);
         else
             holder.vacant.setVisibility(View.INVISIBLE);
         holder.name.setText(item.getName());
         holder.managerName.setText(item.getManagerName());
-        holder.date.setText(context.getString(R.string.until)+" "+itemDateTime.toString(formatter));
+
     }
 
     class ProjectsViewHolder extends RecyclerView.ViewHolder {

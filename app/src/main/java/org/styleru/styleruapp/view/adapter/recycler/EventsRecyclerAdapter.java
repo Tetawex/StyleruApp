@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -48,11 +47,10 @@ public class EventsRecyclerAdapter extends BaseRecyclerAdapter<EventsItem> {
         holder.date.setText(fullDateTimeString.substring(0, fullDateTimeString.length() - 8));
 
         holder.time.setText(new DateTime(item.getDateTime().replace(' ','T')).toString("HH:mm"));
+        holder.title1.setText(item.getTitle());
         if(!(item.getImageUrl()).equals("")) {
             holder.imageHolder.setVisibility(View.VISIBLE);
 
-            holder.title2.setText("");
-            holder.title1.setText(item.getTitle());
 
             Glide
                     .with(context)
@@ -61,37 +59,29 @@ public class EventsRecyclerAdapter extends BaseRecyclerAdapter<EventsItem> {
         }
         else {
             holder.imageHolder.setVisibility(View.GONE);
-            holder.title2.setText(item.getTitle());
-            holder.title2   .setTextSize(25);
-            holder.title2.setPadding(0,30,0,0);
-            holder.title1.setText("");
+
 
         }
 
-        if(item.isViewAttendants()) {
-            holder.attendance.setVisibility(View.GONE);
-        }
-        else {
-            holder.attendance.setVisibility(View.VISIBLE);
-        }
+//        if(item.isViewAttendants()) {
+//            holder.attendance.setVisibility(View.GONE);
+//        }
+//        else {
+//            holder.attendance.setVisibility(View.VISIBLE);
+//        }
 
-        holder.author.setText(item.getAuthor());
         holder.subtitle.setText(item.getSubtitle());
         holder.location.setText(item.getLocation());
     }
 
     class EventsViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.title1)
+        @BindView(R.id.title)
         TextView title1;
 
-        @BindView(R.id.title2)
-        TextView title2;
 
         @BindView(R.id.subtitle)
         TextView subtitle;
 
-        @BindView(R.id.author)
-        TextView author;
 
         @BindView(R.id.date)
         TextView date;
@@ -108,8 +98,8 @@ public class EventsRecyclerAdapter extends BaseRecyclerAdapter<EventsItem> {
         @BindView(R.id.image)
         ImageView image;
 
-        @BindView(R.id.attendance)
-        Button attendance;
+//        @BindView(R.id.attendance)
+//        Button attendance;
 
 
         public EventsViewHolder(View view) {
