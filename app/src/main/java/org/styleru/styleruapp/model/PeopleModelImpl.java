@@ -8,6 +8,7 @@ import org.styleru.styleruapp.model.dto.PeopleItem;
 import org.styleru.styleruapp.model.dto.PeopleRequest;
 import org.styleru.styleruapp.model.dto.PeopleResponse;
 import org.styleru.styleruapp.model.dto.support.PeopleFilter;
+import org.styleru.styleruapp.util.ErrorListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,7 +35,8 @@ public class PeopleModelImpl implements PeopleModel {
     private String authToken;
 
     private Action dataChangedListener;
-    private Consumer<Throwable> errorListener;
+    private Action dataResetListener;
+    private ErrorListener errorListener;
 
     private boolean finishedLoading;
     private Disposable disposable= Disposables.empty();
@@ -82,8 +84,11 @@ public class PeopleModelImpl implements PeopleModel {
                         disposable.dispose();
                     }
                     if(!finishedLoading&&itemList.size()<500)//TODO: убрать временный костыль
-                    {appendData(itemList.size());
-                        dataChangedListener.run();}
+                    {
+                        appendData(itemList.size());
+                        Log.e("model",filteredItemList.size()+"");
+                        dataChangedListener.run();
+                    }
                     else
                         finishedLoading=true;
 
@@ -113,7 +118,9 @@ public class PeopleModelImpl implements PeopleModel {
 
     @Override
     public void updateCachedData() {
+        finishedLoading=false;
         itemList.clear();
+        filteredItemList=itemList;
         appendData(0);
     }
     @Override
@@ -121,7 +128,11 @@ public class PeopleModelImpl implements PeopleModel {
         this.dataChangedListener = dataChangedListener;
     }
     @Override
-    public void setErrorListener(Consumer<Throwable> errorListener) {
+    public void setErrorListener(ErrorListener errorListener) {
         this.errorListener = errorListener;
+    }
+
+    public void setDataResetListener(Action dataResetListener) {
+        this.dataResetListener = dataResetListener;
     }
 }

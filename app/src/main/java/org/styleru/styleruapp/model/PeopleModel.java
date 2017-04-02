@@ -4,6 +4,7 @@ import org.styleru.styleruapp.model.dto.PeopleItem;
 import org.styleru.styleruapp.model.dto.PeopleRequest;
 import org.styleru.styleruapp.model.dto.PeopleResponse;
 import org.styleru.styleruapp.model.dto.support.PeopleFilter;
+import org.styleru.styleruapp.util.ErrorListener;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -21,5 +22,6 @@ public interface PeopleModel {
     void setRequestString(String requestString);
     void updateCachedData();
     void setDataChangedListener(Action dataChangedListener);
-    void setErrorListener(Consumer<Throwable> errorListener);
+    void setDataResetListener(Action dataChangedListener);
+    void setErrorListener(ErrorListener errorListener);
 }

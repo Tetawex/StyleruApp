@@ -5,9 +5,11 @@ import android.util.Log;
 import org.styleru.styleruapp.model.PeopleModel;
 import org.styleru.styleruapp.model.PeopleModelImpl;
 import org.styleru.styleruapp.model.dto.support.PeopleFilter;
+import org.styleru.styleruapp.util.ErrorListener;
 import org.styleru.styleruapp.view.PeopleView;
 
 import java.util.ArrayList;
+import java.util.function.Consumer;
 
 import io.reactivex.disposables.Disposable;
 import io.reactivex.disposables.Disposables;
@@ -36,10 +38,12 @@ public class PeoplePresenterImpl implements PeoplePresenter {
             else
                 onDataUpdate(BATCH_SIZE);
         });
-        model.setErrorListener(throwable->{
-            view.showError(throwable);
-            view.stopProgressBar();
-        });
+        model.setErrorListener(new ErrorListener() {
+                                   @Override
+                                   public void accept(Throwable throwable) {
+                                       view.showError(throwable);
+                                       view.stopProgressBar();
+                                   }});
     }
 
     @Override
@@ -57,7 +61,15 @@ public class PeoplePresenterImpl implements PeoplePresenter {
                         });
         currentId+=batchSize;
     }
-
+    @Override
+    public void onModelUpdateCachedData(){
+        model.updateCachedData();
+        model.setRequestString("");
+        view.setData(new ArrayList<>());
+        view.startProgressBar();
+        onDataUpdate(BATCH_SIZE);
+        currentId=0;
+    }
     @Override
     public void onDataUpdate(int batchSize) {
         currentId=0;

@@ -10,5 +10,6 @@ public interface PeoplePresenter extends Presenter {
     void onDataAppend(int offset, int batchSize);
     void onDataUpdate(int batchSize);
     void onSetFilter(PeopleFilter filter);
+    void onModelUpdateCachedData();
     void onSetRequestString(String string);
 }

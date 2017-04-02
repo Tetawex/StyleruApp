@@ -44,11 +44,11 @@ public class PeopleFragment extends Fragment implements PeopleView {
     private PeoplePresenter presenter;
 
     @BindView(R.id.recycler)
-    protected RecyclerView recyclerView;
-    @BindView(R.id.swipe)
-    protected SwipeRefreshLayout swipeRefreshLayout;
+    public RecyclerView recyclerView;
+    //@BindView(R.id.swipe)
+    //protected SwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.progressbar)
-    protected View progressbar;
+    public View progressbar;
 
     public PeopleFragment() {
         // Required empty public constructor
@@ -68,7 +68,7 @@ public class PeopleFragment extends Fragment implements PeopleView {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_projects, container, false);
+        View view = inflater.inflate(R.layout.fragment_people, container, false);
         MainActivity activity = (MainActivity) getActivity();
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         activity.setSupportActionBar(toolbar);
@@ -87,8 +87,7 @@ public class PeopleFragment extends Fragment implements PeopleView {
         recyclerAdapter=new PeopleRecyclerAdapter(getContext(),new ArrayList<PeopleItem>());
         recyclerView.setAdapter(recyclerAdapter);
 
-        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark,
-                R.color.colorPrimary);
+        //swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark);
 
         //Добавляем листенер для ресайклера, чтобы понять, когда загружать новый фид
         recyclerViewScrollListener = new EndlessRecyclerViewScrollListener(
@@ -102,14 +101,13 @@ public class PeopleFragment extends Fragment implements PeopleView {
         recyclerView.addOnScrollListener(recyclerViewScrollListener);
 
         //Рефреш-лэйаут сверху
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        /*swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh()
             {
-                presenter.onDataUpdate(DEFAULT_BATCH_SIZE);
-
+                presenter.onModelUpdateCachedData();
             }
-        });
+        });*/
         presenter=new PeoplePresenterImpl(this);
         return view;
     }
@@ -164,12 +162,12 @@ public class PeopleFragment extends Fragment implements PeopleView {
 
     @Override
     public void stopProgressBar() {
+        //swipeRefreshLayout.setRefreshing(false);
         progressbar.setVisibility(View.GONE);
     }
 
     @Override
     public void appendData(List<PeopleItem> data) {
-        Log.e("appended",""+data.size());
         recyclerAdapter.appendDataWithNotify(data);
     }
 
@@ -181,7 +179,7 @@ public class PeopleFragment extends Fragment implements PeopleView {
 
     public void onDataUpdated()
     {
-        swipeRefreshLayout.setRefreshing(false);
+        //swipeRefreshLayout.setRefreshing(false);
         recyclerViewScrollListener.resetState();
     }
 
