@@ -89,7 +89,9 @@ public class MainActivity extends AppCompatActivity
         imageView =(ImageView) headerView.findViewById(R.id.user_image);
         name=(TextView) headerView.findViewById(R.id.name);
         email=(TextView) headerView.findViewById(R.id.email);
-
+//        FrameLayout frame= (FrameLayout) findViewById(R.id.frame);
+//        if(android.os.Build.VERSION.SDK_INT < 21)
+//            frame.setPadding(0,16,0,0);
         switchFragment(R.id.nav_events);
 
         UserInfo info = Singletons.getUserInfo();

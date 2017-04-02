@@ -2,7 +2,6 @@ package org.styleru.styleruapp.view.fragments;
 
 import android.app.SearchManager;
 import android.content.Context;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -20,8 +19,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import org.styleru.styleruapp.view.activity.MainActivity;
 import org.styleru.styleruapp.R;
+import org.styleru.styleruapp.view.activity.MainActivity;
 import org.styleru.styleruapp.view.adapter.tab.ViewPagerAdapter2;
 
 public class PeopleFragment extends Fragment {
@@ -79,7 +78,7 @@ public class PeopleFragment extends Fragment {
 
         Log.d("FRAME","1");
         MainActivity activity = (MainActivity) getActivity();
-        MenuInflater inflater1 = activity.getMenuInflater();;
+        MenuInflater inflater1 = activity.getMenuInflater();
         Log.d("FRAME","1");
         inflater1.inflate(R.menu.menu_activity_main, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);

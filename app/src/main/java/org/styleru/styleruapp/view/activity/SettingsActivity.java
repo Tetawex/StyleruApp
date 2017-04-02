@@ -1,9 +1,6 @@
 package org.styleru.styleruapp.view.activity;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -12,6 +9,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import org.styleru.styleruapp.R;
 import org.styleru.styleruapp.model.cache.Singletons;
@@ -25,7 +24,9 @@ public class SettingsActivity extends AppCompatActivity{
     public static final int IDM_HSE = 101;
     public static final int IDM_REU = 102;
     public static final int IDM_ALL = 103;
-    Button but,exit;
+    Button exit;
+    RelativeLayout but;
+    TextView vuz;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -36,11 +37,9 @@ public class SettingsActivity extends AppCompatActivity{
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        final Drawable upArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_material);
-        upArrow.setColorFilter(Color.parseColor("#111111"), PorterDuff.Mode.SRC_ATOP);
-        getSupportActionBar().setHomeAsUpIndicator(upArrow);
+        vuz= (TextView) findViewById(R.id.vuz) ;
 
-        but = (Button) findViewById(R.id.vuz);
+        but = (RelativeLayout) findViewById(R.id.but);
 
         registerForContextMenu(but);
         but.setOnClickListener(new View.OnClickListener() {
@@ -79,13 +78,13 @@ public class SettingsActivity extends AppCompatActivity{
         switch (item.getItemId())
         {
             case IDM_HSE:
-               but.setText("ВШЭ");
+               vuz.setText("ВШЭ");
                 break;
             case IDM_REU:
-                but.setText("РЭУ");
+                vuz.setText("РЭУ");
                 break;
             case IDM_ALL:
-                but.setText("ВСЕ");
+                vuz.setText("ВСЕ");
                 break;
             default:
                 return super.onContextItemSelected(item);

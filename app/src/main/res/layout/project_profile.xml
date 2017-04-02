@@ -16,8 +16,7 @@
             app:titleTextColor="@color/texttoolbar"
             app:subtitleTextColor="@color/texttoolbar"
             android:background="@color/colortoolbar"
-            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+            app:theme="@style/Theme.AppCompat.Light" />
     </android.support.design.widget.AppBarLayout>
     <ScrollView
         android:layout_width="match_parent"

@@ -8,11 +8,14 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import org.styleru.styleruapp.view.activity.MainActivity;
 import org.styleru.styleruapp.R;
+import org.styleru.styleruapp.view.activity.MainActivity;
 import org.styleru.styleruapp.view.adapter.tab.ViewPagerAdapter;
 
 import butterknife.BindView;
@@ -47,7 +50,7 @@ public class ProfileFragment extends Fragment {
         MainActivity activity = (MainActivity) getActivity();
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         toolbar.setTitle(getContext().getString(R.string.profile));
-
+        setHasOptionsMenu(true);
         ButterKnife.bind(this,view);
         setupViewPager(viewPager);
         if(android.os.Build.VERSION.SDK_INT >= 21)
@@ -73,5 +76,21 @@ public class ProfileFragment extends Fragment {
         adapter.addFragment(new ProfileFragmentTabTimeline(), getContext().getString(R.string.timeline));
         viewPager.setAdapter(adapter);
     }
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        MainActivity activity = (MainActivity) getActivity();
+        MenuInflater inflater1 = activity.getMenuInflater();
+        inflater1.inflate(R.menu.settings, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
 }

@@ -8,6 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="24dp"
+    android:id="@+id/frame"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     android:weightSum="1">
     <ImageView

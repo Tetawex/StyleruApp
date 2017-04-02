@@ -15,45 +15,149 @@
             app:titleTextColor="@color/texttoolbar"
             app:subtitleTextColor="@color/texttoolbar"
             android:background="@color/colortoolbar"
-            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+            app:theme="@style/Theme.AppCompat.Light"
+          />
     </android.support.design.widget.AppBarLayout>
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingLeft="24sp"
+        android:paddingRight="24sp"
         android:orientation="vertical">
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="0.2dp"-->
+            <!--android:background="#565656" />-->
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:id="@+id/but"
+           android:layout_height="wrap_content">
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_marginTop="26dp"
+               android:layout_height="wrap_content"
+               android:id="@+id/vuz"
+               android:textSize="16sp"
+               android:text="Выбрать ВУЗ"/>
+       </RelativeLayout>
         <LinearLayout
+            android:layout_marginTop="58dp"
+            android:layout_width="match_parent"
+            android:layout_height="0.2dp"
+            android:orientation="horizontal"
+            android:id="@+id/shape"
+            android:background="#565656"/>
+        <LinearLayout
+            android:layout_below="@id/shape"
+            android:id="@+id/info1"
+            android:orientation="vertical"
+            android:paddingTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="40dp"
-            android:orientation="horizontal">
+            android:textSize="18sp"
+            android:paddingBottom="15dp"
+            android:text="О разработчиках:"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:paddingTop="4dp"
+                android:textSize="14sp"
+                android:layout_height="wrap_content"
+                android:text="Rinat Zubaidulin "/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:autoLink="web"
+                    android:paddingLeft="5sp"
+                    android:linksClickable="true"
+                    android:text="https://vk.com/rzubaidullin"
+                    android:layout_height="wrap_content" />
+        </LinearLayout>
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:paddingTop="4dp"
+                        android:textSize="14sp"
+                        android:layout_height="wrap_content"
+                        android:text="Данил Шавыкин "/>
+                <TextView
+                        android:layout_width="wrap_content"
+                    android:paddingLeft="5sp"
+                        android:text="https://vk.com/tetawex"
+                        android:autoLink="web"
+                        android:linksClickable="true"
+                        android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_height="wrap_content">
+                <TextView
+                            android:layout_width="wrap_content"
+                            android:paddingTop="4dp"
+                            android:textSize="14sp"
+                            android:layout_height="wrap_content"
+                            android:text="Дмитрий Гудилин"/>
+                <TextView
+                            android:layout_width="wrap_content"
+                            android:autoLink="web"
+                    android:paddingLeft="5sp"
+                            android:linksClickable="true"
+                            android:text="https://vk.com/kotedima"
+                            android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="8sp"
+                android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="16sp"
-                android:textSize="17sp"
-                android:textColor="#295d65"
-                android:text="Выбрать ВУЗ"/>
-            <Button android:layout_width="wrap_content"
-                android:layout_height="30sp"
-android:textColor="#FFFFFF"
-               android:layout_marginLeft="60sp"
-                android:id="@+id/vuz"
-                android:text="ВСЕ"
-                android:background="@drawable/button_vuz"
-                />
+                android:id="@+id/ifnotwork"
+                android:text="Если что-то вылетает или работает не так, как надо, пишите в лс разработчикам"/>
+                </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:paddingTop="15dp"
+                android:textColor="#8BD4D4"
+                android:layout_height="wrap_content"
+                android:text="Бизнес в стиле .Ру все права защищены &#169; "/>
+
+
 
 
         </LinearLayout>
 
+
+
+
+
+
+
+
 <LinearLayout
     android:layout_width="match_parent"
-    android:layout_alignParentBottom="true"
     android:paddingBottom="30dp"
     android:gravity="center"
+    android:paddingTop="50dp"
+    android:layout_below="@id/info1"
     android:layout_height="wrap_content">
     <Button
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Выйти"
@@ -66,15 +170,6 @@ android:textColor="#FFFFFF"
        />
 </LinearLayout>
 
-        </RelativeLayout>
-
-
-
-
-
-
-
-
-
-
-</LinearLayout>
+    </RelativeLayout>
+    </ScrollView>
+   </LinearLayout>
