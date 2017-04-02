@@ -11,7 +11,6 @@ import org.styleru.styleruapp.model.dto.support.PeopleFilter;
  */
 
 public class PeopleRequest {
-    public class ProjectsRequest {
 
         @SerializedName("token")
         @Expose
@@ -47,10 +46,9 @@ public class PeopleRequest {
             this.offset = offset;
         }
 
-        public ProjectsRequest(String token, int batchSize, int offset) {
+        public PeopleRequest(String token, int batchSize, int offset) {
             this.token = token;
             this.batchSize = batchSize;
             this.offset = offset;
         }
-    }
 }

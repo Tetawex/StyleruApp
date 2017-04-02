@@ -1,5 +1,7 @@
 package org.styleru.styleruapp.model.dto.support;
 
+import org.styleru.styleruapp.model.dto.PeopleItem;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -20,7 +22,51 @@ public class PeopleFilter {
         this.subdepartmentIds = subdepartmentIds;
         this.experiences = experiences;
     }
+
+    public List<Integer> getUniversityIds() {
+        return universityIds;
+    }
+
+    public void setUniversityIds(List<Integer> universityIds) {
+        this.universityIds = universityIds;
+    }
+
+    public List<Integer> getDepartmentIds() {
+        return departmentIds;
+    }
+
+    public void setDepartmentIds(List<Integer> departmentIds) {
+        this.departmentIds = departmentIds;
+    }
+
+    public List<Integer> getSubdepartmentIds() {
+        return subdepartmentIds;
+    }
+
+    public void setSubdepartmentIds(List<Integer> subdepartmentIds) {
+        this.subdepartmentIds = subdepartmentIds;
+    }
+
+    public List<Integer> getExperiences() {
+        return experiences;
+    }
+
+    public void setExperiences(List<Integer> experiences) {
+        this.experiences = experiences;
+    }
+
     public PeopleFilter() {
         this(Collections.emptyList(),Collections.emptyList(),Collections.emptyList(),Collections.emptyList());
+    }
+    public boolean valid(PeopleItem item){
+        if(getDepartmentIds().size()!=0&&!Collections.disjoint(item.getDepartmentIds(), getDepartmentIds()))
+            return false;
+        if(getSubdepartmentIds().size()!=0&&!Collections.disjoint(item.getSubdepartmentIds(), getSubdepartmentIds()))
+            return false;
+        if(getUniversityIds().size()!=0&&getUniversityIds().contains(item.getUniversityId()))
+            return false;
+        if(getExperiences().size()!=0&&getExperiences().contains(item.getExperience()))
+            return false;
+        return true;
     }
 }

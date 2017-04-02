@@ -1,14 +1,12 @@
 package org.styleru.styleruapp.view.fragments;
 
-import android.app.SearchManager;
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -18,112 +16,176 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import org.styleru.styleruapp.R;
+import org.styleru.styleruapp.model.dto.PeopleItem;
+import org.styleru.styleruapp.model.dto.support.PeopleFilter;
+import org.styleru.styleruapp.presenter.PeoplePresenter;
+import org.styleru.styleruapp.presenter.PeoplePresenterImpl;
+import org.styleru.styleruapp.util.EndlessRecyclerViewScrollListener;
+import org.styleru.styleruapp.view.PeopleView;
 import org.styleru.styleruapp.view.activity.MainActivity;
-import org.styleru.styleruapp.view.adapter.tab.ViewPagerAdapter2;
+import org.styleru.styleruapp.view.adapter.recycler.PeopleRecyclerAdapter;
 
-public class PeopleFragment extends Fragment {
+import java.util.ArrayList;
+import java.util.List;
 
-    private String mParam1;
-    private String mParam2;
-    ProfileFragmentTabOverall frag2;
-    FragmentTransaction fTrans;
-    TabLayout tabLayout;
-    ViewPager viewPager;
-    ViewPagerAdapter2 viewPagerAdapter;
-    private OnFragmentInteractionListener mListener;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class PeopleFragment extends Fragment implements PeopleView {
+    private static final int DEFAULT_BATCH_SIZE=10;//глобальные переменные - признак плохого кода
+    private PeopleFragment.OnFragmentInteractionListener mListener;
+    private EndlessRecyclerViewScrollListener recyclerViewScrollListener;
+    private PeopleRecyclerAdapter recyclerAdapter;
+    private PeopleFilter filter=new PeopleFilter();
+
+    private PeoplePresenter presenter;
+
+    @BindView(R.id.recycler)
+    protected RecyclerView recyclerView;
+    @BindView(R.id.swipe)
+    protected SwipeRefreshLayout swipeRefreshLayout;
+    @BindView(R.id.progressbar)
+    protected View progressbar;
 
     public PeopleFragment() {
         // Required empty public constructor
     }
 
-    public static PeopleFragment newInstance(String param1, String param2) {
+    public static PeopleFragment newInstance() {
         PeopleFragment fragment = new PeopleFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        View view = inflater.inflate(R.layout.fragment_people, container, false);
+        View view = inflater.inflate(R.layout.fragment_projects, container, false);
         MainActivity activity = (MainActivity) getActivity();
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
-        toolbar.setTitle("Люди");
+        activity.setSupportActionBar(toolbar);
+        activity.getSupportActionBar().show();
+
+
+        toolbar.setTitle(getString(R.string.people));
         setHasOptionsMenu(true);
-        // Inflate the layout for this fragment
+
+        ButterKnife.bind(this,view);
+        progressbar.setVisibility(View.VISIBLE);
+        //Адаптер
+        //Тут можно сделать поддержку вертикальной ориентации, использовав GridLayoutManager
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        //Адаптер для ресайклера
+        recyclerAdapter=new PeopleRecyclerAdapter(getContext(),new ArrayList<PeopleItem>());
+        recyclerView.setAdapter(recyclerAdapter);
+
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark,
+                R.color.colorPrimary);
+
+        //Добавляем листенер для ресайклера, чтобы понять, когда загружать новый фид
+        recyclerViewScrollListener = new EndlessRecyclerViewScrollListener(
+                (LinearLayoutManager) recyclerView.getLayoutManager()) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                presenter.onDataAppend(recyclerAdapter
+                        .getItemCount(),DEFAULT_BATCH_SIZE);
+            }
+        };
+        recyclerView.addOnScrollListener(recyclerViewScrollListener);
+
+        //Рефреш-лэйаут сверху
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh()
+            {
+                presenter.onDataUpdate(DEFAULT_BATCH_SIZE);
+
+            }
+        });
+        presenter=new PeoplePresenterImpl(this);
         return view;
-
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
     }
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-
-        // TODO Add your menu entries here
-
-        Log.d("FRAME","1");
         MainActivity activity = (MainActivity) getActivity();
         MenuInflater inflater1 = activity.getMenuInflater();
-        Log.d("FRAME","1");
         inflater1.inflate(R.menu.menu_activity_main, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
-        Log.d("FRAME","1");
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-
-        //Да, именно так и нужно работать с лэйаутами в андроиде
         searchView.setMaxWidth(40000);
-        SearchManager searchManager = (SearchManager) getActivity()
-                .getSystemService(Context.SEARCH_SERVICE);
-        searchView.setSearchableInfo( searchManager.getSearchableInfo(getActivity().getComponentName()) );
+        searchView.setQueryHint(getString(R.string.hint_people));
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                doQuery(newText);
+                return true;
+            }
+        });
         super.onCreateOptionsMenu(menu, inflater);
     }
-//    @Override
-//    public void onAttach(Context context) {
-//        super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-//    }
+    private void doQuery(String query){
+        presenter.onSetRequestString(query.trim());
+    }
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-
-        Log.d("FRAG","desview2");
-    //    getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
-    //    tabLayout.setupWithViewPager(viewPager);
-
-    //
+    public void showError(Throwable throwable) {
+        Toast.makeText(getContext(),throwable.getMessage(),Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void startProgressBar() {
+        progressbar.setVisibility(View.VISIBLE);
+    }
 
-//    @Override
-//    public void onDetach() {
-//        super.onDetach();
-//        mListener = null;
-//    }
+    @Override
+    public void stopProgressBar() {
+        progressbar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void appendData(List<PeopleItem> data) {
+        Log.e("appended",""+data.size());
+        recyclerAdapter.appendDataWithNotify(data);
+    }
+
+    @Override
+    public void setData(List<PeopleItem> data) {
+        onDataUpdated();
+        recyclerAdapter.setDataWithNotify(data);
+    }
+
+    public void onDataUpdated()
+    {
+        swipeRefreshLayout.setRefreshing(false);
+        recyclerViewScrollListener.resetState();
+    }
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-
 }

@@ -1,13 +1,13 @@
 package org.styleru.styleruapp.presenter;
 
+import android.util.Log;
+
 import org.styleru.styleruapp.model.PeopleModel;
-import org.styleru.styleruapp.model.ProjectsModel;
-import org.styleru.styleruapp.model.TestPeopleModelImpl;
-import org.styleru.styleruapp.model.TestProjectsModelImpl;
-import org.styleru.styleruapp.model.dto.ProjectsRequest;
+import org.styleru.styleruapp.model.PeopleModelImpl;
 import org.styleru.styleruapp.model.dto.support.PeopleFilter;
 import org.styleru.styleruapp.view.PeopleView;
-import org.styleru.styleruapp.view.ProjectsView;
+
+import java.util.ArrayList;
 
 import io.reactivex.disposables.Disposable;
 import io.reactivex.disposables.Disposables;
@@ -18,27 +18,37 @@ import io.reactivex.disposables.Disposables;
 
 public class PeoplePresenterImpl implements PeoplePresenter {
     //TODO: заменить инъекцию через конструктор инъекцией дагером
+    public static final int BATCH_SIZE=25;
+
     private PeopleView view;
     private PeopleModel model;
 
     private Disposable disposable= Disposables.empty();
 
     private int currentId=0;
-    private PeopleFilter filter=new PeopleFilter();
 
     public PeoplePresenterImpl(PeopleView view) {
         this.view=view;
-        //TODO: заменить тестовую модель на настоящую, когда сделают api
-        this.model=new TestPeopleModelImpl();
+        this.model=new PeopleModelImpl();
+        model.setDataChangedListener(()->{
+            if(currentId!=0)
+                onDataAppend(currentId,BATCH_SIZE);
+            else
+                onDataUpdate(BATCH_SIZE);
+        });
+        model.setErrorListener(throwable->{
+            view.showError(throwable);
+            view.stopProgressBar();
+        });
     }
 
     @Override
-    public void onPeopleAppend(int offset, int batchSize, String requestString,PeopleFilter filter) {
+    public void onDataAppend(int offset, int batchSize) {
         currentId=offset;
-        disposable = model.getData(batchSize,currentId,requestString,filter)
+        disposable = model.getData(batchSize,currentId)
                 // .flatMap(Observable::from)
                 //.toList()
-                .subscribe(response -> view.appendData(response.getData()),
+                .subscribe(response -> view.appendData(response),
                         throwable -> view.showError(throwable),
                         () -> {
                             if(!disposable.isDisposed()) {
@@ -49,14 +59,14 @@ public class PeoplePresenterImpl implements PeoplePresenter {
     }
 
     @Override
-    public void onPeopleUpdate(int batchSize, String requestString,PeopleFilter filter) {
+    public void onDataUpdate(int batchSize) {
         currentId=0;
-        disposable = model.getData(batchSize,currentId,requestString,filter)
+        disposable = model.getData(batchSize,currentId)
                 //.toList()
                 .subscribe(response ->
                         {
                             view.stopProgressBar();
-                            view.setData(response.getData());
+                            view.setData(response);
                             view.onDataUpdated();
                         },
                         throwable ->
@@ -73,8 +83,20 @@ public class PeoplePresenterImpl implements PeoplePresenter {
     }
 
     @Override
-    public void onSetFilterMode(PeopleFilter filter) {
-        this.filter=filter;
+    public void onSetFilter(PeopleFilter filter) {
+        model.setFilter(filter);
+        view.setData(new ArrayList<>());
+        view.startProgressBar();
+        onDataUpdate(BATCH_SIZE);
+        currentId=0;
+    }
+    @Override
+    public void onSetRequestString(String requestString) {
+        model.setRequestString(requestString);
+        view.setData(new ArrayList<>());
+        view.startProgressBar();
+        onDataUpdate(BATCH_SIZE);
+        currentId=0;
     }
 
     @Override

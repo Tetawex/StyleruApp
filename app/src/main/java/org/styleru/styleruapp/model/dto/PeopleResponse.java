@@ -3,7 +3,9 @@ package org.styleru.styleruapp.model.dto;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.styleru.styleruapp.model.dto.support.Department;
 import org.styleru.styleruapp.model.dto.support.PeopleFilter;
+import org.styleru.styleruapp.model.dto.support.Subdepartment;
 
 import java.util.List;
 
@@ -12,6 +14,7 @@ import java.util.List;
  */
 
 public class PeopleResponse {
+
     @SerializedName("data")
     @Expose
     private List<PeopleItem> data = null;
@@ -23,5 +26,4 @@ public class PeopleResponse {
     public void setData(List<PeopleItem> data) {
         this.data = data;
     }
-
 }

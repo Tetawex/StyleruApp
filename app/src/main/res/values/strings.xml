@@ -14,7 +14,7 @@
         <string name="err_no_internet">Ошибка. Проверьте подключение к интернету</string>
 
         <string name="until">до</string>
-    <string name="hint_people">Поиск по именам и ключевым словам</string>
+    <string name="hint_people">Поиск по имени</string>
     <string name="go">ПОЙДУ</string>
         <string name="вшкусе">Направления</string>
         <string name="direct">Направления</string>

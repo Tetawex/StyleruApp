@@ -1,6 +1,7 @@
 package org.styleru.styleruapp.model;
 
 import org.styleru.styleruapp.model.api.ApiService;
+import org.styleru.styleruapp.model.cache.Singletons;
 import org.styleru.styleruapp.model.dto.LoginRequest;
 import org.styleru.styleruapp.model.dto.LoginResponse;
 import org.styleru.styleruapp.model.dto.ValidateTokenRequest;
@@ -16,7 +17,7 @@ import io.reactivex.schedulers.Schedulers;
 public class LoginModelImpl implements LoginModel {
     private ApiService apiService;
     public LoginModelImpl(){
-        apiService=new ApiService();
+        apiService= Singletons.getApiService();
     }
     @Override
     public Observable<LoginResponse> getLoginResponse(LoginRequest request) {

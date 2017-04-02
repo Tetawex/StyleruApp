@@ -2,6 +2,7 @@ package org.styleru.styleruapp;
 
 import android.app.Application;
 
+import org.styleru.styleruapp.model.api.ApiService;
 import org.styleru.styleruapp.model.cache.PreferencesManager;
 import org.styleru.styleruapp.model.cache.PreferencesManagerImpl;
 import org.styleru.styleruapp.model.cache.Singletons;
@@ -17,5 +18,6 @@ public class StyleruApplication extends Application {
     public void onCreate() {
         super.onCreate();
         Singletons.setPreferencesManager(new PreferencesManagerImpl(getBaseContext()));
+        Singletons.setApiService(new ApiService());
     }
 }

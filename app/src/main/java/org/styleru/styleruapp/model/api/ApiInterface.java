@@ -5,10 +5,13 @@ import org.styleru.styleruapp.model.dto.EventsRequest;
 import org.styleru.styleruapp.model.dto.EventsResponse;
 import org.styleru.styleruapp.model.dto.LoginRequest;
 import org.styleru.styleruapp.model.dto.LoginResponse;
+import org.styleru.styleruapp.model.dto.PeopleRequest;
+import org.styleru.styleruapp.model.dto.PeopleResponse;
 import org.styleru.styleruapp.model.dto.ValidateTokenRequest;
 
 import io.reactivex.Observable;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface ApiInterface {
@@ -17,6 +20,7 @@ public interface ApiInterface {
     @POST("checkValidate")
     Observable<LoginResponse> validateToken(@Body ValidateTokenRequest validateTokenRequest);
 
-    @POST("requestEvents")
-    Observable<EventsResponse> requestEvents(@Body EventsRequest eventsRequest);
+    @POST("allPeople")
+    Observable<PeopleResponse> getPeople(@Body PeopleRequest peopleRequest);
+
 }
