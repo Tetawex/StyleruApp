@@ -1,22 +1,15 @@
 package org.styleru.styleruapp.presenter;
 
-import android.util.Log;
-
-import org.styleru.styleruapp.model.EventsModel;
 import org.styleru.styleruapp.model.ProjectsModel;
-import org.styleru.styleruapp.model.TestProjectsModelImpl;
-import org.styleru.styleruapp.model.dto.EventsItem;
-import org.styleru.styleruapp.model.dto.EventsRequest;
-import org.styleru.styleruapp.model.dto.EventsResponse;
-import org.styleru.styleruapp.model.dto.ProjectsRequest;
-import org.styleru.styleruapp.view.EventsView;
+import org.styleru.styleruapp.model.ProjectsModelImpl;
+import org.styleru.styleruapp.model.dto.support.PeopleFilter;
+import org.styleru.styleruapp.model.dto.support.ProjectsFilter;
+import org.styleru.styleruapp.util.ErrorListener;
+import org.styleru.styleruapp.view.PeopleView;
 import org.styleru.styleruapp.view.ProjectsView;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
-import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.disposables.Disposables;
 
@@ -26,28 +19,39 @@ import io.reactivex.disposables.Disposables;
 
 public class ProjectsPresenterImpl implements ProjectsPresenter {
     //TODO: заменить инъекцию через конструктор инъекцией дагером
+    public static final int BATCH_SIZE=10;
+
     private ProjectsView view;
     private ProjectsModel model;
 
     private Disposable disposable= Disposables.empty();
 
     private int currentId=0;
-    private int filterMode=0;
 
     public ProjectsPresenterImpl(ProjectsView view) {
         this.view=view;
-        //TODO: заменить тестовую модель на настоящую, когда сделают api
-        this.model=new TestProjectsModelImpl();
+        this.model=new ProjectsModelImpl();
+        model.setDataChangedListener(()->{
+            if(currentId!=0)
+                onDataAppend(currentId,BATCH_SIZE);
+            else
+                onDataUpdate(BATCH_SIZE);
+        });
+        model.setErrorListener(new ErrorListener() {
+                                   @Override
+                                   public void accept(Throwable throwable) {
+                                       view.showError(throwable);
+                                       view.stopProgressBar();
+                                   }});
     }
 
     @Override
-    public void onProjectsAppend(int offset, int batchSize, String requestString) {
+    public void onDataAppend(int offset, int batchSize) {
         currentId=offset;
-        disposable = model.getData(new ProjectsRequest("87vg430f7g237fg283f",batchSize,
-                currentId,requestString,filterMode))
+        disposable = model.getData(batchSize,currentId)
                 // .flatMap(Observable::from)
                 //.toList()
-                .subscribe(response -> view.appendData(response.getData()),
+                .subscribe(response -> view.appendData(response),
                         throwable -> view.showError(throwable),
                         () -> {
                             if(!disposable.isDisposed()) {
@@ -56,17 +60,24 @@ public class ProjectsPresenterImpl implements ProjectsPresenter {
                         });
         currentId+=batchSize;
     }
-
     @Override
-    public void onProjectsUpdate(int batchSize, String requestString) {
+    public void onModelUpdateCachedData(){
+        model.updateCachedData();
+        model.setRequestString("");
+        view.setData(new ArrayList<>());
+        view.startProgressBar();
+        onDataUpdate(BATCH_SIZE);
         currentId=0;
-        disposable = model.getData(new ProjectsRequest("87vg430f7g237fg283f",batchSize,
-                currentId,requestString,filterMode))
+    }
+    @Override
+    public void onDataUpdate(int batchSize) {
+        currentId=0;
+        disposable = model.getData(batchSize,currentId)
                 //.toList()
                 .subscribe(response ->
                         {
                             view.stopProgressBar();
-                            view.setData(response.getData());
+                            view.setData(response);
                             view.onDataUpdated();
                         },
                         throwable ->
@@ -83,8 +94,20 @@ public class ProjectsPresenterImpl implements ProjectsPresenter {
     }
 
     @Override
-    public void onSetFilterMode(int filterMode) {
-        this.filterMode=filterMode;
+    public void onSetFilter(ProjectsFilter filter) {
+        model.setFilter(filter);
+        view.setData(new ArrayList<>());
+        view.startProgressBar();
+        onDataUpdate(BATCH_SIZE);
+        currentId=0;
+    }
+    @Override
+    public void onSetRequestString(String requestString) {
+        model.setRequestString(requestString);
+        view.setData(new ArrayList<>());
+        view.startProgressBar();
+        onDataUpdate(BATCH_SIZE);
+        currentId=0;
     }
 
     @Override

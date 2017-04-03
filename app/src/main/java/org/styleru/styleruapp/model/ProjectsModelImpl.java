@@ -1,19 +1,19 @@
 package org.styleru.styleruapp.model;
 
-import android.util.Log;
-
 import org.styleru.styleruapp.model.api.ApiService;
 import org.styleru.styleruapp.model.cache.Singletons;
 import org.styleru.styleruapp.model.dto.PeopleItem;
 import org.styleru.styleruapp.model.dto.PeopleRequest;
 import org.styleru.styleruapp.model.dto.PeopleResponse;
+import org.styleru.styleruapp.model.dto.ProjectsItem;
+import org.styleru.styleruapp.model.dto.ProjectsRequest;
+import org.styleru.styleruapp.model.dto.ProjectsResponse;
 import org.styleru.styleruapp.model.dto.support.PeopleFilter;
+import org.styleru.styleruapp.model.dto.support.ProjectsFilter;
 import org.styleru.styleruapp.util.ErrorListener;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.function.Consumer;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -26,11 +26,11 @@ import io.reactivex.schedulers.Schedulers;
  * Created by Tetawex on 01.04.2017.
  */
 
-public class PeopleModelImpl implements PeopleModel {
-    public static final int BATCH_SIZE=256;
+public class ProjectsModelImpl implements ProjectsModel {
+    public static final int BATCH_SIZE=16;
 
     private String requestString="";
-    private PeopleFilter filter=new PeopleFilter();
+    private ProjectsFilter filter=new ProjectsFilter();
 
     private String authToken;
 
@@ -42,10 +42,10 @@ public class PeopleModelImpl implements PeopleModel {
     private Disposable disposable= Disposables.empty();
     private ApiService apiService;
 
-    private List<PeopleItem> filteredItemList;
-    private List<PeopleItem> itemList;
+    private List<ProjectsItem> filteredItemList;
+    private List<ProjectsItem> itemList;
 
-    public PeopleModelImpl(){
+    public ProjectsModelImpl(){
         itemList =new ArrayList<>();
         filteredItemList =itemList;
         apiService= Singletons.getApiService();
@@ -53,20 +53,16 @@ public class PeopleModelImpl implements PeopleModel {
         appendData(0);
     }
     @Override
-    public Observable<List<PeopleItem>> getData(int batchSize,int currentId) {
+    public Observable<List<ProjectsItem>> getData(int batchSize, int currentId) {
         int cap=currentId+batchSize;
         if(cap>filteredItemList.size())
             cap=filteredItemList.size();
         return Observable.just(new ArrayList<>(filteredItemList.subList(currentId,cap)));
-        //я додумался завернуть саблист в новый массив только после получаса борьбы с ConcurrentModificationException
-        /*return Observable.fromArray(filteredItemList.subList(currentId,cap))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());*/
     }
     public void appendData(int offset){
-        Observable<PeopleResponse> observable =apiService
+        Observable<ProjectsResponse> observable =apiService
                 .getApiInterface()
-                .getPeople(new PeopleRequest(authToken,BATCH_SIZE,offset))
+                .getProjects(new ProjectsRequest(authToken,BATCH_SIZE,offset))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
         disposable=observable.take(BATCH_SIZE).subscribe(
@@ -95,8 +91,9 @@ public class PeopleModelImpl implements PeopleModel {
     }
     private void filter(){
         filteredItemList=new ArrayList<>();
-        for (PeopleItem item :itemList) {
-            if(!(item.getFirstName()+" "+item.getLastName()).toLowerCase().contains(requestString.toLowerCase()))
+        for (ProjectsItem item :itemList) {
+            if(!(item.getName()+item.getManagerName()).toLowerCase()
+                    .contains(requestString.toLowerCase()))
                 continue;
             if(!filter.valid(item))
                 continue;
@@ -105,7 +102,7 @@ public class PeopleModelImpl implements PeopleModel {
         }
     }
     @Override
-    public void setFilter(PeopleFilter filter){
+    public void setFilter(ProjectsFilter filter){
         this.filter=filter;
         filter();
     }

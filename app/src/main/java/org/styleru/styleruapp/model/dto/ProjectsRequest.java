@@ -18,12 +18,6 @@ public class ProjectsRequest {
     @SerializedName("offset")
     @Expose
     private int offset;
-    @SerializedName("request_string")
-    @Expose
-    private String requestString;
-    @SerializedName("filter")
-    @Expose
-    private int filter;
 
     public String getToken() {
         return token;
@@ -49,27 +43,9 @@ public class ProjectsRequest {
         this.offset = offset;
     }
 
-    public String getRequestString() {
-        return requestString;
-    }
-
-    public void setRequestString(String requestString) {
-        this.requestString = requestString;
-    }
-
-    public int getFilter() {
-        return filter;
-    }
-
-    public void setFilter(int filter) {
-        this.filter = filter;
-    }
-
-    public ProjectsRequest(String token, int batchSize, int offset, String requestString, int filter) {
+    public ProjectsRequest(String token, int batchSize, int offset) {
         this.token = token;
         this.batchSize = batchSize;
         this.offset = offset;
-        this.requestString = requestString;
-        this.filter = filter;
     }
 }

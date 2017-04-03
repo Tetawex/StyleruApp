@@ -18,12 +18,19 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import org.styleru.styleruapp.R;
+import org.styleru.styleruapp.model.dto.PeopleItem;
 import org.styleru.styleruapp.model.dto.ProjectsItem;
+import org.styleru.styleruapp.model.dto.support.PeopleFilter;
+import org.styleru.styleruapp.model.dto.support.ProjectsFilter;
+import org.styleru.styleruapp.presenter.PeoplePresenter;
+import org.styleru.styleruapp.presenter.PeoplePresenterImpl;
 import org.styleru.styleruapp.presenter.ProjectsPresenter;
 import org.styleru.styleruapp.presenter.ProjectsPresenterImpl;
 import org.styleru.styleruapp.util.EndlessRecyclerViewScrollListener;
+import org.styleru.styleruapp.view.PeopleView;
 import org.styleru.styleruapp.view.ProjectsView;
 import org.styleru.styleruapp.view.activity.MainActivity;
+import org.styleru.styleruapp.view.adapter.recycler.PeopleRecyclerAdapter;
 import org.styleru.styleruapp.view.adapter.recycler.ProjectsRecyclerAdapter;
 
 import java.util.ArrayList;
@@ -31,29 +38,28 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-public class ProjectsFragment extends Fragment implements ProjectsView{
-    private static final int DEFAULT_BATCH_SIZE=10;//глобальные переменные - признак плохого кода
-    private EventsFragment.OnFragmentInteractionListener mListener;
+public class ProjectsFragment extends Fragment implements ProjectsView {
+    private static final int DEFAULT_BATCH_SIZE=10;
+    private ProjectsFragment.OnFragmentInteractionListener mListener;
     private EndlessRecyclerViewScrollListener recyclerViewScrollListener;
     private ProjectsRecyclerAdapter recyclerAdapter;
-    private String requestString="";
+    private ProjectsFilter filter=new ProjectsFilter();
 
     private ProjectsPresenter presenter;
 
     @BindView(R.id.recycler)
-    protected RecyclerView recyclerView;
-    @BindView(R.id.swipe)
-    protected SwipeRefreshLayout swipeRefreshLayout;
+    public RecyclerView recyclerView;
+    //@BindView(R.id.swipe)
+    //protected SwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.progressbar)
-    protected View progressbar;
+    public View progressbar;
 
     public ProjectsFragment() {
         // Required empty public constructor
     }
 
-    public static ProjectsFragment newInstance(String param1, String param2) {
-        ProjectsFragment fragment = new ProjectsFragment();
+    public static PeopleFragment newInstance() {
+        PeopleFragment fragment = new PeopleFragment();
         return fragment;
     }
 
@@ -66,14 +72,14 @@ public class ProjectsFragment extends Fragment implements ProjectsView{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_projects, container, false);
+        View view = inflater.inflate(R.layout.fragment_people, container, false);
         MainActivity activity = (MainActivity) getActivity();
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         activity.setSupportActionBar(toolbar);
         activity.getSupportActionBar().show();
 
 
-        toolbar.setTitle("Проекты");
+        toolbar.setTitle(getString(R.string.projects));
         setHasOptionsMenu(true);
 
         ButterKnife.bind(this,view);
@@ -85,41 +91,31 @@ public class ProjectsFragment extends Fragment implements ProjectsView{
         recyclerAdapter=new ProjectsRecyclerAdapter(getContext(),new ArrayList<ProjectsItem>());
         recyclerView.setAdapter(recyclerAdapter);
 
-        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark,
-                R.color.colorPrimary);
+        //swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark);
 
         //Добавляем листенер для ресайклера, чтобы понять, когда загружать новый фид
         recyclerViewScrollListener = new EndlessRecyclerViewScrollListener(
                 (LinearLayoutManager) recyclerView.getLayoutManager()) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-                presenter.onProjectsAppend(recyclerAdapter
-                        .getItemCount(),DEFAULT_BATCH_SIZE,requestString);
+                presenter.onDataAppend(recyclerAdapter
+                        .getItemCount(),DEFAULT_BATCH_SIZE);
             }
         };
         recyclerView.addOnScrollListener(recyclerViewScrollListener);
 
         //Рефреш-лэйаут сверху
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        /*swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh()
             {
-                presenter.onProjectsUpdate(DEFAULT_BATCH_SIZE,requestString);
-
+                presenter.onModelUpdateCachedData();
             }
-        });
+        });*/
         presenter=new ProjectsPresenterImpl(this);
-        presenter.onProjectsUpdate(DEFAULT_BATCH_SIZE,requestString);
         return view;
     }
 
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
@@ -128,16 +124,29 @@ public class ProjectsFragment extends Fragment implements ProjectsView{
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-
-        // TODO Add your menu entries here
-
         MainActivity activity = (MainActivity) getActivity();
         MenuInflater inflater1 = activity.getMenuInflater();
         inflater1.inflate(R.menu.menu_activity_main, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-        searchView.setQueryHint("Поиск");
+        searchView.setMaxWidth(40000);
+        searchView.setQueryHint(getString(R.string.hint_people));
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                doQuery(newText);
+                return true;
+            }
+        });
         super.onCreateOptionsMenu(menu, inflater);
+    }
+    private void doQuery(String query){
+        presenter.onSetRequestString(query.trim());
     }
     @Override
     public void onDetach() {
@@ -147,7 +156,7 @@ public class ProjectsFragment extends Fragment implements ProjectsView{
 
     @Override
     public void showError(Throwable throwable) {
-        Toast.makeText(getContext(),throwable.getMessage(),Toast.LENGTH_SHORT);
+        Toast.makeText(getContext(),throwable.getMessage(),Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -157,6 +166,7 @@ public class ProjectsFragment extends Fragment implements ProjectsView{
 
     @Override
     public void stopProgressBar() {
+        //swipeRefreshLayout.setRefreshing(false);
         progressbar.setVisibility(View.GONE);
     }
 
@@ -173,12 +183,11 @@ public class ProjectsFragment extends Fragment implements ProjectsView{
 
     public void onDataUpdated()
     {
-        swipeRefreshLayout.setRefreshing(false);
+        //swipeRefreshLayout.setRefreshing(false);
         recyclerViewScrollListener.resetState();
     }
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 }

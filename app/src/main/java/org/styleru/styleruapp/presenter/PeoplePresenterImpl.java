@@ -20,7 +20,7 @@ import io.reactivex.disposables.Disposables;
 
 public class PeoplePresenterImpl implements PeoplePresenter {
     //TODO: заменить инъекцию через конструктор инъекцией дагером
-    public static final int BATCH_SIZE=25;
+    public static final int BATCH_SIZE=32;
 
     private PeopleView view;
     private PeopleModel model;

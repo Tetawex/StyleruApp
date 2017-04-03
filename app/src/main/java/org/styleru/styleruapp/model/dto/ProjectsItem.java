@@ -20,6 +20,9 @@ public class ProjectsItem {
     @SerializedName("vacant_places")
     @Expose
     private boolean vacantPlaces;
+    @SerializedName("finished")
+    @Expose
+    private boolean finished;
     @SerializedName("end_date_time")
     @Expose
     private String endDateTime;
@@ -64,4 +67,11 @@ public class ProjectsItem {
         this.endDateTime = endDateTime;
     }
 
+    public boolean isFinished() {
+        return finished;
+    }
+
+    public void setFinished(boolean finished) {
+        this.finished = finished;
+    }
 }
