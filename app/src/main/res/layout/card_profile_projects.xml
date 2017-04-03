@@ -17,11 +17,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:textColor="#212121"
+    android:id="@+id/name"
     android:textSize="19dp"
     android:text="БИ-WEB"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/secname"
         android:textColor="#7D7D7D"
         android:text="Веб-дизайнер"/>
 </LinearLayout>
@@ -43,6 +45,7 @@
         android:layout_height="match_parent"
         android:layout_marginRight="24sp"
         android:layout_marginLeft="24sp"
+        android:id="@+id/status"
         android:gravity="center"
         android:layout_gravity="center"
         android:textSize="15sp"
