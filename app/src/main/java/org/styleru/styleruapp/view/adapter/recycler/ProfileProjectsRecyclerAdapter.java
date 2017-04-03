@@ -38,7 +38,7 @@ public class ProfileProjectsRecyclerAdapter extends BaseRecyclerAdapter<ProfileP
 
 
 
-
+        holder.secname.setText(item.getRole());
         holder.name.setText(item.getTitle());
 
 

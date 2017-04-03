@@ -32,7 +32,7 @@ public class ProfileProjectsItem {
     public String getRole() {
         return role;
     }
-    public void setRole(String subtitle) {
+    public void setRole(String role) {
         this.role = role;
     }
     public void setId(int id) {

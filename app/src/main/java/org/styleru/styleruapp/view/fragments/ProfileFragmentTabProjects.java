@@ -70,9 +70,9 @@ public class ProfileFragmentTabProjects extends Fragment implements ProfileProje
         progressbar.setVisibility(View.VISIBLE);
         //Адаптер
         //Тут можно сделать поддержку вертикальной ориентации, использовав GridLayoutManager
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         //Адаптер для ресайклера
-        recyclerAdapter=new ProfileProjectsRecyclerAdapter(getContext(),new ArrayList<ProfileProjectsItem>());
+        recyclerAdapter=new ProfileProjectsRecyclerAdapter(getActivity(),new ArrayList<ProfileProjectsItem>());
         recyclerView.setAdapter(recyclerAdapter);
 
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark,
