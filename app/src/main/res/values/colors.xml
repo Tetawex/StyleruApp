@@ -3,6 +3,7 @@
     <!--<color name="colorPrimary">#C6F4F4</color>-->
     <color name="colorPrimary">#FFF</color>
     <color name="colorPrimaryDark">#96c3c3</color>
+    <color name="colorControl">#8A000000</color>
     <color name="colorAccent">#2DC6C4</color>
     <color name="colorPrimaryDarker">#295D65</color>
     <color name="colorImagePlaceholder">#F2F2F2</color>

@@ -294,6 +294,7 @@ public class PeopleFragment extends Fragment implements PeopleView {
             }
         });
         presenter=new PeoplePresenterImpl(this);
+        presenter.onFilterModelLoad();
         return view;
     }
 
@@ -314,12 +315,16 @@ public class PeopleFragment extends Fragment implements PeopleView {
         filterItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                drawerLocker.setDrawerEnabled(false);
+                /*drawerLocker.setDrawerEnabled(false);
                 departmentsTextList.setText(R.string.all);
                 subdepartmentsTextList.setText(R.string.all);
                 universitiesTextList.setText(R.string.all);
                 experiencesTextList.setText(R.string.all);
-                presenter.onFilterModelLoad();
+                presenter.onFilterModelLoad();*/
+                if(filterModel!=null) {
+                    activityToolbar.setVisibility(View.GONE);
+                    filter.setVisibility(View.VISIBLE);
+                }
                 return true;
             }
         });
