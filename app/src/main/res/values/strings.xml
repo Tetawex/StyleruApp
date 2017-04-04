@@ -24,4 +24,11 @@
     <string name="settings">Настройки</string>
     <string name="edit">Редактировать</string>
     <string name="all">Все</string>
+
+    <string-array name="project_options">
+        <item>Все проекты</item>
+        <item>Текущие</item>
+        <item>Завершенные</item>
+        <item>С вакансиями</item>
+    </string-array>
 </resources>

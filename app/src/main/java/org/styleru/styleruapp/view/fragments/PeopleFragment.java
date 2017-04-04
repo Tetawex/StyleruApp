@@ -30,6 +30,7 @@ import org.styleru.styleruapp.model.dto.support.Subdepartment;
 import org.styleru.styleruapp.model.dto.support.University;
 import org.styleru.styleruapp.presenter.PeoplePresenter;
 import org.styleru.styleruapp.presenter.PeoplePresenterImpl;
+import org.styleru.styleruapp.util.DrawerLocker;
 import org.styleru.styleruapp.util.EndlessRecyclerViewScrollListener;
 import org.styleru.styleruapp.view.PeopleView;
 import org.styleru.styleruapp.view.activity.MainActivity;
@@ -52,6 +53,7 @@ public class PeopleFragment extends Fragment implements PeopleView {
     private Toolbar activityToolbar;
 
     private PeoplePresenter presenter;
+    private DrawerLocker drawerLocker;
 
     @BindView(R.id.recycler)
     public RecyclerView recyclerView;
@@ -162,6 +164,7 @@ public class PeopleFragment extends Fragment implements PeopleView {
             @Override
             public void onClick(View v) {
                 filter.setVisibility(View.GONE);
+                drawerLocker.setDrawerEnabled(true);
                 activityToolbar.setVisibility(View.VISIBLE);
                 List<Integer> departmentIds=new ArrayList<>();
                 for (FilterItem filterItem: selectedDepartments) {
@@ -303,12 +306,15 @@ public class PeopleFragment extends Fragment implements PeopleView {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         MainActivity activity = (MainActivity) getActivity();
+        drawerLocker=activity;
         MenuInflater inflater1 = activity.getMenuInflater();
         inflater1.inflate(R.menu.menu_fragment_people, menu);
         MenuItem filterItem=menu.findItem(R.id.action_filter);
+        filterItem.getIcon().setAlpha(138);
         filterItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
+                drawerLocker.setDrawerEnabled(false);
                 departmentsTextList.setText(R.string.all);
                 subdepartmentsTextList.setText(R.string.all);
                 universitiesTextList.setText(R.string.all);
@@ -318,6 +324,7 @@ public class PeopleFragment extends Fragment implements PeopleView {
             }
         });
         MenuItem searchItem = menu.findItem(R.id.action_search);
+        searchItem.getIcon().setAlpha(138);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setQueryHint(getString(R.string.hint_people));
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

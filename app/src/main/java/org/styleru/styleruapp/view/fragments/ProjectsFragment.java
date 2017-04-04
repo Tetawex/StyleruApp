@@ -9,12 +9,16 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import org.styleru.styleruapp.R;
@@ -43,7 +47,9 @@ public class ProjectsFragment extends Fragment implements ProjectsView {
     private ProjectsFragment.OnFragmentInteractionListener mListener;
     private EndlessRecyclerViewScrollListener recyclerViewScrollListener;
     private ProjectsRecyclerAdapter recyclerAdapter;
+
     private ProjectsFilter filter=new ProjectsFilter();
+    private String[] spinnerOptions;
 
     private ProjectsPresenter presenter;
 
@@ -53,6 +59,7 @@ public class ProjectsFragment extends Fragment implements ProjectsView {
     //protected SwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.progressbar)
     public View progressbar;
+    private Spinner filterOptionsSpinner;
 
     public ProjectsFragment() {
         // Required empty public constructor
@@ -84,7 +91,6 @@ public class ProjectsFragment extends Fragment implements ProjectsView {
 
         ButterKnife.bind(this,view);
         progressbar.setVisibility(View.VISIBLE);
-        //Адаптер
         //Тут можно сделать поддержку вертикальной ориентации, использовав GridLayoutManager
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         //Адаптер для ресайклера
@@ -126,7 +132,7 @@ public class ProjectsFragment extends Fragment implements ProjectsView {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         MainActivity activity = (MainActivity) getActivity();
         MenuInflater inflater1 = activity.getMenuInflater();
-        inflater1.inflate(R.menu.menu_activity_main, menu);
+        inflater1.inflate(R.menu.menu_fragment_projects, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setMaxWidth(40000);
@@ -143,6 +149,61 @@ public class ProjectsFragment extends Fragment implements ProjectsView {
                 return true;
             }
         });
+        MenuItem filterItem=menu.findItem(R.id.action_filter);
+        filterItem.getIcon().setAlpha(138);
+        searchItem.getIcon().setAlpha(138);
+        filterItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                searchItem.collapseActionView();
+                return true;
+            }
+        });
+        searchItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                filterItem.collapseActionView();
+                return true;
+            }
+        });
+        filterOptionsSpinner = (Spinner) MenuItemCompat.getActionView(filterItem);
+        //filterOptionsSpinner.setDropDownHorizontalOffset((int)(TypedValue.applyDimension(TypedValue.
+        //        COMPLEX_UNIT_DIP, 8, getResources().getDisplayMetrics())));
+        ArrayAdapter<?> adapter =
+                ArrayAdapter.createFromResource(getContext(), R.array.project_options, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        filterOptionsSpinner.setAdapter(adapter);
+        filterOptionsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                presenter.onSetFilter(new ProjectsFilter(i));
+                filterItem.setVisible(true);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                presenter.onSetFilter(new ProjectsFilter());
+            }
+        });
+        MenuItemCompat.OnActionExpandListener expandListener = new MenuItemCompat.OnActionExpandListener() {
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem item) {
+                filterItem.setVisible(true);
+                searchItem.setVisible(true);
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem item) {
+                filterItem.setVisible(true);
+                searchItem.setVisible(true);
+                return true;
+            }
+        };
+
+        MenuItemCompat.setOnActionExpandListener(searchItem, expandListener);
+        MenuItemCompat.setOnActionExpandListener(filterItem, expandListener);
+
         super.onCreateOptionsMenu(menu, inflater);
     }
     private void doQuery(String query){
