@@ -55,9 +55,12 @@ public class ProjectsModelImpl implements ProjectsModel {
     @Override
     public Observable<List<ProjectsItem>> getData(int batchSize, int currentId) {
         int cap=currentId+batchSize;
+        int start=currentId;
         if(cap>filteredItemList.size())
             cap=filteredItemList.size();
-        return Observable.just(new ArrayList<>(filteredItemList.subList(currentId,cap)));
+        if(currentId>=cap)
+            start=cap;
+        return Observable.just(new ArrayList<>(filteredItemList.subList(start,cap)));
     }
     public void appendData(int offset){
         Observable<ProjectsResponse> observable =apiService

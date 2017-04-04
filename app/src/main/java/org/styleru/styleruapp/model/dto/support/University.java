@@ -4,11 +4,19 @@ package org.styleru.styleruapp.model.dto.support;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Subdepartment implements FilterItem {
+public class University implements FilterItem{
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
+    }
+
     private boolean checked;
     @SerializedName("id")
     @Expose
-    private int id;
+    private Integer id;
     @SerializedName("name")
     @Expose
     private String name;
@@ -17,22 +25,12 @@ public class Subdepartment implements FilterItem {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
     public String getName() {
         return name;
-    }
-
-    @Override
-    public boolean isChecked() {
-        return checked;
-    }
-
-    @Override
-    public void setChecked(boolean checked) {
-        this.checked=checked;
     }
 
     public void setName(String name) {

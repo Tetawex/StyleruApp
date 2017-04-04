@@ -2,6 +2,7 @@ package org.styleru.styleruapp.view.activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.NavigationView;
@@ -17,6 +18,8 @@ import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -29,6 +32,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import org.styleru.styleruapp.R;
 import org.styleru.styleruapp.model.cache.Singletons;
 import org.styleru.styleruapp.model.cache.UserInfo;
+import org.styleru.styleruapp.util.DrawerLocker;
 import org.styleru.styleruapp.view.fragments.DepartmentsFragment;
 import org.styleru.styleruapp.view.fragments.EventsFragment;
 import org.styleru.styleruapp.view.fragments.PeopleFragment;
@@ -39,7 +43,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,DrawerLocker {
 
     static {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
@@ -74,7 +78,6 @@ public class MainActivity extends AppCompatActivity
 
         setSupportActionBar(toolbar);
         toolbar.setTitle("АКТИВИТИ");
-
 
         toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -216,6 +219,13 @@ public class MainActivity extends AppCompatActivity
         if(android.os.Build.VERSION.SDK_INT >= 21)
             appBarLayout.setElevation(TypedValue.applyDimension(TypedValue.
                     COMPLEX_UNIT_DIP, elevationDp, getResources().getDisplayMetrics()));
+    }
+
+    @Override
+    public void setDrawerEnabled(boolean enabled) {
+        int lockMode = enabled ? DrawerLayout.LOCK_MODE_UNLOCKED :
+                DrawerLayout.LOCK_MODE_LOCKED_CLOSED;
+        drawer.setDrawerLockMode(lockMode);
     }
 
 }

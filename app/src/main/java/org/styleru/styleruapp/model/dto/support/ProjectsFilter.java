@@ -25,4 +25,11 @@ public class ProjectsFilter {
         return (filterMode==0||filterMode==1&&item.isFinished()
                 ||filterMode==2&&(!item.isFinished())||filterMode==3&&item.isVacantPlaces());
     }
+
+    public ProjectsFilter(int filterMode) {
+        this.filterMode = filterMode;
+    }
+
+    public ProjectsFilter() {
+    }
 }

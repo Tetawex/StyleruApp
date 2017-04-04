@@ -4,6 +4,8 @@ import android.util.Log;
 
 import org.styleru.styleruapp.model.api.ApiService;
 import org.styleru.styleruapp.model.cache.Singletons;
+import org.styleru.styleruapp.model.dto.FilterModelRequest;
+import org.styleru.styleruapp.model.dto.FilterModelResponse;
 import org.styleru.styleruapp.model.dto.PeopleItem;
 import org.styleru.styleruapp.model.dto.PeopleRequest;
 import org.styleru.styleruapp.model.dto.PeopleResponse;
@@ -55,13 +57,19 @@ public class PeopleModelImpl implements PeopleModel {
     @Override
     public Observable<List<PeopleItem>> getData(int batchSize,int currentId) {
         int cap=currentId+batchSize;
+        int start=currentId;
         if(cap>filteredItemList.size())
             cap=filteredItemList.size();
-        return Observable.just(new ArrayList<>(filteredItemList.subList(currentId,cap)));
-        //я додумался завернуть саблист в новый массив только после получаса борьбы с ConcurrentModificationException
-        /*return Observable.fromArray(filteredItemList.subList(currentId,cap))
+        if(currentId>=cap)
+            start=cap;
+        return Observable.just(new ArrayList<>(filteredItemList.subList(start,cap)));
+    }
+    @Override
+    public Observable<FilterModelResponse> getFilterModel(){
+        return apiService.getApiInterface()
+                .getFilterModel(new FilterModelRequest(authToken))
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());*/
+                .observeOn(AndroidSchedulers.mainThread());
     }
     public void appendData(int offset){
         Observable<PeopleResponse> observable =apiService

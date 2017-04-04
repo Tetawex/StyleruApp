@@ -1,5 +1,7 @@
 package org.styleru.styleruapp.model.dto.support;
 
+import android.util.Log;
+
 import org.styleru.styleruapp.model.dto.PeopleItem;
 
 import java.util.Collections;
@@ -15,8 +17,10 @@ public class PeopleFilter {
     private List<Integer> subdepartmentIds;
     private List<Integer> experiences;
 
-    public PeopleFilter(List<Integer> universityIds, List<Integer> departmentIds,
-                        List<Integer> subdepartmentIds, List<Integer> experiences) {
+    public PeopleFilter(List<Integer> departmentIds,
+                        List<Integer> subdepartmentIds,
+                        List<Integer> universityIds,
+                        List<Integer> experiences) {
         this.universityIds = universityIds;
         this.departmentIds = departmentIds;
         this.subdepartmentIds = subdepartmentIds;
@@ -59,13 +63,15 @@ public class PeopleFilter {
         this(Collections.emptyList(),Collections.emptyList(),Collections.emptyList(),Collections.emptyList());
     }
     public boolean valid(PeopleItem item){
-        if(getDepartmentIds().size()!=0&&!Collections.disjoint(item.getDepartmentIds(), getDepartmentIds()))
+        if(getDepartmentIds().size()!=0&&
+                Collections.disjoint(getDepartmentIds(), item.getDepartmentIds()))
             return false;
-        if(getSubdepartmentIds().size()!=0&&!Collections.disjoint(item.getSubdepartmentIds(), getSubdepartmentIds()))
+        if(getSubdepartmentIds().size()!=0&&
+                Collections.disjoint(getSubdepartmentIds(), item.getSubdepartmentIds()))
             return false;
-        if(getUniversityIds().size()!=0&&getUniversityIds().contains(item.getUniversityId()))
+        if(getUniversityIds().size()!=0&&!getUniversityIds().contains(item.getUniversityId()))
             return false;
-        if(getExperiences().size()!=0&&getExperiences().contains(item.getExperience()))
+        if(getExperiences().size()!=0&&!getExperiences().contains(item.getExperience()))
             return false;
         return true;
     }

@@ -3,6 +3,8 @@ package org.styleru.styleruapp.model.api;
 
 import org.styleru.styleruapp.model.dto.EventsRequest;
 import org.styleru.styleruapp.model.dto.EventsResponse;
+import org.styleru.styleruapp.model.dto.FilterModelRequest;
+import org.styleru.styleruapp.model.dto.FilterModelResponse;
 import org.styleru.styleruapp.model.dto.LoginRequest;
 import org.styleru.styleruapp.model.dto.LoginResponse;
 import org.styleru.styleruapp.model.dto.PeopleRequest;
@@ -21,6 +23,9 @@ public interface ApiInterface {
     Observable<LoginResponse> login(@Body LoginRequest request);
     @POST("checkValidate")
     Observable<LoginResponse> validateToken(@Body ValidateTokenRequest request);
+
+    @POST("filterData")
+    Observable<FilterModelResponse> getFilterModel(@Body FilterModelRequest request);
 
     @POST("allPeople")
     Observable<PeopleResponse> getPeople(@Body PeopleRequest request);
