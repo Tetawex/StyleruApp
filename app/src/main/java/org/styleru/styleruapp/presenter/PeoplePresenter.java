@@ -8,6 +8,7 @@ import org.styleru.styleruapp.model.dto.support.PeopleFilter;
 
 public interface PeoplePresenter extends Presenter {
     void onDataAppend(int offset, int batchSize);
+    void onFilterModelLoad();
     void onDataUpdate(int batchSize);
     void onSetFilter(PeopleFilter filter);
     void onModelUpdateCachedData();

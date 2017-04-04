@@ -1,4 +1,4 @@
-    <resources>
+<resources>
     <string name="app_name">StyleruApp</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -11,13 +11,16 @@
     <string name="events">Мероприятия</string>
     <string name="people">Люди</string>
     <string name="timeline">Таймлайн</string>
-        <string name="err_no_internet">Ошибка. Проверьте подключение к интернету</string>
+    <string name="filter">Фильтр</string>
+    <string name="err_no_internet">Ошибка. Проверьте подключение к интернету</string>
 
-        <string name="until">до</string>
+    <string name="until">до</string>
     <string name="hint_people">Поиск по имени</string>
+    <string name="hint_projects">Поиск по названию или имени менеджера</string>
     <string name="go">ПОЙДУ</string>
-        <string name="вшкусе">Направления</string>
-        <string name="direct">Направления</string>
-        <string name="settings">Настройки</string>
-        <string name="edit">Редактировать</string>
-    </resources>
+    <string name="subdepartments">Направления</string>
+    <string name="experience">Опыт работы</string>
+    <string name="university">ВУЗ</string>
+    <string name="settings">Настройки</string>
+    <string name="edit">Редактировать</string>
+</resources>

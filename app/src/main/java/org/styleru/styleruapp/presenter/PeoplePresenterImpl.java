@@ -26,6 +26,7 @@ public class PeoplePresenterImpl implements PeoplePresenter {
     private PeopleModel model;
 
     private Disposable disposable= Disposables.empty();
+    private Disposable secondaryDisposable= Disposables.empty();
 
     private int currentId=0;
 
@@ -61,6 +62,18 @@ public class PeoplePresenterImpl implements PeoplePresenter {
                         });
         currentId+=batchSize;
     }
+
+    @Override
+    public void onFilterModelLoad() {
+        secondaryDisposable=model.getFilterModel().subscribe(response -> view.setFilterModel(response),
+                throwable -> view.showError(throwable),
+                () -> {
+                    if(!secondaryDisposable.isDisposed()) {
+                        secondaryDisposable.dispose();
+                    }
+                });
+    }
+
     @Override
     public void onModelUpdateCachedData(){
         model.updateCachedData();
