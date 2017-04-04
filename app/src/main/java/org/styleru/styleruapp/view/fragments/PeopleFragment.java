@@ -119,6 +119,7 @@ public class PeopleFragment extends Fragment implements PeopleView {
         View view = inflater.inflate(R.layout.fragment_people, container, false);
         MainActivity activity = (MainActivity) getActivity();
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.people);
         activityToolbar=toolbar;
 
         setHasOptionsMenu(true);
@@ -308,6 +309,10 @@ public class PeopleFragment extends Fragment implements PeopleView {
         filterItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
+                departmentsTextList.setText(R.string.all);
+                subdepartmentsTextList.setText(R.string.all);
+                universitiesTextList.setText(R.string.all);
+                experiencesTextList.setText(R.string.all);
                 presenter.onFilterModelLoad();
                 return true;
             }
