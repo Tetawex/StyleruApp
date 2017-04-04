@@ -69,9 +69,9 @@ public class PeopleFilter {
         if(getSubdepartmentIds().size()!=0&&
                 Collections.disjoint(getSubdepartmentIds(), item.getSubdepartmentIds()))
             return false;
-        if(getUniversityIds().size()!=0&&getUniversityIds().contains(item.getUniversityId()))
+        if(getUniversityIds().size()!=0&&!getUniversityIds().contains(item.getUniversityId()))
             return false;
-        if(getExperiences().size()!=0&&getExperiences().contains(item.getExperience()))
+        if(getExperiences().size()!=0&&!getExperiences().contains(item.getExperience()))
             return false;
         return true;
     }

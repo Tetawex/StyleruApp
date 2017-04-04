@@ -223,6 +223,70 @@ public class PeopleFragment extends Fragment implements PeopleView {
             @Override
             public void onClick(View v) {
                 filterOptions.setVisibility(View.GONE);
+
+                StringBuilder builder = new StringBuilder();
+                int counter = 0;
+                for (FilterItem item : selectedDepartments) {
+                    if (item.isChecked()) {
+                        builder.append(item.getName());
+                        counter++;
+                        builder.append(", ");
+                    }
+                }
+                if (!(counter == 0 || counter == filterModel.getDepartments().size())){
+                    builder.setLength(builder.length() - 2);
+                    departmentsTextList.setText(builder.toString());
+                }
+
+                else
+                    departmentsTextList.setText(R.string.all);
+
+                counter=0;
+                builder = new StringBuilder();
+                    for (FilterItem item : selectedSubdepartments) {
+                        if (item.isChecked()) {
+                            builder.append(item.getName());
+                            counter++;
+                            builder.append(", ");
+                        }
+                    }
+                if(!(counter==0||counter==filterModel.getSubdepartments().size())) {
+                    builder.setLength(builder.length() - 2);
+                    subdepartmentsTextList.setText(builder.toString());
+                }
+                else
+                    subdepartmentsTextList.setText(R.string.all);
+
+                counter=0;
+                    builder = new StringBuilder();
+                    for (FilterItem item : selectedUniversities) {
+                        if (item.isChecked()) {
+                            builder.append(item.getName());
+                            counter++;
+                            builder.append(", ");
+                        }
+                    }
+                if(!(counter==0||counter==filterModel.getUniversities().size())) {
+                    builder.setLength(builder.length() - 2);
+                    universitiesTextList.setText(builder.toString());
+                }
+                else
+                    universitiesTextList.setText(R.string.all);
+                counter=0;
+                builder = new StringBuilder();
+                    for (FilterItem item : selectedExperiences) {
+                        if (item.isChecked()) {
+                            builder.append(item.getName());
+                            counter++;
+                            builder.append(", ");
+                        }
+                    }
+                if(!(counter==0||counter==filterModel.getExperiences().size())) {
+                    builder.setLength(builder.length()-2);
+                    experiencesTextList.setText(builder.toString());
+                }
+                else
+                    experiencesTextList.setText(R.string.all);
             }
         });
         presenter=new PeoplePresenterImpl(this);
