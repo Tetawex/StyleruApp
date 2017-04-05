@@ -62,7 +62,7 @@
                 android:textColor="#295d29"
                 android:gravity="right"
                 android:id="@+id/vacant"
-                android:layout_gravity="center"
+                android:layout_gravity="right"
                 android:textSize="14sp" />
             <TextView
                 android:id="@+id/date"
