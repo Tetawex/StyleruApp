@@ -1,6 +1,7 @@
 package org.styleru.styleruapp.view.adapter.recycler;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,9 @@ import com.bumptech.glide.Glide;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.styleru.styleruapp.R;
+import org.styleru.styleruapp.model.EventsModel;
 import org.styleru.styleruapp.model.dto.EventsItem;
+import org.styleru.styleruapp.view.EventsView;
 
 import java.util.List;
 
@@ -24,9 +27,11 @@ import butterknife.ButterKnife;
  * Created by tetawex on 07.03.17.
  */
 
-public class EventsRecyclerAdapter extends BaseRecyclerAdapter<EventsItem> {
-    public EventsRecyclerAdapter(Context context, List<EventsItem> data) {
+public class EventsRecyclerAdapter extends MappedIdRecyclerAdapter<EventsItem> {
+    private EventsView view;
+    public EventsRecyclerAdapter(Context context, List<EventsItem> data, EventsView view) {
         super(context, data);
+        this.view = view;
     }
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -45,15 +50,68 @@ public class EventsRecyclerAdapter extends BaseRecyclerAdapter<EventsItem> {
         DateTime itemDateTime=new DateTime(item.getDateTime().replace(' ','T'));
 
         String fullDateTimeString=itemDateTime.toString(DateTimeFormat.longDate());
-        holder.date.setText(fullDateTimeString.substring(0, fullDateTimeString.length() - 8));
+        holder.dateTime.setText(fullDateTimeString.substring(0, fullDateTimeString.length() - 8)
+                +", "+new DateTime(itemDateTime).toString("HH:mm"));
+        holder.title.setText(item.getTitle());
+        if(item.getStatus()==-1) {
+            holder.buttonGo.setBackgroundColor(Color.parseColor("#aaaaaa"));
+            holder.buttonGo.setText(context.getString(R.string.go_wait));
+            holder.buttonGo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                }
+            });
+        }
+        else if(itemDateTime.isAfter(DateTime.now())){
+            if(item.getStatus()==1) {
+                holder.buttonGo.setBackgroundColor(Color.parseColor("#55ff77"));
+                holder.buttonGo.setText(context.getString(R.string.go_future_positive));
+                holder.buttonGo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        holder.buttonGo.setBackgroundColor(Color.parseColor("#aaaaaa"));
+                        holder.buttonGo.setText(context.getString(R.string.go_wait));
+                        item.setStatus(-1);
+                    }
+                });
+            }
+            else {
+                holder.buttonGo.setBackgroundColor(Color.parseColor("#aaffaa"));
+                holder.buttonGo.setText(context.getString(R.string.go_future_negative));
+                holder.buttonGo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        holder.buttonGo.setBackgroundColor(Color.parseColor("#aaaaaa"));
+                        holder.buttonGo.setText(context.getString(R.string.go_wait));
+                        item.setStatus(-1);
+                    }
+                });
+            }
+        }
+        else {
+            if(item.getStatus()==1) {
+                holder.buttonGo.setBackgroundColor(Color.parseColor("#33ff66"));
+                holder.buttonGo.setText(context.getString(R.string.go_past_positive));
+                holder.buttonGo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                    }
+                });
+            }
+            else {
+                holder.buttonGo.setBackgroundColor(Color.parseColor("#ffaaaa"));
+                holder.buttonGo.setText(context.getString(R.string.go_past_negative));
+                holder.buttonGo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                    }
+                });
+            }
+        }
 
-        holder.time.setText(new DateTime(item.getDateTime().replace(' ','T')).toString("HH:mm"));
-        holder.title1.setText(item.getTitle());
         //if(!(item.getImageUrl()).equals("")) {
         if(item.getImageUrl()!=null) {
             holder.imageHolder.setVisibility(View.VISIBLE);
-
-
             Glide
                     .with(context)
                     .load(item.getImageUrl())
@@ -75,21 +133,17 @@ public class EventsRecyclerAdapter extends BaseRecyclerAdapter<EventsItem> {
         holder.subtitle.setText(item.getSubtitle());
         holder.location.setText(item.getLocation());
     }
-
     class EventsViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.title)
-        TextView title1;
+        TextView title;
 
 
         @BindView(R.id.subtitle)
         TextView subtitle;
 
 
-        @BindView(R.id.date)
-        TextView date;
-
-        @BindView(R.id.time)
-        TextView time;
+        @BindView(R.id.date_time)
+        TextView dateTime;
 
         @BindView(R.id.location)
         TextView location;
@@ -100,9 +154,11 @@ public class EventsRecyclerAdapter extends BaseRecyclerAdapter<EventsItem> {
         @BindView(R.id.image)
         ImageView image;
 
-        //@BindView(R.id.attendance)
-        //Button attendance;
+        @BindView(R.id.button_go)
+        Button buttonGo;
 
+        @BindView(R.id.button_attendants)
+        Button buttonAttendants;
 
         public EventsViewHolder(View view) {
             super(view);

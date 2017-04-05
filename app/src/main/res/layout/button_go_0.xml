@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="@string/go"
+        android:text="@string/go_future_negative"
 
         android:textColor="#333"
         android:textSize="16sp"

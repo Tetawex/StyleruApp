@@ -1,13 +1,16 @@
 package org.styleru.styleruapp.model.dto;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import org.styleru.styleruapp.model.dto.support.IdItem;
+
 /**
  * Created by tetawex on 06.03.17.
  * It is just a POJO
  */
 
 
-public class EventsItem {
+public class EventsItem implements IdItem{
 
     @SerializedName("id")
     @Expose
@@ -92,6 +95,7 @@ public class EventsItem {
         this.id = id;
     }
 
+    @Override
     public int getId() {
         return id;
     }

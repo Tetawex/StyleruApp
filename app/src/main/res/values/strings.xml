@@ -12,12 +12,18 @@
     <string name="people">Люди</string>
     <string name="timeline">Таймлайн</string>
     <string name="filter">Фильтр</string>
+
     <string name="err_no_internet">Ошибка. Проверьте подключение к интернету</string>
+
+    <string name="go_future_negative">ПОЙДУ</string>
+    <string name="go_future_positive">ИДУ</string>
+    <string name="go_past_negative">НЕ ХОДИЛ</string>
+    <string name="go_past_positive">ХОДИЛ</string>
+    <string name="go_wait">ПОДОЖДИТЕ</string>
 
     <string name="until">до</string>
     <string name="hint_people">Поиск по имени</string>
     <string name="hint_projects">Поиск по названию или имени менеджера</string>
-    <string name="go">ПОЙДУ</string>
     <string name="subdepartments">Направления</string>
     <string name="experience">Опыт работы</string>
     <string name="university">ВУЗ</string>

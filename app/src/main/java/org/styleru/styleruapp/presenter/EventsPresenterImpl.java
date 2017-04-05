@@ -81,7 +81,6 @@ public class EventsPresenterImpl implements EventsPresenter {
     public void onEventStatusChange(int id, boolean desiredStatus) {
 
     }
-
     @Override
     public void onStop() {
 
