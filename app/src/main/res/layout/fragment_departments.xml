@@ -15,15 +15,15 @@ android:layout_width="match_parent">
         android:paddingRight="0dp">
         <include
             android:id="@+id/d1"
-            layout="@layout/card_direct"
+            layout="@layout/card_departments"
             />
         <include
             android:id="@+id/d1"
-            layout="@layout/card_direct"
+            layout="@layout/card_departments"
             />
         <include
             android:id="@+id/d1"
-            layout="@layout/card_direct"
+            layout="@layout/card_departments"
             />
     </LinearLayout>
 </ScrollView>

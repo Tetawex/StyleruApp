@@ -89,7 +89,7 @@ public class EventsFragment extends Fragment implements EventsView{
                 (LinearLayoutManager) recyclerView.getLayoutManager()) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-                presenter.onEventsAppend(recyclerAdapter.getItemCount(),DEFAULT_BATCH_SIZE);
+                presenter.onDataAppend(recyclerAdapter.getItemCount(),DEFAULT_BATCH_SIZE);
             }
         };
         recyclerView.addOnScrollListener(recyclerViewScrollListener);
@@ -99,12 +99,12 @@ public class EventsFragment extends Fragment implements EventsView{
             @Override
             public void onRefresh()
             {
-                presenter.onEventsUpdate(DEFAULT_BATCH_SIZE);
+                presenter.onDataUpdate(DEFAULT_BATCH_SIZE);
 
             }
         });
         presenter=new EventsPresenterImpl(this);
-        presenter.onEventsUpdate(DEFAULT_BATCH_SIZE);
+        presenter.onDataUpdate(DEFAULT_BATCH_SIZE);
         return view;
     }
 

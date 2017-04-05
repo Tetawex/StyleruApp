@@ -17,15 +17,14 @@ import io.reactivex.Observable;
 /**
  * Created by tetawex on 29.03.17.
  */
-
-public class TestEventsModelImpl implements EventsModel {
+@Deprecated
+public class TestEventsModelImpl {
     private TestEventsItemFactory testEventsItemFactory;
 
     public TestEventsModelImpl() {
         testEventsItemFactory = new TestEventsItemFactory();
     }
 
-    @Override
     public Observable<EventsResponse> getData(EventsRequest request) {
         if(request.getOffset()==0)
             testEventsItemFactory.reset();
@@ -38,7 +37,6 @@ public class TestEventsModelImpl implements EventsModel {
         return Observable.just(eventsResponse);
     }
 
-    @Override
     public Observable<EventStateChangeResponse> getChangedState(EventStateChangeRequest request) {
         return null;
     }

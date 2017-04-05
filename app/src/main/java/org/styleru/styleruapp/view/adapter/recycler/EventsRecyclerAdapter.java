@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -48,7 +49,8 @@ public class EventsRecyclerAdapter extends BaseRecyclerAdapter<EventsItem> {
 
         holder.time.setText(new DateTime(item.getDateTime().replace(' ','T')).toString("HH:mm"));
         holder.title1.setText(item.getTitle());
-        if(!(item.getImageUrl()).equals("")) {
+        //if(!(item.getImageUrl()).equals("")) {
+        if(item.getImageUrl()!=null) {
             holder.imageHolder.setVisibility(View.VISIBLE);
 
 
@@ -63,12 +65,12 @@ public class EventsRecyclerAdapter extends BaseRecyclerAdapter<EventsItem> {
 
         }
 
-//        if(item.isViewAttendants()) {
-//            holder.attendance.setVisibility(View.GONE);
-//        }
-//        else {
-//            holder.attendance.setVisibility(View.VISIBLE);
-//        }
+        /*if(item.isViewAttendants()) {
+            holder.attendance.setVisibility(View.GONE);
+        }
+        else {
+            holder.attendance.setVisibility(View.VISIBLE);
+        }*/
 
         holder.subtitle.setText(item.getSubtitle());
         holder.location.setText(item.getLocation());
@@ -98,8 +100,8 @@ public class EventsRecyclerAdapter extends BaseRecyclerAdapter<EventsItem> {
         @BindView(R.id.image)
         ImageView image;
 
-//        @BindView(R.id.attendance)
-//        Button attendance;
+        //@BindView(R.id.attendance)
+        //Button attendance;
 
 
         public EventsViewHolder(View view) {

@@ -1,6 +1,8 @@
 package org.styleru.styleruapp.model.api;
 
 
+import org.styleru.styleruapp.model.dto.DepartmentsRequest;
+import org.styleru.styleruapp.model.dto.DepartmentsResponse;
 import org.styleru.styleruapp.model.dto.EventsRequest;
 import org.styleru.styleruapp.model.dto.EventsResponse;
 import org.styleru.styleruapp.model.dto.FilterModelRequest;
@@ -27,6 +29,10 @@ public interface ApiInterface {
     @POST("filterData")
     Observable<FilterModelResponse> getFilterModel(@Body FilterModelRequest request);
 
+    @POST("allDepartment")
+    Observable<DepartmentsResponse> getDepartments(@Body DepartmentsRequest request);
+    @POST("allEvents")
+    Observable<EventsResponse> getEvents(@Body EventsRequest request);
     @POST("allPeople")
     Observable<PeopleResponse> getPeople(@Body PeopleRequest request);
     @POST("allProject")

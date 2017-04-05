@@ -1,20 +1,12 @@
 package org.styleru.styleruapp.presenter;
 
-import android.util.Log;
-
+import org.styleru.styleruapp.model.DepartmentsModel;
+import org.styleru.styleruapp.model.DepartmentsModelImpl;
 import org.styleru.styleruapp.model.EventsModel;
 import org.styleru.styleruapp.model.EventsModelImpl;
-import org.styleru.styleruapp.model.TestEventsModelImpl;
-import org.styleru.styleruapp.model.dto.EventsItem;
-import org.styleru.styleruapp.model.dto.EventsRequest;
-import org.styleru.styleruapp.model.dto.EventsResponse;
+import org.styleru.styleruapp.view.DepartmentsView;
 import org.styleru.styleruapp.view.EventsView;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.disposables.Disposables;
 
@@ -22,19 +14,19 @@ import io.reactivex.disposables.Disposables;
  * Created by tetawex on 06.03.17.
  */
 
-public class EventsPresenterImpl implements EventsPresenter {
+public class DepartmentsPresenterImpl implements DepartmentsPresenter {
     //TODO: заменить инъекцию через конструктор инъекцией дагером
-    private EventsView view;
-    private EventsModel model;
+    private DepartmentsView view;
+    private DepartmentsModel model;
 
     private Disposable disposable= Disposables.empty();
 
     private int currentId=0;
 
-    public EventsPresenterImpl(EventsView view) {
+    public DepartmentsPresenterImpl(DepartmentsView view) {
         this.view=view;
         //TODO: заменить тестовую модель на настоящую, когда сделают api
-        this.model=new EventsModelImpl();
+        this.model=new DepartmentsModelImpl();
     }
 
     @Override
@@ -75,11 +67,6 @@ public class EventsPresenterImpl implements EventsPresenter {
                             }
                         });
         currentId+=batchSize;
-    }
-
-    @Override
-    public void onEventStatusChange(int id, boolean desiredStatus) {
-
     }
 
     @Override

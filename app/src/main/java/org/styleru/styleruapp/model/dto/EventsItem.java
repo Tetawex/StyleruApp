@@ -33,6 +33,9 @@ public class EventsItem {
     @SerializedName("author")
     @Expose
     private String  author;
+    @SerializedName("attendants_count")
+    @Expose
+    private int attendantsCount;
     @SerializedName("attendants")
     @Expose
     private boolean viewAttendants;
@@ -89,6 +92,10 @@ public class EventsItem {
         this.id = id;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public int getStatus() {
         return status;
     }
@@ -103,5 +110,13 @@ public class EventsItem {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public int getAttendantsCount() {
+        return attendantsCount;
+    }
+
+    public void setAttendantsCount(int attendantsCount) {
+        this.attendantsCount = attendantsCount;
     }
 }

@@ -179,12 +179,12 @@ public class PeopleFragment extends Fragment implements PeopleView {
                 List<Integer> universityIds=new ArrayList<>();
                 for (FilterItem filterItem: selectedUniversities) {
                     if(filterItem.isChecked())
-                        departmentIds.add(filterItem.getId());
+                        universityIds.add(filterItem.getId());
                 }
                 List<Integer> experienceIds=new ArrayList<>();
                 for (FilterItem filterItem: selectedExperiences) {
                     if(filterItem.isChecked())
-                        departmentIds.add(filterItem.getId());
+                        experienceIds.add(filterItem.getId());
                 }
                 presenter.onSetFilter(
                         new PeopleFilter(departmentIds,
@@ -323,6 +323,7 @@ public class PeopleFragment extends Fragment implements PeopleView {
                 presenter.onFilterModelLoad();*/
                 if(filterModel!=null) {
                     activityToolbar.setVisibility(View.GONE);
+                    drawerLocker.setDrawerEnabled(false);
                     filter.setVisibility(View.VISIBLE);
                 }
                 return true;
@@ -390,8 +391,6 @@ public class PeopleFragment extends Fragment implements PeopleView {
         for(Experience exp :filterModel.getExperiences()){
             selectedExperiences.add(exp);
         }
-        activityToolbar.setVisibility(View.GONE);
-        filter.setVisibility(View.VISIBLE);
     }
 
     @Override

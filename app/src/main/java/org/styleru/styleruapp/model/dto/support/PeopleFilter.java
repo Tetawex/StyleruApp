@@ -69,10 +69,22 @@ public class PeopleFilter {
         if(getSubdepartmentIds().size()!=0&&
                 Collections.disjoint(getSubdepartmentIds(), item.getSubdepartmentIds()))
             return false;
-        if(getUniversityIds().size()!=0&&!getUniversityIds().contains(item.getUniversityId()))
-            return false;
-        if(getExperiences().size()!=0&&!getExperiences().contains(item.getExperience()))
-            return false;
+        if(getUniversityIds().size()!=0) {
+            boolean flag=false;
+            for (Integer integer:getUniversityIds()) {
+                if(integer.equals(item.getUniversityId()))
+                    flag=true;
+            }
+            return flag;
+        }
+        if(getExperiences().size()!=0) {
+            boolean flag=false;
+            for (Integer integer:getExperiences()) {
+                if(integer.equals(item.getExperience()))
+                    flag=true;
+            }
+            return flag;
+        }
         return true;
     }
 }
