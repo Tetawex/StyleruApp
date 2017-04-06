@@ -76,7 +76,10 @@ public class EventsFragment extends Fragment implements EventsView{
         progressbar.setVisibility(View.VISIBLE);
         //Адаптер
         //Тут можно сделать поддержку вертикальной ориентации, использовав GridLayoutManager
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(layoutManager);
         //Адаптер для ресайклера
         recyclerAdapter=new EventsRecyclerAdapter(getContext(),new ArrayList<EventsItem>(),this);
         recyclerView.setAdapter(recyclerAdapter);
