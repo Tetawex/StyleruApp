@@ -84,8 +84,8 @@ public class EventsFragment extends Fragment implements EventsView{
         recyclerAdapter=new EventsRecyclerAdapter(getContext(),new ArrayList<EventsItem>(),this);
         recyclerView.setAdapter(recyclerAdapter);
 
-        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark,
-                R.color.colorPrimary);
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark);
+        swipeRefreshLayout.or;
 
         //Добавляем листенер для ресайклера, чтобы понять, когда загружать новый фид
         recyclerViewScrollListener = new EndlessRecyclerViewScrollListener(
