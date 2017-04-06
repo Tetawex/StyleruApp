@@ -9,7 +9,7 @@ import java.util.List;
  * Created by Пользователь on 05.04.2017.
  */
 
-public class ProfileProfileResponse {
+public class SingleProfileResponse {
     @Expose
     @SerializedName("name")
     private String name;

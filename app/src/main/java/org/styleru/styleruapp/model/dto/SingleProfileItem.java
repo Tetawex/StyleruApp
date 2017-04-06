@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by Пользователь on 03.04.2017.
  */
 
-public class ProfileProjectsItem {
+public class SingleProfileItem {
     @SerializedName("id")
     @Expose
     private int id;

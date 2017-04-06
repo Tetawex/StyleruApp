@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import org.styleru.styleruapp.R;
-import org.styleru.styleruapp.model.dto.ProfileProjectsItem;
+import org.styleru.styleruapp.model.dto.SingleProfileItem;
 import org.styleru.styleruapp.presenter.ProfileProjectsPresenter;
 import org.styleru.styleruapp.presenter.ProfileProjectsPresenterImpl;
 import org.styleru.styleruapp.util.EndlessRecyclerViewScrollListener;
@@ -65,14 +65,13 @@ public class ProfileFragmentTabProjects extends Fragment implements ProfileProje
         View view=inflater.inflate(R.layout.fragment_profile_projects, container, false);
 
 
-
         ButterKnife.bind(this,view);
         progressbar.setVisibility(View.VISIBLE);
         //Адаптер
         //Тут можно сделать поддержку вертикальной ориентации, использовав GridLayoutManager
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         //Адаптер для ресайклера
-        recyclerAdapter=new ProfileProjectsRecyclerAdapter(getActivity(),new ArrayList<ProfileProjectsItem>());
+        recyclerAdapter=new ProfileProjectsRecyclerAdapter(getActivity(),new ArrayList<SingleProfileItem>());
         recyclerView.setAdapter(recyclerAdapter);
 
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark,
@@ -124,12 +123,12 @@ public class ProfileFragmentTabProjects extends Fragment implements ProfileProje
     }
 
     @Override
-    public void appendData(List<ProfileProjectsItem> data) {
+    public void appendData(List<SingleProfileItem> data) {
         recyclerAdapter.appendDataWithNotify(data);
     }
 
     @Override
-    public void setData(List<ProfileProjectsItem> data) {
+    public void setData(List<SingleProfileItem> data) {
         onDataUpdated();
         recyclerAdapter.setDataWithNotify(data);
     }
@@ -144,6 +143,8 @@ public class ProfileFragmentTabProjects extends Fragment implements ProfileProje
         swipeRefreshLayout.setRefreshing(false);
         recyclerViewScrollListener.resetState();
     }
+
+
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name

@@ -26,7 +26,12 @@
             <LinearLayout
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="@drawable/oval_grey"/>
+                android:background="@drawable/oval_grey">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:background="@drawable/vmin"
+                    android:layout_height="match_parent"/>
+                </LinearLayout>
              <LinearLayout
               android:layout_marginLeft="16dp"
               android:layout_width="6dp"
@@ -38,6 +43,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:layout_height="match_parent"
+            android:id="@+id/text"
             android:text="Станислав Продан вступил в проект Vidal 28.02.2016">
 
 

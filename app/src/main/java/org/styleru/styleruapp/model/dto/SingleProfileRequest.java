@@ -7,9 +7,9 @@ import com.google.gson.annotations.SerializedName;
  * Created by Пользователь on 05.04.2017.
  */
 
-public class ProfileProfileRequest {
+public class SingleProfileRequest {
 
-    public ProfileProfileRequest(String token, int id, int offset) {
+    public SingleProfileRequest(String token, int id, int offset) {
         this.token = token;
         this.offset = offset;
         this.id = id;

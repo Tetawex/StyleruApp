@@ -14,13 +14,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 import org.styleru.styleruapp.R;
 import org.styleru.styleruapp.model.dto.PeopleItem;
-import org.styleru.styleruapp.model.dto.ProjectsItem;
-import org.styleru.styleruapp.view.activity.Project_Profile;
+import org.styleru.styleruapp.view.activity.ProfileActivity;
 
 import java.util.List;
 
@@ -65,8 +61,8 @@ public class PeopleRecyclerAdapter extends BaseRecyclerAdapter<PeopleItem> {
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, Project_Profile.class);//TODO:заменить на людей
-                context.startActivity(intent);
+                Intent intent = new Intent(context, ProfileActivity.class);//TODO:заменить на людей
+               context.startActivity(intent);
             }
         });
         Glide

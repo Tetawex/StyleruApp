@@ -3,6 +3,7 @@ package org.styleru.styleruapp.view.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +31,9 @@ public class ProfileFragmentTabOverall extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile_overall, container, false);
 
+        ViewPager viewPager = (ViewPager) getActivity().findViewById(R.id.view_pager);
+        viewPager.setPadding(0,0,0,0);
+
 
         ImageView imageView = (ImageView) view.findViewById(R.id.image3);
 
@@ -46,6 +50,23 @@ public class ProfileFragmentTabOverall extends Fragment {
                 .into(imageView);
 
         return view;
+    }
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d("2","pause1");
+//        ViewPager viewPager = (ViewPager) getActivity().findViewById(R.id.view_pager);
+//        viewPager.setPadding(0,0,0,0);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("2","resume1");
+//        ViewPager viewPager = (ViewPager) getActivity().findViewById(R.id.view_pager);
+//        viewPager.setPadding(0,84,0,0);
     }
 
     @Override

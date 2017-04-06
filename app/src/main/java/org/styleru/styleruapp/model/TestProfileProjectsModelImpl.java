@@ -2,7 +2,7 @@ package org.styleru.styleruapp.model;
 
 import android.util.Log;
 
-import org.styleru.styleruapp.model.dto.ProfileProjectsItem;
+import org.styleru.styleruapp.model.dto.SingleProfileItem;
 import org.styleru.styleruapp.model.dto.ProfileProjectsRequest;
 import org.styleru.styleruapp.model.dto.ProfileProjectsResponse;
 import org.styleru.styleruapp.model.dto.ProfileProjectsStateChangeRequest;
@@ -29,12 +29,12 @@ public class TestProfileProjectsModelImpl implements ProfileProjectsModel {
     public Observable<ProfileProjectsResponse> getData(ProfileProjectsRequest request) {
         if(request.getOffset()==0)
             testProfileProjectsItemFactory.reset();
-        ProfileProjectsResponse profileProjectsResponse=new ProfileProjectsResponse();
-        List<ProfileProjectsItem> list=new ArrayList<ProfileProjectsItem>();
+        ProfileProjectsResponse profileProjectsResponse =new ProfileProjectsResponse();
+        List<SingleProfileItem> list=new ArrayList<SingleProfileItem>();
         for(int i=request.getOffset();i<request.getBatchSize()+request.getOffset();i++)
             list.add(testProfileProjectsItemFactory.generateRandomItem(i));
         profileProjectsResponse.setData(list);
-        Log.d("test",profileProjectsResponse.getData().size()+"");
+        Log.d("test", profileProjectsResponse.getData().size()+"");
         return Observable.just(profileProjectsResponse);
     }
 
@@ -48,8 +48,8 @@ public class TestProfileProjectsModelImpl implements ProfileProjectsModel {
         public void reset(){
             random=new Random(12345);
         }
-        private ProfileProjectsItem generateRandomItem(int id){
-            ProfileProjectsItem item=new ProfileProjectsItem();
+        private SingleProfileItem generateRandomItem(int id){
+            SingleProfileItem item=new SingleProfileItem();
             item.setTitle("Это БИ-WEB");
             item.setRole("Дизайнер");
             item.setStatus("Активно");
