@@ -39,6 +39,9 @@ public class EventsModelImpl implements EventsModel {
 
     @Override
     public Observable<EventStateChangeResponse> getChangedState(int id) {
-        return null;
+        return apiService.getApiInterface()
+                .changeEventState(new EventStateChangeRequest(authToken,id))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 }

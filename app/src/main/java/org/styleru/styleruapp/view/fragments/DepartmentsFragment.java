@@ -132,6 +132,7 @@ public class DepartmentsFragment extends Fragment implements DepartmentsView{
     @Override
     public void stopProgressBar() {
         progressbar.setVisibility(View.GONE);
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override

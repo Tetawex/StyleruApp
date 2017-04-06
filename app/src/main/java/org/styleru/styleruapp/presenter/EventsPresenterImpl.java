@@ -28,6 +28,7 @@ public class EventsPresenterImpl implements EventsPresenter {
     private EventsModel model;
 
     private Disposable disposable= Disposables.empty();
+    private Disposable secondaryDisposable= Disposables.empty();
 
     private int currentId=0;
 
@@ -78,7 +79,21 @@ public class EventsPresenterImpl implements EventsPresenter {
     }
 
     @Override
-    public void onEventStatusChange(int id, boolean desiredStatus) {
+    public void onEventStateChange(int id) {
+        secondaryDisposable=model.getChangedState(id).subscribe(eventStateChangeResponse ->
+        {
+            view.changeEventStateSuccess(id,eventStateChangeResponse.getState());
+        },
+        throwable ->
+        {
+            view.changeEventStateFail(id);
+            view.showError(throwable);
+            Log.getStackTraceString(throwable);
+        },
+        () -> {
+            if(!secondaryDisposable.isDisposed()) {
+                secondaryDisposable.dispose();
+            }});
 
     }
     @Override

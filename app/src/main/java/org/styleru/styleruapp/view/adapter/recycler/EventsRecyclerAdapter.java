@@ -14,7 +14,6 @@ import com.bumptech.glide.Glide;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.styleru.styleruapp.R;
-import org.styleru.styleruapp.model.EventsModel;
 import org.styleru.styleruapp.model.dto.EventsItem;
 import org.styleru.styleruapp.view.EventsView;
 
@@ -28,10 +27,10 @@ import butterknife.ButterKnife;
  */
 
 public class EventsRecyclerAdapter extends MappedIdRecyclerAdapter<EventsItem> {
-    private EventsView view;
-    public EventsRecyclerAdapter(Context context, List<EventsItem> data, EventsView view) {
+    private EventsView eventsView;
+    public EventsRecyclerAdapter(Context context, List<EventsItem> data, EventsView eventsView) {
         super(context, data);
-        this.view = view;
+        this.eventsView = eventsView;
     }
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -53,7 +52,7 @@ public class EventsRecyclerAdapter extends MappedIdRecyclerAdapter<EventsItem> {
         holder.dateTime.setText(fullDateTimeString.substring(0, fullDateTimeString.length() - 8)
                 +", "+new DateTime(itemDateTime).toString("HH:mm"));
         holder.title.setText(item.getTitle());
-        if(item.getStatus()==-1) {
+        if(item.getState()<0) {
             holder.buttonGo.setBackgroundColor(Color.parseColor("#aaaaaa"));
             holder.buttonGo.setText(context.getString(R.string.go_wait));
             holder.buttonGo.setOnClickListener(new View.OnClickListener() {
@@ -63,7 +62,7 @@ public class EventsRecyclerAdapter extends MappedIdRecyclerAdapter<EventsItem> {
             });
         }
         else if(itemDateTime.isAfter(DateTime.now())){
-            if(item.getStatus()==1) {
+            if(item.getState()==1) {
                 holder.buttonGo.setBackgroundColor(Color.parseColor("#55ff77"));
                 holder.buttonGo.setText(context.getString(R.string.go_future_positive));
                 holder.buttonGo.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +70,8 @@ public class EventsRecyclerAdapter extends MappedIdRecyclerAdapter<EventsItem> {
                     public void onClick(View view) {
                         holder.buttonGo.setBackgroundColor(Color.parseColor("#aaaaaa"));
                         holder.buttonGo.setText(context.getString(R.string.go_wait));
-                        item.setStatus(-1);
+                        EventsRecyclerAdapter.this.eventsView.requestChangeEventState(item.getId());
+                        item.setState(item.getState()-2);
                     }
                 });
             }
@@ -83,13 +83,14 @@ public class EventsRecyclerAdapter extends MappedIdRecyclerAdapter<EventsItem> {
                     public void onClick(View view) {
                         holder.buttonGo.setBackgroundColor(Color.parseColor("#aaaaaa"));
                         holder.buttonGo.setText(context.getString(R.string.go_wait));
-                        item.setStatus(-1);
+                        EventsRecyclerAdapter.this.eventsView.requestChangeEventState(item.getId());
+                        item.setState(item.getState()-2);
                     }
                 });
             }
         }
         else {
-            if(item.getStatus()==1) {
+            if(item.getState()==1) {
                 holder.buttonGo.setBackgroundColor(Color.parseColor("#33ff66"));
                 holder.buttonGo.setText(context.getString(R.string.go_past_positive));
                 holder.buttonGo.setOnClickListener(new View.OnClickListener() {
@@ -122,13 +123,6 @@ public class EventsRecyclerAdapter extends MappedIdRecyclerAdapter<EventsItem> {
 
 
         }
-
-        /*if(item.isViewAttendants()) {
-            holder.attendance.setVisibility(View.GONE);
-        }
-        else {
-            holder.attendance.setVisibility(View.VISIBLE);
-        }*/
 
         holder.subtitle.setText(item.getSubtitle());
         holder.location.setText(item.getLocation());

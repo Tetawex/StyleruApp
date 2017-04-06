@@ -69,7 +69,7 @@ public class EventsFragment extends Fragment implements EventsView{
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         activity.setSupportActionBar(toolbar);
         activity.getSupportActionBar().show();
-        toolbar.setTitle("События");
+        toolbar.setTitle(R.string.events);
 
 
         ButterKnife.bind(this,view);
@@ -116,7 +116,7 @@ public class EventsFragment extends Fragment implements EventsView{
 
     @Override
     public void showError(Throwable throwable) {
-        Toast.makeText(getContext(),throwable.getMessage(),Toast.LENGTH_SHORT);
+        Toast.makeText(getContext(),throwable.getMessage(),Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -127,6 +127,7 @@ public class EventsFragment extends Fragment implements EventsView{
     @Override
     public void stopProgressBar() {
         progressbar.setVisibility(View.GONE);
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
@@ -141,10 +142,27 @@ public class EventsFragment extends Fragment implements EventsView{
     }
 
     @Override
-    public void changeEventState(int id) {
-
+    public void changeEventStateSuccess(int id,int state) {
+        recyclerAdapter.getItemById(id).setState(state);
+        recyclerAdapter.notifyItemChanged(
+                recyclerAdapter.getData().indexOf(recyclerAdapter.getItemById(id)));
+        int strId=R.string.event_signed;
+        if(state==0)
+            strId=R.string.event_unsigned;
+        Toast.makeText(getContext(), getString(strId)+" "+recyclerAdapter.getItemById(id).getTitle(),Toast.LENGTH_SHORT).show();
     }
-
+    @Override
+    public void changeEventStateFail(int id) {
+        EventsItem item=recyclerAdapter.getItemById(id);
+        item.setState(item.getState()+2);
+        recyclerAdapter.notifyItemChanged(
+                recyclerAdapter.getData().indexOf(recyclerAdapter.getItemById(id)));
+        Toast.makeText(getContext(), R.string.err_event_state_change_fail,Toast.LENGTH_SHORT).show();
+    }
+    @Override
+    public void requestChangeEventState(int id) {
+        presenter.onEventStateChange(id);
+    }
     public void onDataUpdated()
     {
         swipeRefreshLayout.setRefreshing(false);
