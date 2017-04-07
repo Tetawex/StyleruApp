@@ -55,6 +55,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
                         Md5Hash.md5(Md5Hash.md5(password.getText().toString())));//double hash means double security
             }
         });
+        presenter.onValidateToken();
     }
 
 

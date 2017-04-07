@@ -50,14 +50,12 @@ public class TimelinePresenterImpl implements TimelinePresenter {
         disposable = model.getData(new TimelineRequest("87vg430f7g237fg283f",batchSize,currentId))
                 .subscribe(response ->
                         {
-                            view.stopProgressBar();
                             view.setData(response.getData());
                             Log.d("Timeline","Update");
                             view.onDataUpdated();
                         },
                         throwable ->
                         {
-                            view.stopProgressBar();
                             view.showError(throwable);
                         },
                         () -> {
