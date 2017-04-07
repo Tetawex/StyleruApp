@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import org.styleru.styleruapp.R;
-import org.styleru.styleruapp.model.dto.SingleProfileItem;
+import org.styleru.styleruapp.model.dto.ProfileProjectsItem;
 import org.styleru.styleruapp.presenter.ProfileProjectsPresenter;
 import org.styleru.styleruapp.presenter.ProfileProjectsPresenterImpl;
 import org.styleru.styleruapp.util.EndlessRecyclerViewScrollListener;
@@ -68,7 +68,7 @@ public class ProfileFragmentTabProjects extends Fragment implements ProfileProje
         ButterKnife.bind(this,view);
         progressbar.setVisibility(View.VISIBLE);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerAdapter=new ProfileProjectsRecyclerAdapter(getActivity(),new ArrayList<SingleProfileItem>());
+        recyclerAdapter=new ProfileProjectsRecyclerAdapter(getActivity(),new ArrayList<ProfileProjectsItem>());
         recyclerView.setAdapter(recyclerAdapter);
 
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark,
@@ -119,12 +119,12 @@ public class ProfileFragmentTabProjects extends Fragment implements ProfileProje
     }
 
     @Override
-    public void appendData(List<SingleProfileItem> data) {
+    public void appendData(List<ProfileProjectsItem> data) {
         recyclerAdapter.appendDataWithNotify(data);
     }
 
     @Override
-    public void setData(List<SingleProfileItem> data) {
+    public void setData(List<ProfileProjectsItem> data) {
         onDataUpdated();
         recyclerAdapter.setDataWithNotify(data);
     }

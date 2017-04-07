@@ -1,7 +1,7 @@
 package org.styleru.styleruapp.view;
 
 
-import org.styleru.styleruapp.model.dto.SingleProfileItem;
+import org.styleru.styleruapp.model.dto.ProfileProjectsItem;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ import java.util.List;
  */
 
 public interface ProfileProjectsView extends View {
-    void appendData(List<SingleProfileItem> data);
-    void setData(List<SingleProfileItem> data);
+    void appendData(List<ProfileProjectsItem> data);
+    void setData(List<ProfileProjectsItem> data);
     void changeProfileProjectsState(int id);
     void onDataUpdated();
 }

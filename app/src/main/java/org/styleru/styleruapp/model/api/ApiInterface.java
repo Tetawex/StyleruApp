@@ -13,13 +13,18 @@ import org.styleru.styleruapp.model.dto.LoginRequest;
 import org.styleru.styleruapp.model.dto.LoginResponse;
 import org.styleru.styleruapp.model.dto.PeopleRequest;
 import org.styleru.styleruapp.model.dto.PeopleResponse;
+import org.styleru.styleruapp.model.dto.ProfileProjectsRequest;
+import org.styleru.styleruapp.model.dto.ProfileProjectsResponse;
 import org.styleru.styleruapp.model.dto.ProjectsRequest;
 import org.styleru.styleruapp.model.dto.ProjectsResponse;
+import org.styleru.styleruapp.model.dto.SingleProfileRequest;
+import org.styleru.styleruapp.model.dto.SingleProfileResponse;
+import org.styleru.styleruapp.model.dto.TimelineRequest;
+import org.styleru.styleruapp.model.dto.TimelineResponse;
 import org.styleru.styleruapp.model.dto.ValidateTokenRequest;
 
 import io.reactivex.Observable;
 import retrofit2.http.Body;
-import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface ApiInterface {
@@ -40,5 +45,10 @@ public interface ApiInterface {
     Observable<PeopleResponse> getPeople(@Body PeopleRequest request);
     @POST("allProject")
     Observable<ProjectsResponse> getProjects(@Body ProjectsRequest request);
-
+    @POST("singleTimeline")
+    Observable<TimelineResponse> getTimeine(@Body TimelineRequest request);
+    @POST("singlePersonProjects")
+    Observable<ProfileProjectsResponse> getProfileProjects(@Body ProfileProjectsRequest request);
+    @POST("singlePerson")
+    Observable<SingleProfileResponse> getSingleProfile(@Body SingleProfileRequest request);
 }

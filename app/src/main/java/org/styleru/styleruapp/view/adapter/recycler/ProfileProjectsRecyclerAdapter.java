@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import org.styleru.styleruapp.R;
-import org.styleru.styleruapp.model.dto.SingleProfileItem;
+import org.styleru.styleruapp.model.dto.ProfileProjectsItem;
 
 import java.util.List;
 
@@ -18,8 +18,8 @@ import butterknife.ButterKnife;
  * Created by Пользователь on 03.04.2017.
  */
 
-public class ProfileProjectsRecyclerAdapter extends BaseRecyclerAdapter<SingleProfileItem> {
-    public ProfileProjectsRecyclerAdapter(Context context, List<SingleProfileItem> data) {
+public class ProfileProjectsRecyclerAdapter extends BaseRecyclerAdapter<ProfileProjectsItem> {
+    public ProfileProjectsRecyclerAdapter(Context context, List<ProfileProjectsItem> data) {
         super(context, data);
     }
     @Override
@@ -33,7 +33,7 @@ public class ProfileProjectsRecyclerAdapter extends BaseRecyclerAdapter<SinglePr
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder uncastedHolder, int position) {
-        SingleProfileItem item= getData().get(position);
+        ProfileProjectsItem item= getData().get(position);
         ProfileProjectsViewHolder holder=(ProfileProjectsViewHolder) uncastedHolder;
 
 

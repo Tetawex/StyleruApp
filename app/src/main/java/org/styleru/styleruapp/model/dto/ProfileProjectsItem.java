@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by Пользователь on 03.04.2017.
  */
 
-public class SingleProfileItem {
+public class ProfileProjectsItem {
     @SerializedName("id")
     @Expose
     private int id;
@@ -41,7 +41,6 @@ public class SingleProfileItem {
     public String getStatus() {
         return status;
     }
-
     public void setStatus(String status) {
         this.status = status;
     }

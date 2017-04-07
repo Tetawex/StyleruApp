@@ -12,13 +12,13 @@ import java.util.List;
 public class ProfileProjectsResponse {
     @Expose
     @SerializedName("data")
-    private List<SingleProfileItem> data;
+    private List<ProfileProjectsItem> data;
 
-    public List<SingleProfileItem> getData() {
+    public List<ProfileProjectsItem> getData() {
         return data;
     }
 
-    public void setData(List<SingleProfileItem> data) {
+    public void setData(List<ProfileProjectsItem> data) {
         this.data = data;
     }
 }
