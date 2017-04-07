@@ -19,7 +19,7 @@ import io.reactivex.disposables.Disposables;
 
 public class ProjectsPresenterImpl implements ProjectsPresenter {
     //TODO: заменить инъекцию через конструктор инъекцией дагером
-    public static final int BATCH_SIZE=10;
+    public static final int BATCH_SIZE=30;
 
     private ProjectsView view;
     private ProjectsModel model;
@@ -32,17 +32,16 @@ public class ProjectsPresenterImpl implements ProjectsPresenter {
         this.view=view;
         this.model=new ProjectsModelImpl();
         model.setDataChangedListener(()->{
-            if(currentId!=0)
-                onDataAppend(currentId,BATCH_SIZE);
-            else
+            if(currentId==0) {
                 onDataUpdate(BATCH_SIZE);
+                view.onDataUpdated();
+            }
         });
-        model.setErrorListener(new ErrorListener() {
-                                   @Override
-                                   public void accept(Throwable throwable) {
-                                       view.showError(throwable);
-                                       view.stopProgressBar();
-                                   }});
+        model.setErrorListener((throwable)->
+        {
+            view.showError(throwable);
+            view.stopProgressBar();
+        });
     }
 
     @Override
@@ -63,10 +62,8 @@ public class ProjectsPresenterImpl implements ProjectsPresenter {
     @Override
     public void onModelUpdateCachedData(){
         model.updateCachedData();
-        model.setRequestString("");
         view.setData(new ArrayList<>());
         view.startProgressBar();
-        onDataUpdate(BATCH_SIZE);
         currentId=0;
     }
     @Override

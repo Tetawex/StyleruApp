@@ -33,6 +33,7 @@ import org.styleru.styleruapp.presenter.PeoplePresenterImpl;
 import org.styleru.styleruapp.util.DrawerLocker;
 import org.styleru.styleruapp.util.EndlessRecyclerViewScrollListener;
 import org.styleru.styleruapp.view.PeopleView;
+import org.styleru.styleruapp.view.ToolbarInteractor;
 import org.styleru.styleruapp.view.activity.MainActivity;
 import org.styleru.styleruapp.view.adapter.recycler.FilterItemRecyclerAdapter;
 import org.styleru.styleruapp.view.adapter.recycler.PeopleRecyclerAdapter;
@@ -50,7 +51,6 @@ public class PeopleFragment extends Fragment implements PeopleView {
     private EndlessRecyclerViewScrollListener recyclerViewScrollListener;
     private PeopleRecyclerAdapter recyclerAdapter;
     private PeopleFilter peopleFilter=new PeopleFilter();
-    private Toolbar activityToolbar;
 
     private PeoplePresenter presenter;
     private DrawerLocker drawerLocker;
@@ -98,6 +98,7 @@ public class PeopleFragment extends Fragment implements PeopleView {
     private List<FilterItem> selectedSubdepartments=new ArrayList<>();
     private List<FilterItem> selectedUniversities=new ArrayList<>();
     private List<FilterItem> selectedExperiences=new ArrayList<>();
+    private ToolbarInteractor toolbarInteractor;
 
 
     public PeopleFragment() {
@@ -119,10 +120,11 @@ public class PeopleFragment extends Fragment implements PeopleView {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_people, container, false);
-        MainActivity activity = (MainActivity) getActivity();
-        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.people);
-        activityToolbar=toolbar;
+        toolbarInteractor=(ToolbarInteractor)getActivity();
+        toolbarInteractor.setToolbarTitleMode(ToolbarInteractor.Mode.BASIC);
+        toolbarInteractor.setToolbarTitle(getString(R.string.people));
+        toolbarInteractor.setToolbarElevationDp(4);
+        drawerLocker=(DrawerLocker)getActivity();
 
         setHasOptionsMenu(true);
 
@@ -165,7 +167,7 @@ public class PeopleFragment extends Fragment implements PeopleView {
             public void onClick(View v) {
                 filter.setVisibility(View.GONE);
                 drawerLocker.setDrawerEnabled(true);
-                activityToolbar.setVisibility(View.VISIBLE);
+                toolbarInteractor.setToolbarVisible(true);
                 List<Integer> departmentIds=new ArrayList<>();
                 for (FilterItem filterItem: selectedDepartments) {
                     if(filterItem.isChecked())
@@ -306,10 +308,7 @@ public class PeopleFragment extends Fragment implements PeopleView {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        MainActivity activity = (MainActivity) getActivity();
-        drawerLocker=activity;
-        MenuInflater inflater1 = activity.getMenuInflater();
-        inflater1.inflate(R.menu.menu_fragment_people, menu);
+        inflater.inflate(R.menu.menu_fragment_people, menu);
         MenuItem filterItem=menu.findItem(R.id.action_filter);
         filterItem.getIcon().setAlpha(138);
         filterItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -322,7 +321,7 @@ public class PeopleFragment extends Fragment implements PeopleView {
                 experiencesTextList.setText(R.string.all);
                 presenter.onFilterModelLoad();*/
                 if(filterModel!=null) {
-                    activityToolbar.setVisibility(View.GONE);
+                    toolbarInteractor.setToolbarVisible(false);
                     drawerLocker.setDrawerEnabled(false);
                     filter.setVisibility(View.VISIBLE);
                 }

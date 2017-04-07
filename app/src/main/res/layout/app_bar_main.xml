@@ -16,10 +16,33 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:titleTextColor="@color/texttoolbar"
-            app:subtitleTextColor="@color/texttoolbar"
+            app:titleTextColor="@color/colorPrimaryTextDark"
+            app:subtitleTextColor="@color/colorPrimaryTextDark"
             android:background="@color/colortoolbar"
-            app:theme="@style/Theme.AppCompat.Light" />
+            app:theme="@style/Theme.AppCompat.Light">
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:visibility="visible"
+                    android:id="@+id/toolbar_title"
+                    android:textAppearance="@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Title"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorPrimaryTextDark"
+                    android:text="@string/events"/>
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:id="@+id/toolbar_spinner"
+                    android:textSize="20sp"
+                    android:textAppearance="@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Title"
+                    android:theme="@style/SpinnerTheme" />
+            </FrameLayout>
+        </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
     <include layout="@layout/content_main" />
 </android.support.design.widget.CoordinatorLayout>

@@ -17,8 +17,8 @@
             android:id="@+id/toolbar_vac"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:titleTextColor="@color/texttoolbar"
-            app:subtitleTextColor="@color/texttoolbar"
+            app:titleTextColor="@color/colorPrimaryTextDark"
+            app:subtitleTextColor="@color/colorPrimaryTextDark"
             android:background="@color/colortoolbar"
             app:theme="@style/Theme.AppCompat.Light" />
     </android.support.design.widget.AppBarLayout>

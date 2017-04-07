@@ -17,12 +17,12 @@ public class EventsRequest {
     @SerializedName("token")
     @Expose
     private String token;
-    @SerializedName("batch_size")
-    @Expose
-    private int batchSize;
     @SerializedName("offset")
     @Expose
     private int offset;
+    @SerializedName("batch_size")
+    @Expose
+    private int batchSize;
 
     public String getToken() {
         return token;

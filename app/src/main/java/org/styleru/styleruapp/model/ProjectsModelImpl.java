@@ -1,5 +1,7 @@
 package org.styleru.styleruapp.model;
 
+import android.util.Log;
+
 import org.styleru.styleruapp.model.api.ApiService;
 import org.styleru.styleruapp.model.cache.Singletons;
 import org.styleru.styleruapp.model.dto.PeopleItem;
@@ -47,7 +49,7 @@ public class ProjectsModelImpl implements ProjectsModel {
 
     public ProjectsModelImpl(){
         itemList =new ArrayList<>();
-        filteredItemList =itemList;
+        filteredItemList =new ArrayList<>();
         apiService= Singletons.getApiService();
         authToken=Singletons.getPreferencesManager().getAuthToken();
         appendData(0);
@@ -68,10 +70,12 @@ public class ProjectsModelImpl implements ProjectsModel {
                 .getProjects(new ProjectsRequest(authToken,BATCH_SIZE,offset))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
-        disposable=observable.take(BATCH_SIZE).subscribe(
+        disposable=observable.subscribe(
                 response ->
                 {
                     itemList.addAll(response.getData());
+                    filteredItemList.addAll(filter(response.getData()));
+                    dataChangedListener.run();
                 },
                 throwable ->
                 {
@@ -79,28 +83,37 @@ public class ProjectsModelImpl implements ProjectsModel {
                     finishedLoading=true;
                 },
                 () -> {
-                    if(!disposable.isDisposed()) {
-                        disposable.dispose();
-                    }
-                    if(!finishedLoading&&itemList.size()<500)//TODO: убрать временный костыль
+                    if(!finishedLoading&&itemList.size()<1000)//TODO: убрать временный костыль
                     {
-                        appendData(itemList.size());
-                        dataChangedListener.run();
+                        appendData(itemList.size()+offset);
                     }
-                    else
+                    else {
                         finishedLoading=true;
-
+                        if(!disposable.isDisposed()) {
+                            disposable.dispose();
+                    }
+                    }
                 });
+    }
+    private List<ProjectsItem> filter(List<ProjectsItem> fullList){
+        List<ProjectsItem> fList=new ArrayList<>();
+        for (ProjectsItem item :fullList) {
+            if(filter.valid(item)&&
+            (item.getName()+item.getManagerName()).toLowerCase()
+                    .contains(requestString.toLowerCase())) {
+                fList.add(item);
+            }
+        }
+        return fList;
     }
     private void filter(){
         filteredItemList=new ArrayList<>();
         for (ProjectsItem item :itemList) {
+            if(!filter.valid(item))
+                continue;
             if(!(item.getName()+item.getManagerName()).toLowerCase()
                     .contains(requestString.toLowerCase()))
                 continue;
-            if(!filter.valid(item))
-                continue;
-
             filteredItemList.add(item);
         }
     }
@@ -117,11 +130,13 @@ public class ProjectsModelImpl implements ProjectsModel {
 
     @Override
     public void updateCachedData() {
+        requestString="";
         finishedLoading=false;
         itemList.clear();
-        filteredItemList=itemList;
+        filteredItemList.clear();
         appendData(0);
     }
+
     @Override
     public void setDataChangedListener(Action dataChangedListener) {
         this.dataChangedListener = dataChangedListener;

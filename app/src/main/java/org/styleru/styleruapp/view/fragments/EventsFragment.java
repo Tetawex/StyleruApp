@@ -12,6 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout;
+import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayoutDirection;
+
+import org.joda.time.DateTime;
+import org.styleru.styleruapp.view.ToolbarInteractor;
 import org.styleru.styleruapp.view.activity.MainActivity;
 import org.styleru.styleruapp.R;
 import org.styleru.styleruapp.model.dto.EventsItem;
@@ -37,11 +42,13 @@ public class EventsFragment extends Fragment implements EventsView{
     private EventsRecyclerAdapter recyclerAdapter;
 
     private EventsPresenter presenter;
+    private ToolbarInteractor toolbarInteractor;
 
     @BindView(R.id.recycler)
     protected RecyclerView recyclerView;
     @BindView(R.id.swipe)
-    protected SwipeRefreshLayout swipeRefreshLayout;
+    protected SwipyRefreshLayout swipeRefreshLayout;
+    //protected SwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.progressbar)
     protected View progressbar;
 
@@ -65,13 +72,10 @@ public class EventsFragment extends Fragment implements EventsView{
         super.onCreateView(inflater,container,savedInstanceState);
 
         View view=inflater.inflate(R.layout.fragment_events, container, false);
-        MainActivity activity = (MainActivity) getActivity();
-        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
-        activity.setSupportActionBar(toolbar);
-        activity.getSupportActionBar().show();
-        toolbar.setTitle(R.string.events);
-
-
+        toolbarInteractor=(ToolbarInteractor)getActivity();
+        toolbarInteractor.setToolbarTitleMode(ToolbarInteractor.Mode.BASIC);
+        toolbarInteractor.setToolbarElevationDp(4);
+        toolbarInteractor.setToolbarTitle(getString(R.string.events));
         ButterKnife.bind(this,view);
         progressbar.setVisibility(View.VISIBLE);
         //Адаптер
@@ -85,7 +89,6 @@ public class EventsFragment extends Fragment implements EventsView{
         recyclerView.setAdapter(recyclerAdapter);
 
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark);
-        swipeRefreshLayout.or;
 
         //Добавляем листенер для ресайклера, чтобы понять, когда загружать новый фид
         recyclerViewScrollListener = new EndlessRecyclerViewScrollListener(
@@ -98,12 +101,18 @@ public class EventsFragment extends Fragment implements EventsView{
         recyclerView.addOnScrollListener(recyclerViewScrollListener);
 
         //Рефреш-лэйаут сверху
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        /*swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh()
             {
                 presenter.onDataUpdate(DEFAULT_BATCH_SIZE);
 
+            }
+        });*/
+        swipeRefreshLayout.setOnRefreshListener(new SwipyRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh(SwipyRefreshLayoutDirection direction) {
+                presenter.onDataUpdate(DEFAULT_BATCH_SIZE);
             }
         });
         presenter=new EventsPresenterImpl(this);
@@ -142,6 +151,12 @@ public class EventsFragment extends Fragment implements EventsView{
     public void setData(List<EventsItem> data) {
         onDataUpdated();
         recyclerAdapter.setDataWithNotify(data);
+        for (int i=0;i<data.size();i++){
+            if(DateTime.now().isAfter(new DateTime(data.get(i).getDateTime().replace(' ','T')))) {
+                recyclerView.scrollToPosition(i);
+                return;
+            }
+        }
     }
 
     @Override

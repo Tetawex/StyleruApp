@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.styleru.styleruapp.R;
+import org.styleru.styleruapp.view.ToolbarInteractor;
 import org.styleru.styleruapp.view.activity.MainActivity;
 import org.styleru.styleruapp.view.adapter.tab.ViewPagerAdapter;
 
@@ -26,6 +27,8 @@ public class ProfileFragment extends Fragment {
     public TabLayout tabLayout;
     @BindView(R.id.view_pager)
     public ViewPager viewPager;
+
+    private ToolbarInteractor toolbarInteractor;
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -45,11 +48,11 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-        MainActivity activity = (MainActivity) getActivity();
-        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
-        toolbar.setTitle(getContext().getString(R.string.profile));
+        toolbarInteractor=(ToolbarInteractor)getActivity();
+        toolbarInteractor.setToolbarTitleMode(ToolbarInteractor.Mode.BASIC);
+        toolbarInteractor.setToolbarTitle(getString(R.string.profile));
+        toolbarInteractor.setToolbarElevationDp(0);
         setHasOptionsMenu(true);
         ButterKnife.bind(this,view);
         setupViewPager(viewPager);
@@ -57,8 +60,7 @@ public class ProfileFragment extends Fragment {
             tabLayout.setElevation(TypedValue.applyDimension(TypedValue.
                     COMPLEX_UNIT_DIP, 2, getResources().getDisplayMetrics()));
         if(android.os.Build.VERSION.SDK_INT >= 21)
-            activity.getSupportActionBar().setElevation(TypedValue.applyDimension(TypedValue.
-                    COMPLEX_UNIT_DIP, 2, getResources().getDisplayMetrics()));
+            toolbarInteractor.setToolbarElevationDp(0);
         tabLayout.setupWithViewPager(viewPager);
         return view;
     }

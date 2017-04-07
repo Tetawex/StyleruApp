@@ -12,6 +12,6 @@
     <color name="colorGrey_dark">#687779</color>
     <color name="colorBlue">#6eb2bd</color>
     <color name="colortoolbar">#FFFFFF</color>
-<color name="texttoolbar">#111111</color>
+    <color name="colorPrimaryTextDark">#df000000</color>
 
 </resources>

@@ -8,11 +8,4 @@
         android:layout_width="wrap_content"
         app:showAsAction="always|collapseActionView"
         app:actionViewClass="android.support.v7.widget.SearchView" />
-    <item
-        android:id="@+id/action_filter"
-        android:title="@string/filter"
-        android:icon="@drawable/ic_filter_list_black_24dp"
-        app:actionViewClass="android.widget.Spinner"
-        android:layout_width="wrap_content"
-        app:showAsAction="always|collapseActionView" />
 </menu>

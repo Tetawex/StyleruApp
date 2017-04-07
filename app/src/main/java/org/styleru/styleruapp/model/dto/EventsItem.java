@@ -39,7 +39,7 @@ public class EventsItem implements IdItem{
     @SerializedName("attendants_count")
     @Expose
     private int attendantsCount;
-    @SerializedName("attendants")
+    @SerializedName("view_attendants")
     @Expose
     private boolean viewAttendants;
 
