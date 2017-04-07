@@ -4,6 +4,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -57,8 +58,8 @@ public class PeopleFragment extends Fragment implements PeopleView {
 
     @BindView(R.id.recycler)
     public RecyclerView recyclerView;
-    //@BindView(R.id.swipe)
-    //protected SwipeRefreshLayout swipeRefreshLayout;
+    @BindView(R.id.swipe)
+    protected SwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.progressbar)
     public View progressbar;
     @BindView(R.id.filter)
@@ -141,7 +142,7 @@ public class PeopleFragment extends Fragment implements PeopleView {
         recyclerAdapter=new PeopleRecyclerAdapter(getContext(),new ArrayList<PeopleItem>());
         recyclerView.setAdapter(recyclerAdapter);
 
-        //swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark);
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark);
 
         //Добавляем листенер для ресайклера, чтобы понять, когда загружать новый фид
         recyclerViewScrollListener = new EndlessRecyclerViewScrollListener(
@@ -155,13 +156,13 @@ public class PeopleFragment extends Fragment implements PeopleView {
         recyclerView.addOnScrollListener(recyclerViewScrollListener);
 
         //Рефреш-лэйаут сверху
-        /*swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh()
             {
                 presenter.onModelUpdateCachedData();
             }
-        });*/
+        });
         filterBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -367,7 +368,7 @@ public class PeopleFragment extends Fragment implements PeopleView {
 
     @Override
     public void stopProgressBar() {
-        //swipeRefreshLayout.setRefreshing(false);
+        swipeRefreshLayout.setRefreshing(false);
         progressbar.setVisibility(View.GONE);
     }
 
@@ -405,7 +406,7 @@ public class PeopleFragment extends Fragment implements PeopleView {
 
     public void onDataUpdated()
     {
-        //swipeRefreshLayout.setRefreshing(false);
+        swipeRefreshLayout.setRefreshing(false);
         recyclerViewScrollListener.resetState();
     }
 
