@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.joda.time.format.DateTimeFormat;
@@ -43,15 +44,19 @@ public class TimelineRecyclerAdapter extends BaseRecyclerAdapter<TimelineItem> {
         TimelineViewHolder holder=(TimelineViewHolder) uncastedHolder;
 //        holder.date.setText(context.getString(R.string.until)+" "+itemDateTime.toString(formatter));
         if(item.getStatus()== true)
-        {preposition = " в проект ";}
+        {preposition = " в проект ";
+        holder.back.setBackgroundResource(R.drawable.gal);}
         else
-            {preposition=" из проекта ";};
-        holder.text.setText(item.getName()+" "+item.getSurname()+preposition+item.getProject()+" "+item.getDate());
+            {preposition=" из проекта ";
+                holder.back.setBackgroundResource(R.drawable.vmin);}
+        holder.text.setText(item.getName()+" "+item.getSurname() + preposition + item.getProject()+" "+item.getDate());
     }
 
     class TimelineViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.text)
         TextView text;
+        @BindView(R.id.back)
+        RelativeLayout back;
 
         public TimelineViewHolder(View view) {
             super(view);

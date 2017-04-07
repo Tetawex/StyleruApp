@@ -27,9 +27,10 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@drawable/oval_grey">
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:background="@drawable/vmin"
+                    android:id="@+id/back"
                     android:layout_height="match_parent"/>
                 </LinearLayout>
              <LinearLayout

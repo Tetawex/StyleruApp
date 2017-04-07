@@ -40,8 +40,13 @@
                 <EditText
                     android:id="@+id/login_edit"
                     android:layout_width="match_parent"
+                    android:imeOptions="actionNext"
+                    android:nextFocusDown="@+id/password_edit"
                     android:layout_height="25dp"
+                    android:singleLine="true"
                     android:layout_marginTop="30dp"
+                    android:maxLines="1"
+                    android:focusable="true"
                     android:background="#14cbf0f1"
                     android:hint="Логин"
                     android:textColorHint="#4d686c"/>
@@ -53,13 +58,19 @@
 
                 <EditText
                     android:id="@+id/password_edit"
+                    android:focusable="true"
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
+                    android:maxLines="1"
+
+                    android:singleLine="true"
+                    android:inputType="textPassword"
                     android:layout_marginTop="20dp"
+                    android:imeOptions="actionNext"
                     android:background="#14cbf0f1"
                     android:hint="Пароль"
                     android:textColorHint="#4d686c"/>
-
+                <!--android:nextFocusForward="@id/login_edit"-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="3dp"

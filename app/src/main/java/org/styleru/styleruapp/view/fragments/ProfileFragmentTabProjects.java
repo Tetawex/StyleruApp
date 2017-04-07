@@ -29,7 +29,7 @@ import butterknife.ButterKnife;
  * A screen responsible for viewing event feed, implements corresponding interface
  */
 public class ProfileFragmentTabProjects extends Fragment implements ProfileProjectsView {
-    private static final int DEFAULT_BATCH_SIZE=10;//глобальные переменные - признак некачественного кода
+    private static final int DEFAULT_BATCH_SIZE=10;
     private OnFragmentInteractionListener mListener;
     private EndlessRecyclerViewScrollListener recyclerViewScrollListener;
     private ProfileProjectsRecyclerAdapter recyclerAdapter;
@@ -67,17 +67,13 @@ public class ProfileFragmentTabProjects extends Fragment implements ProfileProje
 
         ButterKnife.bind(this,view);
         progressbar.setVisibility(View.VISIBLE);
-        //Адаптер
-        //Тут можно сделать поддержку вертикальной ориентации, использовав GridLayoutManager
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        //Адаптер для ресайклера
         recyclerAdapter=new ProfileProjectsRecyclerAdapter(getActivity(),new ArrayList<SingleProfileItem>());
         recyclerView.setAdapter(recyclerAdapter);
 
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark,
                 R.color.colorPrimary);
 
-        //Добавляем листенер для ресайклера, чтобы понять, когда загружать новый фид
         recyclerViewScrollListener = new EndlessRecyclerViewScrollListener(
                 (LinearLayoutManager) recyclerView.getLayoutManager()) {
             @Override
@@ -87,7 +83,7 @@ public class ProfileFragmentTabProjects extends Fragment implements ProfileProje
         };
         recyclerView.addOnScrollListener(recyclerViewScrollListener);
 
-        //Рефреш-лэйаут сверху
+
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh()

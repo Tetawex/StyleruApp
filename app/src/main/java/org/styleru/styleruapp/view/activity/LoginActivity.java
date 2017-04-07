@@ -11,9 +11,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import org.styleru.styleruapp.R;
-import org.styleru.styleruapp.StyleruApplication;
-import org.styleru.styleruapp.model.cache.Singletons;
-import org.styleru.styleruapp.model.dto.LoginResponse;
 import org.styleru.styleruapp.presenter.LoginPresenter;
 import org.styleru.styleruapp.presenter.LoginPresenterImpl;
 import org.styleru.styleruapp.util.Md5Hash;
@@ -58,8 +55,11 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
                         Md5Hash.md5(Md5Hash.md5(password.getText().toString())));//double hash means double security
             }
         });
-        presenter.onValidateToken();
     }
+
+
+
+
 
     @Override
     public void showError(Throwable throwable) {

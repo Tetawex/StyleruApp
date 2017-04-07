@@ -4,21 +4,26 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.styleru.styleruapp.R;
 import org.styleru.styleruapp.model.dto.TimelineItem;
-import org.styleru.styleruapp.presenter.TimelineProfilePresenter;
+import org.styleru.styleruapp.presenter.TimelinePresenter;
+import org.styleru.styleruapp.presenter.TimelinePresenterImpl;
+import org.styleru.styleruapp.util.EndlessRecyclerViewScrollListener;
+import org.styleru.styleruapp.view.TimelineView;
 import org.styleru.styleruapp.view.adapter.recycler.TimelineRecyclerAdapter;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,19 +32,23 @@ import butterknife.ButterKnife;
  * Created by Пользователь on 19.03.2017.
  */
 
-public class ProfileFragmentTabTimeline extends Fragment {
+public class ProfileFragmentTabTimeline extends Fragment implements TimelineView {
 
 
     public ProfileFragmentTabTimeline() {
         // Required empty public constructor
     }
+    private static final int DEFAULT_BATCH_SIZE=10;
     private TimelineRecyclerAdapter recyclerAdapter;
     private OnFragmentInteractionListener mListener;
-    private TimelineProfilePresenter presenter;
+    private EndlessRecyclerViewScrollListener recyclerViewScrollListener;
+    private TimelinePresenter presenter;
     @BindView(R.id.recycler)
     protected RecyclerView recyclerView;
     @BindView(R.id.today_date)
     protected TextView date1;
+    @BindView(R.id.swipe)
+    protected SwipeRefreshLayout  swipeRefreshLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,39 +72,83 @@ public class ProfileFragmentTabTimeline extends Fragment {
                     .append(dd).append(".").append(mm + 1).append(".").append(yy));
         }
 
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerAdapter=new TimelineRecyclerAdapter(getActivity(),new ArrayList<TimelineItem>());
+        recyclerView.setAdapter(recyclerAdapter);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerAdapter=new  TimelineRecyclerAdapter(getActivity(),new ArrayList<TimelineItem>());
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark,
+                R.color.colorPrimary);
 
+        recyclerViewScrollListener = new EndlessRecyclerViewScrollListener(
+                (LinearLayoutManager) recyclerView.getLayoutManager()) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                presenter.onTimelineAppend(recyclerAdapter.getItemCount(),DEFAULT_BATCH_SIZE);
+            }
+        };
+        recyclerView.addOnScrollListener(recyclerViewScrollListener);
+
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh()
+            {
+                presenter.onTimelineUpdate(DEFAULT_BATCH_SIZE);
+
+            }
+        });
+        presenter=new TimelinePresenterImpl(this);
+        presenter.onTimelineUpdate(DEFAULT_BATCH_SIZE);
         return view;
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
-        Log.d("FRAG","Peopledestroy");
-//            getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    @Override
+    public void showError(Throwable throwable) {
+        Toast.makeText(getContext(),throwable.getMessage(),Toast.LENGTH_SHORT);
+    }
+
+    @Override
+    public void startProgressBar() {
+
+    }
+
+    @Override
+    public void stopProgressBar() {
+
     }
 
 
     @Override
-    public void onPause() {
-        super.onPause();
-        Log.d("2","pause3");
-//        ViewPager viewPager = (ViewPager) getActivity().findViewById(R.id.view_pager);
-//        viewPager.setPadding(0,0,0,0);
+    public void appendData(List<TimelineItem> data) {
+        recyclerAdapter.appendDataWithNotify(data);
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        Log.d("2","resume3");
-//        ViewPager viewPager = (ViewPager) getActivity().findViewById(R.id.view_pager);
-//        viewPager.setPadding(0,84,0,0);
+    public void setData(List<TimelineItem> data) {
+        onDataUpdated();
+        recyclerAdapter.setDataWithNotify(data);
     }
+
+
+
+    public void onDataUpdated()
+    {
+        swipeRefreshLayout.setRefreshing(false);
+        recyclerViewScrollListener.resetState();
+    }
+
+
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-
 }
+
+
