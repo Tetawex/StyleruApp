@@ -17,7 +17,7 @@ public class EventsItem implements IdItem{
     private int id;
     @SerializedName("status")
     @Expose
-    private int status;
+    private int state;
     @SerializedName("title")
     @Expose
     private String title;
@@ -39,7 +39,7 @@ public class EventsItem implements IdItem{
     @SerializedName("attendants_count")
     @Expose
     private int attendantsCount;
-    @SerializedName("attendants")
+    @SerializedName("view_attendants")
     @Expose
     private boolean viewAttendants;
 
@@ -100,12 +100,12 @@ public class EventsItem implements IdItem{
         return id;
     }
 
-    public int getStatus() {
-        return status;
+    public int getState() {
+        return state;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setState(int state) {
+        this.state = state;
     }
 
     public String getAuthor() {

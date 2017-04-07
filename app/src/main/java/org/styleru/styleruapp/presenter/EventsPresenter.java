@@ -7,5 +7,5 @@ package org.styleru.styleruapp.presenter;
 public interface EventsPresenter extends Presenter{
     void onDataAppend(int offset, int batchSize);
     void onDataUpdate(int batchSize);
-    void onEventStatusChange(int id, boolean desiredStatus);
+    void onEventStateChange(int id);
 }

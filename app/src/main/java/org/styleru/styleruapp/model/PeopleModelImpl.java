@@ -29,7 +29,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class PeopleModelImpl implements PeopleModel {
-    public static final int BATCH_SIZE=256;
+    public static final int BATCH_SIZE=1;
 
     private String requestString="";
     private PeopleFilter filter=new PeopleFilter();
@@ -49,7 +49,7 @@ public class PeopleModelImpl implements PeopleModel {
 
     public PeopleModelImpl(){
         itemList =new ArrayList<>();
-        filteredItemList =itemList;
+        filteredItemList=new ArrayList<>();
         apiService= Singletons.getApiService();
         authToken=Singletons.getPreferencesManager().getAuthToken();
         appendData(0);
@@ -77,10 +77,12 @@ public class PeopleModelImpl implements PeopleModel {
                 .getPeople(new PeopleRequest(authToken,BATCH_SIZE,offset))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
-        disposable=observable.take(BATCH_SIZE).subscribe(
+        disposable=observable.subscribe(
                 response ->
                 {
                     itemList.addAll(response.getData());
+                    filteredItemList.addAll(filter(response.getData()));
+                    dataChangedListener.run();
                 },
                 throwable ->
                 {
@@ -88,18 +90,28 @@ public class PeopleModelImpl implements PeopleModel {
                     finishedLoading=true;
                 },
                 () -> {
-                    if(!disposable.isDisposed()) {
-                        disposable.dispose();
-                    }
-                    if(!finishedLoading&&itemList.size()<500)//TODO: убрать временный костыль
+                    if(!finishedLoading&&itemList.size()<1000)//TODO: убрать временный костыль
                     {
-                        appendData(itemList.size());
-                        dataChangedListener.run();
+                        appendData(itemList.size()+offset);
                     }
-                    else
+                    else {
                         finishedLoading=true;
-
+                        if(!disposable.isDisposed()) {
+                            disposable.dispose();
+                        }
+                    }
                 });
+    }
+    private List<PeopleItem> filter(List<PeopleItem> fullList){
+        List<PeopleItem> fList=new ArrayList<>();
+        for (PeopleItem item :fullList) {
+            if(filter.valid(item)&&
+                    (item.getFirstName()+" "+item.getLastName())
+                            .toLowerCase().contains(requestString.toLowerCase())) {
+                fList.add(item);
+            }
+        }
+        return fList;
     }
     private void filter(){
         filteredItemList=new ArrayList<>();
@@ -125,9 +137,10 @@ public class PeopleModelImpl implements PeopleModel {
 
     @Override
     public void updateCachedData() {
+        requestString="";
         finishedLoading=false;
         itemList.clear();
-        filteredItemList=itemList;
+        filteredItemList.clear();
         appendData(0);
     }
     @Override

@@ -60,8 +60,8 @@ public class ProfileProjectsRecyclerAdapter extends BaseRecyclerAdapter<SinglePr
         TextView secname;
 
 
-        @BindView(R.id.status)
-        TextView status;
+        @BindView(R.id.state)
+        TextView state;
 
 
 //        @BindView(R.id.attendance)

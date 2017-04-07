@@ -30,6 +30,9 @@
     <string name="settings">Настройки</string>
     <string name="edit">Редактировать</string>
     <string name="all">Все</string>
+    <string name="err_event_state_change_fail">Не удалось записаться на событие, попробуйте еще раз</string>
+    <string name="event_signed">Вы записались на событие</string>
+    <string name="event_unsigned">Вы отписались от события</string>
 
     <string-array name="project_options">
         <item>Все проекты</item>

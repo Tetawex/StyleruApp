@@ -33,6 +33,7 @@ import org.styleru.styleruapp.presenter.ProjectsPresenterImpl;
 import org.styleru.styleruapp.util.EndlessRecyclerViewScrollListener;
 import org.styleru.styleruapp.view.PeopleView;
 import org.styleru.styleruapp.view.ProjectsView;
+import org.styleru.styleruapp.view.ToolbarInteractor;
 import org.styleru.styleruapp.view.activity.MainActivity;
 import org.styleru.styleruapp.view.adapter.recycler.PeopleRecyclerAdapter;
 import org.styleru.styleruapp.view.adapter.recycler.ProjectsRecyclerAdapter;
@@ -55,11 +56,13 @@ public class ProjectsFragment extends Fragment implements ProjectsView {
 
     @BindView(R.id.recycler)
     public RecyclerView recyclerView;
-    //@BindView(R.id.swipe)
-    //protected SwipeRefreshLayout swipeRefreshLayout;
+    @BindView(R.id.swipe)
+    protected SwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.progressbar)
     public View progressbar;
-    private Spinner filterOptionsSpinner;
+
+    private ToolbarInteractor toolbarInteractor;
+    private MenuItem searchItem;
 
     public ProjectsFragment() {
         // Required empty public constructor
@@ -79,14 +82,25 @@ public class ProjectsFragment extends Fragment implements ProjectsView {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_people, container, false);
-        MainActivity activity = (MainActivity) getActivity();
-        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
-        activity.setSupportActionBar(toolbar);
-        activity.getSupportActionBar().show();
+        View view = inflater.inflate(R.layout.fragment_projects, container, false);
+        toolbarInteractor=(ToolbarInteractor)getActivity();
+        toolbarInteractor.setToolbarTitleMode(ToolbarInteractor.Mode.SPINNER);
+        toolbarInteractor.setToolbarElevationDp(4);
+        ArrayAdapter<?> adapter =
+                ArrayAdapter.createFromResource(getContext(), R.array.project_options, R.layout.view_toolbar_title_mimic);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        toolbarInteractor.setToolbarSpinnerAdapter(adapter);
+        toolbarInteractor.setToolbarSpinnerListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                presenter.onSetFilter(new ProjectsFilter(i));
+            }
 
-
-        toolbar.setTitle(getString(R.string.projects));
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                presenter.onSetFilter(new ProjectsFilter());
+            }
+        });
         setHasOptionsMenu(true);
 
         ButterKnife.bind(this,view);
@@ -97,7 +111,7 @@ public class ProjectsFragment extends Fragment implements ProjectsView {
         recyclerAdapter=new ProjectsRecyclerAdapter(getContext(),new ArrayList<ProjectsItem>());
         recyclerView.setAdapter(recyclerAdapter);
 
-        //swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark);
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark);
 
         //Добавляем листенер для ресайклера, чтобы понять, когда загружать новый фид
         recyclerViewScrollListener = new EndlessRecyclerViewScrollListener(
@@ -111,13 +125,14 @@ public class ProjectsFragment extends Fragment implements ProjectsView {
         recyclerView.addOnScrollListener(recyclerViewScrollListener);
 
         //Рефреш-лэйаут сверху
-        /*swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh()
             {
+                searchItem.collapseActionView();
                 presenter.onModelUpdateCachedData();
             }
-        });*/
+        });
         presenter=new ProjectsPresenterImpl(this);
         return view;
     }
@@ -130,10 +145,8 @@ public class ProjectsFragment extends Fragment implements ProjectsView {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        MainActivity activity = (MainActivity) getActivity();
-        MenuInflater inflater1 = activity.getMenuInflater();
-        inflater1.inflate(R.menu.menu_fragment_projects, menu);
-        MenuItem searchItem = menu.findItem(R.id.action_search);
+        inflater.inflate(R.menu.menu_fragment_projects, menu);
+        searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setMaxWidth(40000);
         searchView.setQueryHint(getString(R.string.hint_people));
@@ -149,61 +162,13 @@ public class ProjectsFragment extends Fragment implements ProjectsView {
                 return true;
             }
         });
-        MenuItem filterItem=menu.findItem(R.id.action_filter);
-        filterItem.getIcon().setAlpha(138);
         searchItem.getIcon().setAlpha(138);
-        filterItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                searchItem.collapseActionView();
-                return true;
-            }
-        });
         searchItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-                filterItem.collapseActionView();
                 return true;
             }
         });
-        filterOptionsSpinner = (Spinner) MenuItemCompat.getActionView(filterItem);
-        //filterOptionsSpinner.setDropDownHorizontalOffset((int)(TypedValue.applyDimension(TypedValue.
-        //        COMPLEX_UNIT_DIP, 8, getResources().getDisplayMetrics())));
-        ArrayAdapter<?> adapter =
-                ArrayAdapter.createFromResource(getContext(), R.array.project_options, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        filterOptionsSpinner.setAdapter(adapter);
-        filterOptionsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                presenter.onSetFilter(new ProjectsFilter(i));
-                filterItem.setVisible(true);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                presenter.onSetFilter(new ProjectsFilter());
-            }
-        });
-        MenuItemCompat.OnActionExpandListener expandListener = new MenuItemCompat.OnActionExpandListener() {
-            @Override
-            public boolean onMenuItemActionCollapse(MenuItem item) {
-                filterItem.setVisible(true);
-                searchItem.setVisible(true);
-                return true;
-            }
-
-            @Override
-            public boolean onMenuItemActionExpand(MenuItem item) {
-                filterItem.setVisible(true);
-                searchItem.setVisible(true);
-                return true;
-            }
-        };
-
-        MenuItemCompat.setOnActionExpandListener(searchItem, expandListener);
-        MenuItemCompat.setOnActionExpandListener(filterItem, expandListener);
-
         super.onCreateOptionsMenu(menu, inflater);
     }
     private void doQuery(String query){
@@ -227,7 +192,7 @@ public class ProjectsFragment extends Fragment implements ProjectsView {
 
     @Override
     public void stopProgressBar() {
-        //swipeRefreshLayout.setRefreshing(false);
+        swipeRefreshLayout.setRefreshing(false);
         progressbar.setVisibility(View.GONE);
     }
 
@@ -244,7 +209,7 @@ public class ProjectsFragment extends Fragment implements ProjectsView {
 
     public void onDataUpdated()
     {
-        //swipeRefreshLayout.setRefreshing(false);
+        swipeRefreshLayout.setRefreshing(false);
         recyclerViewScrollListener.resetState();
     }
 

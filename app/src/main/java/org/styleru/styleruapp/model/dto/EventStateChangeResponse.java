@@ -8,19 +8,19 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class EventStateChangeResponse {
-    @SerializedName("new_state")
+    @SerializedName("status")
     @Expose
-    private int newState;
+    private int state;
     @SerializedName("id")
     @Expose
     private int id;
 
-    public int getNewState() {
-        return newState;
+    public int getState() {
+        return state;
     }
 
-    public void setNewState(int newState) {
-        this.newState = newState;
+    public void setState(int state) {
+        this.state = state;
     }
     public int getId() {
         return id;

@@ -52,10 +52,13 @@ f
         <item name="windowNoTitle">true</item>
         <item name="colorControlNormal">@color/colorControl</item>
         <item name="windowActionBar">false</item>
-        <item name="colorPrimary">@color/texttoolbar</item>
+        <item name="colorPrimary">@color/colorPrimaryTextDark</item>
         <item name="drawerArrowStyle">@style/DrawerArrowToggle</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <style name="SpinnerTheme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorControlNormal">@color/colorPrimaryTextDark</item>
     </style>
     <!---->
     <!---->

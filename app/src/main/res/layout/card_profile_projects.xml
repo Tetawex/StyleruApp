@@ -45,7 +45,7 @@
         android:layout_height="match_parent"
         android:layout_marginRight="24sp"
         android:layout_marginLeft="24sp"
-        android:id="@+id/status"
+        android:id="@+id/state"
         android:gravity="center"
         android:layout_gravity="center"
         android:textSize="15sp"

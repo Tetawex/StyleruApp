@@ -22,6 +22,7 @@ import org.styleru.styleruapp.presenter.EventsPresenterImpl;
 import org.styleru.styleruapp.util.EndlessRecyclerViewScrollListener;
 import org.styleru.styleruapp.view.DepartmentsView;
 import org.styleru.styleruapp.view.EventsView;
+import org.styleru.styleruapp.view.ToolbarInteractor;
 import org.styleru.styleruapp.view.activity.MainActivity;
 import org.styleru.styleruapp.view.adapter.recycler.DepartmentsRecyclerAdapter;
 import org.styleru.styleruapp.view.adapter.recycler.EventsRecyclerAdapter;
@@ -49,6 +50,7 @@ public class DepartmentsFragment extends Fragment implements DepartmentsView{
     protected SwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.progressbar)
     protected View progressbar;
+    private ToolbarInteractor toolbarInteractor;
 
 
     public DepartmentsFragment() {
@@ -69,13 +71,11 @@ public class DepartmentsFragment extends Fragment implements DepartmentsView{
                              Bundle savedInstanceState) {
         super.onCreateView(inflater,container,savedInstanceState);
 
-        View view=inflater.inflate(R.layout.fragment_events, container, false);
-        MainActivity activity = (MainActivity) getActivity();
-        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
-        activity.setSupportActionBar(toolbar);
-        activity.getSupportActionBar().show();
-        toolbar.setTitle(R.string.departments);
-
+        View view=inflater.inflate(R.layout.fragment_departments, container, false);
+        toolbarInteractor=(ToolbarInteractor)getActivity();
+        toolbarInteractor.setToolbarTitleMode(ToolbarInteractor.Mode.BASIC);
+        toolbarInteractor.setToolbarTitle(getString(R.string.departments));
+        toolbarInteractor.setToolbarElevationDp(4);
 
         ButterKnife.bind(this,view);
         progressbar.setVisibility(View.VISIBLE);
@@ -132,6 +132,7 @@ public class DepartmentsFragment extends Fragment implements DepartmentsView{
     @Override
     public void stopProgressBar() {
         progressbar.setVisibility(View.GONE);
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
