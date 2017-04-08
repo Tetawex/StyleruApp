@@ -28,7 +28,6 @@ import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import org.styleru.styleruapp.R;
 import org.styleru.styleruapp.model.cache.Singletons;
 import org.styleru.styleruapp.model.cache.UserInfo;
-import org.styleru.styleruapp.model.dto.support.ProjectsFilter;
 import org.styleru.styleruapp.util.DrawerLocker;
 import org.styleru.styleruapp.view.ToolbarInteractor;
 import org.styleru.styleruapp.view.fragments.DepartmentsFragment;
@@ -36,6 +35,7 @@ import org.styleru.styleruapp.view.fragments.EventsFragment;
 import org.styleru.styleruapp.view.fragments.PeopleFragment;
 import org.styleru.styleruapp.view.fragments.ProfileFragment;
 import org.styleru.styleruapp.view.fragments.ProjectsFragment;
+import org.styleru.styleruapp.view.fragments.SettingsFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -147,8 +147,7 @@ public class MainActivity extends AppCompatActivity
                 transaction.replace(R.id.container, new ProjectsFragment());
                 break;
             case (R.id.nav_settings):
-                Intent intent = new Intent(getApplication(), SettingsActivity.class);
-                startActivity(intent);
+                transaction.replace(R.id.container, new SettingsFragment());
         }
         transaction.commit();
 

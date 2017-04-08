@@ -1,64 +1,83 @@
-package org.styleru.styleruapp.view.activity;
+package org.styleru.styleruapp.view.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.support.v4.app.Fragment;
 import android.view.ContextMenu;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.styleru.styleruapp.R;
 import org.styleru.styleruapp.model.cache.Singletons;
+import org.styleru.styleruapp.view.ToolbarInteractor;
+import org.styleru.styleruapp.view.activity.LoginActivity;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by Пользователь on 29.03.2017.
  */
 
-public class SettingsActivity extends AppCompatActivity{
-    Toolbar tool32;
+public class SettingsFragment extends Fragment {
     public static final int IDM_HSE = 101;
     public static final int IDM_REU = 102;
     public static final int IDM_ALL = 103;
-    Button exit;
-    RelativeLayout but;
+
+    @BindView(R.id.vuz)
     TextView vuz;
+    @BindView(R.id.but)
+    RelativeLayout but;
+    @BindView(R.id.exit)
+    TextView exit;
+    private ToolbarInteractor toolbarInteractor;
+    public SettingsFragment() {
+        // Required empty public constructor
+    }
+    public static SettingsFragment newInstance(String param1, String param2) {
+        SettingsFragment fragment = new SettingsFragment();
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
 
-        setContentView(R.layout.settings);
-        tool32 = (Toolbar) findViewById(R.id.toolbar5);
-       tool32.setTitle("Настройки");
-        setSupportActionBar(tool32);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-        vuz= (TextView) findViewById(R.id.vuz) ;
-
-        but = (RelativeLayout) findViewById(R.id.but);
-
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_settings, container, false);
+        ButterKnife.bind(this,view);
+        toolbarInteractor=(ToolbarInteractor)getActivity();
+        toolbarInteractor.setToolbarTitleMode(ToolbarInteractor.Mode.BASIC);
+        toolbarInteractor.setToolbarTitle(getString(R.string.profile));
+        toolbarInteractor.setToolbarElevationDp(0);
+        setHasOptionsMenu(true);
         registerForContextMenu(but);
         but.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openContextMenu(but);
+                getActivity().openContextMenu(but);
             }
         });
-        exit= (Button) findViewById(R.id.exit);
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Singletons.getPreferencesManager().setAuthToken("");
-                Intent intent = new Intent(getApplication(),LoginActivity.class);
+                Intent intent = new Intent(getContext(),LoginActivity.class);
                 startActivity(intent);
-                finish();
+//                getFragmentManager().finish();
             }
         });
-
+        return view;
     }
 
     @Override
@@ -93,7 +112,6 @@ public class SettingsActivity extends AppCompatActivity{
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        finish();
         return super.onOptionsItemSelected(item);
     }
 }

@@ -13,7 +13,7 @@ public class SettingsUploadRequest {
     @SerializedName("token")
     @Expose
     private String token;
-    @SerializedName("settings")
+    @SerializedName("fragment_settings")
     @Expose
     private Settings settings;
 

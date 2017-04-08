@@ -10,7 +10,7 @@ import org.styleru.styleruapp.model.dto.support.Settings;
  */
 
 public class SettingsDownloadResponse {
-    @SerializedName("settings")
+    @SerializedName("fragment_settings")
     @Expose
     private Settings settings;
 

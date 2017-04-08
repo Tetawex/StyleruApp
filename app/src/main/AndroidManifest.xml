@@ -29,10 +29,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.SettingsActivity"
-            android:theme="@style/MyMaterialTheme"
-            android:windowSoftInputMode="stateHidden">
-        </activity>
         <activity android:name=".view.activity.Project_Profile"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="stateHidden">
@@ -43,10 +39,6 @@
             android:windowSoftInputMode="stateHidden">
         </activity>
         <activity android:name=".view.activity.ProfileActivity"
-            android:theme="@style/MyMaterialTheme"
-            android:windowSoftInputMode="stateHidden">
-        </activity>
-        <activity android:name=".view.activity.Profile1Activity"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="stateHidden">
         </activity>
