@@ -5,8 +5,6 @@ import android.util.Log;
 import org.styleru.styleruapp.model.dto.ProfileProjectsItem;
 import org.styleru.styleruapp.model.dto.ProfileProjectsRequest;
 import org.styleru.styleruapp.model.dto.ProfileProjectsResponse;
-import org.styleru.styleruapp.model.dto.ProfileProjectsStateChangeRequest;
-import org.styleru.styleruapp.model.dto.ProfileProjectsStateChangeResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,10 +36,7 @@ public class TestProfileProjectsModelImpl implements ProfileProjectsModel {
         return Observable.just(profileProjectsResponse);
     }
 
-    @Override
-    public Observable<ProfileProjectsStateChangeResponse> getChangedState(ProfileProjectsStateChangeRequest request) {
-        return null;
-    }
+
 
     private class TestProfileProjectsItemFactory{
         private Random random=new Random(12345);

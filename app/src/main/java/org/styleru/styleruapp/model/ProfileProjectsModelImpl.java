@@ -4,8 +4,6 @@ import org.styleru.styleruapp.model.api.ApiService;
 import org.styleru.styleruapp.model.cache.Singletons;
 import org.styleru.styleruapp.model.dto.ProfileProjectsRequest;
 import org.styleru.styleruapp.model.dto.ProfileProjectsResponse;
-import org.styleru.styleruapp.model.dto.ProfileProjectsStateChangeRequest;
-import org.styleru.styleruapp.model.dto.ProfileProjectsStateChangeResponse;
 
 import io.reactivex.Observable;
 
@@ -26,8 +24,5 @@ public class ProfileProjectsModelImpl implements ProfileProjectsModel {
         return null;
     }
 
-    @Override
-    public Observable<ProfileProjectsStateChangeResponse> getChangedState(ProfileProjectsStateChangeRequest request) {
-        return null;
-    }
+
 }

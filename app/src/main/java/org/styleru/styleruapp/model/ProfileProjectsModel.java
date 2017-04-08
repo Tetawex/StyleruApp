@@ -2,8 +2,6 @@ package org.styleru.styleruapp.model;
 
 import org.styleru.styleruapp.model.dto.ProfileProjectsRequest;
 import org.styleru.styleruapp.model.dto.ProfileProjectsResponse;
-import org.styleru.styleruapp.model.dto.ProfileProjectsStateChangeRequest;
-import org.styleru.styleruapp.model.dto.ProfileProjectsStateChangeResponse;
 
 import io.reactivex.Observable;
 
@@ -13,5 +11,4 @@ import io.reactivex.Observable;
 
 public interface ProfileProjectsModel extends Model {
     Observable<ProfileProjectsResponse> getData(ProfileProjectsRequest request);
-    Observable<ProfileProjectsStateChangeResponse> getChangedState(ProfileProjectsStateChangeRequest request);
 }
