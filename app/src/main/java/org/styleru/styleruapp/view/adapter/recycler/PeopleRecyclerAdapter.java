@@ -3,6 +3,7 @@ package org.styleru.styleruapp.view.adapter.recycler;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.RecyclerView;
@@ -61,8 +62,12 @@ public class PeopleRecyclerAdapter extends BaseRecyclerAdapter<PeopleItem> {
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, ProfileActivity.class);//TODO:заменить на людей
-               context.startActivity(intent);
+                Bundle bundle =new Bundle();
+                bundle.putInt("id",item.getId());
+                bundle.putString("name",item.getFirstName()+" "+item.getLastName());
+                Intent intent = new Intent(context, ProfileActivity.class);
+                intent.putExtras(bundle);
+                context.startActivity(intent);
             }
         });
         Glide

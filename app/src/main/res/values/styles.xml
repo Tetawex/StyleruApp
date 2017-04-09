@@ -60,6 +60,14 @@ f
     <style name="SpinnerTheme" parent="ThemeOverlay.AppCompat.Light">
         <item name="colorControlNormal">@color/colorPrimaryTextDark</item>
     </style>
+    <style name="AcceptButtonLight" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:textColor">#DF000000</item>
+        <item name="colorButtonNormal">#C4FFF0</item>
+    </style>
+    <style name="StandardButton" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:textColor">#dfffffff</item>
+        <item name="colorButtonNormal">@color/colorAccent</item>
+    </style>
     <!---->
     <!---->
     <!--<style name="NavigationViewStyle">-->

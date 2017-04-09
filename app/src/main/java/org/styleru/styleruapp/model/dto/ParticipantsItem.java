@@ -7,16 +7,16 @@ import com.google.gson.annotations.SerializedName;
  * Created by Пользователь on 04.04.2017.
  */
 
-public class MembersItem {
+public class ParticipantsItem {
     @SerializedName("id")
     @Expose
     private int id;
     @SerializedName("name")
     @Expose
     private String name;
-    @SerializedName("role")
+    @SerializedName("duty")
     @Expose
-    private String role;
+    private String duty;
 
     public int getId() {
         return id;
@@ -34,12 +34,12 @@ public class MembersItem {
         this.name = name;
     }
 
-    public String getRole() {
-        return role;
+    public String getDuty() {
+        return duty;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setDuty(String duty) {
+        this.duty = duty;
     }
 
 }

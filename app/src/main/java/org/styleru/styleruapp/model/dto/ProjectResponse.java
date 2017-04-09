@@ -11,64 +11,102 @@ import java.util.List;
 
 public class ProjectResponse {
     @Expose
-    @SerializedName("manager")
-    private String manager;
+    @SerializedName("name")
+    private String name;
     @Expose
-    @SerializedName("start")
-    private String start;
+    @SerializedName("view_submissions")
+    private boolean viewSubmissions;
     @Expose
-    @SerializedName("deadline")
-    private String deadline;
+    @SerializedName("manager_name")
+    private String managerName;
     @Expose
-    @SerializedName("progress")
-    private int progress;
+    @SerializedName("id_manager")
+    private String managerId;
     @Expose
-    @SerializedName("data1")
-    private List<MembersItem> data1;
+    @SerializedName("date_time_start")
+    private String dateTimeStart;
     @Expose
-    @SerializedName("data2")
-    private List<DutiesItem> data2;
+    @SerializedName("date_time_end")
+    private String dateTimeEnd;
+    @Expose
+    @SerializedName("completion")
+    private int completion;
+    @Expose
+    @SerializedName("participants")
+    private List<ParticipantsItem> participants;
+    @Expose
+    @SerializedName("vacancies")
+    private List<VacanciesItem> vacancies;
 
-    public String getManager() {
-        return manager;
+    public String getName() {
+        return name;
     }
 
-    public void setManager(String manager) {
-        this.manager = manager;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getStart() {
-        return start;
+    public boolean isViewSubmissions() {
+        return viewSubmissions;
     }
 
-    public void setStart(String start) {
-        this.start = start;
+    public void setViewSubmissions(boolean viewSubmissions) {
+        this.viewSubmissions = viewSubmissions;
     }
 
-    public String getDeadline() {
-        return deadline;
+    public String getManagerName() {
+        return managerName;
     }
 
-    public void setDeadline(String deadline) {
-        this.deadline = deadline;
+    public void setManagerName(String managerName) {
+        this.managerName = managerName;
     }
 
-    public int getProgress() {
-        return progress;
+    public String getManagerId() {
+        return managerId;
     }
 
-    public void setProgress(int progress) {
-        this.progress = progress;
+    public void setManagerId(String managerId) {
+        this.managerId = managerId;
     }
 
-    public List<MembersItem> getData1() {
-        return data1;
+    public String getDateTimeStart() {
+        return dateTimeStart;
     }
 
-    public void setData1(List<MembersItem> data1) {
-        this.data1 = data1;
+    public void setDateTimeStart(String dateTimeStart) {
+        this.dateTimeStart = dateTimeStart;
     }
 
-    public List<DutiesItem> getData2() {return data2;}
-    public void setData2(List<DutiesItem> data2){this.data2=data2;}
+    public String getDateTimeEnd() {
+        return dateTimeEnd;
+    }
+
+    public void setDateTimeEnd(String dateTimeEnd) {
+        this.dateTimeEnd = dateTimeEnd;
+    }
+
+    public int getCompletion() {
+        return completion;
+    }
+
+    public void setCompletion(int completion) {
+        this.completion = completion;
+    }
+
+    public List<ParticipantsItem> getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(List<ParticipantsItem> participants) {
+        this.participants = participants;
+    }
+
+    public List<VacanciesItem> getVacancies() {
+        return vacancies;
+    }
+
+    public void setVacancies(List<VacanciesItem> vacancies) {
+        this.vacancies = vacancies;
+    }
 }

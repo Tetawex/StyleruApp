@@ -11,7 +11,7 @@ import retrofit2.Retrofit;
 /**
  * Created by Tetawex on 31.03.2017.
  */
-
+@Deprecated
 public class TestLoginModelImpl implements LoginModel {
     @Override
     public Observable<LoginResponse> getLoginResponse(LoginRequest request) {

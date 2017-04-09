@@ -172,7 +172,5 @@
                 android:layout_marginBottom="16dp"
                 android:text=" WEB-РАЗРАБОТЧИК(15) "/>
         </LinearLayout>
-
     </ScrollView>
-
 </LinearLayout>

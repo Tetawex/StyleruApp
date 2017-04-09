@@ -1,0 +1,21 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_marginTop="4dp"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="13sp"
+        android:gravity="left"
+        android:layout_weight="0.5"
+        android:text="Ринат Забайдулин"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:textSize="13sp"
+        android:gravity="left"
+        android:textColor="#7cd2d2"
+        android:text="Менеджер приложения"/>
+</LinearLayout>

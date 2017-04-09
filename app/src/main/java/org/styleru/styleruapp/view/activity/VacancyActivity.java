@@ -12,7 +12,7 @@ import org.styleru.styleruapp.R;
  * Created by Пользователь on 29.03.2017.
  */
 
-public class Vacancy extends AppCompatActivity {
+public class VacancyActivity extends AppCompatActivity {
 
 
     Button back;

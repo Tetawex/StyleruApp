@@ -1,23 +1,13 @@
 package org.styleru.styleruapp.view.adapter.recycler;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.BitmapImageViewTarget;
-
 import org.styleru.styleruapp.R;
-import org.styleru.styleruapp.model.dto.support.Department;
 import org.styleru.styleruapp.model.dto.support.FilterItem;
-import org.styleru.styleruapp.view.activity.Project_Profile;
 
 import java.util.List;
 

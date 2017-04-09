@@ -9,9 +9,8 @@ import com.google.gson.annotations.SerializedName;
 
 public class ProjectRequest {
 
-    public ProjectRequest(String token, int id, int offset) {
+    public ProjectRequest(String token, int id) {
             this.token = token;
-            this.offset = offset;
             this.id = id;
         }
 
@@ -21,9 +20,6 @@ public class ProjectRequest {
         @SerializedName("id")
         @Expose
         private int id;
-        @SerializedName("offset")
-        @Expose
-        private int offset;
 
         public String getToken() {
             return token;
@@ -40,12 +36,4 @@ public class ProjectRequest {
     public void setId(int id) {
         this.id = id;
     }
-
-        public int getOffset() {
-            return offset;
-        }
-
-        public void setOffset(int offset) {
-            this.offset = offset;
-        }
 }
