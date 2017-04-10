@@ -1,3 +1,2 @@
 # StyleruApp
-Rinat ne smotri ples
-Nu pozaluista
+Корпоративное приложение организации styleru.org с открытым исходным кодом
