@@ -153,7 +153,10 @@ public class EventsFragment extends Fragment implements EventsView{
         recyclerAdapter.setDataWithNotify(data);
         for (int i=0;i<data.size();i++){
             if(DateTime.now().isAfter(new DateTime(data.get(i).getDateTime().replace(' ','T')))) {
-                recyclerView.scrollToPosition(i);
+                int position=i-1;
+                if(position<0)
+                    position=i;
+                recyclerView.scrollToPosition(position);
                 return;
             }
         }

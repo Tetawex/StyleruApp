@@ -3,7 +3,7 @@
     <!--<color name="colorPrimary">#C6F4F4</color>-->
     <color name="colorPrimary">#FFF</color>
     <color name="colorPrimaryDark">#96c3c3</color>
-    <color name="colorControl">#8A000000</color>
+    <color name="colorControl">#с9с9с9</color>
     <color name="colorAccent">#2DC6C4</color>
     <color name="colorPrimaryDarker">#295D65</color>
     <color name="colorImagePlaceholder">#F2F2F2</color>
@@ -12,6 +12,6 @@
     <color name="colorGrey_dark">#687779</color>
     <color name="colorBlue">#6eb2bd</color>
     <color name="colortoolbar">#FFFFFF</color>
-    <color name="colorPrimaryTextDark">#df000000</color>
+    <color name="colorPrimaryTextDark">#212121</color>
 
 </resources>

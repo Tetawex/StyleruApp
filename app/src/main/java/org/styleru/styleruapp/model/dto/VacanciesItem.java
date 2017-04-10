@@ -14,7 +14,7 @@ public class VacanciesItem {
     @SerializedName("title")
     @Expose
     private String title;
-    @SerializedName("required_ammount")
+    @SerializedName("required_amount")
     @Expose
     private int requiredAmount;
 

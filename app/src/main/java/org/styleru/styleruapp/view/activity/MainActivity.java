@@ -81,8 +81,14 @@ public class MainActivity extends AppCompatActivity
         name=(TextView) headerView.findViewById(R.id.name);
         email=(TextView) headerView.findViewById(R.id.email);
         switchFragment(R.id.nav_events);
-
-        UserInfo info = Singletons.getUserInfo();
+        UserInfo info = null;
+        try {
+            info = Singletons.getUserInfo();
+        }catch (NullPointerException npe){
+            Intent intent = new Intent(getApplication(), LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
         name.setText(info.getFirstName()+" "+info.getLastName());
         email.setText(info.getEmail());
         Glide
