@@ -10,15 +10,15 @@ import org.styleru.styleruapp.model.dto.support.Settings;
  */
 
 public class SettingsDownloadResponse {
-    @SerializedName("fragment_settings")
+    @SerializedName("settings")
     @Expose
-    private Settings settings;
+    private SettingsDataModel settingsDataModel;
 
-    public Settings getSettings() {
-        return settings;
+    public SettingsDataModel getSettingsDataModel() {
+        return settingsDataModel;
     }
 
-    public void setSettings(Settings settings) {
-        this.settings = settings;
+    public void setSettingsDataModel(SettingsDataModel settingsDataModel) {
+        this.settingsDataModel = settingsDataModel;
     }
 }

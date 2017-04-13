@@ -13,6 +13,8 @@ public class University implements FilterItem{
         this.checked = checked;
     }
 
+    @SerializedName("selected")
+    @Expose
     private boolean checked;
     @SerializedName("id")
     @Expose

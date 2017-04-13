@@ -3,9 +3,12 @@ package org.styleru.styleruapp.view.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.SearchView;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +17,7 @@ import android.widget.TextView;
 
 import org.styleru.styleruapp.R;
 import org.styleru.styleruapp.model.cache.Singletons;
+import org.styleru.styleruapp.model.dto.SettingsDataModel;
 import org.styleru.styleruapp.view.ToolbarInteractor;
 import org.styleru.styleruapp.view.activity.LoginActivity;
 
@@ -36,6 +40,8 @@ public class SettingsFragment extends Fragment {
     @BindView(R.id.exit)
     TextView exit;
     private ToolbarInteractor toolbarInteractor;
+
+    private SettingsDataModel settingsDataModel;
     public SettingsFragment() {
         // Required empty public constructor
     }
@@ -58,8 +64,8 @@ public class SettingsFragment extends Fragment {
         ButterKnife.bind(this,view);
         toolbarInteractor=(ToolbarInteractor)getActivity();
         toolbarInteractor.setToolbarTitleMode(ToolbarInteractor.Mode.BASIC);
-        toolbarInteractor.setToolbarTitle(getString(R.string.profile));
-        toolbarInteractor.setToolbarElevationDp(0);
+        toolbarInteractor.setToolbarTitle(getString(R.string.settings));
+        toolbarInteractor.setToolbarElevationDp(4);
         setHasOptionsMenu(true);
         registerForContextMenu(but);
         but.setOnClickListener(new View.OnClickListener() {
@@ -79,36 +85,17 @@ public class SettingsFragment extends Fragment {
         });
         return view;
     }
-
     @Override
-    public void onCreateContextMenu(ContextMenu menu, View v,
-                                    ContextMenu.ContextMenuInfo menuInfo)
-    {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        menu.add(Menu.NONE, IDM_HSE, Menu.NONE, "ВШЭ");
-        menu.add(Menu.NONE, IDM_REU, Menu.NONE, "РЭУ");
-        menu.add(Menu.NONE, IDM_ALL, Menu.NONE, "ВСЕ");
-    }
-
-
-    @Override
-    public boolean onContextItemSelected(MenuItem item)
-    {
-        switch (item.getItemId())
-        {
-            case IDM_HSE:
-               vuz.setText("ВШЭ");
-                break;
-            case IDM_REU:
-                vuz.setText("РЭУ");
-                break;
-            case IDM_ALL:
-                vuz.setText("ВСЕ");
-                break;
-            default:
-                return super.onContextItemSelected(item);
-        }
-        return true;
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_fragment_settings, menu);
+        MenuItem item = menu.findItem(R.id.action_sync);
+        item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                return true;
+            }
+        });
+        super.onCreateOptionsMenu(menu, inflater);
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
