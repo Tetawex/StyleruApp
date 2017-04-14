@@ -127,6 +127,7 @@
                             android:paddingLeft="3dp"
                             android:textSize="16dp"
                             android:layout_height="wrap_content"
+                            android:id="@+id/attendants_count"
                             android:text="25"/>
                     </LinearLayout>
                     <Button

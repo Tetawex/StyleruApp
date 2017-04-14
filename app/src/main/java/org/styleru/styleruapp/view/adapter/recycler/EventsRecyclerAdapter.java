@@ -51,6 +51,7 @@ public class EventsRecyclerAdapter extends MappedIdRecyclerAdapter<EventsItem> {
         String fullDateTimeString=itemDateTime.toString(DateTimeFormat.longDate());
         holder.dateTime.setText(fullDateTimeString.substring(0, fullDateTimeString.length() - 8)
                 +", "+new DateTime(itemDateTime).toString("HH:mm"));
+        holder.attendantsCount.setText(item.getAttendantsCount()+"");
         holder.title.setText(item.getTitle());
         if(item.getState()<0) {
             holder.buttonGo.setBackgroundColor(Color.parseColor("#aaaaaa"));
@@ -131,7 +132,6 @@ public class EventsRecyclerAdapter extends MappedIdRecyclerAdapter<EventsItem> {
         @BindView(R.id.title)
         TextView title;
 
-
         @BindView(R.id.subtitle)
         TextView subtitle;
 
@@ -153,6 +153,9 @@ public class EventsRecyclerAdapter extends MappedIdRecyclerAdapter<EventsItem> {
 
         @BindView(R.id.button_attendants)
         Button buttonAttendants;
+
+        @BindView(R.id.attendants_count)
+        TextView attendantsCount;
 
         public EventsViewHolder(View view) {
             super(view);

@@ -19,6 +19,10 @@ import org.styleru.styleruapp.model.dto.ProjectRequest;
 import org.styleru.styleruapp.model.dto.ProjectResponse;
 import org.styleru.styleruapp.model.dto.ProjectsRequest;
 import org.styleru.styleruapp.model.dto.ProjectsResponse;
+import org.styleru.styleruapp.model.dto.SettingsDownloadRequest;
+import org.styleru.styleruapp.model.dto.SettingsDownloadResponse;
+import org.styleru.styleruapp.model.dto.SettingsUploadRequest;
+import org.styleru.styleruapp.model.dto.SettingsUploadResponse;
 import org.styleru.styleruapp.model.dto.SingleProfileRequest;
 import org.styleru.styleruapp.model.dto.SingleProfileResponse;
 import org.styleru.styleruapp.model.dto.TimelineRequest;
@@ -34,8 +38,14 @@ public interface ApiInterface {
     Observable<LoginResponse> login(@Body LoginRequest request);
     @POST("checkValidate")
     Observable<LoginResponse> validateToken(@Body ValidateTokenRequest request);
+
     @POST("filterData")
     Observable<FilterModelResponse> getFilterModel(@Body FilterModelRequest request);
+    @POST("settingsData")
+    Observable<SettingsDownloadResponse> getSettingsModel(@Body SettingsDownloadRequest request);
+
+    @POST("settingsChange")
+    Observable<SettingsUploadResponse> uploadSettings(@Body SettingsUploadRequest request);
     @POST("eventRegistration")
     Observable<EventStateChangeResponse> changeEventState(@Body EventStateChangeRequest request);
 

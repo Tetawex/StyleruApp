@@ -33,6 +33,10 @@
     <string name="err_event_state_change_fail">Не удалось записаться на событие, попробуйте еще раз</string>
     <string name="event_signed">Вы записались на событие</string>
     <string name="event_unsigned">Вы отписались от события</string>
+    <string name="decline">ОТМЕНИТЬ</string>
+    <string name="settings_sync_success">Настройки успешно синхронизированны с сервером</string>
+    <string name="settings_sync_fail">Не удалось синхронизировать настройки с сервером</string>
+    <string name="progressbar_loading">ЗАГРУЗКА...</string>
 
     <string-array name="project_options">
         <item>Все проекты</item>

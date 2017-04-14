@@ -26,7 +26,9 @@ public class University implements FilterItem{
     public int getId() {
         return id;
     }
-
+    public Integer getIdInteger(){
+        return id;
+    }
     public void setId(Integer id) {
         this.id = id;
     }
@@ -38,5 +40,8 @@ public class University implements FilterItem{
     public void setName(String name) {
         this.name = name;
     }
-
+    @Override
+    public String toString(){
+        return name;
+    }
 }

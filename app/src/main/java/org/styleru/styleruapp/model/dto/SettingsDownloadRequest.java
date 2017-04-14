@@ -19,4 +19,8 @@ public class SettingsDownloadRequest {
     public void setToken(String token) {
         this.token = token;
     }
+
+    public SettingsDownloadRequest(String token) {
+        this.token = token;
+    }
 }

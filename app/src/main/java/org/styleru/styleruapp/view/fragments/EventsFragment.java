@@ -164,12 +164,16 @@ public class EventsFragment extends Fragment implements EventsView{
 
     @Override
     public void changeEventStateSuccess(int id,int state) {
-        recyclerAdapter.getItemById(id).setState(state);
+        EventsItem item=recyclerAdapter.getItemById(id);
+        int strId=R.string.event_signed;
+        item.setState(state);
+        item.setAttendantsCount(item.getAttendantsCount()+1);
+        if(state==0) {
+            strId = R.string.event_unsigned;
+            item.setAttendantsCount(item.getAttendantsCount()-2);
+        }
         recyclerAdapter.notifyItemChanged(
                 recyclerAdapter.getData().indexOf(recyclerAdapter.getItemById(id)));
-        int strId=R.string.event_signed;
-        if(state==0)
-            strId=R.string.event_unsigned;
         Toast.makeText(getContext(), getString(strId)+" "+recyclerAdapter.getItemById(id).getTitle(),Toast.LENGTH_SHORT).show();
     }
     @Override

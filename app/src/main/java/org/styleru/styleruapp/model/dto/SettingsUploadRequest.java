@@ -15,23 +15,12 @@ public class SettingsUploadRequest {
     @SerializedName("token")
     @Expose
     private String token;
-    @SerializedName("university_ids")
+    @SerializedName("id_university")
     @Expose
-    private List<Integer> universityIds;
+    private Integer universityId;
 
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
+    public SettingsUploadRequest(String token,Settings settings) {
         this.token = token;
-    }
-
-    public List<Integer> getUniversityIds() {
-        return universityIds;
-    }
-
-    public void setUniversityIds(List<Integer> universityIds) {
-        this.universityIds = universityIds;
+        universityId=settings.getUniversityId();
     }
 }

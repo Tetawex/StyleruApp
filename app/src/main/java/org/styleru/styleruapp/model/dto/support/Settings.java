@@ -10,13 +10,13 @@ import com.google.gson.annotations.SerializedName;
 public class Settings {
     @Expose
     @SerializedName("university_id")
-    private int universityId;//if 0, show all
+    private Integer universityId;//if null, show all
 
-    public int getUniversityId() {
+    public Integer getUniversityId() {
         return universityId;
     }
 
-    public void setUniversityId(int universityId) {
+    public void setUniversityId(Integer universityId) {
         this.universityId = universityId;
     }
 }
