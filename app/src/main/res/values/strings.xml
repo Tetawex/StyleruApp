@@ -37,6 +37,7 @@
     <string name="settings_sync_success">Настройки успешно синхронизированны с сервером</string>
     <string name="settings_sync_fail">Не удалось синхронизировать настройки с сервером</string>
     <string name="progressbar_loading">ЗАГРУЗКА...</string>
+    <string name="user_name">Rinat Zubaidullin</string>
 
     <string-array name="project_options">
         <item>Все проекты</item>

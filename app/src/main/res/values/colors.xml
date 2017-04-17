@@ -13,5 +13,6 @@
     <color name="colorBlue">#6eb2bd</color>
     <color name="colortoolbar">#FFFFFF</color>
     <color name="colorPrimaryTextDark">#212121</color>
+    <color name="colorAccent2">#28C7C0</color>
 
 </resources>

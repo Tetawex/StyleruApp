@@ -33,7 +33,7 @@ import org.styleru.styleruapp.view.ToolbarInteractor;
 import org.styleru.styleruapp.view.fragments.DepartmentsFragment;
 import org.styleru.styleruapp.view.fragments.EventsFragment;
 import org.styleru.styleruapp.view.fragments.PeopleFragment;
-import org.styleru.styleruapp.view.fragments.ProfileFragment;
+import org.styleru.styleruapp.view.fragments.ProfileFragment1;
 import org.styleru.styleruapp.view.fragments.ProjectsFragment;
 import org.styleru.styleruapp.view.fragments.SettingsFragment;
 
@@ -146,8 +146,13 @@ public class MainActivity extends AppCompatActivity
             case (R.id.nav_events):
                 transaction.replace(R.id.container, new EventsFragment());
                 break;
+            case (R.id.nav_profile2):
+                transaction.replace(R.id.container, new ProfileFragment1());
+                break;
             case (R.id.nav_profile):
-                transaction.replace(R.id.container, new ProfileFragment());
+//                transaction.replace(R.id.container, new ProfileFragment());
+                Intent intent = new Intent(getApplication(), ProfileActivity2.class);
+                startActivity(intent);
                 break;
             case (R.id.nav_projects):
                 transaction.replace(R.id.container, new ProjectsFragment());

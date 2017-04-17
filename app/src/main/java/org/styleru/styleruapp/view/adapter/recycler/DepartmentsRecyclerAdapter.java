@@ -1,9 +1,6 @@
 package org.styleru.styleruapp.view.adapter.recycler;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,13 +8,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.BitmapImageViewTarget;
 
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
 import org.styleru.styleruapp.R;
 import org.styleru.styleruapp.model.dto.DepartmentsItem;
-import org.styleru.styleruapp.model.dto.EventsItem;
 
 import java.util.List;
 
@@ -48,20 +41,14 @@ public class DepartmentsRecyclerAdapter extends BaseRecyclerAdapter<DepartmentsI
         holder.email.setText(item.getEmail());
         holder.managerName.setText(item.getManager());
         holder.name.setText(item.getName());
+        holder.phone.setText(item.getPhone());
         Glide
                 .with(context)
                 .load(item.getImgUrl())
                 .asBitmap().centerCrop()
-                .placeholder(R.drawable.placeholder_loading_circled)
-                .into(new BitmapImageViewTarget(holder.image) {
-                    @Override
-                    protected void setResource(Bitmap resource) {
-                        RoundedBitmapDrawable circularBitmapDrawable =
-                                RoundedBitmapDrawableFactory.create(context.getResources(), resource);
-                        circularBitmapDrawable.setCircular(true);
-                        holder.image.setImageDrawable(circularBitmapDrawable);
-                    }
-                });
+                .placeholder(R.drawable.placeholder_loading)
+                .into(holder.image) ;
+
     }
 
     class DepartmentsViewHolder extends RecyclerView.ViewHolder {
@@ -73,6 +60,8 @@ public class DepartmentsRecyclerAdapter extends BaseRecyclerAdapter<DepartmentsI
         TextView email;
         @BindView(R.id.image)
         ImageView image;
+        @BindView(R.id.phone)
+        TextView phone;
 
         public DepartmentsViewHolder(View view) {
             super(view);

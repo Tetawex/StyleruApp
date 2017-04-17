@@ -5,36 +5,32 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import org.styleru.styleruapp.R;
 import org.styleru.styleruapp.view.ToolbarInteractor;
-import org.styleru.styleruapp.view.activity.MainActivity;
 import org.styleru.styleruapp.view.adapter.tab.ViewPagerAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ProfileFragment extends Fragment {
+public class ProfileFragment1 extends Fragment {
     @BindView(R.id.tab_layout)
     public TabLayout tabLayout;
     @BindView(R.id.view_pager)
     public ViewPager viewPager;
 
     private ToolbarInteractor toolbarInteractor;
-    public ProfileFragment() {
+    public ProfileFragment1() {
         // Required empty public constructor
     }
 
-    public static ProfileFragment newInstance(String param1, String param2) {
-        ProfileFragment fragment = new ProfileFragment();
+    public static ProfileFragment1 newInstance(String param1, String param2) {
+        ProfileFragment1 fragment = new ProfileFragment1();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -78,12 +74,12 @@ public class ProfileFragment extends Fragment {
         adapter.addFragment(new ProfileFragmentTabTimeline(), getContext().getString(R.string.timeline));
         viewPager.setAdapter(adapter);
     }
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        MainActivity activity = (MainActivity) getActivity();
-        MenuInflater inflater1 = activity.getMenuInflater();
-        inflater1.inflate(R.menu.settings, menu);
-    }
+//    @Override
+//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//        MainActivity activity = (MainActivity) getActivity();
+//        MenuInflater inflater1 = activity.getMenuInflater();
+//        inflater1.inflate(R.menu.settings, menu);
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

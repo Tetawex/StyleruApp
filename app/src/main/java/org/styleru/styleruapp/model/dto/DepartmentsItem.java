@@ -3,9 +3,6 @@ package org.styleru.styleruapp.model.dto;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.Collections;
-import java.util.List;
-
 /**
  * Created by tetawex on 29.03.17.
  */
@@ -26,6 +23,18 @@ public class DepartmentsItem {
     @SerializedName("email")
     @Expose
     private String email;
+    @SerializedName("phone")
+    @Expose
+    private String phone;
+
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
     public String getName() {
         return name;

@@ -8,7 +8,6 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:name="org.styleru.styleruapp.StyleruApplication">
-        <!-- Потом надо бы поменять theme-->
         <activity
             android:name=".view.activity.MainActivity"
             android:label="@string/app_name"
@@ -39,6 +38,10 @@
             android:windowSoftInputMode="stateHidden">
         </activity>
         <activity android:name=".view.activity.ProfileActivity"
+            android:theme="@style/MyMaterialTheme"
+            android:windowSoftInputMode="stateHidden">
+        </activity>
+        <activity android:name=".view.activity.ProfileActivity2"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="stateHidden">
         </activity>

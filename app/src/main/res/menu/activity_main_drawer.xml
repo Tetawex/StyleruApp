@@ -14,6 +14,10 @@
             android:icon="@drawable/menu_profile"
             android:title="@string/profile" />
         <item
+            android:id="@+id/nav_profile2"
+            android:icon="@drawable/menu_profile"
+            android:title="Профиль2" />
+        <item
             android:id="@+id/nav_departments"
             android:icon="@drawable/menu_directions"
             android:title="@string/subdepartments" />
@@ -25,6 +29,7 @@
             android:id="@+id/nav_settings"
             android:icon="@drawable/menu_settings"
             android:title="@string/settings"/>
+
 
 
 </menu>
