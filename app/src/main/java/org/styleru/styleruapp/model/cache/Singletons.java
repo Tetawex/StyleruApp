@@ -29,6 +29,8 @@ public class Singletons {
     }
 
     public static ApiService getApiService() {
+        /*if(apiService==null)
+            setApiService(new ApiService());*/
         return apiService;
     }
 

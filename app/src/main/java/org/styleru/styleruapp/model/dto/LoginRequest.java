@@ -6,13 +6,27 @@ import com.google.gson.annotations.SerializedName;
 public class LoginRequest {
     @SerializedName("user_email")
     @Expose
-    private final String userEmail;
+    private String userEmail;
 
     @SerializedName("user_password")
     @Expose
-    private final String userPassword;
+    private String userPassword;
 
-    public LoginRequest(String userEmail, String userPassword) {
+
+    public void setOnesignalUserId(String onesignalUserId) {
+        this.onesignalUserId = onesignalUserId;
+    }
+
+    @SerializedName("guid")
+    @Expose
+    private String onesignalUserId;
+
+    public LoginRequest(String userEmail, String userPassword,String onesignalUserId) {
+        this.userEmail = userEmail;
+        this.userPassword = userPassword;
+        this.onesignalUserId =onesignalUserId;
+    }
+    public LoginRequest(String userEmail, String userPassword){
         this.userEmail = userEmail;
         this.userPassword = userPassword;
     }
@@ -23,5 +37,9 @@ public class LoginRequest {
 
     public String getUserPassword() {
         return userPassword;
+    }
+
+    public String getOnesignalUserId() {
+        return onesignalUserId;
     }
 }

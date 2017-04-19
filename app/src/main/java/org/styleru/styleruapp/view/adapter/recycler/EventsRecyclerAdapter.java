@@ -54,7 +54,7 @@ public class EventsRecyclerAdapter extends MappedIdRecyclerAdapter<EventsItem> {
         holder.attendantsCount.setText(item.getAttendantsCount()+"");
         holder.title.setText(item.getTitle());
         if(item.getState()<0) {
-            holder.buttonGo.setBackgroundColor(Color.parseColor("#aaaaaa"));
+            holder.buttonGo.setBackgroundColor(Color.parseColor("#eee"));
             holder.buttonGo.setText(context.getString(R.string.go_wait));
             holder.buttonGo.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -64,12 +64,14 @@ public class EventsRecyclerAdapter extends MappedIdRecyclerAdapter<EventsItem> {
         }
         else if(itemDateTime.isAfter(DateTime.now())){
             if(item.getState()==1) {
-                holder.buttonGo.setBackgroundColor(Color.parseColor("#55ff77"));
+                holder.buttonGo.setBackgroundColor(context
+                        .getResources().getColor(R.color.colorButtonUnsubscribe));
                 holder.buttonGo.setText(context.getString(R.string.go_future_positive));
                 holder.buttonGo.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        holder.buttonGo.setBackgroundColor(Color.parseColor("#aaaaaa"));
+                        holder.buttonGo.setBackgroundColor(context
+                                .getResources().getColor(R.color.colorButtonWait));
                         holder.buttonGo.setText(context.getString(R.string.go_wait));
                         EventsRecyclerAdapter.this.eventsView.requestChangeEventState(item.getId());
                         item.setState(item.getState()-2);
@@ -77,12 +79,14 @@ public class EventsRecyclerAdapter extends MappedIdRecyclerAdapter<EventsItem> {
                 });
             }
             else {
-                holder.buttonGo.setBackgroundColor(Color.parseColor("#aaffaa"));
+                holder.buttonGo.setBackgroundColor(context
+                        .getResources().getColor(R.color.colorButtonSubscribe));
                 holder.buttonGo.setText(context.getString(R.string.go_future_negative));
                 holder.buttonGo.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        holder.buttonGo.setBackgroundColor(Color.parseColor("#aaaaaa"));
+                        holder.buttonGo.setBackgroundColor(context
+                                .getResources().getColor(R.color.colorButtonWait));
                         holder.buttonGo.setText(context.getString(R.string.go_wait));
                         EventsRecyclerAdapter.this.eventsView.requestChangeEventState(item.getId());
                         item.setState(item.getState()-2);
@@ -92,7 +96,8 @@ public class EventsRecyclerAdapter extends MappedIdRecyclerAdapter<EventsItem> {
         }
         else {
             if(item.getState()==1) {
-                holder.buttonGo.setBackgroundColor(Color.parseColor("#33ff66"));
+                holder.buttonGo.setBackgroundColor(context
+                        .getResources().getColor(R.color.colorButtonVisited));
                 holder.buttonGo.setText(context.getString(R.string.go_past_positive));
                 holder.buttonGo.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -101,7 +106,8 @@ public class EventsRecyclerAdapter extends MappedIdRecyclerAdapter<EventsItem> {
                 });
             }
             else {
-                holder.buttonGo.setBackgroundColor(Color.parseColor("#ffaaaa"));
+                holder.buttonGo.setBackgroundColor(context
+                        .getResources().getColor(R.color.colorButtonNotVisited));
                 holder.buttonGo.setText(context.getString(R.string.go_past_negative));
                 holder.buttonGo.setOnClickListener(new View.OnClickListener() {
                     @Override

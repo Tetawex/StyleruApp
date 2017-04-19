@@ -1,8 +1,11 @@
 package org.styleru.styleruapp.presenter;
 
+import android.util.Log;
+
+import com.onesignal.OneSignal;
+
 import org.styleru.styleruapp.model.LoginModel;
 import org.styleru.styleruapp.model.LoginModelImpl;
-import org.styleru.styleruapp.model.TestLoginModelImpl;
 import org.styleru.styleruapp.model.cache.Singletons;
 import org.styleru.styleruapp.model.cache.UserInfo;
 import org.styleru.styleruapp.model.dto.LoginRequest;
@@ -36,23 +39,31 @@ public class LoginPresenterImpl implements LoginPresenter {
     @Override
     public void onLogin(String email, String password) {
         view.startProgressBar();
-        disposable = model.getLoginResponse(new LoginRequest(email,password))
-                .subscribe(response ->
-                        {
-                            Singletons.setUserInfo(new UserInfo(response));
-                            Singletons.getPreferencesManager().setAuthToken(response.getToken());
-                            view.switchToMainPage();
-                        },
-                        throwable ->
-                        {
-                            view.stopProgressBar();
-                            view.showError(throwable);
-                        },
-                        () -> {
-                            if(!disposable.isDisposed()) {
-                                disposable.dispose();
-                            }
-                        });
+        LoginRequest request=new LoginRequest(email,password);
+        OneSignal.idsAvailable(new OneSignal.IdsAvailableHandler() {
+            @Override
+            public void idsAvailable(String userId, String registrationId) {
+                    request.setOnesignalUserId(userId);
+                    disposable = model.getLoginResponse(request)
+                            .subscribe(response ->
+                                    {
+                                        Singletons.setUserInfo(new UserInfo(response));
+                                        Singletons.getPreferencesManager().setAuthToken(response.getToken());
+                                        view.switchToMainPage();
+                                    },
+                                    throwable ->
+                                    {
+                                        view.stopProgressBar();
+                                        view.showError(throwable);
+                                    },
+                                    () -> {
+                                        if(!disposable.isDisposed()) {
+                                            disposable.dispose();
+                                        }
+                                    });
+
+            }
+        });
     }
 
     @Override

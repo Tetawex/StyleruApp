@@ -13,6 +13,10 @@
     <color name="colorBlue">#6eb2bd</color>
     <color name="colortoolbar">#FFFFFF</color>
     <color name="colorPrimaryTextDark">#212121</color>
-    <color name="colorAccent2">#28C7C0</color>
-
+    <color name="colorButtonSubscribe">#7CD2D2</color>
+    <color name="colorButtonUnsubscribe">#B2F4D2</color>
+    <color name="colorButtonVisited">#aaa</color>
+    <color name="colorButtonNotVisited">#D5BCB6</color>
+    <color name="colorButtonWait">#eee</color>
+    <color name="colorAccent2">#28C7C0</color>;
 </resources>

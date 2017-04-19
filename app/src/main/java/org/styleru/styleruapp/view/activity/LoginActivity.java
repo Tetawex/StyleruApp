@@ -49,6 +49,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 presenter.onLogin(login.getText().toString(),
                         Md5Hash.md5(Md5Hash.md5(password.getText().toString())));//double hash means double security
             }
