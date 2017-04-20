@@ -41,22 +41,19 @@ public class ProfileFragmentTabOverall extends Fragment {
         ImageView imageView = (ImageView) view.findViewById(R.id.image3);
 
         UserInfo info = Singletons.getUserInfo();
-
+        TextView surname = (TextView) view.findViewById(R.id.name);
+        TextView name = (TextView) view.findViewById(R.id.surname);
 
 //        name.setText(info.getLastName());
 //        presenter.onSingleProfileAppend(info.getToken(),info.getUserId());
 //        surname.setText(item.surname);
 //        name.setText(item.name);
-
-//Отсюда
-        //        TextView surname = (TextView) view.findViewById(R.id.name);
-//        TextView name = (TextView) view.findViewById(R.id.surname);
-//        Glide
-//                .with(this)
-//                .load(info.getImageUrl())
-//                .asBitmap().centerCrop()
-//                .placeholder(R.drawable.placeholder_loading_circled)
-//                .into(imageView);
+        Glide
+                .with(this)
+                .load(info.getImageUrl())
+                .asBitmap().centerCrop()
+                .placeholder(R.drawable.placeholder_loading_circled)
+                .into(imageView);
 
         return view;
     }
