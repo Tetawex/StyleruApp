@@ -89,22 +89,22 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
             finish();
         }
-        name.setText(info.getFirstName()+" "+info.getLastName());
-        email.setText(info.getEmail());
-        Glide
-                .with(this)
-                .load(info.getImageUrl())
-                .asBitmap().centerCrop()
-                .placeholder(R.drawable.placeholder_loading_circled)
-                .into(new BitmapImageViewTarget(imageView) {
-            @Override
-            protected void setResource(Bitmap resource) {
-                RoundedBitmapDrawable circularBitmapDrawable =
-                        RoundedBitmapDrawableFactory.create(getResources(), resource);
-                circularBitmapDrawable.setCircular(true);
-                imageView.setImageDrawable(circularBitmapDrawable);
-            }
-        });
+//        name.setText(info.getFirstName()+" "+info.getLastName());
+//        email.setText(info.getEmail());
+//        Glide
+//                .with(this)
+//                .load(info.getImageUrl())
+//                .asBitmap().centerCrop()
+//                .placeholder(R.drawable.placeholder_loading_circled)
+//                .into(new BitmapImageViewTarget(imageView) {
+//            @Override
+//            protected void setResource(Bitmap resource) {
+//                RoundedBitmapDrawable circularBitmapDrawable =
+//                        RoundedBitmapDrawableFactory.create(getResources(), resource);
+//                circularBitmapDrawable.setCircular(true);
+//                imageView.setImageDrawable(circularBitmapDrawable);
+//            }
+//        });
     }
     @Override
     public void onBackPressed() {

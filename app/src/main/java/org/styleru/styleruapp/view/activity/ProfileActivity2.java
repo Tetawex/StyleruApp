@@ -51,12 +51,15 @@ public class ProfileActivity2 extends AppCompatActivity {
 //        presenter.onSingleProfileAppend(info.getToken(),info.getUserId());
 //        surname.setText(item.surname);
 //        name.setText(item.name);
-        Glide
-                .with(this)
-                .load(info.getImageUrl())
-                .asBitmap().centerCrop()
-                .placeholder(R.drawable.placeholder_loading_circled)
-                .into(provileid);
+
+
+      //  И тут
+//        Glide
+//                .with(this)
+//                .load(info.getImageUrl())
+//                .asBitmap().centerCrop()
+//                .placeholder(R.drawable.placeholder_loading_circled)
+//                .into(provileid);
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         collapsingToolbarLayout.setTitle(getResources().getString(R.string.user_name));
         dynamicToolbarColor();

@@ -55,6 +55,9 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
             }
         });
         presenter.onValidateToken();
+        Intent intent = new Intent(getApplication(), MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 
 
