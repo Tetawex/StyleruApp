@@ -1,190 +1,187 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:layout_width="match_parent">
-    <LinearLayout
     android:layout_width="match_parent"
-    android:orientation="vertical"
+    android:fitsSystemWindows="true"
     android:layout_height="match_parent">
-        <android.support.design.widget.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/AppTheme.AppBarOverlay">
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:titleTextColor="@color/colorPrimaryTextDark"
-                app:subtitleTextColor="@color/colorPrimaryTextDark"
-                android:background="@color/colortoolbar"
-                app:theme="@style/Theme.AppCompat.Light" />
-        </android.support.design.widget.AppBarLayout>
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/refresher">
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="24dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-medium"
-                        android:text="Описание проекта:"
-                        android:textColor="@color/colorGrey"
-                        android:textSize="16sp"
-                        android:textStyle="normal" />
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Менеджер проекта:"
-                            android:textColor="@color/colorGrey"
-                            android:textSize="14sp" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="4dp"
-                            android:text="Анна Подображных"
-                            android:id="@+id/text_manager_name"
-                            android:textColor="@color/colorBlue"
-                            android:textSize="14sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Начало проекта:"
-                            android:textColor="@color/colorGrey"
-                            android:textSize="14sp" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="4dp"
-                            android:text="12.07.2016"
-                            android:id="@+id/text_start"
-                            android:textColor="@color/colorBlue"
-                            android:textSize="14sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Дедлайн:"
-                            android:textColor="@color/colorGrey"
-                            android:textSize="14sp" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="4dp"
-                            android:text="13.04.2017"
-                            android:id="@+id/text_end"
-                            android:textColor="@color/colorBlue"
-                            android:textSize="14sp" />
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="16dp"
-                        android:fontFamily="sans-serif-medium"
-                        android:gravity="center"
-                        android:text="Прогресс выполнения проекта"
-                        android:textColor="@color/colorGrey"
-                        android:textSize="16sp" />
-
-                    <com.github.lzyzsd.circleprogress.DonutProgress
-                        android:id="@+id/progressbar_completion"
-                        android:layout_width="160dp"
-                        android:layout_height="160dp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="16dp"
-                        app:donut_finished_color="@color/colorAccent"
-                        app:donut_finished_stroke_width="16dp"
-                        app:donut_text_size="26dp"
-                        app:donut_progress="70"
-                        app:donut_text_color="@color/colorAccent"
-                        app:donut_unfinished_stroke_width="16dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginBottom="4dp"
-                        android:fontFamily="sans-serif-medium"
-                        android:gravity="center"
-                        android:text="Участники:"
-                        android:textColor="@color/colorGrey"
-                        android:textSize="16sp" />
-                    <android.support.v7.widget.RecyclerView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/recycler_participants"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginBottom="4dp"
-                        android:fontFamily="sans-serif-medium"
-                        android:gravity="center"
-                        android:text="Вакансии:"
-                        android:textColor="@color/colorGrey"
-                        android:textSize="16sp" />
-                    <android.support.v7.widget.RecyclerView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/recycler_vacancies"/>
-                    <android.support.v4.widget.Space
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp" />
-                </LinearLayout>
-            </ScrollView>
-        </android.support.v4.widget.SwipeRefreshLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:layout_width="match_parent">
+        <LinearLayout
+        android:layout_width="match_parent"
         android:orientation="vertical"
-        android:gravity="center"
-        android:id="@+id/progressbar"
-        android:visibility="gone">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ЗАГРУЗКА..."/>
-    </LinearLayout>
-</FrameLayout>
+        android:layout_height="match_parent">
+            <android.support.design.widget.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/AppTheme.AppBarOverlay">
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:titleTextColor="@color/colorPrimaryTextDark"
+                    app:subtitleTextColor="@color/colorPrimaryTextDark"
+                    android:background="@color/colortoolbar"
+                    app:theme="@style/Theme.AppCompat.Light" />
+            </android.support.design.widget.AppBarLayout>
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/refresher">
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="24dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="Описание проекта:"
+                            android:textColor="@color/colorGrey"
+                            android:textSize="16sp"
+                            android:textStyle="normal" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Менеджер проекта:"
+                                android:textColor="@color/colorGrey"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="4dp"
+                                android:text="Анна Подображных"
+                                android:id="@+id/text_manager_name"
+                                android:textColor="@color/colorBlue"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Начало проекта:"
+                                android:textColor="@color/colorGrey"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="4dp"
+                                android:text="12.07.2016"
+                                android:id="@+id/text_start"
+                                android:textColor="@color/colorBlue"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Дедлайн:"
+                                android:textColor="@color/colorGrey"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="4dp"
+                                android:text="13.04.2017"
+                                android:id="@+id/text_end"
+                                android:textColor="@color/colorBlue"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:gravity="center"
+                            android:text="Прогресс выполнения проекта"
+                            android:textColor="@color/colorGrey"
+                            android:textSize="16sp" />
+
+                        <com.github.lzyzsd.circleprogress.DonutProgress
+                            android:id="@+id/progressbar_completion"
+                            android:layout_width="160dp"
+                            android:layout_height="160dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="16dp"
+                            app:donut_finished_color="@color/colorAccent"
+                            app:donut_finished_stroke_width="16dp"
+                            app:donut_text_size="26dp"
+                            app:donut_progress="70"
+                            app:donut_text_color="@color/colorAccent"
+                            app:donut_unfinished_stroke_width="16dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginBottom="4dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:gravity="center"
+                            android:text="Участники:"
+                            android:textColor="@color/colorGrey"
+                            android:textSize="16sp" />
+                        <android.support.v7.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/recycler_participants"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginBottom="4dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:gravity="center"
+                            android:text="Вакансии:"
+                            android:textColor="@color/colorGrey"
+                            android:textSize="16sp" />
+                        <android.support.v7.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/recycler_vacancies"/>
+                        <android.support.v4.widget.Space
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp" />
+                    </LinearLayout>
+                </ScrollView>
+            </android.support.v4.widget.SwipeRefreshLayout>
+        </LinearLayout>
+        <include
+            layout="@layout/view_progressbar_basic"
+            android:id="@+id/progressbar"/>
+    </FrameLayout>
+</android.support.design.widget.CoordinatorLayout>

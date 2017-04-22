@@ -29,7 +29,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class PeopleModelImpl implements PeopleModel {
-    public static final int BATCH_SIZE=1;
+    public static final int BATCH_SIZE=50;
 
     private String requestString="";
     private PeopleFilter filter=new PeopleFilter();

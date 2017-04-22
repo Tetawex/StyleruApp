@@ -29,20 +29,20 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.activity.ProjectActivity"
-            android:theme="@style/MyMaterialTheme"
+            android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden">
 
         </activity>
         <activity android:name=".view.activity.VacancyActivity"
-            android:theme="@style/MyMaterialTheme"
+            android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden">
         </activity>
         <activity android:name=".view.activity.ProfileActivity"
-            android:theme="@style/MyMaterialTheme"
+            android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden">
         </activity>
         <activity android:name=".view.activity.ProfileActivity2"
-            android:theme="@style/MyMaterialTheme"
+            android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden">
         </activity>
     </application>
