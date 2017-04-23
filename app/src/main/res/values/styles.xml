@@ -35,10 +35,10 @@
     </style>
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
     </style>
-    <style name="MyMaterialTheme" parent="MyMaterialTheme.Base">
+    <!--<style name="MyMaterialTheme" parent="MyMaterialTheme.Base">
         <item name="colorControlNormal">@color/colorControl</item>
         <item name="drawerArrowStyle">@style/DrawerArrowToggle</item>
-    </style>
+    </style>-->
 
 
 
@@ -46,17 +46,16 @@
         <!-- Ваш цвет -->
         <item name="color">@color/colorControl</item>
     </style>
-f
 
-    <style name="MyMaterialTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
+    <!--<style name="MyMaterialTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="windowNoTitle">true</item>
         <item name="colorControlNormal">@color/colorControl</item>
-        <!--<item name="windowActionBar">false</item>-->
+        <item name="windowActionBar">false</item>
         <item name="colorPrimary">@color/colorPrimaryTextDark</item>
         <item name="drawerArrowStyle">@style/DrawerArrowToggle</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-    </style>
+    </style> -->
     <style name="SpinnerTheme" parent="ThemeOverlay.AppCompat.Light">
         <item name="colorControlNormal">@color/colorPrimaryTextDark</item>
     </style>
@@ -73,13 +72,13 @@ f
 
 
 
-    <style name="expandedappbar" parent="@android:style/TextAppearance.Medium">
+    <style name="expandedAppbar" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
         <item name="android:textSize">30sp</item>
-        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textColor">@color/colorPrimaryTextLightTransparent</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="collapsedappbar" parent="@android:style/TextAppearance.Medium">
+    <style name="collapsedAppbar" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/colorPrimaryTextDark</item>
     </style>

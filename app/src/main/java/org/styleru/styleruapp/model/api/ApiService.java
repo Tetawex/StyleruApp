@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiService {
 
-    private static String baseUrl = "http://tatoo.styleru.net/api/";
+    private static String baseUrl = "http://api.in.styleru.org/";
     private ApiInterface apiInterface;
 
     public ApiService()

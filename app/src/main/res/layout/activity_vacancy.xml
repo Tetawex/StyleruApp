@@ -1,104 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:paddingLeft="0dp"
-    android:paddingRight="0dp"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:fitsSystemWindows="true"
-    android:background="#FFF">
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbar1"
+        android:layout_width="match_parent"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:fitsSystemWindows="true"
+        android:background="#FFF">
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar1"
 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar_vac"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:titleTextColor="@color/colorPrimaryTextDark"
-            app:subtitleTextColor="@color/colorPrimaryTextDark"
-            android:background="@color/colortoolbar"
-            app:theme="@style/Theme.AppCompat.Light" />
-    </android.support.design.widget.AppBarLayout>
-    <ScrollView
-    android:scrollbars="none"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:paddingLeft="0dp"
-            android:paddingTop="8dp"
-            android:paddingRight="0dp">
-    <LinearLayout
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar_vac"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:titleTextColor="@color/colorPrimaryTextDark"
+                app:subtitleTextColor="@color/colorPrimaryTextDark"
+                android:background="@color/colortoolbar"
+                app:theme="@style/Theme.AppCompat.Light" />
+        </android.support.design.widget.AppBarLayout>
+        <ScrollView
+        android:scrollbars="none"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <ImageView
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_margin="8dp"
-            android:layout_gravity="center"
-            android:src="@drawable/placeholder_person"
-            android:adjustViewBounds="true"/>
+        android:layout_height="match_parent">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:paddingLeft="0dp"
+                android:paddingTop="8dp"
+                android:paddingRight="0dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_margin="8dp"
+                android:layout_gravity="center"
+                android:src="@drawable/placeholder_person"
+                android:adjustViewBounds="true"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center|left"
-                android:layout_margin="8dp">
+                android:orientation="vertical">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView android:layout_width="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center|left"
+                    android:layout_margin="8dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Иванов Иван Иванович"
-                        android:textStyle="bold"
-                        android:textSize="14sp"
-                        android:textColor="#436060" />
-                    <ImageView
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="2dp"
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
-                        android:src="@drawable/galochka"/>
+                        android:orientation="horizontal">
+                        <TextView android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Иванов Иван Иванович"
+                            android:textStyle="bold"
+                            android:textSize="14sp"
+                            android:textColor="#436060" />
+                        <ImageView
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:src="@drawable/galochka"/>
+                    </LinearLayout>
+                    <TextView android:layout_width="wrap_content"
+                        android:layout_height="18dp"
+                        android:textSize="13sp"
+                        android:layout_marginTop="4dp"
+                        android:text="Веб-дизайнер"
+                        android:textStyle="normal"
+                        android:textColor="#3bb9cd" />
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="26dp"
+                        android:text="Одобрить"
+                        android:layout_marginTop="10dp"
+                        android:paddingTop="0dp"
+                        android:paddingBottom="0dp"
+                        android:paddingLeft="2dp"
+                        android:paddingRight="2dp"
+                        android:textSize="15dp"
+                        android:textAllCaps="false"
+                        android:textColor="#FFFFFF"
+                        android:background="#7CD2D2"/>
                 </LinearLayout>
-                <TextView android:layout_width="wrap_content"
-                    android:layout_height="18dp"
-                    android:textSize="13sp"
-                    android:layout_marginTop="4dp"
-                    android:text="Веб-дизайнер"
-                    android:textStyle="normal"
-                    android:textColor="#3bb9cd" />
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="26dp"
-                    android:text="Одобрить"
-                    android:layout_marginTop="10dp"
-                    android:paddingTop="0dp"
-                    android:paddingBottom="0dp"
-                    android:paddingLeft="2dp"
-                    android:paddingRight="2dp"
-                    android:textSize="15dp"
-                    android:textAllCaps="false"
-                    android:textColor="#FFFFFF"
-                    android:background="#7CD2D2"/>
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorFragmentBackground"/>
             </LinearLayout>
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/colorFragmentBackground"/>
         </LinearLayout>
     </LinearLayout>
-</LinearLayout>
-        </ScrollView>
-    </LinearLayout>
+            </ScrollView>
+</android.support.design.widget.CoordinatorLayout>

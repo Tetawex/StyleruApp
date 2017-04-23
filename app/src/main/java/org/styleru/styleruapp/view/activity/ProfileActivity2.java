@@ -142,8 +142,8 @@ public class ProfileActivity2 extends AppCompatActivity {
 
 
     private void toolbarTextAppernce() {
-        collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.collapsedappbar);
-        collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.expandedappbar);
+        collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.collapsedAppbar);
+        collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.expandedAppbar);
 
     }
 
