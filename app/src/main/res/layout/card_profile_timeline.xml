@@ -21,7 +21,7 @@
             <LinearLayout
                 android:layout_marginLeft="16dp"
                 android:layout_width="6dp"
-                android:layout_height="16dp"
+                android:layout_height="8dp"
                 android:background="@drawable/line_vertical"/>
             <LinearLayout
                 android:layout_width="40dp"
@@ -36,7 +36,7 @@
              <LinearLayout
               android:layout_marginLeft="16dp"
               android:layout_width="6dp"
-              android:layout_height="16dp"
+              android:layout_height="8dp"
               android:background="@drawable/line_vertical"/>
 </LinearLayout>
         <TextView

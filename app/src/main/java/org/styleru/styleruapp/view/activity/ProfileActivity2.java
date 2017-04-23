@@ -14,9 +14,15 @@ import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+
+import net.cachapa.expandablelayout.ExpandableLayout;
 
 import org.styleru.styleruapp.R;
 import org.styleru.styleruapp.model.cache.Singletons;
@@ -29,7 +35,9 @@ import org.styleru.styleruapp.model.cache.UserInfo;
 public class ProfileActivity2 extends AppCompatActivity {
 
     private CollapsingToolbarLayout collapsingToolbarLayout = null;
-
+    private ExpandableLayout expandableLayout1;
+    ImageView down;
+    public boolean flag = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,8 +45,37 @@ public class ProfileActivity2 extends AppCompatActivity {
         AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        down = (ImageView) findViewById(R.id.down);
+        expandableLayout1 = (ExpandableLayout) findViewById(R.id.expandable_layout_1);
+        expandableLayout1.collapse();
+        TextView clicker = (TextView) findViewById(R.id.clickable1);
+        clicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (flag == true){
+                expandableLayout1.collapse();
+                    flag = false;
+            }
+                {
+                    expandableLayout1.expand();
 
-
+                    flag = true;
+                }
+            }
+        });
+        down.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (flag == true){
+                    expandableLayout1.collapse();
+                    flag = false;
+                }
+                {
+                    expandableLayout1.expand();
+                    flag = true;
+                }
+            }
+        });
 
 
 
@@ -80,11 +117,11 @@ public class ProfileActivity2 extends AppCompatActivity {
                     upArrow.setColorFilter(Color.parseColor("#ffffff"), PorterDuff.Mode.SRC_ATOP);
                     getSupportActionBar().setHomeAsUpIndicator(upArrow);
                     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                   settings.setColorFilter(Color.parseColor("#ffffff"), PorterDuff.Mode.SRC_ATOP);
+                    settings.setColorFilter(Color.parseColor("#ffffff"), PorterDuff.Mode.SRC_ATOP);
                     toolbar.setOverflowIcon(settings);
                 }
             }
-    });
+        });
     }
 
 
