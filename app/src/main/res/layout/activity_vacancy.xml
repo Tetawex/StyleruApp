@@ -9,6 +9,10 @@
         android:orientation="vertical"
         android:fitsSystemWindows="true"
         android:background="#FFF">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
         <android.support.design.widget.AppBarLayout
             android:id="@+id/appbar1"
 
@@ -102,4 +106,5 @@
         </LinearLayout>
     </LinearLayout>
             </ScrollView>
+    </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

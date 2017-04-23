@@ -5,6 +5,7 @@ import org.styleru.styleruapp.model.dto.SettingsDownloadResponse;
 import org.styleru.styleruapp.model.dto.SettingsUploadResponse;
 import org.styleru.styleruapp.model.dto.support.Settings;
 
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 
 /**
@@ -14,4 +15,5 @@ import io.reactivex.Observable;
 public interface SettingsModel {
     Observable<SettingsDownloadResponse> getData();
     Observable<SettingsUploadResponse> setData(Settings data);
+    Completable logout(String onesignalUserId);
 }

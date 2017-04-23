@@ -2,12 +2,14 @@ package org.styleru.styleruapp.model;
 
 import org.styleru.styleruapp.model.api.ApiService;
 import org.styleru.styleruapp.model.cache.Singletons;
+import org.styleru.styleruapp.model.dto.LogoutRequest;
 import org.styleru.styleruapp.model.dto.SettingsDownloadRequest;
 import org.styleru.styleruapp.model.dto.SettingsDownloadResponse;
 import org.styleru.styleruapp.model.dto.SettingsUploadRequest;
 import org.styleru.styleruapp.model.dto.SettingsUploadResponse;
 import org.styleru.styleruapp.model.dto.support.Settings;
 
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -37,6 +39,14 @@ public class SettingsModelImpl implements SettingsModel {
     public Observable<SettingsUploadResponse> setData(Settings data) {
         return service.getApiInterface()
                 .uploadSettings(new SettingsUploadRequest(authToken,data))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    @Override
+    public Completable logout(String onesignalUserId) {
+        return service.getApiInterface()
+                .logout(new LogoutRequest(onesignalUserId))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

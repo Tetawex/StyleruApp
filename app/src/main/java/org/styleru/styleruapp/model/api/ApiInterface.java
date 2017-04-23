@@ -11,6 +11,7 @@ import org.styleru.styleruapp.model.dto.FilterModelRequest;
 import org.styleru.styleruapp.model.dto.FilterModelResponse;
 import org.styleru.styleruapp.model.dto.LoginRequest;
 import org.styleru.styleruapp.model.dto.LoginResponse;
+import org.styleru.styleruapp.model.dto.LogoutRequest;
 import org.styleru.styleruapp.model.dto.PeopleRequest;
 import org.styleru.styleruapp.model.dto.PeopleResponse;
 import org.styleru.styleruapp.model.dto.ProfileProjectsRequest;
@@ -29,6 +30,7 @@ import org.styleru.styleruapp.model.dto.TimelineRequest;
 import org.styleru.styleruapp.model.dto.TimelineResponse;
 import org.styleru.styleruapp.model.dto.ValidateTokenRequest;
 
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
@@ -38,6 +40,8 @@ public interface ApiInterface {
     Observable<LoginResponse> login(@Body LoginRequest request);
     @POST("checkValidate")
     Observable<LoginResponse> validateToken(@Body ValidateTokenRequest request);
+    @POST("disconnect")
+    Completable logout(@Body LogoutRequest request);
 
     @POST("filterData")
     Observable<FilterModelResponse> getFilterModel(@Body FilterModelRequest request);

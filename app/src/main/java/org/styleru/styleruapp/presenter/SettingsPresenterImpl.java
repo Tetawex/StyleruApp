@@ -1,7 +1,12 @@
 package org.styleru.styleruapp.presenter;
 
+import com.onesignal.OneSignal;
+
 import org.styleru.styleruapp.model.SettingsModel;
 import org.styleru.styleruapp.model.SettingsModelImpl;
+import org.styleru.styleruapp.model.cache.Singletons;
+import org.styleru.styleruapp.model.cache.UserInfo;
+import org.styleru.styleruapp.model.dto.LogoutRequest;
 import org.styleru.styleruapp.model.dto.support.Settings;
 import org.styleru.styleruapp.view.SettingsView;
 
@@ -16,6 +21,7 @@ public class SettingsPresenterImpl implements SettingsPresenter {
     private SettingsView view;
     private Disposable disposable;
     private Disposable secondaryDisposable;
+    private Disposable tertiaryDisposable;
 
     public SettingsPresenterImpl(SettingsView view) {
         this.model = new SettingsModelImpl();
@@ -59,5 +65,26 @@ public class SettingsPresenterImpl implements SettingsPresenter {
                             }
                             view.stopProgressBar();
                         });
+    }
+
+    @Override
+    public void onLogout() {
+        view.startProgressBar();
+        OneSignal.idsAvailable(new OneSignal.IdsAvailableHandler() {
+            @Override
+            public void idsAvailable(String userId, String registrationId) {
+                tertiaryDisposable = model.logout(userId)
+                        .subscribe(() ->
+                                {
+                                    view.stopProgressBar();
+                                    view.switchToLoginPage();
+                                },
+                                throwable ->
+                                {
+                                    view.stopProgressBar();
+                                    view.showError(throwable);
+                                });
+            }
+        });
     }
 }

@@ -8,5 +8,6 @@ import org.styleru.styleruapp.model.dto.SettingsDataModel;
 
 public interface SettingsView extends View{
     void setData(SettingsDataModel data);
+    void switchToLoginPage();
     void notifySyncState(int state);
 }

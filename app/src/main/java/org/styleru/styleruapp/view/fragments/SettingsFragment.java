@@ -78,10 +78,7 @@ public class SettingsFragment extends Fragment implements SettingsView {
         exitTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Singletons.getPreferencesManager().setAuthToken("");
-                Intent intent = new Intent(getContext(),LoginActivity.class);
-                startActivity(intent);
-                getActivity().finish();
+                presenter.onLogout();
             }
         });
         presenter=new SettingsPresenterImpl(this);
@@ -165,6 +162,14 @@ public class SettingsFragment extends Fragment implements SettingsView {
                 builderSingle.show();
             }
         });
+    }
+
+    @Override
+    public void switchToLoginPage() {
+        Singletons.getPreferencesManager().setAuthToken("");
+        Intent intent = new Intent(getContext(),LoginActivity.class);
+        startActivity(intent);
+        getActivity().finish();
     }
 
     @Override

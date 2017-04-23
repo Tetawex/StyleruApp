@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiService {
 
-    private static String baseUrl = "http://api.in.styleru.org/";
+    private static String baseUrl = "http://tatoo.styleru.net/api/";
     private ApiInterface apiInterface;
 
     public ApiService()
@@ -21,9 +21,9 @@ public class ApiService {
     public ApiService(String baseUrl)
     {
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-        /*HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-        httpClient.addInterceptor(logging);*/
+        httpClient.addInterceptor(logging);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 //.addConverterFactory(GsonConverterFactory.create(new GsonBuilder().setLenient().create()))
