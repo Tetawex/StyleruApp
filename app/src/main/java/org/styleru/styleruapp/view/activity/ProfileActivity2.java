@@ -12,6 +12,7 @@ import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,12 +22,19 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.github.mikephil.charting.charts.RadarChart;
+import com.github.mikephil.charting.data.DataSet;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.RadarData;
+import com.github.mikephil.charting.data.RadarDataSet;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
 
 import org.styleru.styleruapp.R;
 import org.styleru.styleruapp.model.cache.Singletons;
 import org.styleru.styleruapp.model.cache.UserInfo;
+
+import java.util.ArrayList;
 
 /**
  * Created by Пользователь on 15.04.2017.
@@ -35,9 +43,10 @@ import org.styleru.styleruapp.model.cache.UserInfo;
 public class ProfileActivity2 extends AppCompatActivity {
 
     private CollapsingToolbarLayout collapsingToolbarLayout = null;
-    private ExpandableLayout expandableLayout1;
+    private ExpandableLayout expandableLayout1,expandableLayout2;
     ImageView down;
     public boolean flag = true;
+    public boolean flag2= true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,10 +54,71 @@ public class ProfileActivity2 extends AppCompatActivity {
         AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setSubtitle("Это сабтайтд");
+//        if(android.os.Build.VERSION.SDK_INT >= 21)
+
+
+
+
+
         down = (ImageView) findViewById(R.id.down);
+
+
         expandableLayout1 = (ExpandableLayout) findViewById(R.id.expandable_layout_1);
         expandableLayout1.collapse();
-        TextView clicker = (TextView) findViewById(R.id.clickable1);
+        expandableLayout2 = (ExpandableLayout) findViewById(R.id.expandable_layout_2);
+        expandableLayout2.collapse();
+
+
+
+        RadarChart chart = (RadarChart) findViewById(R.id.chart);
+        ArrayList<Entry> entries = new ArrayList<>();
+                entries.add(new Entry(1f, 0));
+                entries.add(new Entry(2f, 1));
+                entries.add(new Entry(3f, 2));
+                entries.add(new Entry(2f, 3));
+                entries.add(new Entry(2f, 4));
+                entries.add(new Entry(1f, 5));
+        RadarDataSet dataset_comp1 = new RadarDataSet(entries, "Компетенции" );
+        dataset_comp1.setColor(Color.CYAN);
+       dataset_comp1.setDrawFilled(true);
+        ArrayList<RadarDataSet> dataSets = new ArrayList<RadarDataSet>();
+        dataSets.add(dataset_comp1);
+
+
+
+
+        ArrayList<String> labels = new ArrayList<String>();
+        labels.add("scrum");
+        labels.add("Тайм-менеджмент");
+        labels.add("ведение проекта");
+        labels.add("командообразования");
+        labels.add("Мотивация");
+        labels.add("переговоры");
+        RadarData data = new RadarData(labels, dataSets);
+        chart.setData(data);
+        String description = "";
+        chart.setDescription(description);
+//        chart.invalidate();
+
+
+        FrameLayout clicker2 = (FrameLayout) findViewById(R.id.clickable2) ;
+        clicker2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (flag2 == true){
+                    expandableLayout2.collapse();
+                    flag2 = false;
+                }
+                {
+                    expandableLayout2.expand();
+
+                    flag2 = true;
+                }
+            }
+        });
+
+        FrameLayout clicker = (FrameLayout) findViewById(R.id.clickable1);
         clicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,19 +129,6 @@ public class ProfileActivity2 extends AppCompatActivity {
                 {
                     expandableLayout1.expand();
 
-                    flag = true;
-                }
-            }
-        });
-        down.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (flag == true){
-                    expandableLayout1.collapse();
-                    flag = false;
-                }
-                {
-                    expandableLayout1.expand();
                     flag = true;
                 }
             }
