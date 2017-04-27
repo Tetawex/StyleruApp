@@ -152,7 +152,9 @@ public class ProfileActivity2 extends AppCompatActivity {
                 .placeholder(R.drawable.placeholder_loading_circled)
                 .into(provileid);
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+
         collapsingToolbarLayout.setTitle(getResources().getString(R.string.user_name));
+
         dynamicToolbarColor();
         toolbarTextAppernce();
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
