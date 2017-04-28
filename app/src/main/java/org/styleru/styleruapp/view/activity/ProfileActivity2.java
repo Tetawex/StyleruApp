@@ -23,6 +23,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.github.mikephil.charting.charts.RadarChart;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.DataSet;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.RadarData;
@@ -43,10 +45,7 @@ import java.util.ArrayList;
 public class ProfileActivity2 extends AppCompatActivity {
 
     private CollapsingToolbarLayout collapsingToolbarLayout = null;
-    private ExpandableLayout expandableLayout1,expandableLayout2;
-    ImageView down;
-    public boolean flag = true;
-    public boolean flag2= true;
+    private ExpandableLayout expandableLayoutTimeline,expandableLayoutCompetence,expandableLayoutProjects;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,20 +57,27 @@ public class ProfileActivity2 extends AppCompatActivity {
 //        if(android.os.Build.VERSION.SDK_INT >= 21)
 
 
+        //down = (ImageView) findViewById(R.id.down);
 
 
-
-        down = (ImageView) findViewById(R.id.down);
-
-
-        expandableLayout1 = (ExpandableLayout) findViewById(R.id.expandable_layout_1);
-        expandableLayout1.collapse();
-        expandableLayout2 = (ExpandableLayout) findViewById(R.id.expandable_layout_2);
-        expandableLayout2.collapse();
+        expandableLayoutTimeline = (ExpandableLayout) findViewById(R.id.expandable_layout_timeline);
+        expandableLayoutTimeline.collapse();
+        expandableLayoutCompetence = (ExpandableLayout) findViewById(R.id.expandable_layout_competence);
+        //expandableLayoutCompetence.collapse();
+        expandableLayoutProjects = (ExpandableLayout) findViewById(R.id.expandable_layout_projects);
+        expandableLayoutProjects.collapse();
 
 
 
         RadarChart chart = (RadarChart) findViewById(R.id.chart);
+        chart.setTouchEnabled(false);
+        chart.setDescription("");
+        chart.getLegend().setEnabled(false);
+        YAxis yAxis = chart.getYAxis();
+        yAxis.setEnabled(false);
+        yAxis.setAxisMaxValue(3);
+        yAxis.setAxisMinValue(1);
+
         ArrayList<Entry> entries = new ArrayList<>();
                 entries.add(new Entry(1f, 0));
                 entries.add(new Entry(2f, 1));
@@ -79,14 +85,14 @@ public class ProfileActivity2 extends AppCompatActivity {
                 entries.add(new Entry(2f, 3));
                 entries.add(new Entry(2f, 4));
                 entries.add(new Entry(1f, 5));
+
         RadarDataSet dataset_comp1 = new RadarDataSet(entries, "Компетенции" );
-        dataset_comp1.setColor(Color.CYAN);
-       dataset_comp1.setDrawFilled(true);
+        dataset_comp1.setColor(Color.rgb(40,199,192));
+        dataset_comp1.setDrawFilled(true);
+        dataset_comp1.setValueTextSize(0);
+
         ArrayList<RadarDataSet> dataSets = new ArrayList<RadarDataSet>();
         dataSets.add(dataset_comp1);
-
-
-
 
         ArrayList<String> labels = new ArrayList<String>();
         labels.add("scrum");
@@ -95,42 +101,42 @@ public class ProfileActivity2 extends AppCompatActivity {
         labels.add("командообразования");
         labels.add("Мотивация");
         labels.add("переговоры");
+
         RadarData data = new RadarData(labels, dataSets);
         chart.setData(data);
-        String description = "";
-        chart.setDescription(description);
-//        chart.invalidate();
+ //       chart.invalidate();
 
 
-        FrameLayout clicker2 = (FrameLayout) findViewById(R.id.clickable2) ;
-        clicker2.setOnClickListener(new View.OnClickListener() {
+        FrameLayout clickerCompetence = (FrameLayout) findViewById(R.id.frame_competence) ;
+        clickerCompetence.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (flag2 == true){
-                    expandableLayout2.collapse();
-                    flag2 = false;
-                }
-                {
-                    expandableLayout2.expand();
-
-                    flag2 = true;
-                }
+                if (expandableLayoutCompetence.isExpanded())
+                    expandableLayoutCompetence.collapse();
+                else
+                    expandableLayoutCompetence.expand();
             }
         });
 
-        FrameLayout clicker = (FrameLayout) findViewById(R.id.clickable1);
-        clicker.setOnClickListener(new View.OnClickListener() {
+        FrameLayout clickerTimeline = (FrameLayout) findViewById(R.id.frame_timeline);
+        clickerTimeline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (flag == true){
-                expandableLayout1.collapse();
-                    flag = false;
+                if (expandableLayoutTimeline.isExpanded())
+                    expandableLayoutTimeline.collapse();
+                else
+                    expandableLayoutTimeline.expand();
             }
-                {
-                    expandableLayout1.expand();
+        });
 
-                    flag = true;
-                }
+        FrameLayout clickerProjects = (FrameLayout) findViewById(R.id.frame_projects);
+        clickerProjects.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (expandableLayoutProjects.isExpanded())
+                    expandableLayoutProjects.collapse();
+                else
+                    expandableLayoutProjects.expand();
             }
         });
 
@@ -169,6 +175,7 @@ public class ProfileActivity2 extends AppCompatActivity {
                     getSupportActionBar().setHomeAsUpIndicator(upArrow);
                     settings.setColorFilter(Color.parseColor("#000000"), PorterDuff.Mode.SRC_ATOP);
                     toolbar.setOverflowIcon(settings);
+
                 }
                 else
                 {
@@ -220,6 +227,7 @@ public class ProfileActivity2 extends AppCompatActivity {
         finish();
         return super.onOptionsItemSelected(item);
     }
+
 
 
 }

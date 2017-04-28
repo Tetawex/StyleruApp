@@ -6,34 +6,32 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ffe5e5e5"
+        android:background="@color/colorFragmentBackground"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/grey2"
+            android:background="@color/colorFragmentBackground"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:orientation="vertical"
             android:paddingTop="0dp">
-
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                >
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:background="#FFF"
+                    android:background="@drawable/shadow_linear"
                     android:layout_height="match_parent">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="#FFF"
-                        android:layout_marginLeft="16sp"
-                        android:layout_marginRight="16sp"
+                        android:background="@drawable/shadow_linear"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
                         android:orientation="vertical">
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -111,17 +109,18 @@
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="6dp"
                 android:paddingBottom="8dp"
                 android:layout_width="match_parent"
                 android:orientation="vertical"
-                android:background="#FFF"
+                android:background="@drawable/shadow_linear"
                 android:layout_height="wrap_content">
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/clickable2"
-                    android:orientation="horizontal">
+                    android:id="@+id/frame_competence"
+                    android:orientation="horizontal"
+                    >
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -135,83 +134,80 @@
                         android:layout_gravity="right"
                         android:layout_width="40dp"
                         android:layout_marginTop="6dp"
-                        android:paddingLeft="10dp"
+                        android:layout_marginRight="6dp"
                         android:layout_height="40dp"
-                        android:id="@+id/down2"
+                        android:id="@+id/down_competence"
                         android:visibility="visible"
                         android:background="@drawable/arrow_down"/>
                 </FrameLayout>
                 <net.cachapa.expandablelayout.ExpandableLayout
-                    android:id="@+id/expandable_layout_2"
+                    android:id="@+id/expandable_layout_competence"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:el_duration="500"
                     app:el_expanded="true">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:orientation="vertical"
-                    android:layout_height="wrap_content">
-                <com.github.mikephil.charting.charts.RadarChart
-                    android:layout_width="match_parent"
-                    android:id="@+id/chart"
-                    android:layout_height="250dp">
-                </com.github.mikephil.charting.charts.RadarChart>
-
-                <HorizontalScrollView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="10dp"
-                    android:paddingLeft="18sp"
-                    android:paddingTop="0sp"
-                    android:scrollbars="none">
-
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
                         android:layout_height="wrap_content">
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="0dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginRight="16dp"
+                            android:layout_marginBottom="6dp"
+                            android:background="@color/colorFragmentBackground"/>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            >
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="WEB"
+                                android:textSize="16dp"
+                                android:layout_marginLeft="16dp"/>
+                            <com.github.mikephil.charting.charts.RadarChart
+                                android:layout_width="match_parent"
+                                android:id="@+id/chart"
+                                android:layout_height="350dp"
+                                android:layout_marginLeft="-16dp"
+                                >
+                            </com.github.mikephil.charting.charts.RadarChart>
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            >
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Android"
+                                android:textSize="16dp"
+                                android:layout_marginLeft="16dp"/>
+                            <com.github.mikephil.charting.charts.RadarChart
+                                android:layout_width="match_parent"
+                                android:id="@+id/chart2"
+                                android:layout_height="350dp"
+                                >
+                            </com.github.mikephil.charting.charts.RadarChart>
+                        </RelativeLayout>
 
-                        <include
-                            android:id="@+id/d1"
-                            layout="@layout/card_profile_direction" />
-
-                        <include
-                            android:id="@+id/d1"
-                            layout="@layout/card_profile_direction" />
-
-                        <include
-                            android:id="@+id/d1"
-                            layout="@layout/card_profile_direction" />
-
-                        <include
-                            android:id="@+id/d1"
-                            layout="@layout/card_profile_direction" />
-
-                        <include
-                            android:id="@+id/d1"
-                            layout="@layout/card_profile_direction" />
-
-                        <include
-                            android:id="@+id/d1"
-                            layout="@layout/card_profile_direction" />
-
-                        <include
-                            android:id="@+id/d1"
-                            layout="@layout/card_profile_direction" />
-                    </LinearLayout>
-                </HorizontalScrollView>
                     </LinearLayout>
                 </net.cachapa.expandablelayout.ExpandableLayout>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#FFF"
-                android:layout_marginTop="8dp"
+                android:background="@drawable/shadow_linear"
+                android:layout_marginTop="6dp"
                 android:paddingBottom="8dp"
                 android:orientation="vertical">
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/clickable1"
+                    android:id="@+id/frame_timeline"
                     android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
@@ -226,22 +222,33 @@
                         android:layout_gravity="right"
                         android:layout_width="40dp"
                         android:layout_marginTop="6dp"
+                        android:layout_marginRight="6dp"
                         android:paddingLeft="10dp"
                         android:layout_height="40dp"
-                        android:id="@+id/down"
+                        android:id="@+id/down_timeline"
                         android:visibility="visible"
                         android:background="@drawable/arrow_down"/>
                 </FrameLayout>
                 <net.cachapa.expandablelayout.ExpandableLayout
-                    android:id="@+id/expandable_layout_1"
+                    android:id="@+id/expandable_layout_timeline"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:el_duration="500"
                     app:el_expanded="true">
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+
+                        android:background="@color/colorFragmentBackground"/>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:orientation="vertical"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp">
+
                         <include
                             android:id="@+id/d1"
                             layout="@layout/card_profile_timeline" />
@@ -277,7 +284,68 @@
                             layout="@layout/card_profile_timeline" />
                     </LinearLayout>
                 </net.cachapa.expandablelayout.ExpandableLayout>
+
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shadow_linear"
+                android:layout_marginTop="6dp"
+                android:paddingBottom="8dp"
+                android:orientation="vertical">
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/frame_projects"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="16sp"
+                        android:layout_marginBottom="4dp"
+                        android:paddingTop="12dp"
+                        android:text="Проекты "
+                        android:textColor="#344a4d"
+                        android:textSize="19dp" />
+                    <ImageView
+                        android:layout_gravity="right"
+                        android:layout_width="40dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginRight="6dp"
+                        android:paddingLeft="10dp"
+                        android:layout_height="40dp"
+                        android:id="@+id/down_projects"
+                        android:visibility="visible"
+                        android:background="@drawable/arrow_down"/>
+                </FrameLayout>
+
+                <net.cachapa.expandablelayout.ExpandableLayout
+                    android:id="@+id/expandable_layout_projects"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:el_duration="500"
+                    app:el_expanded="true">
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginBottom="0dp"
+                        android:background="@color/colorFragmentBackground"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <include layout="@layout/card_person_project"/>
+                        <include layout="@layout/card_person_project"/>
+                        <include layout="@layout/card_person_project"/>
+                        <include layout="@layout/card_person_project"/>
+                        <include layout="@layout/card_person_project"/>
+                    </LinearLayout>
+                </net.cachapa.expandablelayout.ExpandableLayout>
+            </LinearLayout>
+
         </LinearLayout>
 
 
