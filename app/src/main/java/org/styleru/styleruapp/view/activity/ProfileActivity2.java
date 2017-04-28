@@ -108,35 +108,56 @@ public class ProfileActivity2 extends AppCompatActivity {
 
 
         FrameLayout clickerCompetence = (FrameLayout) findViewById(R.id.frame_competence) ;
+        ImageView imgCompetenceCollapse = (ImageView) findViewById(R.id.down_competence);
         clickerCompetence.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (expandableLayoutCompetence.isExpanded())
+                if (expandableLayoutCompetence.isExpanded()) {
                     expandableLayoutCompetence.collapse();
+                    imgCompetenceCollapse.setBackgroundResource(R.drawable.arrow_down);
+                }
+
                 else
+                {
                     expandableLayoutCompetence.expand();
+                    imgCompetenceCollapse.setBackgroundResource(R.drawable.arrow_up);
+                }
             }
         });
 
         FrameLayout clickerTimeline = (FrameLayout) findViewById(R.id.frame_timeline);
+        ImageView imgTimelineCollapse = (ImageView) findViewById(R.id.down_timeline);
         clickerTimeline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (expandableLayoutTimeline.isExpanded())
+                {
                     expandableLayoutTimeline.collapse();
+                    imgTimelineCollapse.setBackgroundResource(R.drawable.arrow_down);
+                }
                 else
+                {
                     expandableLayoutTimeline.expand();
+                    imgTimelineCollapse.setBackgroundResource(R.drawable.arrow_up);
+                }
             }
         });
 
         FrameLayout clickerProjects = (FrameLayout) findViewById(R.id.frame_projects);
+        ImageView imgProjectCollapse = (ImageView) findViewById(R.id.down_projects);
         clickerProjects.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (expandableLayoutProjects.isExpanded())
+                {
                     expandableLayoutProjects.collapse();
+                    imgProjectCollapse.setBackgroundResource(R.drawable.arrow_down);
+                }
                 else
+                {
                     expandableLayoutProjects.expand();
+                    imgProjectCollapse.setBackgroundResource(R.drawable.arrow_up);
+                }
             }
         });
 

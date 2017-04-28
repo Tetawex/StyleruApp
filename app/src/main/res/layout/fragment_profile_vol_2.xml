@@ -138,7 +138,7 @@
                         android:layout_height="40dp"
                         android:id="@+id/down_competence"
                         android:visibility="visible"
-                        android:background="@drawable/arrow_down"/>
+                        android:background="@drawable/arrow_up"/>
                 </FrameLayout>
                 <net.cachapa.expandablelayout.ExpandableLayout
                     android:id="@+id/expandable_layout_competence"
