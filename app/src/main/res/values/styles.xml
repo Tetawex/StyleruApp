@@ -20,6 +20,20 @@
         <item name="android:textColorHint">@color/colorAccent</item>
     </style>
 
+    <!--<style name="MyOverflowButton" parent="Widget.AppCompat.ActionButton.Overflow">-->
+        <!--<item name="android:paddingRight">30dp</item>-->
+
+    <!--</style>-->
+    <!--<style name="myToolbarStyle" parent="@style/Widget.AppCompat.Toolbar">-->
+        <!--<item name="android:paddingRight">20dp</item>-->
+    <!--</style>-->
+    <!--<style name="myToolbarNavigationButtonStyle" parent="@style/Widget.AppCompat.Toolbar.Button.Navigation">-->
+        <!--<item name="android:minWidth">0dp</item>-->
+        <!--<item name="android:padding">12dp</item>-->
+        <!--<item name="android:scaleType">centerInside</item>-->
+    <!--</style>-->
+
+
     <style name="AttendantsListButton" parent="Theme.AppCompat">
 
     </style>

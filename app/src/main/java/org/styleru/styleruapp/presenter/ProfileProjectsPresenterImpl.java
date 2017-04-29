@@ -30,7 +30,7 @@ public class ProfileProjectsPresenterImpl implements ProfileProjectsPresenter {
     @Override
     public void onProfileProjectsAppend(int offset, int batchSize) {
         currentId=offset;
-        disposable = model.getData(new ProfileProjectsRequest("87v30f7g237fg283f",batchSize,currentId))
+        disposable = model.getData(new ProfileProjectsRequest("Модель все равно",batchSize,currentId))
                 .subscribe(response -> view.appendData(response.getData()),
                         throwable -> view.showError(throwable),
                         () -> {
@@ -39,33 +39,6 @@ public class ProfileProjectsPresenterImpl implements ProfileProjectsPresenter {
                             }
                         });
         currentId+=batchSize;
-    }
-
-    @Override
-    public void onProfileProjectsUpdate(int batchSize) {
-        currentId=0;
-        disposable = model.getData(new ProfileProjectsRequest("87vg437g237fg283f",batchSize,currentId))
-                .subscribe(response ->
-                        {
-                            view.stopProgressBar();
-                            view.setData(response.getData());
-                            view.onDataUpdated();
-                        },
-                        throwable ->
-                        {
-                            view.stopProgressBar();
-                            view.showError(throwable);
-                        },
-                        () -> {
-                            if(!disposable.isDisposed()) {
-                                disposable.dispose();
-                            }
-                        });
-        currentId+=batchSize;
-    }
-    @Override
-    public void onProfileProjectsStatusChange(int id, boolean desiredStatus) {
-
     }
 
     @Override

@@ -20,6 +20,10 @@ public class ProfileProjectsItem {
     @SerializedName("role")
     @Expose
     private String role;
+    @SerializedName("date_finish")
+    @Expose
+    private String date_finish;
+
 
     public String getTitle() {
         return title;
@@ -43,5 +47,13 @@ public class ProfileProjectsItem {
     }
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getDate_finish() {
+        return date_finish;
+    }
+
+    public void setDate_finish(String date_finish) {
+        this.date_finish = date_finish;
     }
 }

@@ -2,9 +2,11 @@ package org.styleru.styleruapp.view.adapter.recycler;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.styleru.styleruapp.R;
 import org.styleru.styleruapp.model.dto.ProfileProjectsItem;
@@ -24,7 +26,7 @@ public class ProfileProjectsRecyclerAdapter extends BaseRecyclerAdapter<ProfileP
     }
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view=inflater.inflate(R.layout.card_profile_projects,parent,false);
+        View view=inflater.inflate(R.layout.card_person_project,parent,false);
         ProfileProjectsViewHolder  holder;
         holder = new ProfileProjectsViewHolder(view);
 
@@ -38,8 +40,12 @@ public class ProfileProjectsRecyclerAdapter extends BaseRecyclerAdapter<ProfileP
 
 
 
-        holder.secname.setText(item.getRole());
+      holder.date.setText(item.getDate_finish());
+        holder.manager_name.setText(item.getRole());
         holder.name.setText(item.getTitle());
+        holder.vacant.setText(item.getStatus());
+        Log.d("LOGI",item.getTitle());
+
 
 
 //        if(item.isViewAttendants()) {
@@ -56,12 +62,14 @@ public class ProfileProjectsRecyclerAdapter extends BaseRecyclerAdapter<ProfileP
         TextView name;
 
 
-        @BindView(R.id.secname)
-        TextView secname;
+        @BindView(R.id.manager_name)
+        TextView manager_name;
+        @BindView(R.id.vacant)
+        TextView vacant;
+        @BindView(R.id.date)
+        TextView date;
 
 
-        @BindView(R.id.state)
-        TextView state;
 
 
 //        @BindView(R.id.attendance)

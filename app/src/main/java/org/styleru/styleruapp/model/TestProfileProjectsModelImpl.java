@@ -48,7 +48,7 @@ public class TestProfileProjectsModelImpl implements ProfileProjectsModel {
             item.setTitle("Это БИ-WEB");
             item.setRole("Дизайнер");
             item.setStatus("Активно");
-
+            item.setDate_finish("25.06.12");
             return item;
 
         }

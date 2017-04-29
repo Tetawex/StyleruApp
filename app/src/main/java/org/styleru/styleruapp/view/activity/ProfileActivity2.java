@@ -11,21 +11,19 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.github.mikephil.charting.charts.RadarChart;
-import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.DataSet;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.RadarData;
 import com.github.mikephil.charting.data.RadarDataSet;
@@ -35,17 +33,32 @@ import net.cachapa.expandablelayout.ExpandableLayout;
 import org.styleru.styleruapp.R;
 import org.styleru.styleruapp.model.cache.Singletons;
 import org.styleru.styleruapp.model.cache.UserInfo;
+import org.styleru.styleruapp.model.dto.ProfileProjectsItem;
+import org.styleru.styleruapp.model.dto.ProjectsItem;
+import org.styleru.styleruapp.presenter.ProfileProjectsPresenter;
+import org.styleru.styleruapp.presenter.ProfileProjectsPresenterImpl;
+import org.styleru.styleruapp.util.EndlessRecyclerViewScrollListener;
+import org.styleru.styleruapp.view.ProfileProjectsView;
+import org.styleru.styleruapp.view.adapter.recycler.ProfileProjectsRecyclerAdapter;
+import org.styleru.styleruapp.view.fragments.ProfileFragmentTabProjects;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Пользователь on 15.04.2017.
  */
 
-public class ProfileActivity2 extends AppCompatActivity {
+public class ProfileActivity2 extends AppCompatActivity implements ProfileProjectsView {
+    private static final int DEFAULT_BATCH_SIZE=10;
+    private ProfileFragmentTabProjects.OnFragmentInteractionListener mListener;
+    private EndlessRecyclerViewScrollListener recyclerViewScrollListener;
+    private ProfileProjectsRecyclerAdapter recyclerAdapter;
 
+    private ProfileProjectsPresenter presenter;
     private CollapsingToolbarLayout collapsingToolbarLayout = null;
     private ExpandableLayout expandableLayoutTimeline,expandableLayoutCompetence,expandableLayoutProjects;
+    private RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +72,7 @@ public class ProfileActivity2 extends AppCompatActivity {
 
         //down = (ImageView) findViewById(R.id.down);
 
-
+        String[] myDataset = getDataSet();
         expandableLayoutTimeline = (ExpandableLayout) findViewById(R.id.expandable_layout_timeline);
         expandableLayoutTimeline.collapse();
         expandableLayoutCompetence = (ExpandableLayout) findViewById(R.id.expandable_layout_competence);
@@ -67,6 +80,19 @@ public class ProfileActivity2 extends AppCompatActivity {
         expandableLayoutProjects = (ExpandableLayout) findViewById(R.id.expandable_layout_projects);
         expandableLayoutProjects.collapse();
 
+        recyclerView = (RecyclerView) findViewById(R.id.proj);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerAdapter=new ProfileProjectsRecyclerAdapter(this,new ArrayList<ProfileProjectsItem>());
+        recyclerView.setAdapter(recyclerAdapter);
+        recyclerViewScrollListener = new EndlessRecyclerViewScrollListener(
+                (LinearLayoutManager) recyclerView.getLayoutManager()) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                presenter.onProfileProjectsAppend(recyclerAdapter.getItemCount(),DEFAULT_BATCH_SIZE);
+            }
+        };
+        recyclerView.addOnScrollListener(recyclerViewScrollListener);
+        presenter=new ProfileProjectsPresenterImpl(this);
 
 
         RadarChart chart = (RadarChart) findViewById(R.id.chart);
@@ -179,9 +205,10 @@ public class ProfileActivity2 extends AppCompatActivity {
                 .placeholder(R.drawable.placeholder_loading_circled)
                 .into(provileid);
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-
         collapsingToolbarLayout.setTitle(getResources().getString(R.string.user_name));
-
+        collapsingToolbarLayout.setExpandedTitleMargin(20,0,0,60);
+//
+//        TextView compet = (TextView) findViewById(R.id.compet);
         dynamicToolbarColor();
         toolbarTextAppernce();
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
@@ -190,12 +217,17 @@ public class ProfileActivity2 extends AppCompatActivity {
             {
                 Drawable upArrow = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_arrow_back, null);
                 Drawable settings = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_settings, null);
+//                if (offset < -100)
+//                    compet.setVisibility(View.INVISIBLE);
+//                else
+//                    compet.setVisibility(View.VISIBLE);
                 if (offset < -200)
                 {
                     upArrow.setColorFilter(Color.parseColor("#000000"), PorterDuff.Mode.SRC_ATOP);
                     getSupportActionBar().setHomeAsUpIndicator(upArrow);
                     settings.setColorFilter(Color.parseColor("#000000"), PorterDuff.Mode.SRC_ATOP);
                     toolbar.setOverflowIcon(settings);
+
 
                 }
                 else
@@ -212,6 +244,13 @@ public class ProfileActivity2 extends AppCompatActivity {
     }
 
 
+//    private void prepateProjectsdata() {
+//        ProjectsItem projectsItem = new  ProjectsItem(1,"Дмитрий","Ринат",true,true,"16.06.99");
+//        ProjectsList.add(projectsItem);
+//
+//
+//        mAdapter.notifyDataSetChanged();
+//    }
     private void dynamicToolbarColor() {
 
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
@@ -250,5 +289,36 @@ public class ProfileActivity2 extends AppCompatActivity {
     }
 
 
+    public String[] getDataSet() {
+        String[] mDataSet = new String[100];
+        for (int i = 0; i < 100; i++) {
+            mDataSet[i] = "item" + i;
+        }
+        return mDataSet;
+    }
 
+    @Override
+    public void showError(Throwable throwable) {
+
+    }
+
+    @Override
+    public void startProgressBar() {
+
+    }
+
+    @Override
+    public void stopProgressBar() {
+
+    }
+
+    @Override
+    public void appendData(List<ProfileProjectsItem> data) {
+        recyclerAdapter.appendDataWithNotify(data);
+    }
+
+    @Override
+    public void setData(List<ProfileProjectsItem> data) {
+        recyclerAdapter.setDataWithNotify(data);
+    }
 }

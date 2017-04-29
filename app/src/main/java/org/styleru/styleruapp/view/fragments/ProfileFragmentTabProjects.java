@@ -82,18 +82,7 @@ public class ProfileFragmentTabProjects extends Fragment implements ProfileProje
             }
         };
         recyclerView.addOnScrollListener(recyclerViewScrollListener);
-
-
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh()
-            {
-                presenter.onProfileProjectsUpdate(DEFAULT_BATCH_SIZE);
-
-            }
-        });
         presenter=new ProfileProjectsPresenterImpl(this);
-        presenter.onProfileProjectsUpdate(DEFAULT_BATCH_SIZE);
         return view;
     }
 
@@ -110,13 +99,14 @@ public class ProfileFragmentTabProjects extends Fragment implements ProfileProje
 
     @Override
     public void startProgressBar() {
-        progressbar.setVisibility(View.VISIBLE);
+
     }
 
     @Override
     public void stopProgressBar() {
-        progressbar.setVisibility(View.GONE);
+
     }
+
 
     @Override
     public void appendData(List<ProfileProjectsItem> data) {
@@ -129,10 +119,7 @@ public class ProfileFragmentTabProjects extends Fragment implements ProfileProje
         recyclerAdapter.setDataWithNotify(data);
     }
 
-    @Override
-    public void changeProfileProjectsState(int id) {
 
-    }
 
     public void onDataUpdated()
     {
