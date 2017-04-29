@@ -57,6 +57,8 @@ public class ProfileProjectsRecyclerAdapter extends BaseRecyclerAdapter<ProfileP
 
     }
 
+
+
     class ProfileProjectsViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.name)
         TextView name;

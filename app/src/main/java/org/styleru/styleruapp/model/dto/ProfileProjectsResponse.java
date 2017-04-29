@@ -10,8 +10,9 @@ import java.util.List;
  */
 
 public class ProfileProjectsResponse {
-    @Expose
     @SerializedName("data")
+    @Expose
+
     private List<ProfileProjectsItem> data;
 
     public List<ProfileProjectsItem> getData() {

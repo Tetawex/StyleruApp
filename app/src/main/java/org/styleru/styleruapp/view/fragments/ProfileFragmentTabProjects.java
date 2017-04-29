@@ -28,7 +28,7 @@ import butterknife.ButterKnife;
 /**
  * A screen responsible for viewing event feed, implements corresponding interface
  */
-public class ProfileFragmentTabProjects extends Fragment implements ProfileProjectsView {
+public class ProfileFragmentTabProjects extends Fragment {
     private static final int DEFAULT_BATCH_SIZE=10;
     private OnFragmentInteractionListener mListener;
     private EndlessRecyclerViewScrollListener recyclerViewScrollListener;
@@ -74,15 +74,8 @@ public class ProfileFragmentTabProjects extends Fragment implements ProfileProje
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark,
                 R.color.colorPrimary);
 
-        recyclerViewScrollListener = new EndlessRecyclerViewScrollListener(
-                (LinearLayoutManager) recyclerView.getLayoutManager()) {
-            @Override
-            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-                presenter.onProfileProjectsAppend(recyclerAdapter.getItemCount(),DEFAULT_BATCH_SIZE);
-            }
-        };
         recyclerView.addOnScrollListener(recyclerViewScrollListener);
-        presenter=new ProfileProjectsPresenterImpl(this);
+//        presenter=new ProfileProjectsPresenterImpl(this);
         return view;
     }
 
@@ -92,32 +85,28 @@ public class ProfileFragmentTabProjects extends Fragment implements ProfileProje
         mListener = null;
     }
 
-    @Override
-    public void showError(Throwable throwable) {
-        Toast.makeText(getContext(),throwable.getMessage(),Toast.LENGTH_SHORT);
-    }
-
-    @Override
-    public void startProgressBar() {
-
-    }
-
-    @Override
-    public void stopProgressBar() {
-
-    }
-
-
-    @Override
-    public void appendData(List<ProfileProjectsItem> data) {
-        recyclerAdapter.appendDataWithNotify(data);
-    }
-
-    @Override
-    public void setData(List<ProfileProjectsItem> data) {
-        onDataUpdated();
-        recyclerAdapter.setDataWithNotify(data);
-    }
+//    @Override
+//    public void showError(Throwable throwable) {
+//        Toast.makeText(getContext(),throwable.getMessage(),Toast.LENGTH_SHORT);
+//    }
+//
+//    @Override
+//    public void startProgressBar() {
+//
+//    }
+//
+//    @Override
+//    public void stopProgressBar() {
+//
+//    }
+//
+//
+//    @Override
+//    public void appendData(List<ProfileProjectsItem> data) {
+//        recyclerAdapter.appendDataWithNotify(data);
+//    }
+//
+//
 
 
 

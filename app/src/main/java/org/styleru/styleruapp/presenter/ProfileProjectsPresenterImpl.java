@@ -1,8 +1,12 @@
 package org.styleru.styleruapp.presenter;
 
+import org.styleru.styleruapp.model.DepartmentsModel;
+import org.styleru.styleruapp.model.DepartmentsModelImpl;
 import org.styleru.styleruapp.model.ProfileProjectsModel;
+import org.styleru.styleruapp.model.ProfileProjectsModelImpl;
 import org.styleru.styleruapp.model.TestProfileProjectsModelImpl;
 import org.styleru.styleruapp.model.dto.ProfileProjectsRequest;
+import org.styleru.styleruapp.view.DepartmentsView;
 import org.styleru.styleruapp.view.ProfileProjectsView;
 
 import io.reactivex.disposables.Disposable;
@@ -24,15 +28,41 @@ public class ProfileProjectsPresenterImpl implements ProfileProjectsPresenter {
     public ProfileProjectsPresenterImpl(ProfileProjectsView view) {
         this.view=view;
         //TODO: заменить тестовую модель на настоящую, когда сделают api
-        this.model=new TestProfileProjectsModelImpl();
+        this.model=new ProfileProjectsModelImpl();
     }
 
     @Override
-    public void onProfileProjectsAppend(int offset, int batchSize) {
+    public void onDataAppend(int offset, int batchSize) {
         currentId=offset;
-        disposable = model.getData(new ProfileProjectsRequest("Модель все равно",batchSize,currentId))
+        disposable = model.getData(currentId, batchSize)
                 .subscribe(response -> view.appendData(response.getData()),
                         throwable -> view.showError(throwable),
+                        () -> {
+                            if(!disposable.isDisposed()) {
+                                disposable.dispose();
+                            }
+                        });
+        currentId+=batchSize;
+    }
+
+    @Override
+    public void onDataUpdate(int batchSize) {
+        currentId=0;
+        if(!disposable.isDisposed()) {
+            disposable.dispose();
+        }
+        disposable = model.getData(currentId,batchSize)
+                .subscribe(response ->
+                        {
+                            view.stopProgressBar();
+                            view.setData(response.getData());
+                            view.onDataUpdated();
+                        },
+                        throwable ->
+                        {
+                            view.stopProgressBar();
+                            view.showError(throwable);
+                        },
                         () -> {
                             if(!disposable.isDisposed()) {
                                 disposable.dispose();
@@ -46,4 +76,3 @@ public class ProfileProjectsPresenterImpl implements ProfileProjectsPresenter {
 
     }
 }
-

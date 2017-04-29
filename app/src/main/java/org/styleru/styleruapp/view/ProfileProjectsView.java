@@ -1,6 +1,7 @@
 package org.styleru.styleruapp.view;
 
 
+import org.styleru.styleruapp.model.dto.DepartmentsItem;
 import org.styleru.styleruapp.model.dto.ProfileProjectsItem;
 
 import java.util.List;
@@ -12,4 +13,6 @@ import java.util.List;
 public interface ProfileProjectsView extends View {
     void appendData(List<ProfileProjectsItem> data);
     void setData(List<ProfileProjectsItem> data);
+    void onDataUpdated();
+
 }

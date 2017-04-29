@@ -5,8 +5,7 @@ package org.styleru.styleruapp.presenter;
  */
 
 
-    public interface ProfileProjectsPresenter extends Presenter{
-        void onProfileProjectsAppend(int offset,int batchSize);
-
+public interface ProfileProjectsPresenter extends Presenter{
+    void onDataAppend(int offset, int batchSize);
+    void onDataUpdate(int batchSize);
 }
-

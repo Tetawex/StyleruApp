@@ -9,12 +9,13 @@ import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,12 +34,14 @@ import net.cachapa.expandablelayout.ExpandableLayout;
 import org.styleru.styleruapp.R;
 import org.styleru.styleruapp.model.cache.Singletons;
 import org.styleru.styleruapp.model.cache.UserInfo;
+import org.styleru.styleruapp.model.dto.DepartmentsItem;
 import org.styleru.styleruapp.model.dto.ProfileProjectsItem;
-import org.styleru.styleruapp.model.dto.ProjectsItem;
+import org.styleru.styleruapp.presenter.DepartmentsPresenterImpl;
 import org.styleru.styleruapp.presenter.ProfileProjectsPresenter;
 import org.styleru.styleruapp.presenter.ProfileProjectsPresenterImpl;
 import org.styleru.styleruapp.util.EndlessRecyclerViewScrollListener;
 import org.styleru.styleruapp.view.ProfileProjectsView;
+import org.styleru.styleruapp.view.adapter.recycler.DepartmentsRecyclerAdapter;
 import org.styleru.styleruapp.view.adapter.recycler.ProfileProjectsRecyclerAdapter;
 import org.styleru.styleruapp.view.fragments.ProfileFragmentTabProjects;
 
@@ -67,32 +70,24 @@ public class ProfileActivity2 extends AppCompatActivity implements ProfileProjec
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setSubtitle("Это сабтайтд");
-//        if(android.os.Build.VERSION.SDK_INT >= 21)
-
-
-        //down = (ImageView) findViewById(R.id.down);
-
-        String[] myDataset = getDataSet();
         expandableLayoutTimeline = (ExpandableLayout) findViewById(R.id.expandable_layout_timeline);
-        expandableLayoutTimeline.collapse();
         expandableLayoutCompetence = (ExpandableLayout) findViewById(R.id.expandable_layout_competence);
-        //expandableLayoutCompetence.collapse();
         expandableLayoutProjects = (ExpandableLayout) findViewById(R.id.expandable_layout_projects);
-        expandableLayoutProjects.collapse();
-
-        recyclerView = (RecyclerView) findViewById(R.id.proj);
+        recyclerView= (RecyclerView) findViewById(R.id.proj) ;
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerAdapter=new ProfileProjectsRecyclerAdapter(this,new ArrayList<ProfileProjectsItem>());
         recyclerView.setAdapter(recyclerAdapter);
+
         recyclerViewScrollListener = new EndlessRecyclerViewScrollListener(
                 (LinearLayoutManager) recyclerView.getLayoutManager()) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-                presenter.onProfileProjectsAppend(recyclerAdapter.getItemCount(),DEFAULT_BATCH_SIZE);
+                presenter.onDataAppend(recyclerAdapter.getItemCount(),DEFAULT_BATCH_SIZE);
             }
         };
         recyclerView.addOnScrollListener(recyclerViewScrollListener);
         presenter=new ProfileProjectsPresenterImpl(this);
+        presenter.onDataUpdate(DEFAULT_BATCH_SIZE);
 
 
         RadarChart chart = (RadarChart) findViewById(R.id.chart);
@@ -288,15 +283,6 @@ public class ProfileActivity2 extends AppCompatActivity implements ProfileProjec
         return super.onOptionsItemSelected(item);
     }
 
-
-    public String[] getDataSet() {
-        String[] mDataSet = new String[100];
-        for (int i = 0; i < 100; i++) {
-            mDataSet[i] = "item" + i;
-        }
-        return mDataSet;
-    }
-
     @Override
     public void showError(Throwable throwable) {
 
@@ -311,14 +297,31 @@ public class ProfileActivity2 extends AppCompatActivity implements ProfileProjec
     public void stopProgressBar() {
 
     }
-
     @Override
     public void appendData(List<ProfileProjectsItem> data) {
         recyclerAdapter.appendDataWithNotify(data);
     }
 
+
+
     @Override
     public void setData(List<ProfileProjectsItem> data) {
+        onDataUpdated();
         recyclerAdapter.setDataWithNotify(data);
     }
+
+    public void onDataUpdated()
+    {
+        recyclerViewScrollListener.resetState();
+    }
+//
+//    public String[] getDataSet() {
+//        String[] mDataSet = new String[100];
+//        for (int i = 0; i < 100; i++) {
+//            mDataSet[i] = "item" + i;
+//        }
+//        return mDataSet;
+//    }
+
+
 }

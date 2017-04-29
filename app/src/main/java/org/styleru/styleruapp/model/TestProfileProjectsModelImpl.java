@@ -23,19 +23,23 @@ public class TestProfileProjectsModelImpl implements ProfileProjectsModel {
         testProfileProjectsItemFactory = new TestProfileProjectsItemFactory();
     }
 
-    @Override
-    public Observable<ProfileProjectsResponse> getData(ProfileProjectsRequest request) {
-        if(request.getOffset()==0)
-            testProfileProjectsItemFactory.reset();
-        ProfileProjectsResponse profileProjectsResponse =new ProfileProjectsResponse();
-        List<ProfileProjectsItem> list=new ArrayList<ProfileProjectsItem>();
-        for(int i=request.getOffset();i<request.getBatchSize()+request.getOffset();i++)
-            list.add(testProfileProjectsItemFactory.generateRandomItem(i));
-        profileProjectsResponse.setData(list);
-        Log.d("test", profileProjectsResponse.getData().size()+"");
-        return Observable.just(profileProjectsResponse);
-    }
+//    @Override
+//    public Observable<ProfileProjectsResponse> getData(ProfileProjectsRequest request) {
+//        if(request.getOffset()==0)
+//            testProfileProjectsItemFactory.reset();
+//        ProfileProjectsResponse profileProjectsResponse =new ProfileProjectsResponse();
+//        List<ProfileProjectsItem> list=new ArrayList<ProfileProjectsItem>();
+//        for(int i=request.getOffset();i<request.getBatchSize()+request.getOffset();i++)
+//            list.add(testProfileProjectsItemFactory.generateRandomItem(i));
+//        profileProjectsResponse.setData(list);
+//        Log.d("test", profileProjectsResponse.getData().size()+"");
+//        return Observable.just(profileProjectsResponse);
+//    }
 
+    @Override
+    public Observable<ProfileProjectsResponse> getData(int offset, int batchSize) {
+        return null;
+    }
 
 
     private class TestProfileProjectsItemFactory{

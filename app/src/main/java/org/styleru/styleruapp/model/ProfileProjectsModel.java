@@ -10,5 +10,5 @@ import io.reactivex.Observable;
  */
 
 public interface ProfileProjectsModel extends Model {
-    Observable<ProfileProjectsResponse> getData(ProfileProjectsRequest request);
+    Observable<ProfileProjectsResponse> getData(int offset,int batchSize);
 }
