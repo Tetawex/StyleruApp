@@ -1,12 +1,8 @@
 package org.styleru.styleruapp.presenter;
 
-import org.styleru.styleruapp.model.DepartmentsModel;
-import org.styleru.styleruapp.model.DepartmentsModelImpl;
-import org.styleru.styleruapp.model.ProfileProjectsModel;
-import org.styleru.styleruapp.model.ProfileProjectsModelImpl;
-import org.styleru.styleruapp.model.TestProfileProjectsModelImpl;
-import org.styleru.styleruapp.model.dto.ProfileProjectsRequest;
-import org.styleru.styleruapp.view.DepartmentsView;
+
+import org.styleru.styleruapp.model.ProfileModel;
+import org.styleru.styleruapp.model.ProfileModelImpl;
 import org.styleru.styleruapp.view.ProfileProjectsView;
 
 import io.reactivex.disposables.Disposable;
@@ -19,7 +15,7 @@ import io.reactivex.disposables.Disposables;
 public class ProfileProjectsPresenterImpl implements ProfileProjectsPresenter {
     //TODO: заменить инъекцию через конструктор инъекцией дагером
     private ProfileProjectsView view;
-    private ProfileProjectsModel model;
+    private ProfileModel model;
 
     private Disposable disposable= Disposables.empty();
 
@@ -28,7 +24,7 @@ public class ProfileProjectsPresenterImpl implements ProfileProjectsPresenter {
     public ProfileProjectsPresenterImpl(ProfileProjectsView view) {
         this.view=view;
         //TODO: заменить тестовую модель на настоящую, когда сделают api
-        this.model=new ProfileProjectsModelImpl();
+        this.model=new ProfileModelImpl();
     }
 
     @Override

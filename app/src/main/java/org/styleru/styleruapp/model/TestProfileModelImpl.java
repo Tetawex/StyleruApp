@@ -1,13 +1,9 @@
 package org.styleru.styleruapp.model;
 
-import android.util.Log;
-
 import org.styleru.styleruapp.model.dto.ProfileProjectsItem;
-import org.styleru.styleruapp.model.dto.ProfileProjectsRequest;
 import org.styleru.styleruapp.model.dto.ProfileProjectsResponse;
+import org.styleru.styleruapp.model.dto.ProfileRequest;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 import io.reactivex.Observable;
@@ -16,15 +12,15 @@ import io.reactivex.Observable;
  * Created by Пользователь on 03.04.2017.
  */
 
-public class TestProfileProjectsModelImpl implements ProfileProjectsModel {
+public class TestProfileModelImpl implements ProfileModel {
     private TestProfileProjectsItemFactory testProfileProjectsItemFactory;
 
-    public TestProfileProjectsModelImpl() {
+    public TestProfileModelImpl() {
         testProfileProjectsItemFactory = new TestProfileProjectsItemFactory();
     }
 
 //    @Override
-//    public Observable<ProfileProjectsResponse> getData(ProfileProjectsRequest request) {
+//    public Observable<ProfileProjectsResponse> getData(ProfileRequest request) {
 //        if(request.getOffset()==0)
 //            testProfileProjectsItemFactory.reset();
 //        ProfileProjectsResponse profileProjectsResponse =new ProfileProjectsResponse();
@@ -36,8 +32,13 @@ public class TestProfileProjectsModelImpl implements ProfileProjectsModel {
 //        return Observable.just(profileProjectsResponse);
 //    }
 
+//    @Override
+//    public Observable<ProfileProjectsResponse> getData(int offset, int batchSize) {
+//        return null;
+//    }
+
     @Override
-    public Observable<ProfileProjectsResponse> getData(int offset, int batchSize) {
+    public Observable<ProfileProjectsResponse> getData(ProfileRequest request) {
         return null;
     }
 

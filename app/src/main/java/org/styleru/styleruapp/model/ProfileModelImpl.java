@@ -2,9 +2,7 @@ package org.styleru.styleruapp.model;
 
 import org.styleru.styleruapp.model.api.ApiService;
 import org.styleru.styleruapp.model.cache.Singletons;
-import org.styleru.styleruapp.model.dto.DepartmentsRequest;
-import org.styleru.styleruapp.model.dto.DepartmentsResponse;
-import org.styleru.styleruapp.model.dto.ProfileProjectsRequest;
+import org.styleru.styleruapp.model.dto.ProfileRequest;
 import org.styleru.styleruapp.model.dto.ProfileProjectsResponse;
 
 import io.reactivex.Observable;
@@ -15,17 +13,18 @@ import io.reactivex.schedulers.Schedulers;
  * Created by Пользователь on 07.04.2017.
  */
 
-public class ProfileProjectsModelImpl implements ProfileProjectsModel {
+public class ProfileModelImpl implements ProfileModel {
     private ApiService apiService;
     private String authToken;
-    public ProfileProjectsModelImpl() {
+    private int user_id = 0;
+    public ProfileModelImpl() {
         apiService= Singletons.getApiService();
         authToken=Singletons.getPreferencesManager().getAuthToken();
     }
     @Override
-    public Observable<ProfileProjectsResponse> getData(int offset, int batchSize) {
+    public Observable<ProfileProjectsResponse> getData(ProfileRequest request) {
         return apiService.getApiInterface()
-                .getProfileProjects(new ProfileProjectsRequest(authToken,batchSize,offset))
+                .getProfileProjects(new ProfileRequest(authToken,user_id))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

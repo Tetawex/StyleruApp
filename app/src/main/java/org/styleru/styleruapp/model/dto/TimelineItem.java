@@ -9,30 +9,61 @@ import org.styleru.styleruapp.model.dto.support.IdItem;
  * Created by Пользователь on 06.04.2017.
  */
 
-public class TimelineItem implements IdItem {
+public class TimelineItem  {
 
-    @SerializedName("id")
-    @Expose
-    private int id;
     @SerializedName("name")
     @Expose
     private String name;
-    @SerializedName("surname")
+    @SerializedName("type")
     @Expose
-    private String surname;
+    private int type;
+    @SerializedName("is_project")
+    @Expose
+    private boolean is_projects;
+    @SerializedName("is_event")
+    @Expose
+    private boolean is_event;
+    @SerializedName("department_change")
+    @Expose
+    private boolean department_change;
+    @SerializedName("action")
+    @Expose
+    private String action;
+    @SerializedName("action_name")
+    @Expose
+    private String action_name;
+    @SerializedName("action_id")
+    @Expose
+    private int action_id;
     @SerializedName("date")
     @Expose
     private String date;
-    @SerializedName("status")
-    @Expose
-    private boolean status;
-    @SerializedName("project")
-    @Expose
-    private String project;
 
+    public boolean is_event() {
+        return is_event;
+    }
 
-    public boolean getStatus() {
-        return status;
+    public boolean is_projects() {
+        return is_projects;
+    }
+    public boolean isDepartment_change() {
+        return department_change;
+    }
+
+    public int getAction_id() {
+        return action_id;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public String getAction() {
+        return action;
+    }
+
+    public String getAction_name() {
+        return action_name;
     }
 
     public String getDate() {
@@ -43,40 +74,41 @@ public class TimelineItem implements IdItem {
         return name;
     }
 
-    public String getSurname() {
-        return surname;
+    public void setAction(String action) {
+        this.action = action;
     }
 
-    public String getProject() {
-        return project;
+    public void setAction_id(int action_id) {
+        this.action_id = action_id;
+    }
+
+    public void setAction_name(String action_name) {
+        this.action_name = action_name;
     }
 
     public void setDate(String date) {
         this.date = date;
     }
 
+    public void setDepartment_change(boolean department_change) {
+        this.department_change = department_change;
+    }
+
+    public void setIs_event(boolean is_event) {
+        this.is_event = is_event;
+    }
+
+    public void setIs_projects(boolean is_projects) {
+        this.is_projects = is_projects;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setType(int type) {
+        this.type = type;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-
-    public void setProject(String project) {
-        this.project = project;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    @Override
-    public int getId() {
-        return id;
-    }
 }
 
