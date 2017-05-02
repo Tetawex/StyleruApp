@@ -16,6 +16,7 @@ import org.styleru.styleruapp.model.dto.PeopleRequest;
 import org.styleru.styleruapp.model.dto.PeopleResponse;
 import org.styleru.styleruapp.model.dto.ProfileRequest;
 import org.styleru.styleruapp.model.dto.ProfileProjectsResponse;
+import org.styleru.styleruapp.model.dto.ProfileResponse;
 import org.styleru.styleruapp.model.dto.ProjectRequest;
 import org.styleru.styleruapp.model.dto.ProjectResponse;
 import org.styleru.styleruapp.model.dto.ProjectsRequest;
@@ -70,4 +71,8 @@ public interface ApiInterface {
     Observable<SingleProfileResponse> getSingleProfile(@Body SingleProfileRequest request);
     @POST("singleProject")
     Observable<ProjectResponse> getSingleProject(@Body ProjectRequest request);
+    @POST("singlePersonFull")
+    Observable<ProfileResponse> getSingleProfileFull(@Body ProfileRequest request);
+
+
 }

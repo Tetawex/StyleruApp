@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.github.mikephil.charting.charts.RadarChart;
@@ -31,16 +32,24 @@ import com.github.mikephil.charting.data.RadarDataSet;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
 
+import org.json.JSONArray;
 import org.styleru.styleruapp.R;
 import org.styleru.styleruapp.model.cache.Singletons;
 import org.styleru.styleruapp.model.cache.UserInfo;
 import org.styleru.styleruapp.model.dto.DepartmentsItem;
+import org.styleru.styleruapp.model.dto.ProfileItem;
 import org.styleru.styleruapp.model.dto.ProfileProjectsItem;
+import org.styleru.styleruapp.model.dto.ProjectsItem;
+import org.styleru.styleruapp.model.dto.TimelineItem;
 import org.styleru.styleruapp.presenter.DepartmentsPresenterImpl;
+import org.styleru.styleruapp.presenter.LoginPresenterImpl;
+import org.styleru.styleruapp.presenter.ProfilePresenter;
+import org.styleru.styleruapp.presenter.ProfilePresenterImpl;
 import org.styleru.styleruapp.presenter.ProfileProjectsPresenter;
 import org.styleru.styleruapp.presenter.ProfileProjectsPresenterImpl;
 import org.styleru.styleruapp.util.EndlessRecyclerViewScrollListener;
 import org.styleru.styleruapp.view.ProfileProjectsView;
+import org.styleru.styleruapp.view.ProfileView;
 import org.styleru.styleruapp.view.adapter.recycler.DepartmentsRecyclerAdapter;
 import org.styleru.styleruapp.view.adapter.recycler.ProfileProjectsRecyclerAdapter;
 import org.styleru.styleruapp.view.fragments.ProfileFragmentTabProjects;
@@ -48,20 +57,18 @@ import org.styleru.styleruapp.view.fragments.ProfileFragmentTabProjects;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Пользователь on 15.04.2017.
- */
 
-public class ProfileActivity2 extends AppCompatActivity implements ProfileProjectsView {
+public class ProfileActivity2 extends AppCompatActivity implements ProfileView {
     private static final int DEFAULT_BATCH_SIZE=10;
     private ProfileFragmentTabProjects.OnFragmentInteractionListener mListener;
     private EndlessRecyclerViewScrollListener recyclerViewScrollListener;
     private ProfileProjectsRecyclerAdapter recyclerAdapter;
-
-    private ProfileProjectsPresenter presenter;
+    private String authToken;
+    private ProfilePresenter presenter;
     private CollapsingToolbarLayout collapsingToolbarLayout = null;
     private ExpandableLayout expandableLayoutTimeline,expandableLayoutCompetence,expandableLayoutProjects;
     private RecyclerView recyclerView;
+    private String asd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,22 +81,24 @@ public class ProfileActivity2 extends AppCompatActivity implements ProfileProjec
         expandableLayoutCompetence = (ExpandableLayout) findViewById(R.id.expandable_layout_competence);
         expandableLayoutProjects = (ExpandableLayout) findViewById(R.id.expandable_layout_projects);
         recyclerView= (RecyclerView) findViewById(R.id.proj) ;
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerAdapter=new ProfileProjectsRecyclerAdapter(this,new ArrayList<ProfileProjectsItem>());
-        recyclerView.setAdapter(recyclerAdapter);
+        authToken=Singletons.getPreferencesManager().getAuthToken();
 
-        recyclerViewScrollListener = new EndlessRecyclerViewScrollListener(
-                (LinearLayoutManager) recyclerView.getLayoutManager()) {
-            @Override
-            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-                presenter.onDataAppend(recyclerAdapter.getItemCount(),DEFAULT_BATCH_SIZE);
-            }
-        };
-        recyclerView.addOnScrollListener(recyclerViewScrollListener);
-        presenter=new ProfileProjectsPresenterImpl(this);
-        presenter.onDataUpdate(DEFAULT_BATCH_SIZE);
+        presenter=new ProfilePresenterImpl(this);
+        presenter.onProfileCreate(authToken,1);
 
 
+
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        recyclerAdapter=new ProfileProjectsRecyclerAdapter(this,new ArrayList<ProfileProjectsItem>());
+//        recyclerView.setAdapter(recyclerAdapter);
+//        recyclerViewScrollListener = new EndlessRecyclerViewScrollListener(
+//                (LinearLayoutManager) recyclerView.getLayoutManager()) {
+//            @Override
+//            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+//                presenter.onProfileCreate();
+//                presenter.onDataAppend(recyclerAdapter.getItemCount(),DEFAULT_BATCH_SIZE);
+//            }
+//        };
         RadarChart chart = (RadarChart) findViewById(R.id.chart);
         chart.setTouchEnabled(false);
         chart.setDescription("");
@@ -106,7 +115,6 @@ public class ProfileActivity2 extends AppCompatActivity implements ProfileProjec
                 entries.add(new Entry(2f, 3));
                 entries.add(new Entry(2f, 4));
                 entries.add(new Entry(1f, 5));
-
         RadarDataSet dataset_comp1 = new RadarDataSet(entries, "Компетенции" );
         dataset_comp1.setColor(Color.rgb(40,199,192));
         dataset_comp1.setDrawFilled(true);
@@ -145,7 +153,6 @@ public class ProfileActivity2 extends AppCompatActivity implements ProfileProjec
                 }
             }
         });
-
         FrameLayout clickerTimeline = (FrameLayout) findViewById(R.id.frame_timeline);
         ImageView imgTimelineCollapse = (ImageView) findViewById(R.id.down_timeline);
         clickerTimeline.setOnClickListener(new View.OnClickListener() {
@@ -163,7 +170,6 @@ public class ProfileActivity2 extends AppCompatActivity implements ProfileProjec
                 }
             }
         });
-
         FrameLayout clickerProjects = (FrameLayout) findViewById(R.id.frame_projects);
         ImageView imgProjectCollapse = (ImageView) findViewById(R.id.down_projects);
         clickerProjects.setOnClickListener(new View.OnClickListener() {
@@ -181,9 +187,6 @@ public class ProfileActivity2 extends AppCompatActivity implements ProfileProjec
                 }
             }
         });
-
-
-
 //        ActionBar actionBar = getSupportActionBar();
 //        actionBar.setDisplayHomeAsUpEnabled(true);
         ImageView provileid = (ImageView) findViewById(R.id.profile_id);
@@ -237,7 +240,6 @@ public class ProfileActivity2 extends AppCompatActivity implements ProfileProjec
             }
         });
     }
-
 
 //    private void prepateProjectsdata() {
 //        ProjectsItem projectsItem = new  ProjectsItem(1,"Дмитрий","Ринат",true,true,"16.06.99");
@@ -297,31 +299,18 @@ public class ProfileActivity2 extends AppCompatActivity implements ProfileProjec
     public void stopProgressBar() {
 
     }
-    @Override
-    public void appendData(List<ProfileProjectsItem> data) {
-        recyclerAdapter.appendDataWithNotify(data);
-    }
-
-
 
     @Override
-    public void setData(List<ProfileProjectsItem> data) {
-        onDataUpdated();
-        recyclerAdapter.setDataWithNotify(data);
+    public void setData(List<ProfileItem> data) {
+        Object a = data.get(1);
+        Log.d("LOGI",a.toString());
     }
 
-    public void onDataUpdated()
-    {
-        recyclerViewScrollListener.resetState();
+    @Override
+    public void appendData(List<ProfileItem> data) {
+        Object a = data.get(1);
+        Log.d("LOGI",a.toString());
     }
-//
-//    public String[] getDataSet() {
-//        String[] mDataSet = new String[100];
-//        for (int i = 0; i < 100; i++) {
-//            mDataSet[i] = "item" + i;
-//        }
-//        return mDataSet;
-//    }
 
 
 }

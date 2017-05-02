@@ -43,13 +43,14 @@ public class TimelineRecyclerAdapter extends BaseRecyclerAdapter<TimelineItem> {
         TimelineItem item= getData().get(position);
         TimelineViewHolder holder=(TimelineViewHolder) uncastedHolder;
 //        holder.date.setText(context.getString(R.string.until)+" "+itemDateTime.toString(formatter));
-        if(item.getStatus()== true)
+//        if(item.getStatus()== true)
+        holder.text.setText(item.getName()+" "+item.getAction()+" "+item.getAction_name()+" "+item.getDate());
         {preposition = " в проект ";
         holder.back.setBackgroundResource(R.drawable.gal);}
-        else
-            {preposition=" из проекта ";
-                holder.back.setBackgroundResource(R.drawable.vmin);}
-        holder.text.setText(item.getName()+" "+item.getSurname() + preposition + item.getProject()+" "+item.getDate());
+//        else
+//            {preposition=" из проекта ";
+//                holder.back.setBackgroundResource(R.drawable.vmin);}
+//        holder.text.setText(item.getName()+" "+item.getSurname() + preposition + item.getProject()+" "+item.getDate());
     }
 
     class TimelineViewHolder extends RecyclerView.ViewHolder {

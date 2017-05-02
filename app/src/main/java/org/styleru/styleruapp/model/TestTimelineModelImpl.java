@@ -51,12 +51,12 @@ public class TestTimelineModelImpl implements TimelineModel{
            item.setDate("29.05.12");
             item.setName("Станислав");
             Log.d("Timeline",item.getName());
-            item.setProject("NAMED");
-
-            final Random random = new Random();
-
-            item.setStatus(random.nextBoolean());
-            item.setSurname("Мясников");
+//            item.setProject("NAMED");
+//
+//            final Random random = new Random();
+//
+//            item.setStatus(random.nextBoolean());
+//            item.setSurname("Мясников");
             return item;
 
         }

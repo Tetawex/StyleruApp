@@ -2,6 +2,7 @@ package org.styleru.styleruapp.model;
 
 import org.styleru.styleruapp.model.dto.ProfileRequest;
 import org.styleru.styleruapp.model.dto.ProfileProjectsResponse;
+import org.styleru.styleruapp.model.dto.ProfileResponse;
 
 import io.reactivex.Observable;
 
@@ -10,5 +11,5 @@ import io.reactivex.Observable;
  */
 
 public interface ProfileModel extends Model {
-    Observable<ProfileProjectsResponse> getData(ProfileRequest request);
+    Observable<ProfileResponse> getData(ProfileRequest request);
 }

@@ -17,8 +17,8 @@ import com.bumptech.glide.Glide;
 import org.styleru.styleruapp.R;
 import org.styleru.styleruapp.model.cache.Singletons;
 import org.styleru.styleruapp.model.cache.UserInfo;
-import org.styleru.styleruapp.presenter.SingleProfilePresenter;
-import org.styleru.styleruapp.presenter.SingleProfilePresenterImpl;
+
+
 
 public class ProfileFragmentTabOverall extends Fragment {
 
@@ -26,9 +26,9 @@ public class ProfileFragmentTabOverall extends Fragment {
     public ProfileFragmentTabOverall() {
         // Required empty public constructor
     }
-    private SingleProfilePresenter presenter;
+
     Button btn;
-    SingleProfilePresenterImpl item;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

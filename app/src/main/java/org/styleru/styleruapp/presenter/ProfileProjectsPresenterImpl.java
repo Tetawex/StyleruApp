@@ -27,45 +27,54 @@ public class ProfileProjectsPresenterImpl implements ProfileProjectsPresenter {
         this.model=new ProfileModelImpl();
     }
 
+//    @Override
+//    public void onDataAppend(String token, int user_id) {
+//        disposable = model.getData(token,user_id)
+//                .subscribe(response -> view.appendData(response.getData()),
+//                        throwable -> view.showError(throwable),
+//                        () -> {
+//                            if(!disposable.isDisposed()) {
+//                                disposable.dispose();
+//                            }
+//                        });
+//        currentId+=batchSize;
+//    }
+
     @Override
     public void onDataAppend(int offset, int batchSize) {
-        currentId=offset;
-        disposable = model.getData(currentId, batchSize)
-                .subscribe(response -> view.appendData(response.getData()),
-                        throwable -> view.showError(throwable),
-                        () -> {
-                            if(!disposable.isDisposed()) {
-                                disposable.dispose();
-                            }
-                        });
-        currentId+=batchSize;
+
     }
 
     @Override
     public void onDataUpdate(int batchSize) {
-        currentId=0;
-        if(!disposable.isDisposed()) {
-            disposable.dispose();
-        }
-        disposable = model.getData(currentId,batchSize)
-                .subscribe(response ->
-                        {
-                            view.stopProgressBar();
-                            view.setData(response.getData());
-                            view.onDataUpdated();
-                        },
-                        throwable ->
-                        {
-                            view.stopProgressBar();
-                            view.showError(throwable);
-                        },
-                        () -> {
-                            if(!disposable.isDisposed()) {
-                                disposable.dispose();
-                            }
-                        });
-        currentId+=batchSize;
+
     }
+
+//    @Override
+//    public void onDataUpdate(int batchSize) {
+//        currentId=0;
+//        if(!disposable.isDisposed()) {
+//            disposable.dispose();
+//        }
+//        disposable = model.getData(currentId,batchSize)
+//                .subscribe(response ->
+//                        {
+//                            view.stopProgressBar();
+//                            view.setData(response.getData());
+//                            view.onDataUpdated();
+//                        },
+//                        throwable ->
+//                        {
+//                            view.stopProgressBar();
+//                            view.showError(throwable);
+//                        },
+//                        () -> {
+//                            if(!disposable.isDisposed()) {
+//                                disposable.dispose();
+//                            }
+//                        });
+//        currentId+=batchSize;
+//    }
 
     @Override
     public void onStop() {
