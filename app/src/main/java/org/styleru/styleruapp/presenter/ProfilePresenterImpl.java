@@ -30,7 +30,8 @@ public class ProfilePresenterImpl implements ProfilePresenter {
     @Override
     public void onProfileCreate(String token, int user_id) {
         disposable = model.getData(request)
-                .subscribe(response -> view.appendData(response.getData()),
+                .subscribe(response ->
+                                view.appendData(response),
                         throwable -> view.showError(throwable),
                         () -> {
                             if(!disposable.isDisposed()) {

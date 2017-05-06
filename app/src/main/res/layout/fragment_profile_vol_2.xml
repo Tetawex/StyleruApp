@@ -147,55 +147,11 @@
                     android:layout_height="wrap_content"
                     app:el_duration="500"
                     app:el_expanded="true">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:orientation="vertical"
-                        android:layout_height="wrap_content">
-                        <FrameLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginTop="0dp"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginRight="16dp"
-                            android:layout_marginBottom="6dp"
-                            android:background="@color/colorFragmentBackground"/>
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            >
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="WEB"
-                                android:textSize="16dp"
-                                android:layout_marginLeft="16dp"/>
-                            <com.github.mikephil.charting.charts.RadarChart
-                                android:layout_width="match_parent"
-                                android:id="@+id/chart"
-                                android:layout_height="350dp"
-                                android:layout_marginLeft="-16dp"
-                                >
-                            </com.github.mikephil.charting.charts.RadarChart>
-                        </RelativeLayout>
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            >
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Android"
-                                android:textSize="16dp"
-                                android:layout_marginLeft="16dp"/>
-                            <com.github.mikephil.charting.charts.RadarChart
-                                android:layout_width="match_parent"
-                                android:id="@+id/chart2"
-                                android:layout_height="350dp"
-                                >
-                            </com.github.mikephil.charting.charts.RadarChart>
-                        </RelativeLayout>
-
-                    </LinearLayout>
+               <android.support.v7.widget.RecyclerView
+                   android:id="@+id/recycler_compete"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content">
+               </android.support.v7.widget.RecyclerView>
                 </net.cachapa.expandablelayout.ExpandableLayout>
             </LinearLayout>
             <LinearLayout
@@ -250,39 +206,12 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp">
 
-                        <include
-                            android:id="@+id/d1"
-                            layout="@layout/card_profile_timeline" />
-                        <include
-                            android:id="@+id/d1"
-                            layout="@layout/card_profile_timeline" />
-                        <include
-                            android:id="@+id/d1"
-                            layout="@layout/card_profile_timeline" />
-                        <include
-                            android:id="@+id/d1"
-                            layout="@layout/card_profile_timeline" />
-                        <include
-                            android:id="@+id/d1"
-                            layout="@layout/card_profile_timeline" />
-                        <include
-                            android:id="@+id/d1"
-                            layout="@layout/card_profile_timeline" />
-                        <include
-                            android:id="@+id/d1"
-                            layout="@layout/card_profile_timeline" />
-                        <include
-                            android:id="@+id/d1"
-                            layout="@layout/card_profile_timeline" />
-                        <include
-                            android:id="@+id/d1"
-                            layout="@layout/card_profile_timeline" />
-                        <include
-                            android:id="@+id/d1"
-                            layout="@layout/card_profile_timeline" />
-                        <include
-                            android:id="@+id/d1"
-                            layout="@layout/card_profile_timeline" />
+                       <android.support.v7.widget.RecyclerView
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:id="@+id/recycler_timeline">
+
+                       </android.support.v7.widget.RecyclerView>
                     </LinearLayout>
                 </net.cachapa.expandablelayout.ExpandableLayout>
 
@@ -339,7 +268,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
                     <android.support.v7.widget.RecyclerView
-                        android:id="@+id/proj"
+                        android:id="@+id/recycler_projects"
                         android:scrollbars="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>

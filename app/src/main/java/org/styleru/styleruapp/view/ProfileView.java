@@ -1,6 +1,7 @@
 package org.styleru.styleruapp.view;
 
 import org.styleru.styleruapp.model.dto.ProfileItem;
+import org.styleru.styleruapp.model.dto.ProfileResponse;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
 
 
 public interface ProfileView extends View {
-    void setData(List<ProfileItem> data);
-    void appendData(List<ProfileItem> data);
+    void setData(ProfileResponse response);
+    void appendData(ProfileResponse response);
 
 }

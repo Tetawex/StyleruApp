@@ -9,10 +9,8 @@ import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.content.res.ResourcesCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -24,38 +22,24 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.github.mikephil.charting.charts.RadarChart;
-import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.RadarData;
-import com.github.mikephil.charting.data.RadarDataSet;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
 
-import org.json.JSONArray;
 import org.styleru.styleruapp.R;
 import org.styleru.styleruapp.model.cache.Singletons;
 import org.styleru.styleruapp.model.cache.UserInfo;
-import org.styleru.styleruapp.model.dto.DepartmentsItem;
 import org.styleru.styleruapp.model.dto.ProfileItem;
-import org.styleru.styleruapp.model.dto.ProfileProjectsItem;
-import org.styleru.styleruapp.model.dto.ProjectsItem;
-import org.styleru.styleruapp.model.dto.TimelineItem;
-import org.styleru.styleruapp.presenter.DepartmentsPresenterImpl;
-import org.styleru.styleruapp.presenter.LoginPresenterImpl;
+import org.styleru.styleruapp.model.dto.ProfileResponse;
 import org.styleru.styleruapp.presenter.ProfilePresenter;
 import org.styleru.styleruapp.presenter.ProfilePresenterImpl;
-import org.styleru.styleruapp.presenter.ProfileProjectsPresenter;
-import org.styleru.styleruapp.presenter.ProfileProjectsPresenterImpl;
 import org.styleru.styleruapp.util.EndlessRecyclerViewScrollListener;
-import org.styleru.styleruapp.view.ProfileProjectsView;
 import org.styleru.styleruapp.view.ProfileView;
-import org.styleru.styleruapp.view.adapter.recycler.DepartmentsRecyclerAdapter;
 import org.styleru.styleruapp.view.adapter.recycler.ProfileProjectsRecyclerAdapter;
 import org.styleru.styleruapp.view.fragments.ProfileFragmentTabProjects;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.BindView;
 
 
 public class ProfileActivity2 extends AppCompatActivity implements ProfileView {
@@ -69,6 +53,12 @@ public class ProfileActivity2 extends AppCompatActivity implements ProfileView {
     private ExpandableLayout expandableLayoutTimeline,expandableLayoutCompetence,expandableLayoutProjects;
     private RecyclerView recyclerView;
     private String asd;
+    @BindView(R.id.recycler_compete)
+    public RecyclerView recycler_compete;
+    @BindView(R.id.recycler_projects)
+    public RecyclerView recycler_projects;
+    @BindView(R.id.recycler_timeline)
+    public RecyclerView recycler_timeline;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,11 +70,13 @@ public class ProfileActivity2 extends AppCompatActivity implements ProfileView {
         expandableLayoutTimeline = (ExpandableLayout) findViewById(R.id.expandable_layout_timeline);
         expandableLayoutCompetence = (ExpandableLayout) findViewById(R.id.expandable_layout_competence);
         expandableLayoutProjects = (ExpandableLayout) findViewById(R.id.expandable_layout_projects);
-        recyclerView= (RecyclerView) findViewById(R.id.proj) ;
         authToken=Singletons.getPreferencesManager().getAuthToken();
+
 
         presenter=new ProfilePresenterImpl(this);
         presenter.onProfileCreate(authToken,1);
+
+
 
 
 
@@ -99,40 +91,7 @@ public class ProfileActivity2 extends AppCompatActivity implements ProfileView {
 //                presenter.onDataAppend(recyclerAdapter.getItemCount(),DEFAULT_BATCH_SIZE);
 //            }
 //        };
-        RadarChart chart = (RadarChart) findViewById(R.id.chart);
-        chart.setTouchEnabled(false);
-        chart.setDescription("");
-        chart.getLegend().setEnabled(false);
-        YAxis yAxis = chart.getYAxis();
-        yAxis.setEnabled(false);
-        yAxis.setAxisMaxValue(3);
-        yAxis.setAxisMinValue(1);
 
-        ArrayList<Entry> entries = new ArrayList<>();
-                entries.add(new Entry(1f, 0));
-                entries.add(new Entry(2f, 1));
-                entries.add(new Entry(3f, 2));
-                entries.add(new Entry(2f, 3));
-                entries.add(new Entry(2f, 4));
-                entries.add(new Entry(1f, 5));
-        RadarDataSet dataset_comp1 = new RadarDataSet(entries, "Компетенции" );
-        dataset_comp1.setColor(Color.rgb(40,199,192));
-        dataset_comp1.setDrawFilled(true);
-        dataset_comp1.setValueTextSize(0);
-
-        ArrayList<RadarDataSet> dataSets = new ArrayList<RadarDataSet>();
-        dataSets.add(dataset_comp1);
-
-        ArrayList<String> labels = new ArrayList<String>();
-        labels.add("scrum");
-        labels.add("Тайм-менеджмент");
-        labels.add("ведение проекта");
-        labels.add("командообразования");
-        labels.add("Мотивация");
-        labels.add("переговоры");
-
-        RadarData data = new RadarData(labels, dataSets);
-        chart.setData(data);
  //       chart.invalidate();
 
 
@@ -300,17 +259,25 @@ public class ProfileActivity2 extends AppCompatActivity implements ProfileView {
 
     }
 
+
     @Override
-    public void setData(List<ProfileItem> data) {
-        Object a = data.get(1);
-        Log.d("LOGI",a.toString());
+    public void setData(ProfileResponse response) {
+
     }
 
     @Override
-    public void appendData(List<ProfileItem> data) {
-        Object a = data.get(1);
-        Log.d("LOGI",a.toString());
+    public void appendData(ProfileResponse response) {
+       List<ProfileItem> a= response.getData();
+        String m =a.get(8).toString();
+        Toast toast = Toast.makeText(getApplicationContext(),
+                m, Toast.LENGTH_SHORT);
+        toast.show();
     }
+
+//    @Override
+//    public void appendData(ProfileResponse response) {
+//
+//    }
 
 
 }
