@@ -12,6 +12,7 @@ import android.widget.TextView;
 import org.styleru.styleruapp.R;
 import org.styleru.styleruapp.model.dto.ParticipantsItem;
 import org.styleru.styleruapp.model.dto.VacanciesItem;
+import org.styleru.styleruapp.view.ProjectView;
 import org.styleru.styleruapp.view.activity.ProfileActivity;
 import org.styleru.styleruapp.view.activity.VacancyActivity;
 
@@ -25,8 +26,11 @@ import butterknife.ButterKnife;
  */
 
 public class ProjectVacanciesRecyclerAdapter extends BaseRecyclerAdapter<VacanciesItem> {
-    public ProjectVacanciesRecyclerAdapter(Context context, List<VacanciesItem> data) {
+    private ProjectView projectsView;
+    public ProjectVacanciesRecyclerAdapter(
+            Context context, List<VacanciesItem> data,ProjectView projectView) {
         super(context, data);
+        this.projectsView=projectView;
     }
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -42,14 +46,21 @@ public class ProjectVacanciesRecyclerAdapter extends BaseRecyclerAdapter<Vacanci
         VacanciesItem item= getData().get(position);
         ProjectVacanciesViewHolder holder=(ProjectVacanciesViewHolder) uncastedHolder;
         holder.button.setText(item.getTitle()+" ("+item.getRequiredAmount()+")");
-        holder.button.setOnClickListener(new View.OnClickListener() {
+        if(item.isTransferToNextPage())
+            holder.button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Bundle bundle=new Bundle();
+                    bundle.putInt("id",item.getId());
+                    Intent intent = new Intent(context,VacancyActivity.class);
+                    intent.putExtras(bundle);
+                    context.startActivity(intent);
+                }
+            });
+        else
+            holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bundle=new Bundle();
-                bundle.putInt("id",item.getId());
-                Intent intent = new Intent(context,VacancyActivity.class);
-                intent.putExtras(bundle);
-                context.startActivity(intent);
             }
         });
     }

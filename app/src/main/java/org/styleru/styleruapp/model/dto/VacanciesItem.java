@@ -17,6 +17,17 @@ public class VacanciesItem {
     @SerializedName("required_amount")
     @Expose
     private int requiredAmount;
+    @SerializedName("view_vacancies")
+    @Expose
+    private boolean transferToNextPage;
+
+    public boolean isTransferToNextPage() {
+        return transferToNextPage;
+    }
+
+    public void setTransferToNextPage(boolean transferToNextPage) {
+        this.transferToNextPage = transferToNextPage;
+    }
 
     public int getId() {
         return id;

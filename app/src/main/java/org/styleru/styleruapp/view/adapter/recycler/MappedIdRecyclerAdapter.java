@@ -50,6 +50,12 @@ public abstract class MappedIdRecyclerAdapter<T extends IdItem> extends  BaseRec
         }
         notifyDataSetChanged();
     }
+    public void removeItemByIdWithNotify(int id){
+        getData().remove(idMap.get(id));
+        idMap.remove(id);
+        notifyDataSetChanged();
+    }
+
     public T getItemById(int id){
         return idMap.get(id);
     }

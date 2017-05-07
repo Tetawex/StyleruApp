@@ -21,7 +21,7 @@ public class ProjectResponse {
     private String managerName;
     @Expose
     @SerializedName("id_manager")
-    private String managerId;
+    private int managerId;
     @Expose
     @SerializedName("date_time_start")
     private String dateTimeStart;
@@ -62,11 +62,11 @@ public class ProjectResponse {
         this.managerName = managerName;
     }
 
-    public String getManagerId() {
+    public int getManagerId() {
         return managerId;
     }
 
-    public void setManagerId(String managerId) {
+    public void setManagerId(int managerId) {
         this.managerId = managerId;
     }
 

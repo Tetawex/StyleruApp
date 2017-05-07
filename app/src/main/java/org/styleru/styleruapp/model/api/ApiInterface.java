@@ -1,6 +1,7 @@
 package org.styleru.styleruapp.model.api;
 
 
+import org.styleru.styleruapp.model.dto.ApproveVacancyRequest;
 import org.styleru.styleruapp.model.dto.DepartmentsRequest;
 import org.styleru.styleruapp.model.dto.DepartmentsResponse;
 import org.styleru.styleruapp.model.dto.EventStateChangeRequest;
@@ -14,13 +15,15 @@ import org.styleru.styleruapp.model.dto.LoginResponse;
 import org.styleru.styleruapp.model.dto.LogoutRequest;
 import org.styleru.styleruapp.model.dto.PeopleRequest;
 import org.styleru.styleruapp.model.dto.PeopleResponse;
+
 import org.styleru.styleruapp.model.dto.ProfileRequest;
-import org.styleru.styleruapp.model.dto.ProfileProjectsResponse;
 import org.styleru.styleruapp.model.dto.ProfileResponse;
 import org.styleru.styleruapp.model.dto.ProjectRequest;
 import org.styleru.styleruapp.model.dto.ProjectResponse;
 import org.styleru.styleruapp.model.dto.ProjectsRequest;
 import org.styleru.styleruapp.model.dto.ProjectsResponse;
+import org.styleru.styleruapp.model.dto.RecommendVacancyRequest;
+import org.styleru.styleruapp.model.dto.RequestVacancyRequest;
 import org.styleru.styleruapp.model.dto.SettingsDownloadRequest;
 import org.styleru.styleruapp.model.dto.SettingsDownloadResponse;
 import org.styleru.styleruapp.model.dto.SettingsUploadRequest;
@@ -29,6 +32,7 @@ import org.styleru.styleruapp.model.dto.SingleProfileRequest;
 import org.styleru.styleruapp.model.dto.SingleProfileResponse;
 import org.styleru.styleruapp.model.dto.TimelineRequest;
 import org.styleru.styleruapp.model.dto.TimelineResponse;
+import org.styleru.styleruapp.model.dto.VacancyResponse;
 import org.styleru.styleruapp.model.dto.ValidateTokenRequest;
 
 import io.reactivex.Completable;
@@ -64,15 +68,22 @@ public interface ApiInterface {
     Observable<ProjectsResponse> getProjects(@Body ProjectsRequest request);
 
     @POST("singleTimeline")
-    Observable<TimelineResponse> getTimeine(@Body TimelineRequest request);
-    @POST("singlePersonProjects")
-    Observable<ProfileProjectsResponse> getProfileProjects(@Body ProfileRequest request);
+    Observable<TimelineResponse> getTimeline(@Body TimelineRequest request);
+    //@POST("singlePersonProjects")
+    //Observable<ProfileProjectsResponse> getProfileProjects(@Body ProfileProjectsRequest request);
     @POST("singlePerson")
     Observable<SingleProfileResponse> getSingleProfile(@Body SingleProfileRequest request);
     @POST("singleProject")
     Observable<ProjectResponse> getSingleProject(@Body ProjectRequest request);
+
+    @POST("vacancy")
+    Observable<VacancyResponse> getVacancyData(@Body VacancyRequest request);
+    @POST("recommendVacancy")
+    Completable recommendVacancy(@Body RecommendVacancyRequest request);
+    @POST("approveVacancy")
+    Completable approveVacancy(@Body ApproveVacancyRequest request);
+    @POST("requestVacancy")
+    Completable requestVacancy(@Body RequestVacancyRequest request);
     @POST("singlePersonFull")
     Observable<ProfileResponse> getSingleProfileFull(@Body ProfileRequest request);
-
-
 }
