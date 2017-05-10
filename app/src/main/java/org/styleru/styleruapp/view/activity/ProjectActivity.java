@@ -20,6 +20,7 @@ import org.joda.time.format.DateTimeFormatter;
 import org.styleru.styleruapp.R;
 import org.styleru.styleruapp.model.dto.ProjectResponse;
 import org.styleru.styleruapp.presenter.ProjectPresenter;
+import org.styleru.styleruapp.presenter.ProjectPresenterImpl;
 import org.styleru.styleruapp.view.ProjectView;
 import org.styleru.styleruapp.view.adapter.recycler.ProjectParticipantsRecyclerAdapter;
 import org.styleru.styleruapp.view.adapter.recycler.ProjectVacanciesRecyclerAdapter;
@@ -90,6 +91,7 @@ public class ProjectActivity extends AppCompatActivity implements ProjectView{
                 presenter.onLoadData(id);
             }
         });
+        presenter=new ProjectPresenterImpl(this);
         presenter.onLoadData(id);
     }
     @Override

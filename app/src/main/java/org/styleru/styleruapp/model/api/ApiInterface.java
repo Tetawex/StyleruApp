@@ -32,6 +32,7 @@ import org.styleru.styleruapp.model.dto.SingleProfileRequest;
 import org.styleru.styleruapp.model.dto.SingleProfileResponse;
 import org.styleru.styleruapp.model.dto.TimelineRequest;
 import org.styleru.styleruapp.model.dto.TimelineResponse;
+import org.styleru.styleruapp.model.dto.VacancyRequest;
 import org.styleru.styleruapp.model.dto.VacancyResponse;
 import org.styleru.styleruapp.model.dto.ValidateTokenRequest;
 

@@ -9,10 +9,13 @@ public class Request implements IdItem{
     @SerializedName("id")
     @Expose
     private int id;
+    @SerializedName("recommended")
+    @Expose
+    private boolean recommended;
     @SerializedName("id_people")
     @Expose
     private int peopleId;
-    @SerializedName("image_people")
+    @SerializedName("img_people")
     @Expose
     private String image;
     @SerializedName("name_people")
@@ -49,5 +52,13 @@ public class Request implements IdItem{
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public boolean isRecommended() {
+        return recommended;
+    }
+
+    public void setRecommended(boolean recommended) {
+        this.recommended = recommended;
     }
 }

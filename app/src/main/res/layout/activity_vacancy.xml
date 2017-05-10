@@ -28,11 +28,18 @@
                 android:background="@color/colortoolbar"
                 app:theme="@style/Theme.AppCompat.Light" />
         </android.support.design.widget.AppBarLayout>
-        <android.support.v7.widget.RecyclerView
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/refresher"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </android.support.v4.widget.SwipeRefreshLayout>
     </LinearLayout>
     <include layout="@layout/view_progressbar_basic"
         android:id="@+id/progressbar"
         android:visibility="gone"/>
+
 </android.support.design.widget.CoordinatorLayout>

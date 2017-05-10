@@ -46,6 +46,7 @@ public class ProjectVacanciesRecyclerAdapter extends BaseRecyclerAdapter<Vacanci
         VacanciesItem item= getData().get(position);
         ProjectVacanciesViewHolder holder=(ProjectVacanciesViewHolder) uncastedHolder;
         holder.button.setText(item.getTitle()+" ("+item.getRequiredAmount()+")");
+        holder.button.setEnabled(item.isEnabled());
         if(item.isTransferToNextPage())
             holder.button.setOnClickListener(new View.OnClickListener() {
                 @Override

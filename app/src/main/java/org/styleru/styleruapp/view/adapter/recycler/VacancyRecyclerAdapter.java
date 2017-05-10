@@ -65,12 +65,16 @@ public class VacancyRecyclerAdapter extends MappedIdRecyclerAdapter<Request> {
         VacancyViewHolder holder =(VacancyViewHolder)uncastedHolder;
         Request item=getData().get(position);
         holder.name.setText(item.getPeopleName());
+        if(item.isRecommended())
+            holder.indicatorRecommended.setVisibility(View.VISIBLE);
+        else
+            holder.indicatorRecommended.setVisibility(View.GONE);
         if(canRecommend) {
             holder.recommendButton.setVisibility(View.VISIBLE);
             holder.recommendButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    vacancyView.onRecommendVacancy(item.getId());
+                    vacancyView.onRecommendVacancy(item.getId(),item.getPeopleName(),item.isRecommended());
                 }
             });
         }
@@ -81,7 +85,7 @@ public class VacancyRecyclerAdapter extends MappedIdRecyclerAdapter<Request> {
             holder.approveButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    vacancyView.onApproveVacancy(item.getId());
+                    vacancyView.onApproveVacancy(item.getId(),item.getPeopleName());
                 }
             });
         }
@@ -89,46 +93,43 @@ public class VacancyRecyclerAdapter extends MappedIdRecyclerAdapter<Request> {
             holder.approveButton.setVisibility(View.GONE);
         Glide
                 .with(context)
-                .load(R.drawable.arrow_back)
+                .load(item.getImage())
                 .asBitmap().centerCrop()
                 .placeholder(R.drawable.placeholder_loading_circled)
                 .into(new BitmapImageViewTarget(holder.image) {
                     @Override
                     protected void setResource(Bitmap resource) {
                         RoundedBitmapDrawable circularBitmapDrawable =
-                                RoundedBitmapDrawableFactory
-                                        .create(context.getResources(), resource);
+                                RoundedBitmapDrawableFactory.create(context.getResources(), resource);
                         circularBitmapDrawable.setCircular(true);
                         holder.image.setImageDrawable(circularBitmapDrawable);
                     }
                 });
     }
 
-    public boolean isCanApprove() {
-        return canApprove;
+    public void setPrivileges(boolean canApprove,boolean canRecommend){
+        this.canApprove=canApprove;
+        this.canRecommend=canRecommend;
+        notifyDataSetChanged();
     }
 
-    public void setCanApprove(boolean canApprove) {
-        this.canApprove = canApprove;
-    }
-
-    public boolean isCanRecommend() {
-        return canRecommend;
-    }
-
-    public void setCanRecommend(boolean canRecommend) {
-        this.canRecommend = canRecommend;
+    public void tickVacancyByIdWithNotify(int id) {
+        Request r=getItemById(id);
+        r.setRecommended(!r.isRecommended());
+        notifyItemChanged(getData().indexOf(r));
     }
 
     class VacancyViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.name)
         TextView name;
 
-        @BindView(R.id.departments)
-        TextView departments;
+        //@BindView(R.id.departments)
+        //TextView departments;
 
         @BindView(R.id.image)
         ImageView image;
+        @BindView(R.id.recommended_indicator)
+        ImageView indicatorRecommended;
 
         @BindView(R.id.button_approve)
         AppCompatButton approveButton;

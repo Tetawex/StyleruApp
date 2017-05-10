@@ -42,6 +42,9 @@
     <string name="vacancies">Вакансии</string>
     <string name="vacancy_request_submitted">Заявка успешно отправлена</string>
     <string name="vacancy_request_removed">Заявка успешно отменена</string>
+    <string name="vacancy_approved">принят(а) на проект</string>
+    <string name="vacancy_recommended">рекомендован(а) на проект</string>
+    <string name="vacancy_recommended_false">более не рекомендован(а) на проект</string>
 
     <string-array name="project_options">
         <item>Все проекты</item>

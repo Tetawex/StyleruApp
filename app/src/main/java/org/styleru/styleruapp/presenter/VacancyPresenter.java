@@ -6,6 +6,6 @@ package org.styleru.styleruapp.presenter;
 
 public interface VacancyPresenter extends Presenter {
     void onLoadVacanciesData(int vacancyId);
-    void onApproveVacancy(int id);
-    void onRecommendVacancy(int id);
+    void onApproveVacancy(int id,String name);
+    void onRecommendVacancy(int id,String name,boolean status);
 }

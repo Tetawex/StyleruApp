@@ -12,9 +12,14 @@ import java.util.List;
 public interface VacancyView extends View {
     void setVacanciesData(List<Request> data);
 
-    void setPrivilegies(boolean canApprove, boolean canRecommend);
+    void setPrivileges(boolean canApprove, boolean canRecommend);
 
-    void onApproveVacancy(int id);
-    void onRecommendVacancy(int id);
+    void onApproveVacancy(int id,String name);
+    void onRecommendVacancy(int id,String name,boolean status);
+
     void removeVacancy(int id);
+    void tickVacancy(int id);
+
+    void notifyVacancyRecommended(String name,boolean status);
+    void notifyVacancyApproved(String name);
 }

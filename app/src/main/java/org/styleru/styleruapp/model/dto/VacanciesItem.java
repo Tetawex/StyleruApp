@@ -17,9 +17,12 @@ public class VacanciesItem {
     @SerializedName("required_amount")
     @Expose
     private int requiredAmount;
-    @SerializedName("view_vacancies")
+    @SerializedName("action")
     @Expose
     private boolean transferToNextPage;
+    @SerializedName("status")
+    @Expose
+    private boolean enabled;
 
     public boolean isTransferToNextPage() {
         return transferToNextPage;
@@ -51,5 +54,13 @@ public class VacanciesItem {
 
     public void setRequiredAmount(int requiredAmount) {
         this.requiredAmount = requiredAmount;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 }
