@@ -39,6 +39,8 @@ public class ProjectActivity extends AppCompatActivity implements ProjectView{
     public Toolbar toolbar;
     @BindView(R.id.text_manager_name)
     public TextView textManagerName;
+    @BindView(R.id.text_description)
+    public TextView textDescription;
     @BindView(R.id.text_end)
     public TextView textDateEnd;
     @BindView(R.id.text_start)
@@ -100,6 +102,8 @@ public class ProjectActivity extends AppCompatActivity implements ProjectView{
         textDateEnd.setText(new DateTime(response.getDateTimeEnd()).toString(formatter));
         textDateStart.setText(new DateTime(response.getDateTimeStart()).toString(formatter));
         participantsRecyclerAdapter.setDataWithNotify(response.getParticipants());
+        textDescription.setText(response.getDescription());
+        vacanciesRecyclerAdapter.setCanViewSubmissions(response.isViewSubmissions());
         vacanciesRecyclerAdapter.setDataWithNotify(response.getVacancies());
         completionProgressbar.setProgress(response.getCompletion());
 
@@ -107,10 +111,9 @@ public class ProjectActivity extends AppCompatActivity implements ProjectView{
         textManagerName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent();
                 Bundle bundle=new Bundle();
                 bundle.putInt("id",response.getManagerId());
-                bundle.putString("name",response.getManagerName());
+                Intent intent = new Intent(getBaseContext(),ProfileActivity2.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -149,11 +152,12 @@ public class ProjectActivity extends AppCompatActivity implements ProjectView{
         presenter.onRequestVacancy(id,accepted);
     }
     @Override
-    public void notifyVacancyRequestCompleted(boolean accepted){
+    public void notifyVacancyRequestCompleted(int id,boolean accepted){
         if(accepted)
             Toast.makeText(this, R.string.vacancy_request_submitted,Toast.LENGTH_SHORT).show();
         else
             Toast.makeText(this, R.string.vacancy_request_removed,Toast.LENGTH_SHORT).show();
+        vacanciesRecyclerAdapter.tickVacancyByIdWithNotify(id);
     }
 }
 

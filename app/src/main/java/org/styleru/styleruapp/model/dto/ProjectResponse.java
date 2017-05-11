@@ -19,6 +19,8 @@ public class ProjectResponse {
     @Expose
     @SerializedName("manager_name")
     private String managerName;
+    @SerializedName("description")
+    private String description;
     @Expose
     @SerializedName("id_manager")
     private int managerId;
@@ -108,5 +110,13 @@ public class ProjectResponse {
 
     public void setVacancies(List<VacanciesItem> vacancies) {
         this.vacancies = vacancies;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

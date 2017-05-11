@@ -11,5 +11,5 @@ public interface ProjectView extends View {
 
     void requestVacancy(int id, boolean accepted);
 
-    void notifyVacancyRequestCompleted(boolean accepted);
+    void notifyVacancyRequestCompleted(int id,boolean accepted);
 }

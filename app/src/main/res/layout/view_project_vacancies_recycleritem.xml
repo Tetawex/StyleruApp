@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="horizontal">
+
     <android.support.v7.widget.AppCompatButton
-        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:theme="@style/StandardButton"
-        android:id="@+id/button"
-        android:text="ДИЗАЙНЕР(4)"/>
-</FrameLayout>
+        android:text="ДИЗАЙНЕР(4)"
+        android:theme="@style/StandardButton" />
+
+    <ImageView
+        android:id="@+id/submitted_indicator"
+        android:layout_marginLeft="4dp"
+        android:layout_gravity="center_vertical"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/galochka"/>
+</LinearLayout>

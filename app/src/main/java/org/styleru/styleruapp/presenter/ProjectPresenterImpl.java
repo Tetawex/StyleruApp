@@ -55,7 +55,7 @@ public class ProjectPresenterImpl implements ProjectPresenter {
     @Override
     public void onRequestVacancy(int id, boolean accepted) {
         secDisposable= model.requestVacancy(id).subscribe(
-                ()->view.notifyVacancyRequestCompleted(!accepted),
+                ()->view.notifyVacancyRequestCompleted(id,!accepted),
                 throwable->view.showError(throwable));
     }
 }

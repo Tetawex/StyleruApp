@@ -3,11 +3,13 @@ package org.styleru.styleruapp.model.dto;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.styleru.styleruapp.model.dto.support.IdItem;
+
 /**
  * Created by Пользователь on 04.04.2017.
  */
 
-public class VacanciesItem {
+public class VacanciesItem implements IdItem{
     @SerializedName("id")
     @Expose
     private int id;

@@ -7,6 +7,7 @@ import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.styleru.styleruapp.R;
@@ -25,8 +26,18 @@ import butterknife.ButterKnife;
  * Created by tetawex on 07.03.17.
  */
 
-public class ProjectVacanciesRecyclerAdapter extends BaseRecyclerAdapter<VacanciesItem> {
+public class ProjectVacanciesRecyclerAdapter extends MappedIdRecyclerAdapter<VacanciesItem> {
     private ProjectView projectsView;
+
+    public boolean isCanViewSubmissions() {
+        return canViewSubmissions;
+    }
+
+    public void setCanViewSubmissions(boolean canViewSubmissions) {
+        this.canViewSubmissions = canViewSubmissions;
+    }
+
+    private boolean canViewSubmissions;
     public ProjectVacanciesRecyclerAdapter(
             Context context, List<VacanciesItem> data,ProjectView projectView) {
         super(context, data);
@@ -46,8 +57,11 @@ public class ProjectVacanciesRecyclerAdapter extends BaseRecyclerAdapter<Vacanci
         VacanciesItem item= getData().get(position);
         ProjectVacanciesViewHolder holder=(ProjectVacanciesViewHolder) uncastedHolder;
         holder.button.setText(item.getTitle()+" ("+item.getRequiredAmount()+")");
-        holder.button.setEnabled(item.isEnabled());
-        if(item.isTransferToNextPage())
+        if(item.isEnabled())
+            holder.indicator.setVisibility(View.VISIBLE);
+        else
+            holder.indicator.setVisibility(View.GONE);
+        if(canViewSubmissions)
             holder.button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -58,17 +72,26 @@ public class ProjectVacanciesRecyclerAdapter extends BaseRecyclerAdapter<Vacanci
                     context.startActivity(intent);
                 }
             });
-        else
+        else if(item.isTransferToNextPage())
             holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                projectsView.requestVacancy(item.getId(),item.isEnabled());
             }
         });
+        else
+            holder.button.setEnabled(false);
     }
-
+    public void tickVacancyByIdWithNotify(int id) {
+        VacanciesItem r=getItemById(id);
+        r.setEnabled(!r.isEnabled());
+        notifyItemChanged(getData().indexOf(r));
+    }
     class ProjectVacanciesViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.button)
         AppCompatButton button;
+        @BindView(R.id.submitted_indicator)
+        ImageView indicator;
         public ProjectVacanciesViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
