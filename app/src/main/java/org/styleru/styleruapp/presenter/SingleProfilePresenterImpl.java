@@ -15,10 +15,8 @@ import io.reactivex.disposables.Disposables;
  */
 
 public class SingleProfilePresenterImpl implements SingleProfilePresenter {
-    //TODO: заменить инъекцию через конструктор инъекцией дагером
     private SingleProfileView view;
     private SingleProfileModel model;
-    public String mail,phone,name,surname,image;
 
     private Disposable disposable= Disposables.empty();
 
@@ -38,7 +36,7 @@ public class SingleProfilePresenterImpl implements SingleProfilePresenter {
                 .subscribe(response ->
                         {
                             view.switchToMainPage();
-                            Log.d("PROF","YES");
+                            view.
                             mail = response.getEmail();
                             phone= response.getPhone();
                             name = response.getFirst_name();

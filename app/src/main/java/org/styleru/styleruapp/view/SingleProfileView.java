@@ -5,5 +5,5 @@ package org.styleru.styleruapp.view;
  */
 
 public interface SingleProfileView extends View{
-    void switchToMainPage();
+    void inflateData();
 }
