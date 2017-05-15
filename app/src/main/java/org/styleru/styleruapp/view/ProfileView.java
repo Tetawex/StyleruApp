@@ -11,7 +11,5 @@ import java.util.List;
 
 
 public interface ProfileView extends View {
-    void setData(ProfileResponse response);
-    void appendData(ProfileResponse response);
-
+    void inflateData(ProfileItem item);
 }

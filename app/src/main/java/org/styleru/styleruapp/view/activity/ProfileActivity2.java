@@ -9,17 +9,18 @@ import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
@@ -29,30 +30,44 @@ import org.styleru.styleruapp.R;
 import org.styleru.styleruapp.model.cache.Singletons;
 import org.styleru.styleruapp.model.cache.UserInfo;
 import org.styleru.styleruapp.model.dto.ProfileItem;
-import org.styleru.styleruapp.model.dto.ProfileResponse;
+import org.styleru.styleruapp.model.dto.support.Skill;
 import org.styleru.styleruapp.presenter.ProfilePresenter;
 import org.styleru.styleruapp.presenter.ProfilePresenterImpl;
-import org.styleru.styleruapp.util.EndlessRecyclerViewScrollListener;
 import org.styleru.styleruapp.view.ProfileView;
+import org.styleru.styleruapp.view.adapter.recycler.CompetenceRecyclerAdapter;
 import org.styleru.styleruapp.view.adapter.recycler.ProfileProjectsRecyclerAdapter;
+import org.styleru.styleruapp.view.adapter.recycler.TimelineRecyclerAdapter;
 import org.styleru.styleruapp.view.fragments.ProfileFragmentTabProjects;
 
-import java.util.List;
+import java.util.Collections;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 
 public class ProfileActivity2 extends AppCompatActivity implements ProfileView {
     private static final int DEFAULT_BATCH_SIZE=10;
     private ProfileFragmentTabProjects.OnFragmentInteractionListener mListener;
-    private EndlessRecyclerViewScrollListener recyclerViewScrollListener;
-    private ProfileProjectsRecyclerAdapter recyclerAdapter;
-    private String authToken;
     private ProfilePresenter presenter;
     private CollapsingToolbarLayout collapsingToolbarLayout = null;
     private ExpandableLayout expandableLayoutTimeline,expandableLayoutCompetence,expandableLayoutProjects;
-    private RecyclerView recyclerView;
-    private String asd;
+    private CompetenceRecyclerAdapter competenceRecyclerAdapter;
+    private ProfileProjectsRecyclerAdapter projectsRecyclerAdapter;
+    private TimelineRecyclerAdapter timelineRecyclerAdapter;
+    @BindView(R.id.profile_id)
+    public ImageView imageView;
+    @BindView(R.id.progressbar)
+    public View progressbar;
+    @BindView(R.id.text_skills_list)
+    public TextView textSkillsList;
+    @BindView(R.id.text_phone)
+    public TextView textPhone;
+    @BindView(R.id.text_email)
+    public TextView textEmail;
+    @BindView(R.id.text_review)
+    public TextView textReview;
+    Toolbar toolbar;
+
     @BindView(R.id.recycler_compete)
     public RecyclerView recycler_compete;
     @BindView(R.id.recycler_projects)
@@ -63,37 +78,27 @@ public class ProfileActivity2 extends AppCompatActivity implements ProfileView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_profile_vol_2);
+        ButterKnife.bind(this);
         AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setSubtitle("Это сабтайтд");
         expandableLayoutTimeline = (ExpandableLayout) findViewById(R.id.expandable_layout_timeline);
         expandableLayoutCompetence = (ExpandableLayout) findViewById(R.id.expandable_layout_competence);
         expandableLayoutProjects = (ExpandableLayout) findViewById(R.id.expandable_layout_projects);
-        authToken=Singletons.getPreferencesManager().getAuthToken();
 
+        competenceRecyclerAdapter=new CompetenceRecyclerAdapter(this, Collections.emptyList());
+        projectsRecyclerAdapter=new ProfileProjectsRecyclerAdapter(this, Collections.emptyList());
+        timelineRecyclerAdapter=new TimelineRecyclerAdapter(this, Collections.emptyList());
+
+        recycler_compete.setLayoutManager(new LinearLayoutManager(this));
+        recycler_compete.setAdapter(competenceRecyclerAdapter);
+        recycler_projects.setLayoutManager(new LinearLayoutManager(this));
+        recycler_projects.setAdapter(projectsRecyclerAdapter);
+        recycler_timeline.setLayoutManager(new LinearLayoutManager(this));
+        recycler_timeline.setAdapter(timelineRecyclerAdapter);
 
         presenter=new ProfilePresenterImpl(this);
-        presenter.onProfileCreate(authToken,1);
-
-
-
-
-
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        recyclerAdapter=new ProfileProjectsRecyclerAdapter(this,new ArrayList<ProfileProjectsItem>());
-//        recyclerView.setAdapter(recyclerAdapter);
-//        recyclerViewScrollListener = new EndlessRecyclerViewScrollListener(
-//                (LinearLayoutManager) recyclerView.getLayoutManager()) {
-//            @Override
-//            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-//                presenter.onProfileCreate();
-//                presenter.onDataAppend(recyclerAdapter.getItemCount(),DEFAULT_BATCH_SIZE);
-//            }
-//        };
-
- //       chart.invalidate();
-
 
         FrameLayout clickerCompetence = (FrameLayout) findViewById(R.id.frame_competence) ;
         ImageView imgCompetenceCollapse = (ImageView) findViewById(R.id.down_competence);
@@ -146,28 +151,12 @@ public class ProfileActivity2 extends AppCompatActivity implements ProfileView {
                 }
             }
         });
-//        ActionBar actionBar = getSupportActionBar();
-//        actionBar.setDisplayHomeAsUpEnabled(true);
-        ImageView provileid = (ImageView) findViewById(R.id.profile_id);
-        UserInfo info = Singletons.getUserInfo();
-
-//        name.setText(info.getLastName());
-//        presenter.onSingleProfileAppend(info.getToken(),info.getUserId());
-//        surname.setText(item.surname);
-//        name.setText(item.name);
-        Glide
-                .with(this)
-                .load(info.getImageUrl())
-                .asBitmap().centerCrop()
-                .placeholder(R.drawable.placeholder_loading_circled)
-                .into(provileid);
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        collapsingToolbarLayout.setTitle(getResources().getString(R.string.user_name));
         collapsingToolbarLayout.setExpandedTitleMargin(20,0,0,60);
 //
 //        TextView compet = (TextView) findViewById(R.id.compet);
         dynamicToolbarColor();
-        toolbarTextAppernce();
+        toolbarTextAppearance();
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int offset)
@@ -198,15 +187,11 @@ public class ProfileActivity2 extends AppCompatActivity implements ProfileView {
                 }
             }
         });
+        //presenter.onRequestProfileData(getIntent().getIntExtra("id",1));
+
+        presenter.onRequestProfileData(1);
     }
 
-//    private void prepateProjectsdata() {
-//        ProjectsItem projectsItem = new  ProjectsItem(1,"Дмитрий","Ринат",true,true,"16.06.99");
-//        ProjectsList.add(projectsItem);
-//
-//
-//        mAdapter.notifyDataSetChanged();
-//    }
     private void dynamicToolbarColor() {
 
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
@@ -223,7 +208,7 @@ public class ProfileActivity2 extends AppCompatActivity implements ProfileView {
     }
 
 
-    private void toolbarTextAppernce() {
+    private void toolbarTextAppearance() {
         collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.collapsedAppbar);
         collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.expandedAppbar);
 
@@ -251,33 +236,34 @@ public class ProfileActivity2 extends AppCompatActivity implements ProfileView {
 
     @Override
     public void startProgressBar() {
-
+        progressbar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void stopProgressBar() {
-
-    }
-
-
-    @Override
-    public void setData(ProfileResponse response) {
-
+        progressbar.setVisibility(View.GONE);
     }
 
     @Override
-    public void appendData(ProfileResponse response) {
-       List<ProfileItem> a= response.getData();
-        String m =a.get(8).toString();
-        Toast toast = Toast.makeText(getApplicationContext(),
-                m, Toast.LENGTH_SHORT);
-        toast.show();
+    public void inflateData(ProfileItem item) {
+        competenceRecyclerAdapter.setDataWithNotify(item.getSkills());
+        timelineRecyclerAdapter.setDataWithNotify(item.getTimeline());
+        projectsRecyclerAdapter.setDataWithNotify(item.getProjects());
+        collapsingToolbarLayout.setTitle(getResources().getString(R.string.user_name));
+        textPhone.setText(item.getPhone());
+        textReview.setText(item.getSummary());
+        textEmail.setText(item.getEmail());
+        toolbar.setTitle(item.getFirst_name()+" "+item.getLast_name());
+        Glide
+                .with(this)
+                .load(item.getImage_url())
+                .asBitmap().centerCrop()
+                .placeholder(R.drawable.placeholder_loading_circled)
+                .into(imageView);
+        String list="";
+        for (Skill skill:item.getSkills()) {
+            list=list+skill.getName()+", ";
+        }
+        textSkillsList.setText(list.substring(list.length()-2));
     }
-
-//    @Override
-//    public void appendData(ProfileResponse response) {
-//
-//    }
-
-
 }

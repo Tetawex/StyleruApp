@@ -13,6 +13,7 @@ import org.styleru.styleruapp.R;
 import org.styleru.styleruapp.model.dto.TimelineItem;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,7 +24,7 @@ import butterknife.ButterKnife;
 
 public class TimelineRecyclerAdapter extends BaseRecyclerAdapter<TimelineItem> {
     private DateTimeFormatter formatter;
-    public TimelineRecyclerAdapter(Context context, ArrayList<TimelineItem> data) {
+    public TimelineRecyclerAdapter(Context context, List<TimelineItem> data) {
         super(context, data);
         formatter = DateTimeFormat.forPattern("dd.MM.yyyy");
     }
@@ -31,7 +32,7 @@ public class TimelineRecyclerAdapter extends BaseRecyclerAdapter<TimelineItem> {
     public String preposition;
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view=inflater.inflate(R.layout.card_projects_vol2,parent,false);
+        View view=inflater.inflate(R.layout.card_profile_timeline,parent,false);
         TimelineViewHolder  holder;
         holder = new TimelineViewHolder(view);
         return holder;

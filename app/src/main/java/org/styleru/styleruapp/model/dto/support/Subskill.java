@@ -11,7 +11,7 @@ public class Subskill {
     private String name;
     @SerializedName("score")
     @Expose
-    private String score;
+    private Integer score;
 
     public String getName() {
         return name;
@@ -21,11 +21,11 @@ public class Subskill {
         this.name = name;
     }
 
-    public String getScore() {
+    public Integer getScore() {
         return score;
     }
 
-    public void setScore(String score) {
+    public void setScore(Integer score) {
         this.score = score;
     }
 

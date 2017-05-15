@@ -11,5 +11,5 @@ import io.reactivex.Observable;
  */
 
 public interface ProfileModel extends Model {
-    Observable<ProfileResponse> getData(ProfileRequest request);
+    Observable<ProfileResponse> getData(int id);
 }

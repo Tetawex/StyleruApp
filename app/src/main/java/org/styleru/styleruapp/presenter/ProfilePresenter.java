@@ -5,5 +5,5 @@ package org.styleru.styleruapp.presenter;
  */
 
 public interface ProfilePresenter extends Presenter{
-    void onProfileCreate(String token,int user_id);
+    void onRequestProfileData(int user_id);
 }

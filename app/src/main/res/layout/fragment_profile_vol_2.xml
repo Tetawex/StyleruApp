@@ -2,7 +2,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -47,6 +46,7 @@
                                 android:textColor="#111"
                                 android:text="Телефон:"/>
                             <TextView
+                                android:id="@+id/text_phone"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0.2"
@@ -67,6 +67,7 @@
                                 android:textColor="#111"
                                 android:text="Email:"/>
                             <TextView
+                                android:id="@+id/text_email"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0.2"
@@ -87,6 +88,7 @@
                                 android:textColor="#111"
                                 android:text="Отзыв:"/>
                             <TextView
+                                android:id="@+id/text_review"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0.2"
@@ -139,14 +141,14 @@
                         android:layout_height="40dp"
                         android:id="@+id/down_competence"
                         android:visibility="visible"
-                        android:background="@drawable/arrow_up"/>
+                        android:background="@drawable/arrow_down"/>
                 </FrameLayout>
                 <net.cachapa.expandablelayout.ExpandableLayout
                     android:id="@+id/expandable_layout_competence"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:el_duration="500"
-                    app:el_expanded="true">
+                    app:el_expanded="false">
                <android.support.v7.widget.RecyclerView
                    android:id="@+id/recycler_compete"
                    android:layout_width="match_parent"
@@ -191,7 +193,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:el_duration="500"
-                    app:el_expanded="true">
+                    app:el_expanded="false">
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
@@ -254,7 +256,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:el_duration="500"
-                    app:el_expanded="true">
+                    app:el_expanded="false">
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
@@ -312,7 +314,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginBottom="8dp"
                 app:layout_collapseMode="parallax"
-                android:id="@+id/text"
+                android:id="@+id/text_skills_list"
                 app:layout_collapseParallaxMultiplier="0.7"
                 android:layout_gravity="bottom"
                 android:text="Web, android, Менеджмент"/>
@@ -327,5 +329,7 @@
         </android.support.design.widget.CollapsingToolbarLayout>
 
     </android.support.design.widget.AppBarLayout>
-
+    <include layout="@layout/view_progressbar_basic"
+        android:id="@+id/progressbar"
+        android:visibility="gone"/>
 </android.support.design.widget.CoordinatorLayout>

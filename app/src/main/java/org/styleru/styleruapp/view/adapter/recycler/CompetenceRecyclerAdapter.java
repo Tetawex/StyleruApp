@@ -40,7 +40,6 @@ public class CompetenceRecyclerAdapter extends BaseRecyclerAdapter<Skill> {
     public void onBindViewHolder(RecyclerView.ViewHolder uncastedHolder, int position) {
 
         Skill item= getData().get(position);
-        List<Subskill> item2 = item.getSubskills();
 
         CompetenceViewHolder holder=(CompetenceViewHolder) uncastedHolder;
         holder.text.setText(item.getName());
@@ -52,31 +51,26 @@ public class CompetenceRecyclerAdapter extends BaseRecyclerAdapter<Skill> {
         holder.chart.getLegend().setEnabled(false);
         YAxis yAxis = holder.chart.getYAxis();
         yAxis.setEnabled(false);
-        yAxis.setAxisMaxValue(3);
+        yAxis.setAxisMaxValue(5);
         yAxis.setAxisMinValue(1);
 
-        ArrayList<Entry> entries = new ArrayList<>();
-        entries.add(new Entry(1f, 0));
-        entries.add(new Entry(2f, 1));
-        entries.add(new Entry(3f, 2));
-        entries.add(new Entry(2f, 3));
-        entries.add(new Entry(2f, 4));
-        entries.add(new Entry(1f, 5));
+        holder.text.setText(item.getName());
+
+        List<String> labels = new ArrayList<String>();
+        List<Entry> entries = new ArrayList<>();
+        int i=0;
+        for (Subskill sub:item.getSubskills()) {
+            entries.add(new Entry(sub.getScore(), i));
+            labels.add(sub.getName());
+            i++;
+        }
         RadarDataSet dataset_comp1 = new RadarDataSet(entries, "Компетенции" );
         dataset_comp1.setColor(Color.rgb(40,199,192));
         dataset_comp1.setDrawFilled(true);
         dataset_comp1.setValueTextSize(0);
 
-        ArrayList<RadarDataSet> dataSets = new ArrayList<RadarDataSet>();
+        List<RadarDataSet> dataSets = new ArrayList<RadarDataSet>();
         dataSets.add(dataset_comp1);
-
-        ArrayList<String> labels = new ArrayList<String>();
-        labels.add("scrum");
-        labels.add("Тайм-менеджмент");
-        labels.add("ведение проекта");
-        labels.add("командообразования");
-        labels.add("Мотивация");
-        labels.add("переговоры");
 
         RadarData data = new RadarData(labels, dataSets);
         holder.chart.setData(data);

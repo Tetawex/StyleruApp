@@ -85,6 +85,6 @@ public interface ApiInterface {
     Completable approveVacancy(@Body ApproveVacancyRequest request);
     @POST("requestVacancy")
     Completable requestVacancy(@Body RequestVacancyRequest request);
-    @POST("singlePersonFull")
+    @POST("profile")
     Observable<ProfileResponse> getSingleProfileFull(@Body ProfileRequest request);
 }

@@ -17,10 +17,7 @@ public class ProfilePresenterImpl implements ProfilePresenter {
     //TODO: заменить инъекцию через конструктор инъекцией дагером
     private ProfileView view;
     private ProfileModel model;
-    ProfileRequest request;
     private Disposable disposable= Disposables.empty();
-
-    private int currentId=0;
 
     public ProfilePresenterImpl(ProfileView view) {
         this.view=view;
@@ -28,11 +25,15 @@ public class ProfilePresenterImpl implements ProfilePresenter {
     }
 
     @Override
-    public void onProfileCreate(String token, int user_id) {
-        disposable = model.getData(request)
-                .subscribe(response ->
-                                view.appendData(response),
-                        throwable -> view.showError(throwable),
+    public void onRequestProfileData(int user_id) {
+        view.startProgressBar();
+        disposable = model.getData(user_id)
+                .subscribe(response -> {
+                            view.inflateData(response.getData());
+                            view.stopProgressBar();
+                        },
+                        throwable -> {view.showError(throwable);
+                            view.stopProgressBar();},
                         () -> {
                             if(!disposable.isDisposed()) {
                                 disposable.dispose();
