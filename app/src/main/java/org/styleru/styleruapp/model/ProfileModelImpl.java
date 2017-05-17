@@ -25,8 +25,8 @@ public class ProfileModelImpl implements ProfileModel {
     @Override
     public Observable<ProfileResponse> getData(int id) {
         ProfileRequest request=new ProfileRequest(authToken,id);
-        /*if(id<0)
-            request.setUser_id(null);*/
+        if(id<0)
+            request.setUser_id(null);
         return apiService.getApiInterface()
                 .getSingleProfileFull(request)
                 .subscribeOn(Schedulers.io())

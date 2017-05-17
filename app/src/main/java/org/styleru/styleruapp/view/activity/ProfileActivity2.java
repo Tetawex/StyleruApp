@@ -187,9 +187,7 @@ public class ProfileActivity2 extends AppCompatActivity implements ProfileView {
                 }
             }
         });
-        //presenter.onRequestProfileData(getIntent().getIntExtra("id",1));
-
-        presenter.onRequestProfileData(1);
+        presenter.onRequestProfileData(getIntent().getIntExtra("id",-1));
     }
 
     private void dynamicToolbarColor() {
