@@ -1,5 +1,7 @@
 package org.styleru.styleruapp.view.activity;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -9,26 +11,27 @@ import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.content.res.ResourcesCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
 import org.styleru.styleruapp.R;
-import org.styleru.styleruapp.model.cache.Singletons;
-import org.styleru.styleruapp.model.cache.UserInfo;
 import org.styleru.styleruapp.model.dto.ProfileItem;
 import org.styleru.styleruapp.model.dto.support.Skill;
 import org.styleru.styleruapp.presenter.ProfilePresenter;
@@ -54,6 +57,7 @@ public class ProfileActivity2 extends AppCompatActivity implements ProfileView {
     private CompetenceRecyclerAdapter competenceRecyclerAdapter;
     private ProfileProjectsRecyclerAdapter projectsRecyclerAdapter;
     private TimelineRecyclerAdapter timelineRecyclerAdapter;
+    private boolean canEdit=false;
     @BindView(R.id.profile_id)
     public ImageView imageView;
     @BindView(R.id.progressbar)
@@ -66,6 +70,12 @@ public class ProfileActivity2 extends AppCompatActivity implements ProfileView {
     public TextView textEmail;
     @BindView(R.id.text_review)
     public TextView textReview;
+    @BindView(R.id.date_start)
+    public TextView dateStartText;
+    @BindView(R.id.date_end)
+    public TextView dateEndText;
+
+    MenuItem editMenuItem;
     Toolbar toolbar;
 
     @BindView(R.id.recycler_compete)
@@ -82,7 +92,7 @@ public class ProfileActivity2 extends AppCompatActivity implements ProfileView {
         AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setSubtitle("Это сабтайтд");
+        toolbar.setTitle("Загрузка...");
         expandableLayoutTimeline = (ExpandableLayout) findViewById(R.id.expandable_layout_timeline);
         expandableLayoutCompetence = (ExpandableLayout) findViewById(R.id.expandable_layout_competence);
         expandableLayoutProjects = (ExpandableLayout) findViewById(R.id.expandable_layout_projects);
@@ -152,7 +162,7 @@ public class ProfileActivity2 extends AppCompatActivity implements ProfileView {
             }
         });
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        collapsingToolbarLayout.setExpandedTitleMargin(20,0,0,60);
+        //collapsingToolbarLayout.setExpandedTitleMargin(convertDpToPixel(16,this),0,0,convertDpToPixel(36,this));
 //
 //        TextView compet = (TextView) findViewById(R.id.compet);
         dynamicToolbarColor();
@@ -217,19 +227,23 @@ public class ProfileActivity2 extends AppCompatActivity implements ProfileView {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.settings, menu);
+        getMenuInflater().inflate(R.menu.menu_profile, menu);
+        editMenuItem=menu.findItem(R.id.action_edit);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        finish();
+        if(item.getItemId()==R.id.action_edit)
+            editProfile();
+        else if(item.getItemId()==android.R.id.home)
+            finish();
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void showError(Throwable throwable) {
-
+        Toast.makeText(this,throwable.getMessage(),Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -247,21 +261,39 @@ public class ProfileActivity2 extends AppCompatActivity implements ProfileView {
         competenceRecyclerAdapter.setDataWithNotify(item.getSkills());
         timelineRecyclerAdapter.setDataWithNotify(item.getTimeline());
         projectsRecyclerAdapter.setDataWithNotify(item.getProjects());
-        collapsingToolbarLayout.setTitle(getResources().getString(R.string.user_name));
+        collapsingToolbarLayout.setTitle("");
         textPhone.setText(item.getPhone());
         textReview.setText(item.getSummary());
         textEmail.setText(item.getEmail());
-        toolbar.setTitle(item.getFirst_name()+" "+item.getLast_name());
+        toolbar.setTitle(item.getFirstName()+" "+item.getLastName());
+        dateStartText.setText(DateTime.parse(item.getStartDate().replace(' ','T')).toString(DateTimeFormat.mediumDate()));
+        dateEndText.setText(DateTime.now().toString(DateTimeFormat.mediumDate()));
+        canEdit=item.isCanEdit();
+        if(!canEdit)
+            editMenuItem.setVisible(false);
         Glide
                 .with(this)
                 .load(item.getImage_url())
                 .asBitmap().centerCrop()
-                .placeholder(R.drawable.placeholder_loading_circled)
+                .placeholder(R.color.colorGrey)
                 .into(imageView);
         String list="";
         for (Skill skill:item.getSkills()) {
-            list=list+skill.getName()+", ";
+            list+=skill.getName()+", ";
         }
-        textSkillsList.setText(list.substring(list.length()-2));
+        textSkillsList.setText(list.substring(0,list.length()-2));
+    }
+    public static int convertDpToPixel(float dp, Context context){
+        Resources resources = context.getResources();
+        DisplayMetrics metrics = resources.getDisplayMetrics();
+        float px = dp * ((float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+        return (int)px;
+    }
+    private void editProfile(){
+        if(canEdit)
+            //TODO:переход на активити вместо этого
+            Toast.makeText(this, R.string.feature_not_implemented,Toast.LENGTH_SHORT).show();
+        else
+            Toast.makeText(this, R.string.insufficent_permissions,Toast.LENGTH_SHORT).show();
     }
 }

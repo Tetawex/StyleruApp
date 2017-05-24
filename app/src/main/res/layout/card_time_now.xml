@@ -20,7 +20,7 @@
         android:orientation="horizontal"
         android:layout_gravity="center"
         android:gravity="center"
-        android:id="@+id/today_date"
+        android:id="@+id/date"
         android:text="20.02.30"
         android:layout_weight="1" >
 

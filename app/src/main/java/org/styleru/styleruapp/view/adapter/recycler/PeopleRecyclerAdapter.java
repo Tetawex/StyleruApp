@@ -18,6 +18,7 @@ import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import org.styleru.styleruapp.R;
 import org.styleru.styleruapp.model.dto.PeopleItem;
 import org.styleru.styleruapp.view.activity.ProfileActivity;
+import org.styleru.styleruapp.view.activity.ProfileActivity2;
 
 import java.util.List;
 
@@ -65,7 +66,7 @@ public class PeopleRecyclerAdapter extends BaseRecyclerAdapter<PeopleItem> {
                 Bundle bundle =new Bundle();
                 bundle.putInt("id",item.getId());
                 bundle.putString("name",item.getFirstName()+" "+item.getLastName());
-                Intent intent = new Intent(context, ProfileActivity.class);
+                Intent intent = new Intent(context, ProfileActivity2.class);
                 intent.putExtras(bundle);
                 context.startActivity(intent);
             }

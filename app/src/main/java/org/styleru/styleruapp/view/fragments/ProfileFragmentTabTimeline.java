@@ -45,7 +45,7 @@ public class ProfileFragmentTabTimeline extends Fragment implements TimelineView
     private TimelinePresenter presenter;
     @BindView(R.id.recycler)
     protected RecyclerView recyclerView;
-    @BindView(R.id.today_date)
+    @BindView(R.id.date)
     protected TextView date1;
     @BindView(R.id.swipe)
     protected SwipeRefreshLayout  swipeRefreshLayout;

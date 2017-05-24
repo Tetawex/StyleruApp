@@ -86,13 +86,13 @@
 
 
 
-    <style name="expandedAppbar" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+    <style name="expandedAppbar" parent="AppTheme.NoActionBar">
         <item name="android:textSize">30sp</item>
         <item name="android:textColor">@color/colorPrimaryTextLightTransparent</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="collapsedAppbar" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+    <style name="collapsedAppbar" parent="AppTheme">
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/colorPrimaryTextDark</item>
     </style>

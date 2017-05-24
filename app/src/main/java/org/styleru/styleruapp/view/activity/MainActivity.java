@@ -146,9 +146,6 @@ public class MainActivity extends AppCompatActivity
             case (R.id.nav_events):
                 transaction.replace(R.id.container, new EventsFragment());
                 break;
-            case (R.id.nav_profile2):
-                transaction.replace(R.id.container, new ProfileFragment1());
-                break;
             case (R.id.nav_profile):
 //                transaction.replace(R.id.container, new ProfileFragment());
                 Intent intent = new Intent(getApplication(), ProfileActivity2.class);
