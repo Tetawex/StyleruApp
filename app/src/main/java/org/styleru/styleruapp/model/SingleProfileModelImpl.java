@@ -21,11 +21,11 @@ public class SingleProfileModelImpl implements SingleProfileModel {
 
     public SingleProfileModelImpl() {
         apiService = Singletons.getApiService();
-        authToken=Singletons.getPreferencesManager().getAuthToken();
+        authToken = Singletons.getPreferencesManager().getAuthToken();
     }
 
     @Override
-    public Observable<SingleProfileResponse> getSingleProfile (SingleProfileRequest request) {
+    public Observable<SingleProfileResponse> getSingleProfile(SingleProfileRequest request) {
         Observable<SingleProfileResponse> observable = apiService.getApiInterface().getSingleProfile(request)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());

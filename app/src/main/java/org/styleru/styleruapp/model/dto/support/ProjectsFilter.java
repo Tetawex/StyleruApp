@@ -21,9 +21,10 @@ public class ProjectsFilter {
     public void setFilterMode(int filterMode) {
         this.filterMode = filterMode;
     }
-    public boolean valid(ProjectsItem item){
-        return (filterMode==0||filterMode==1&&item.isFinished()
-                ||filterMode==2&&(!item.isFinished())||filterMode==3&&item.isVacantPlaces());
+
+    public boolean valid(ProjectsItem item) {
+        return (filterMode == 0 || filterMode == 1 && item.isFinished()
+                || filterMode == 2 && (!item.isFinished()) || filterMode == 3 && item.isVacantPlaces());
     }
 
     public ProjectsFilter(int filterMode) {

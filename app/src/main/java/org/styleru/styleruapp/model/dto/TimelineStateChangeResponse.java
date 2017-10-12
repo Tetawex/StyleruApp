@@ -22,6 +22,7 @@ public class TimelineStateChangeResponse {
     public void setNewState(int newState) {
         this.newState = newState;
     }
+
     public int getId() {
         return id;
     }

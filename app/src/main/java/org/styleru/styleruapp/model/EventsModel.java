@@ -13,6 +13,7 @@ import io.reactivex.Observable;
  */
 
 public interface EventsModel extends Model {
-    Observable<EventsResponse> getData(int offset,int batchSize);
+    Observable<EventsResponse> getData(int offset, int batchSize);
+
     Observable<EventStateChangeResponse> getChangedState(int id);
 }

@@ -28,10 +28,11 @@ public class CompetenceRecyclerAdapter extends BaseRecyclerAdapter<Skill> {
     public CompetenceRecyclerAdapter(Context context, List<Skill> data) {
         super(context, data);
     }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view=inflater.inflate(R.layout.layout_compete,parent,false);
-        CompetenceViewHolder  holder;
+        View view = inflater.inflate(R.layout.layout_compete, parent, false);
+        CompetenceViewHolder holder;
         holder = new CompetenceViewHolder(view);
         return holder;
     }
@@ -39,11 +40,10 @@ public class CompetenceRecyclerAdapter extends BaseRecyclerAdapter<Skill> {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder uncastedHolder, int position) {
 
-        Skill item= getData().get(position);
+        Skill item = getData().get(position);
 
-        CompetenceViewHolder holder=(CompetenceViewHolder) uncastedHolder;
+        CompetenceViewHolder holder = (CompetenceViewHolder) uncastedHolder;
         holder.text.setText(item.getName());
-
 
 
         holder.chart.setTouchEnabled(false);
@@ -58,14 +58,14 @@ public class CompetenceRecyclerAdapter extends BaseRecyclerAdapter<Skill> {
 
         List<String> labels = new ArrayList<String>();
         List<Entry> entries = new ArrayList<>();
-        int i=0;
-        for (Subskill sub:item.getSubskills()) {
+        int i = 0;
+        for (Subskill sub : item.getSubskills()) {
             entries.add(new Entry(sub.getScore(), i));
             labels.add(sub.getName());
             i++;
         }
-        RadarDataSet dataset_comp1 = new RadarDataSet(entries, "Компетенции" );
-        dataset_comp1.setColor(Color.rgb(40,199,192));
+        RadarDataSet dataset_comp1 = new RadarDataSet(entries, "Компетенции");
+        dataset_comp1.setColor(Color.rgb(40, 199, 192));
         dataset_comp1.setDrawFilled(true);
         dataset_comp1.setValueTextSize(0);
 

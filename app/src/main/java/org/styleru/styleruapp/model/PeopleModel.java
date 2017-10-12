@@ -19,11 +19,18 @@ import io.reactivex.functions.Action;
 
 public interface PeopleModel {
     Observable<List<PeopleItem>> getData(int batchSize, int currentId);
+
     Observable<FilterModelResponse> getFilterModel();
+
     void setFilter(PeopleFilter filter);
+
     void setRequestString(String requestString);
+
     void updateCachedData();
+
     void setDataChangedListener(Action dataChangedListener);
+
     void setDataResetListener(Action dataChangedListener);
+
     void setErrorListener(ErrorListener errorListener);
 }

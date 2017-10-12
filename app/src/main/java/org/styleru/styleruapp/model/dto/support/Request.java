@@ -4,7 +4,7 @@ package org.styleru.styleruapp.model.dto.support;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Request implements IdItem{
+public class Request implements IdItem {
 
     @SerializedName("id")
     @Expose

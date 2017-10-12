@@ -12,43 +12,43 @@ import org.styleru.styleruapp.model.dto.support.PeopleFilter;
 
 public class PeopleRequest {
 
-        @SerializedName("token")
-        @Expose
-        private String token;
-        @SerializedName("batch_size")
-        @Expose
-        private int batchSize;
-        @SerializedName("offset")
-        @Expose
-        private int offset;
+    @SerializedName("token")
+    @Expose
+    private String token;
+    @SerializedName("batch_size")
+    @Expose
+    private int batchSize;
+    @SerializedName("offset")
+    @Expose
+    private int offset;
 
-        public String getToken() {
-            return token;
-        }
+    public String getToken() {
+        return token;
+    }
 
-        public void setToken(String token) {
-            this.token = token;
-        }
+    public void setToken(String token) {
+        this.token = token;
+    }
 
-        public int getBatchSize() {
-            return batchSize;
-        }
+    public int getBatchSize() {
+        return batchSize;
+    }
 
-        public void setBatchSize(int batchSize) {
-            this.batchSize = batchSize;
-        }
+    public void setBatchSize(int batchSize) {
+        this.batchSize = batchSize;
+    }
 
-        public int getOffset() {
-            return offset;
-        }
+    public int getOffset() {
+        return offset;
+    }
 
-        public void setOffset(int offset) {
-            this.offset = offset;
-        }
+    public void setOffset(int offset) {
+        this.offset = offset;
+    }
 
-        public PeopleRequest(String token, int batchSize, int offset) {
-            this.token = token;
-            this.batchSize = batchSize;
-            this.offset = offset;
-        }
+    public PeopleRequest(String token, int batchSize, int offset) {
+        this.token = token;
+        this.batchSize = batchSize;
+        this.offset = offset;
+    }
 }

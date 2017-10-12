@@ -47,11 +47,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class PeopleFragment extends Fragment implements PeopleView {
-    private static final int DEFAULT_BATCH_SIZE=10;
+    private static final int DEFAULT_BATCH_SIZE = 10;
     private PeopleFragment.OnFragmentInteractionListener mListener;
     private EndlessRecyclerViewScrollListener recyclerViewScrollListener;
     private PeopleRecyclerAdapter recyclerAdapter;
-    private PeopleFilter peopleFilter=new PeopleFilter();
+    private PeopleFilter peopleFilter = new PeopleFilter();
 
     private PeoplePresenter presenter;
     private DrawerLocker drawerLocker;
@@ -94,11 +94,11 @@ public class PeopleFragment extends Fragment implements PeopleView {
     public TextView experiencesTextList;
 
     private FilterItemRecyclerAdapter filterRecyclerAdapter;
-    private FilterModelResponse filterModel=null;
-    private List<FilterItem> selectedDepartments=new ArrayList<>();
-    private List<FilterItem> selectedSubdepartments=new ArrayList<>();
-    private List<FilterItem> selectedUniversities=new ArrayList<>();
-    private List<FilterItem> selectedExperiences=new ArrayList<>();
+    private FilterModelResponse filterModel = null;
+    private List<FilterItem> selectedDepartments = new ArrayList<>();
+    private List<FilterItem> selectedSubdepartments = new ArrayList<>();
+    private List<FilterItem> selectedUniversities = new ArrayList<>();
+    private List<FilterItem> selectedExperiences = new ArrayList<>();
     private ToolbarInteractor toolbarInteractor;
 
 
@@ -121,25 +121,25 @@ public class PeopleFragment extends Fragment implements PeopleView {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_people, container, false);
-        toolbarInteractor=(ToolbarInteractor)getActivity();
+        toolbarInteractor = (ToolbarInteractor) getActivity();
         toolbarInteractor.setToolbarTitleMode(ToolbarInteractor.Mode.BASIC);
         toolbarInteractor.setToolbarTitle(getString(R.string.people));
         toolbarInteractor.setToolbarElevationDp(4);
-        drawerLocker=(DrawerLocker)getActivity();
+        drawerLocker = (DrawerLocker) getActivity();
 
         setHasOptionsMenu(true);
 
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
         progressbar.setVisibility(View.VISIBLE);
         filterRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         //Адаптер для ресайклера
-        filterRecyclerAdapter=new FilterItemRecyclerAdapter(getContext(), Collections.emptyList());
+        filterRecyclerAdapter = new FilterItemRecyclerAdapter(getContext(), Collections.emptyList());
         filterRecycler.setAdapter(filterRecyclerAdapter);
         //Адаптер
         //Тут можно сделать поддержку вертикальной ориентации, использовав GridLayoutManager
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         //Адаптер для ресайклера
-        recyclerAdapter=new PeopleRecyclerAdapter(getContext(),new ArrayList<PeopleItem>());
+        recyclerAdapter = new PeopleRecyclerAdapter(getContext(), new ArrayList<PeopleItem>());
         recyclerView.setAdapter(recyclerAdapter);
 
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark);
@@ -150,7 +150,7 @@ public class PeopleFragment extends Fragment implements PeopleView {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
                 presenter.onDataAppend(recyclerAdapter
-                        .getItemCount(),DEFAULT_BATCH_SIZE);
+                        .getItemCount(), DEFAULT_BATCH_SIZE);
             }
         };
         recyclerView.addOnScrollListener(recyclerViewScrollListener);
@@ -158,8 +158,7 @@ public class PeopleFragment extends Fragment implements PeopleView {
         //Рефреш-лэйаут сверху
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onRefresh()
-            {
+            public void onRefresh() {
                 presenter.onModelUpdateCachedData();
             }
         });
@@ -169,29 +168,29 @@ public class PeopleFragment extends Fragment implements PeopleView {
                 filter.setVisibility(View.GONE);
                 drawerLocker.setDrawerEnabled(true);
                 toolbarInteractor.setToolbarVisible(true);
-                List<Integer> departmentIds=new ArrayList<>();
-                for (FilterItem filterItem: selectedDepartments) {
-                    if(filterItem.isChecked())
+                List<Integer> departmentIds = new ArrayList<>();
+                for (FilterItem filterItem : selectedDepartments) {
+                    if (filterItem.isChecked())
                         departmentIds.add(filterItem.getId());
                 }
-                List<Integer> subdepartmentIds=new ArrayList<>();
-                for (FilterItem filterItem: selectedSubdepartments) {
-                    if(filterItem.isChecked())
+                List<Integer> subdepartmentIds = new ArrayList<>();
+                for (FilterItem filterItem : selectedSubdepartments) {
+                    if (filterItem.isChecked())
                         subdepartmentIds.add(filterItem.getId());
                 }
-                List<Integer> universityIds=new ArrayList<>();
-                for (FilterItem filterItem: selectedUniversities) {
-                    if(filterItem.isChecked())
+                List<Integer> universityIds = new ArrayList<>();
+                for (FilterItem filterItem : selectedUniversities) {
+                    if (filterItem.isChecked())
                         universityIds.add(filterItem.getId());
                 }
-                List<Integer> experienceIds=new ArrayList<>();
-                for (FilterItem filterItem: selectedExperiences) {
-                    if(filterItem.isChecked())
+                List<Integer> experienceIds = new ArrayList<>();
+                for (FilterItem filterItem : selectedExperiences) {
+                    if (filterItem.isChecked())
                         experienceIds.add(filterItem.getId());
                 }
                 presenter.onSetFilter(
                         new PeopleFilter(departmentIds,
-                                subdepartmentIds,universityIds,experienceIds));
+                                subdepartmentIds, universityIds, experienceIds));
             }
         });
         departmentsClickTarget.setOnClickListener(new View.OnClickListener() {
@@ -240,63 +239,58 @@ public class PeopleFragment extends Fragment implements PeopleView {
                         builder.append(", ");
                     }
                 }
-                if (!(counter == 0 || counter == filterModel.getDepartments().size())){
+                if (!(counter == 0 || counter == filterModel.getDepartments().size())) {
                     builder.setLength(builder.length() - 2);
                     departmentsTextList.setText(builder.toString());
-                }
-
-                else
+                } else
                     departmentsTextList.setText(R.string.all);
 
-                counter=0;
+                counter = 0;
                 builder = new StringBuilder();
-                    for (FilterItem item : selectedSubdepartments) {
-                        if (item.isChecked()) {
-                            builder.append(item.getName());
-                            counter++;
-                            builder.append(", ");
-                        }
+                for (FilterItem item : selectedSubdepartments) {
+                    if (item.isChecked()) {
+                        builder.append(item.getName());
+                        counter++;
+                        builder.append(", ");
                     }
-                if(!(counter==0||counter==filterModel.getSubdepartments().size())) {
+                }
+                if (!(counter == 0 || counter == filterModel.getSubdepartments().size())) {
                     builder.setLength(builder.length() - 2);
                     subdepartmentsTextList.setText(builder.toString());
-                }
-                else
+                } else
                     subdepartmentsTextList.setText(R.string.all);
 
-                counter=0;
-                    builder = new StringBuilder();
-                    for (FilterItem item : selectedUniversities) {
-                        if (item.isChecked()) {
-                            builder.append(item.getName());
-                            counter++;
-                            builder.append(", ");
-                        }
+                counter = 0;
+                builder = new StringBuilder();
+                for (FilterItem item : selectedUniversities) {
+                    if (item.isChecked()) {
+                        builder.append(item.getName());
+                        counter++;
+                        builder.append(", ");
                     }
-                if(!(counter==0||counter==filterModel.getUniversities().size())) {
+                }
+                if (!(counter == 0 || counter == filterModel.getUniversities().size())) {
                     builder.setLength(builder.length() - 2);
                     universitiesTextList.setText(builder.toString());
-                }
-                else
+                } else
                     universitiesTextList.setText(R.string.all);
-                counter=0;
+                counter = 0;
                 builder = new StringBuilder();
-                    for (FilterItem item : selectedExperiences) {
-                        if (item.isChecked()) {
-                            builder.append(item.getName());
-                            counter++;
-                            builder.append(", ");
-                        }
+                for (FilterItem item : selectedExperiences) {
+                    if (item.isChecked()) {
+                        builder.append(item.getName());
+                        counter++;
+                        builder.append(", ");
                     }
-                if(!(counter==0||counter==filterModel.getExperiences().size())) {
-                    builder.setLength(builder.length()-2);
-                    experiencesTextList.setText(builder.toString());
                 }
-                else
+                if (!(counter == 0 || counter == filterModel.getExperiences().size())) {
+                    builder.setLength(builder.length() - 2);
+                    experiencesTextList.setText(builder.toString());
+                } else
                     experiencesTextList.setText(R.string.all);
             }
         });
-        presenter=new PeoplePresenterImpl(this);
+        presenter = new PeoplePresenterImpl(this);
         presenter.onFilterModelLoad();
         return view;
     }
@@ -310,7 +304,7 @@ public class PeopleFragment extends Fragment implements PeopleView {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_fragment_people, menu);
-        MenuItem filterItem=menu.findItem(R.id.action_filter);
+        MenuItem filterItem = menu.findItem(R.id.action_filter);
         filterItem.getIcon().setAlpha(138);
         filterItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
@@ -321,7 +315,7 @@ public class PeopleFragment extends Fragment implements PeopleView {
                 universitiesTextList.setText(R.string.all);
                 experiencesTextList.setText(R.string.all);
                 presenter.onFilterModelLoad();*/
-                if(filterModel!=null) {
+                if (filterModel != null) {
                     toolbarInteractor.setToolbarVisible(false);
                     drawerLocker.setDrawerEnabled(false);
                     filter.setVisibility(View.VISIBLE);
@@ -347,9 +341,11 @@ public class PeopleFragment extends Fragment implements PeopleView {
         });
         super.onCreateOptionsMenu(menu, inflater);
     }
-    private void doQuery(String query){
+
+    private void doQuery(String query) {
         presenter.onSetRequestString(query.trim());
     }
+
     @Override
     public void onDetach() {
         super.onDetach();
@@ -358,7 +354,7 @@ public class PeopleFragment extends Fragment implements PeopleView {
 
     @Override
     public void showError(Throwable throwable) {
-        Toast.makeText(getContext(),throwable.getMessage(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), throwable.getMessage(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -374,21 +370,21 @@ public class PeopleFragment extends Fragment implements PeopleView {
 
     @Override
     public void setFilterModel(FilterModelResponse model) {
-        filterModel=model;
+        filterModel = model;
         selectedUniversities.clear();
         selectedDepartments.clear();
         selectedSubdepartments.clear();
         selectedExperiences.clear();
-        for(Department dep :filterModel.getDepartments()){
+        for (Department dep : filterModel.getDepartments()) {
             selectedDepartments.add(dep);
         }
-        for(Subdepartment sub :filterModel.getSubdepartments()){
+        for (Subdepartment sub : filterModel.getSubdepartments()) {
             selectedSubdepartments.add(sub);
         }
-        for(University uni :filterModel.getUniversities()){
+        for (University uni : filterModel.getUniversities()) {
             selectedUniversities.add(uni);
         }
-        for(Experience exp :filterModel.getExperiences()){
+        for (Experience exp : filterModel.getExperiences()) {
             selectedExperiences.add(exp);
         }
     }
@@ -404,8 +400,7 @@ public class PeopleFragment extends Fragment implements PeopleView {
         recyclerAdapter.setDataWithNotify(data);
     }
 
-    public void onDataUpdated()
-    {
+    public void onDataUpdated() {
         swipeRefreshLayout.setRefreshing(false);
         recyclerViewScrollListener.resetState();
     }

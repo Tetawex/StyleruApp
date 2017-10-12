@@ -27,38 +27,38 @@ public class EventsPresenterImpl implements EventsPresenter {
     private EventsView view;
     private EventsModel model;
 
-    private Disposable disposable= Disposables.empty();
-    private Disposable secondaryDisposable= Disposables.empty();
+    private Disposable disposable = Disposables.empty();
+    private Disposable secondaryDisposable = Disposables.empty();
 
-    private int currentId=0;
+    private int currentId = 0;
 
     public EventsPresenterImpl(EventsView view) {
-        this.view=view;
+        this.view = view;
         //TODO: заменить тестовую модель на настоящую, когда сделают api
-        this.model=new EventsModelImpl();
+        this.model = new EventsModelImpl();
     }
 
     @Override
     public void onDataAppend(int offset, int batchSize) {
-        currentId=offset;
+        currentId = offset;
         disposable = model.getData(currentId, batchSize)
                 .subscribe(response -> view.appendData(response.getData()),
                         throwable -> view.showError(throwable),
                         () -> {
-                            if(!disposable.isDisposed()) {
+                            if (!disposable.isDisposed()) {
                                 disposable.dispose();
                             }
                         });
-        currentId+=batchSize;
+        currentId += batchSize;
     }
 
     @Override
     public void onDataUpdate(int batchSize) {
-        currentId=0;
-        if(!disposable.isDisposed()) {
+        currentId = 0;
+        if (!disposable.isDisposed()) {
             disposable.dispose();
         }
-        disposable = model.getData(currentId,batchSize)
+        disposable = model.getData(currentId, batchSize)
                 .subscribe(response ->
                         {
                             view.stopProgressBar();
@@ -71,31 +71,33 @@ public class EventsPresenterImpl implements EventsPresenter {
                             view.showError(throwable);
                         },
                         () -> {
-                            if(!disposable.isDisposed()) {
+                            if (!disposable.isDisposed()) {
                                 disposable.dispose();
                             }
                         });
-        currentId+=batchSize;
+        currentId += batchSize;
     }
 
     @Override
     public void onEventStateChange(int id) {
-        secondaryDisposable=model.getChangedState(id).subscribe(eventStateChangeResponse ->
-        {
-            view.changeEventStateSuccess(id,eventStateChangeResponse.getState());
-        },
-        throwable ->
-        {
-            view.changeEventStateFail(id);
-            view.showError(throwable);
-            Log.getStackTraceString(throwable);
-        },
-        () -> {
-            if(!secondaryDisposable.isDisposed()) {
-                secondaryDisposable.dispose();
-            }});
+        secondaryDisposable = model.getChangedState(id).subscribe(eventStateChangeResponse ->
+                {
+                    view.changeEventStateSuccess(id, eventStateChangeResponse.getState());
+                },
+                throwable ->
+                {
+                    view.changeEventStateFail(id);
+                    view.showError(throwable);
+                    Log.getStackTraceString(throwable);
+                },
+                () -> {
+                    if (!secondaryDisposable.isDisposed()) {
+                        secondaryDisposable.dispose();
+                    }
+                });
 
     }
+
     @Override
     public void onStop() {
 

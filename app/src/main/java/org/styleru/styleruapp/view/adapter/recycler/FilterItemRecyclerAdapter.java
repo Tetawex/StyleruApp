@@ -22,10 +22,11 @@ public class FilterItemRecyclerAdapter extends BaseRecyclerAdapter<FilterItem> {
     public FilterItemRecyclerAdapter(Context context, List<FilterItem> data) {
         super(context, data);
     }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view=inflater.inflate(R.layout.view_filter_item,parent,false);
-        FilterItemViewHolder  holder;
+        View view = inflater.inflate(R.layout.view_filter_item, parent, false);
+        FilterItemViewHolder holder;
         holder = new FilterItemViewHolder(view);
         return holder;
     }
@@ -33,10 +34,10 @@ public class FilterItemRecyclerAdapter extends BaseRecyclerAdapter<FilterItem> {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder uncastedHolder, int position) {
 
-        FilterItem item= getData().get(position);
-        FilterItemViewHolder holder=(FilterItemViewHolder) uncastedHolder;
+        FilterItem item = getData().get(position);
+        FilterItemViewHolder holder = (FilterItemViewHolder) uncastedHolder;
         holder.title.setText(item.getName());
-        if(item.isChecked())
+        if (item.isChecked())
             holder.checkbox.setVisibility(View.VISIBLE);
         else
             holder.checkbox.setVisibility(View.INVISIBLE);
@@ -44,7 +45,7 @@ public class FilterItemRecyclerAdapter extends BaseRecyclerAdapter<FilterItem> {
             @Override
             public void onClick(View v) {
                 item.setChecked(!item.isChecked());
-                if(item.isChecked())
+                if (item.isChecked())
                     holder.checkbox.setVisibility(View.VISIBLE);
                 else
                     holder.checkbox.setVisibility(View.INVISIBLE);
@@ -59,6 +60,7 @@ public class FilterItemRecyclerAdapter extends BaseRecyclerAdapter<FilterItem> {
         View checkbox;
         @BindView(R.id.title)
         TextView title;
+
         public FilterItemViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);

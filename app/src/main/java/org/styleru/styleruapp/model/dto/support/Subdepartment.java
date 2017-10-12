@@ -32,7 +32,7 @@ public class Subdepartment implements FilterItem {
 
     @Override
     public void setChecked(boolean checked) {
-        this.checked=checked;
+        this.checked = checked;
     }
 
     public void setName(String name) {

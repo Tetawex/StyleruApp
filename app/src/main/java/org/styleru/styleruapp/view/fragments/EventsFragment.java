@@ -35,8 +35,8 @@ import butterknife.ButterKnife;
 /**
  * A screen responsible for viewing event feed, implements corresponding interface
  */
-public class EventsFragment extends Fragment implements EventsView{
-    private static final int DEFAULT_BATCH_SIZE=10;//глобальные переменные - признак некачественного кода
+public class EventsFragment extends Fragment implements EventsView {
+    private static final int DEFAULT_BATCH_SIZE = 10;//глобальные переменные - признак некачественного кода
     private OnFragmentInteractionListener mListener;
     private EndlessRecyclerViewScrollListener recyclerViewScrollListener;
     private EventsRecyclerAdapter recyclerAdapter;
@@ -69,14 +69,14 @@ public class EventsFragment extends Fragment implements EventsView{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        super.onCreateView(inflater,container,savedInstanceState);
+        super.onCreateView(inflater, container, savedInstanceState);
 
-        View view=inflater.inflate(R.layout.fragment_events, container, false);
-        toolbarInteractor=(ToolbarInteractor)getActivity();
+        View view = inflater.inflate(R.layout.fragment_events, container, false);
+        toolbarInteractor = (ToolbarInteractor) getActivity();
         toolbarInteractor.setToolbarTitleMode(ToolbarInteractor.Mode.BASIC);
         toolbarInteractor.setToolbarElevationDp(4);
         toolbarInteractor.setToolbarTitle(getString(R.string.events));
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
         progressbar.setVisibility(View.VISIBLE);
         //Адаптер
         //Тут можно сделать поддержку вертикальной ориентации, использовав GridLayoutManager
@@ -85,7 +85,7 @@ public class EventsFragment extends Fragment implements EventsView{
         layoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(layoutManager);
         //Адаптер для ресайклера
-        recyclerAdapter=new EventsRecyclerAdapter(getContext(),new ArrayList<EventsItem>(),this);
+        recyclerAdapter = new EventsRecyclerAdapter(getContext(), new ArrayList<EventsItem>(), this);
         recyclerView.setAdapter(recyclerAdapter);
 
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark);
@@ -95,7 +95,7 @@ public class EventsFragment extends Fragment implements EventsView{
                 (LinearLayoutManager) recyclerView.getLayoutManager()) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-                presenter.onDataAppend(recyclerAdapter.getItemCount(),DEFAULT_BATCH_SIZE);
+                presenter.onDataAppend(recyclerAdapter.getItemCount(), DEFAULT_BATCH_SIZE);
             }
         };
         recyclerView.addOnScrollListener(recyclerViewScrollListener);
@@ -115,7 +115,7 @@ public class EventsFragment extends Fragment implements EventsView{
                 presenter.onDataUpdate(DEFAULT_BATCH_SIZE);
             }
         });
-        presenter=new EventsPresenterImpl(this);
+        presenter = new EventsPresenterImpl(this);
         presenter.onDataUpdate(DEFAULT_BATCH_SIZE);
         return view;
     }
@@ -128,7 +128,7 @@ public class EventsFragment extends Fragment implements EventsView{
 
     @Override
     public void showError(Throwable throwable) {
-        Toast.makeText(getContext(),throwable.getMessage(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), throwable.getMessage(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -151,11 +151,11 @@ public class EventsFragment extends Fragment implements EventsView{
     public void setData(List<EventsItem> data) {
         onDataUpdated();
         recyclerAdapter.setDataWithNotify(data);
-        for (int i=0;i<data.size();i++){
-            if(DateTime.now().isAfter(new DateTime(data.get(i).getDateTime().replace(' ','T')))) {
-                int position=i-1;
-                if(position<0)
-                    position=i;
+        for (int i = 0; i < data.size(); i++) {
+            if (DateTime.now().isAfter(new DateTime(data.get(i).getDateTime().replace(' ', 'T')))) {
+                int position = i - 1;
+                if (position < 0)
+                    position = i;
                 recyclerView.scrollToPosition(position);
                 return;
             }
@@ -163,33 +163,35 @@ public class EventsFragment extends Fragment implements EventsView{
     }
 
     @Override
-    public void changeEventStateSuccess(int id,int state) {
-        EventsItem item=recyclerAdapter.getItemById(id);
-        int strId=R.string.event_signed;
+    public void changeEventStateSuccess(int id, int state) {
+        EventsItem item = recyclerAdapter.getItemById(id);
+        int strId = R.string.event_signed;
         item.setState(state);
-        item.setAttendantsCount(item.getAttendantsCount()+1);
-        if(state==0) {
+        item.setAttendantsCount(item.getAttendantsCount() + 1);
+        if (state == 0) {
             strId = R.string.event_unsigned;
-            item.setAttendantsCount(item.getAttendantsCount()-2);
+            item.setAttendantsCount(item.getAttendantsCount() - 2);
         }
         recyclerAdapter.notifyItemChanged(
                 recyclerAdapter.getData().indexOf(recyclerAdapter.getItemById(id)));
-        Toast.makeText(getContext(), getString(strId)+" "+recyclerAdapter.getItemById(id).getTitle(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), getString(strId) + " " + recyclerAdapter.getItemById(id).getTitle(), Toast.LENGTH_SHORT).show();
     }
+
     @Override
     public void changeEventStateFail(int id) {
-        EventsItem item=recyclerAdapter.getItemById(id);
-        item.setState(item.getState()+2);
+        EventsItem item = recyclerAdapter.getItemById(id);
+        item.setState(item.getState() + 2);
         recyclerAdapter.notifyItemChanged(
                 recyclerAdapter.getData().indexOf(recyclerAdapter.getItemById(id)));
-        Toast.makeText(getContext(), R.string.err_event_state_change_fail,Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), R.string.err_event_state_change_fail, Toast.LENGTH_SHORT).show();
     }
+
     @Override
     public void requestChangeEventState(int id) {
         presenter.onEventStateChange(id);
     }
-    public void onDataUpdated()
-    {
+
+    public void onDataUpdated() {
         swipeRefreshLayout.setRefreshing(false);
         recyclerViewScrollListener.resetState();
     }

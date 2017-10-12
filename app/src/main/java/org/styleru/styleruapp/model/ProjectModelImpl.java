@@ -20,19 +20,19 @@ public class ProjectModelImpl implements ProjectModel {
     private String token;
 
     public ProjectModelImpl() {
-        apiService= Singletons.getApiService();
-        token=Singletons.getPreferencesManager().getAuthToken();
+        apiService = Singletons.getApiService();
+        token = Singletons.getPreferencesManager().getAuthToken();
     }
 
     @Override
     public Observable<ProjectResponse> getProjectData(int id) {
-        return apiService.getApiInterface().getSingleProject(new ProjectRequest(token,id))
+        return apiService.getApiInterface().getSingleProject(new ProjectRequest(token, id))
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
     @Override
     public Completable requestVacancy(int id) {
-        return apiService.getApiInterface().requestVacancy(new RequestVacancyRequest(id,token))
+        return apiService.getApiInterface().requestVacancy(new RequestVacancyRequest(id, token))
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 }

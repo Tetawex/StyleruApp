@@ -9,8 +9,10 @@ import java.util.List;
  * Created by tetawex on 06.03.17.
  */
 
-public interface DepartmentsView extends View{
+public interface DepartmentsView extends View {
     void appendData(List<DepartmentsItem> data);
+
     void setData(List<DepartmentsItem> data);
+
     void onDataUpdated();
 }

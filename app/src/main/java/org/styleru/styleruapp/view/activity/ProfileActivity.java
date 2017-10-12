@@ -30,9 +30,6 @@ public class ProfileActivity extends AppCompatActivity {
     public Toolbar toolbar;
 
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -22,7 +22,7 @@ import butterknife.ButterKnife;
  * Created by Пользователь on 13.03.2017.
  */
 
-public class LoginActivity extends AppCompatActivity implements LoginView{
+public class LoginActivity extends AppCompatActivity implements LoginView {
 
     @BindView(R.id.progressbar)
     View progressbar;
@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        presenter=new LoginPresenterImpl(this);
+        presenter = new LoginPresenterImpl(this);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,13 +58,10 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
     }
 
 
-
-
-
     @Override
     public void showError(Throwable throwable) {
-        Toast.makeText(this,throwable.getMessage(),Toast.LENGTH_LONG).show();
-        Log.e("auth",throwable.getMessage());
+        Toast.makeText(this, throwable.getMessage(), Toast.LENGTH_LONG).show();
+        Log.e("auth", throwable.getMessage());
     }
 
     @Override

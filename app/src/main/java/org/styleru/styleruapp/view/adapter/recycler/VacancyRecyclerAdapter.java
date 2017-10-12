@@ -41,20 +41,22 @@ public class VacancyRecyclerAdapter extends MappedIdRecyclerAdapter<Request> {
 
     public VacancyRecyclerAdapter(Context context, List<Request> data,
                                   VacancyView vacancyView,
-                                  boolean canApprove,boolean canRecommend) {
+                                  boolean canApprove, boolean canRecommend) {
         super(context, data);
         this.vacancyView = vacancyView;
-        this.canApprove=canApprove;
-        this.canRecommend=canRecommend;
+        this.canApprove = canApprove;
+        this.canRecommend = canRecommend;
     }
+
     public VacancyRecyclerAdapter(Context context, List<Request> data,
                                   VacancyView vacancyView) {
-        this(context,data,vacancyView,false,false);
+        this(context, data, vacancyView, false, false);
     }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view=inflater.inflate(R.layout.recycleritem_vacancy,parent,false);
-        VacancyViewHolder  holder;
+        View view = inflater.inflate(R.layout.recycleritem_vacancy, parent, false);
+        VacancyViewHolder holder;
         holder = new VacancyViewHolder(view);
 
         return holder;
@@ -62,34 +64,32 @@ public class VacancyRecyclerAdapter extends MappedIdRecyclerAdapter<Request> {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder uncastedHolder, int position) {
-        VacancyViewHolder holder =(VacancyViewHolder)uncastedHolder;
-        Request item=getData().get(position);
+        VacancyViewHolder holder = (VacancyViewHolder) uncastedHolder;
+        Request item = getData().get(position);
         holder.name.setText(item.getPeopleName());
-        if(item.isRecommended())
+        if (item.isRecommended())
             holder.indicatorRecommended.setVisibility(View.VISIBLE);
         else
             holder.indicatorRecommended.setVisibility(View.GONE);
-        if(canRecommend) {
+        if (canRecommend) {
             holder.recommendButton.setVisibility(View.VISIBLE);
             holder.recommendButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    vacancyView.onRecommendVacancy(item.getId(),item.getPeopleName(),item.isRecommended());
+                    vacancyView.onRecommendVacancy(item.getId(), item.getPeopleName(), item.isRecommended());
                 }
             });
-        }
-        else
+        } else
             holder.recommendButton.setVisibility(View.GONE);
-        if(canApprove) {
+        if (canApprove) {
             holder.approveButton.setVisibility(View.VISIBLE);
             holder.approveButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    vacancyView.onApproveVacancy(item.getId(),item.getPeopleName());
+                    vacancyView.onApproveVacancy(item.getId(), item.getPeopleName());
                 }
             });
-        }
-        else
+        } else
             holder.approveButton.setVisibility(View.GONE);
         Glide
                 .with(context)
@@ -107,14 +107,14 @@ public class VacancyRecyclerAdapter extends MappedIdRecyclerAdapter<Request> {
                 });
     }
 
-    public void setPrivileges(boolean canApprove,boolean canRecommend){
-        this.canApprove=canApprove;
-        this.canRecommend=canRecommend;
+    public void setPrivileges(boolean canApprove, boolean canRecommend) {
+        this.canApprove = canApprove;
+        this.canRecommend = canRecommend;
         notifyDataSetChanged();
     }
 
     public void tickVacancyByIdWithNotify(int id) {
-        Request r=getItemById(id);
+        Request r = getItemById(id);
         r.setRecommended(!r.isRecommended());
         notifyItemChanged(getData().indexOf(r));
     }
@@ -136,6 +136,7 @@ public class VacancyRecyclerAdapter extends MappedIdRecyclerAdapter<Request> {
 
         @BindView(R.id.button_recommend)
         AppCompatButton recommendButton;
+
         public VacancyViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);

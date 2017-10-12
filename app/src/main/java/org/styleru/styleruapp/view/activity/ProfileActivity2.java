@@ -49,15 +49,15 @@ import butterknife.ButterKnife;
 
 
 public class ProfileActivity2 extends AppCompatActivity implements ProfileView {
-    private static final int DEFAULT_BATCH_SIZE=10;
+    private static final int DEFAULT_BATCH_SIZE = 10;
     private ProfileFragmentTabProjects.OnFragmentInteractionListener mListener;
     private ProfilePresenter presenter;
     private CollapsingToolbarLayout collapsingToolbarLayout = null;
-    private ExpandableLayout expandableLayoutTimeline,expandableLayoutCompetence,expandableLayoutProjects;
+    private ExpandableLayout expandableLayoutTimeline, expandableLayoutCompetence, expandableLayoutProjects;
     private CompetenceRecyclerAdapter competenceRecyclerAdapter;
     private ProfileProjectsRecyclerAdapter projectsRecyclerAdapter;
     private TimelineRecyclerAdapter timelineRecyclerAdapter;
-    private boolean canEdit=false;
+    private boolean canEdit = false;
     @BindView(R.id.profile_id)
     public ImageView imageView;
     @BindView(R.id.progressbar)
@@ -84,6 +84,7 @@ public class ProfileActivity2 extends AppCompatActivity implements ProfileView {
     public RecyclerView recycler_projects;
     @BindView(R.id.recycler_timeline)
     public RecyclerView recycler_timeline;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,9 +98,9 @@ public class ProfileActivity2 extends AppCompatActivity implements ProfileView {
         expandableLayoutCompetence = (ExpandableLayout) findViewById(R.id.expandable_layout_competence);
         expandableLayoutProjects = (ExpandableLayout) findViewById(R.id.expandable_layout_projects);
 
-        competenceRecyclerAdapter=new CompetenceRecyclerAdapter(this, Collections.emptyList());
-        projectsRecyclerAdapter=new ProfileProjectsRecyclerAdapter(this, Collections.emptyList());
-        timelineRecyclerAdapter=new TimelineRecyclerAdapter(this, Collections.emptyList());
+        competenceRecyclerAdapter = new CompetenceRecyclerAdapter(this, Collections.emptyList());
+        projectsRecyclerAdapter = new ProfileProjectsRecyclerAdapter(this, Collections.emptyList());
+        timelineRecyclerAdapter = new TimelineRecyclerAdapter(this, Collections.emptyList());
 
         recycler_compete.setLayoutManager(new LinearLayoutManager(this));
         recycler_compete.setAdapter(competenceRecyclerAdapter);
@@ -108,9 +109,9 @@ public class ProfileActivity2 extends AppCompatActivity implements ProfileView {
         recycler_timeline.setLayoutManager(new LinearLayoutManager(this));
         recycler_timeline.setAdapter(timelineRecyclerAdapter);
 
-        presenter=new ProfilePresenterImpl(this);
+        presenter = new ProfilePresenterImpl(this);
 
-        FrameLayout clickerCompetence = (FrameLayout) findViewById(R.id.frame_competence) ;
+        FrameLayout clickerCompetence = (FrameLayout) findViewById(R.id.frame_competence);
         ImageView imgCompetenceCollapse = (ImageView) findViewById(R.id.down_competence);
         clickerCompetence.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,10 +119,7 @@ public class ProfileActivity2 extends AppCompatActivity implements ProfileView {
                 if (expandableLayoutCompetence.isExpanded()) {
                     expandableLayoutCompetence.collapse();
                     imgCompetenceCollapse.setBackgroundResource(R.drawable.arrow_down);
-                }
-
-                else
-                {
+                } else {
                     expandableLayoutCompetence.expand();
                     imgCompetenceCollapse.setBackgroundResource(R.drawable.arrow_up);
                 }
@@ -132,13 +130,10 @@ public class ProfileActivity2 extends AppCompatActivity implements ProfileView {
         clickerTimeline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (expandableLayoutTimeline.isExpanded())
-                {
+                if (expandableLayoutTimeline.isExpanded()) {
                     expandableLayoutTimeline.collapse();
                     imgTimelineCollapse.setBackgroundResource(R.drawable.arrow_down);
-                }
-                else
-                {
+                } else {
                     expandableLayoutTimeline.expand();
                     imgTimelineCollapse.setBackgroundResource(R.drawable.arrow_up);
                 }
@@ -149,13 +144,10 @@ public class ProfileActivity2 extends AppCompatActivity implements ProfileView {
         clickerProjects.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (expandableLayoutProjects.isExpanded())
-                {
+                if (expandableLayoutProjects.isExpanded()) {
                     expandableLayoutProjects.collapse();
                     imgProjectCollapse.setBackgroundResource(R.drawable.arrow_down);
-                }
-                else
-                {
+                } else {
                     expandableLayoutProjects.expand();
                     imgProjectCollapse.setBackgroundResource(R.drawable.arrow_up);
                 }
@@ -169,25 +161,21 @@ public class ProfileActivity2 extends AppCompatActivity implements ProfileView {
         toolbarTextAppearance();
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int offset)
-            {
+            public void onOffsetChanged(AppBarLayout appBarLayout, int offset) {
                 Drawable upArrow = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_arrow_back, null);
                 Drawable settings = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_settings, null);
 //                if (offset < -100)
 //                    compet.setVisibility(View.INVISIBLE);
 //                else
 //                    compet.setVisibility(View.VISIBLE);
-                if (offset < -200)
-                {
+                if (offset < -200) {
                     upArrow.setColorFilter(Color.parseColor("#000000"), PorterDuff.Mode.SRC_ATOP);
                     getSupportActionBar().setHomeAsUpIndicator(upArrow);
                     settings.setColorFilter(Color.parseColor("#000000"), PorterDuff.Mode.SRC_ATOP);
                     toolbar.setOverflowIcon(settings);
 
 
-                }
-                else
-                {
+                } else {
 
                     upArrow.setColorFilter(Color.parseColor("#ffffff"), PorterDuff.Mode.SRC_ATOP);
                     getSupportActionBar().setHomeAsUpIndicator(upArrow);
@@ -197,7 +185,7 @@ public class ProfileActivity2 extends AppCompatActivity implements ProfileView {
                 }
             }
         });
-        presenter.onRequestProfileData(getIntent().getIntExtra("id",-1));
+        presenter.onRequestProfileData(getIntent().getIntExtra("id", -1));
     }
 
     private void dynamicToolbarColor() {
@@ -223,27 +211,26 @@ public class ProfileActivity2 extends AppCompatActivity implements ProfileView {
     }
 
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_profile, menu);
-        editMenuItem=menu.findItem(R.id.action_edit);
+        editMenuItem = menu.findItem(R.id.action_edit);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId()==R.id.action_edit)
+        if (item.getItemId() == R.id.action_edit)
             editProfile();
-        else if(item.getItemId()==android.R.id.home)
+        else if (item.getItemId() == android.R.id.home)
             finish();
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void showError(Throwable throwable) {
-        Toast.makeText(this,throwable.getMessage(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, throwable.getMessage(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -265,11 +252,11 @@ public class ProfileActivity2 extends AppCompatActivity implements ProfileView {
         textPhone.setText(item.getPhone());
         textReview.setText(item.getSummary());
         textEmail.setText(item.getEmail());
-        toolbar.setTitle(item.getFirstName()+" "+item.getLastName());
-        dateStartText.setText(DateTime.parse(item.getStartDate().replace(' ','T')).toString(DateTimeFormat.mediumDate()));
+        toolbar.setTitle(item.getFirstName() + " " + item.getLastName());
+        dateStartText.setText(DateTime.parse(item.getStartDate().replace(' ', 'T')).toString(DateTimeFormat.mediumDate()));
         dateEndText.setText(DateTime.now().toString(DateTimeFormat.mediumDate()));
-        canEdit=item.isCanEdit();
-        if(!canEdit)
+        canEdit = item.isCanEdit();
+        if (!canEdit)
             editMenuItem.setVisible(false);
         Glide
                 .with(this)
@@ -277,23 +264,25 @@ public class ProfileActivity2 extends AppCompatActivity implements ProfileView {
                 .asBitmap().centerCrop()
                 .placeholder(R.color.colorGrey)
                 .into(imageView);
-        String list="";
-        for (Skill skill:item.getSkills()) {
-            list+=skill.getName()+", ";
+        String list = "";
+        for (Skill skill : item.getSkills()) {
+            list += skill.getName() + ", ";
         }
-        textSkillsList.setText(list.substring(0,list.length()-2));
+        textSkillsList.setText(list.substring(0, list.length() - 2));
     }
-    public static int convertDpToPixel(float dp, Context context){
+
+    public static int convertDpToPixel(float dp, Context context) {
         Resources resources = context.getResources();
         DisplayMetrics metrics = resources.getDisplayMetrics();
-        float px = dp * ((float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
-        return (int)px;
+        float px = dp * ((float) metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+        return (int) px;
     }
-    private void editProfile(){
-        if(canEdit)
+
+    private void editProfile() {
+        if (canEdit)
             //TODO:переход на активити вместо этого
-            Toast.makeText(this, R.string.feature_not_implemented,Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.feature_not_implemented, Toast.LENGTH_SHORT).show();
         else
-            Toast.makeText(this, R.string.insufficent_permissions,Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.insufficent_permissions, Toast.LENGTH_SHORT).show();
     }
 }

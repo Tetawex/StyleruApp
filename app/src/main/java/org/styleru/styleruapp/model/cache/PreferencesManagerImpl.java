@@ -15,11 +15,12 @@ public class PreferencesManagerImpl implements PreferencesManager {
     private SharedPreferences sharedPreferences;
 
     public PreferencesManagerImpl(Context context) {
-        sharedPreferences=context.getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
+        sharedPreferences = context.getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
     }
+
     @Override
     public String getAuthToken() {
-        if(sharedPreferences.contains(PREF_TOKEN))
+        if (sharedPreferences.contains(PREF_TOKEN))
             return sharedPreferences.getString(PREF_TOKEN, "");
         return "";
     }

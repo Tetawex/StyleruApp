@@ -14,6 +14,8 @@ import io.reactivex.Observable;
 
 public interface SettingsModel {
     Observable<SettingsDownloadResponse> getData();
+
     Observable<SettingsUploadResponse> setData(Settings data);
+
     Completable logout(String onesignalUserId);
 }

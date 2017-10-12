@@ -19,39 +19,39 @@ public class TimelinePresenterImpl implements TimelinePresenter {
     private TimelineView view;
     private TimelineModel model;
 
-    private Disposable disposable= Disposables.empty();
+    private Disposable disposable = Disposables.empty();
 
-    private int currentId=0;
+    private int currentId = 0;
 
     public TimelinePresenterImpl(TimelineView view) {
-        this.view=view;
+        this.view = view;
         //TODO: заменить тестовую модель на настоящую, когда сделают api
-        this.model=new TestTimelineModelImpl();
+        this.model = new TestTimelineModelImpl();
     }
 
     @Override
     public void onTimelineAppend(int offset, int batchSize) {
-        currentId=offset;
-        disposable = model.getData(new TimelineRequest("87vg430f7g237fg283f",batchSize,currentId))
+        currentId = offset;
+        disposable = model.getData(new TimelineRequest("87vg430f7g237fg283f", batchSize, currentId))
                 .subscribe(response -> view.appendData(response.getData()),
                         throwable -> view.showError(throwable),
                         () -> {
-                            if(!disposable.isDisposed()) {
-                                Log.d("Time","Append");
+                            if (!disposable.isDisposed()) {
+                                Log.d("Time", "Append");
                                 disposable.dispose();
                             }
                         });
-        currentId+=batchSize;
+        currentId += batchSize;
     }
 
     @Override
     public void onTimelineUpdate(int batchSize) {
-        currentId=0;
-        disposable = model.getData(new TimelineRequest("87vg430f7g237fg283f",batchSize,currentId))
+        currentId = 0;
+        disposable = model.getData(new TimelineRequest("87vg430f7g237fg283f", batchSize, currentId))
                 .subscribe(response ->
                         {
                             view.setData(response.getData());
-                            Log.d("Timeline","Update");
+                            Log.d("Timeline", "Update");
                             view.onDataUpdated();
                         },
                         throwable ->
@@ -59,12 +59,13 @@ public class TimelinePresenterImpl implements TimelinePresenter {
                             view.showError(throwable);
                         },
                         () -> {
-                            if(!disposable.isDisposed()) {
+                            if (!disposable.isDisposed()) {
                                 disposable.dispose();
                             }
                         });
-        currentId+=batchSize;
+        currentId += batchSize;
     }
+
     @Override
     public void onTimelineStatusChange(int id, boolean desiredStatus) {
 

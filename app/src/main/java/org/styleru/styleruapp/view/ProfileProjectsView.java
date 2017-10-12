@@ -12,6 +12,7 @@ import java.util.List;
 
 public interface ProfileProjectsView extends View {
     void appendData(List<ProfileProjectsItem> data);
+
     void setData(List<ProfileProjectsItem> data);
 
 }

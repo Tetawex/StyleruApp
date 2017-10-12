@@ -44,18 +44,18 @@ public class VacancyActivity extends AppCompatActivity implements VacancyView {
         setContentView(R.layout.activity_vacancy);
         ButterKnife.bind(this);
 
-        Bundle intentBundle=getIntent().getExtras();
+        Bundle intentBundle = getIntent().getExtras();
 
-        vacancyId=intentBundle.getInt("id");
+        vacancyId = intentBundle.getInt("id");
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 presenter.onLoadVacanciesData(vacancyId);
             }
         });
-        presenter=new VacancyPresenterImpl(this);
+        presenter = new VacancyPresenterImpl(this);
         presenter.onLoadVacanciesData(vacancyId);
-        recyclerAdapter=new VacancyRecyclerAdapter(this, Collections.emptyList(),this);
+        recyclerAdapter = new VacancyRecyclerAdapter(this, Collections.emptyList(), this);
         recyclerView.setAdapter(recyclerAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -73,7 +73,7 @@ public class VacancyActivity extends AppCompatActivity implements VacancyView {
 
     @Override
     public void showError(Throwable throwable) {
-        Toast.makeText(this,throwable.getMessage(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, throwable.getMessage(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -91,40 +91,42 @@ public class VacancyActivity extends AppCompatActivity implements VacancyView {
     public void setVacanciesData(List<Request> data) {
         recyclerAdapter.setDataWithNotify(data);
     }
+
     @Override
-    public void setPrivileges(boolean canApprove,boolean canRecommend){
-        recyclerAdapter.setPrivileges(canApprove,canRecommend);
+    public void setPrivileges(boolean canApprove, boolean canRecommend) {
+        recyclerAdapter.setPrivileges(canApprove, canRecommend);
     }
 
     @Override
     public void onApproveVacancy(int id, String name) {
-        presenter.onApproveVacancy(id,name);
+        presenter.onApproveVacancy(id, name);
     }
 
     @Override
-    public void onRecommendVacancy(int id,String name,boolean status) {
-        presenter.onRecommendVacancy(id,name,status);
+    public void onRecommendVacancy(int id, String name, boolean status) {
+        presenter.onRecommendVacancy(id, name, status);
     }
 
     @Override
     public void removeVacancy(int id) {
         recyclerAdapter.removeItemByIdWithNotify(id);
     }
+
     @Override
     public void tickVacancy(int id) {
         recyclerAdapter.tickVacancyByIdWithNotify(id);
     }
 
     @Override
-    public void notifyVacancyRecommended(String name,boolean status) {
-        String msg=getString(R.string.vacancy_recommended);
-        if(!status)
-            msg=getString(R.string.vacancy_recommended_false);
-        Toast.makeText(this,name+" "+msg,Toast.LENGTH_SHORT).show();
+    public void notifyVacancyRecommended(String name, boolean status) {
+        String msg = getString(R.string.vacancy_recommended);
+        if (!status)
+            msg = getString(R.string.vacancy_recommended_false);
+        Toast.makeText(this, name + " " + msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void notifyVacancyApproved(String name) {
-        Toast.makeText(this,name+" "+getString(R.string.vacancy_approved),Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, name + " " + getString(R.string.vacancy_approved), Toast.LENGTH_SHORT).show();
     }
 }

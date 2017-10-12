@@ -41,7 +41,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,DrawerLocker,ToolbarInteractor {
+        implements NavigationView.OnNavigationItemSelectedListener, DrawerLocker, ToolbarInteractor {
     private ActionBarDrawerToggle toggle;
 
     public ImageView imageView;
@@ -77,19 +77,19 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         View headerView = navigationView.getHeaderView(0);
-        imageView =(ImageView) headerView.findViewById(R.id.user_image);
-        name=(TextView) headerView.findViewById(R.id.name);
-        email=(TextView) headerView.findViewById(R.id.email);
+        imageView = (ImageView) headerView.findViewById(R.id.user_image);
+        name = (TextView) headerView.findViewById(R.id.name);
+        email = (TextView) headerView.findViewById(R.id.email);
         switchFragment(R.id.nav_events);
         UserInfo info = null;
         try {
             info = Singletons.getUserInfo();
-        }catch (NullPointerException npe){
+        } catch (NullPointerException npe) {
             Intent intent = new Intent(getApplication(), LoginActivity.class);
             startActivity(intent);
             finish();
         }
-        name.setText(info.getFirstName()+" "+info.getLastName());
+        name.setText(info.getFirstName() + " " + info.getLastName());
         email.setText(info.getEmail());
         Glide
                 .with(this)
@@ -97,15 +97,16 @@ public class MainActivity extends AppCompatActivity
                 .asBitmap().centerCrop()
                 .placeholder(R.drawable.placeholder_loading_circled)
                 .into(new BitmapImageViewTarget(imageView) {
-            @Override
-            protected void setResource(Bitmap resource) {
-                RoundedBitmapDrawable circularBitmapDrawable =
-                        RoundedBitmapDrawableFactory.create(getResources(), resource);
-                circularBitmapDrawable.setCircular(true);
-                imageView.setImageDrawable(circularBitmapDrawable);
-            }
-        });
+                    @Override
+                    protected void setResource(Bitmap resource) {
+                        RoundedBitmapDrawable circularBitmapDrawable =
+                                RoundedBitmapDrawableFactory.create(getResources(), resource);
+                        circularBitmapDrawable.setCircular(true);
+                        imageView.setImageDrawable(circularBitmapDrawable);
+                    }
+                });
     }
+
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(Intent.ACTION_MAIN);
@@ -113,10 +114,12 @@ public class MainActivity extends AppCompatActivity
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
+
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (toggle.onOptionsItemSelected(item)) {
@@ -132,10 +135,11 @@ public class MainActivity extends AppCompatActivity
         switchFragment(id);
         return true;
     }
-    public void switchFragment(int id){
+
+    public void switchFragment(int id) {
         final android.support.v4.app.FragmentTransaction transaction
                 = getSupportFragmentManager().beginTransaction();
-        switch(id) {
+        switch (id) {
 
             case (R.id.nav_people):
                 transaction.replace(R.id.container, new PeopleFragment());
@@ -162,8 +166,9 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
     }
-    public void setAppBarElevation(float elevationDp){
-        if(android.os.Build.VERSION.SDK_INT >= 21)
+
+    public void setAppBarElevation(float elevationDp) {
+        if (android.os.Build.VERSION.SDK_INT >= 21)
             appBarLayout.setElevation(TypedValue.applyDimension(TypedValue.
                     COMPLEX_UNIT_DIP, elevationDp, getResources().getDisplayMetrics()));
     }
@@ -177,11 +182,10 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void setToolbarTitleMode(Mode mode) {
-        if(mode==Mode.BASIC){
+        if (mode == Mode.BASIC) {
             toolbarText.setVisibility(View.VISIBLE);
             toolbarSpinner.setVisibility(View.GONE);
-        }
-        else {
+        } else {
             toolbarSpinner.setVisibility(View.VISIBLE);
             toolbarText.setVisibility(View.GONE);
         }
@@ -189,14 +193,14 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void setToolbarElevationDp(float elevationDp) {
-        if(android.os.Build.VERSION.SDK_INT >= 21)
+        if (android.os.Build.VERSION.SDK_INT >= 21)
             appBarLayout.setElevation(TypedValue.applyDimension(TypedValue.
                     COMPLEX_UNIT_DIP, elevationDp, getResources().getDisplayMetrics()));
     }
 
     @Override
     public void setToolbarVisible(boolean visible) {
-        if(visible)
+        if (visible)
             toolbar.setVisibility(View.VISIBLE);
         else
             toolbar.setVisibility(View.GONE);

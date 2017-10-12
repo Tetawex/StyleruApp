@@ -10,7 +10,8 @@ import io.reactivex.Observable;
  * Created by Tetawex on 31.03.2017.
  */
 
-public interface LoginModel extends Model{
+public interface LoginModel extends Model {
     Observable<LoginResponse> getLoginResponse(LoginRequest request);
+
     Observable<LoginResponse> validateToken(ValidateTokenRequest request);
 }

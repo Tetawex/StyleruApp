@@ -10,9 +10,12 @@ import java.util.List;
  * Created by tetawex on 29.03.17.
  */
 
-public interface PeopleView extends View{
+public interface PeopleView extends View {
     void setFilterModel(FilterModelResponse model);
+
     void appendData(List<PeopleItem> data);
+
     void setData(List<PeopleItem> data);
+
     void onDataUpdated();
 }

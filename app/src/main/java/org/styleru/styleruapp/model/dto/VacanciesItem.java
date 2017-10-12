@@ -9,7 +9,7 @@ import org.styleru.styleruapp.model.dto.support.IdItem;
  * Created by Пользователь on 04.04.2017.
  */
 
-public class VacanciesItem implements IdItem{
+public class VacanciesItem implements IdItem {
     @SerializedName("id")
     @Expose
     private int id;

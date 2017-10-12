@@ -16,12 +16,18 @@ import io.reactivex.functions.Action;
  * Created by tetawex on 29.03.17.
  */
 
-public interface ProjectsModel extends Model{
+public interface ProjectsModel extends Model {
     Observable<List<ProjectsItem>> getData(int batchSize, int currentId);
+
     void setFilter(ProjectsFilter filter);
+
     void setRequestString(String requestString);
+
     void updateCachedData();
+
     void setDataChangedListener(Action dataChangedListener);
+
     void setDataResetListener(Action dataChangedListener);
+
     void setErrorListener(ErrorListener errorListener);
 }

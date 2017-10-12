@@ -6,5 +6,6 @@ package org.styleru.styleruapp.model.cache;
 
 public interface PreferencesManager {
     String getAuthToken();
+
     void setAuthToken(String token);
 }

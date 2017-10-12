@@ -9,7 +9,7 @@ import io.reactivex.Observable;
  * Created by Пользователь on 07.04.2017.
  */
 
-public interface SingleProfileModel extends Model{
+public interface SingleProfileModel extends Model {
     Observable<SingleProfileResponse> getSingleProfile(SingleProfileRequest request);
 //    Observable<SingleProfileResponse> validateToken(ValidateTokenRequest request);
 }

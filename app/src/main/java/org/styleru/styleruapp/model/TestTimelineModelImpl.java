@@ -18,7 +18,7 @@ import io.reactivex.Observable;
  * Created by Пользователь on 06.04.2017.
  */
 
-public class TestTimelineModelImpl implements TimelineModel{
+public class TestTimelineModelImpl implements TimelineModel {
     private TestTimelineItemFactory testTimelineItemFactory;
 
     public TestTimelineModelImpl() {
@@ -26,14 +26,14 @@ public class TestTimelineModelImpl implements TimelineModel{
     }
 
     public Observable<TimelineResponse> getData(TimelineRequest request) {
-        if(request.getOffset()==0)
+        if (request.getOffset() == 0)
             testTimelineItemFactory.reset();
-        TimelineResponse timelineResponse=new TimelineResponse();
-        List<TimelineItem> list=new ArrayList<TimelineItem>();
-        for(int i=request.getOffset();i<request.getBatchSize()+request.getOffset();i++)
+        TimelineResponse timelineResponse = new TimelineResponse();
+        List<TimelineItem> list = new ArrayList<TimelineItem>();
+        for (int i = request.getOffset(); i < request.getBatchSize() + request.getOffset(); i++)
             list.add(testTimelineItemFactory.generateRandomItem(i));
         timelineResponse.setData(list);
-        Log.d("test",timelineResponse.getData().size()+"");
+        Log.d("test", timelineResponse.getData().size() + "");
         return Observable.just(timelineResponse);
     }
 
@@ -41,16 +41,18 @@ public class TestTimelineModelImpl implements TimelineModel{
         return null;
     }
 
-    private class TestTimelineItemFactory{
-        private Random random=new Random(12345);
-        public void reset(){
-            random=new Random(12345);
+    private class TestTimelineItemFactory {
+        private Random random = new Random(12345);
+
+        public void reset() {
+            random = new Random(12345);
         }
-        private TimelineItem generateRandomItem(int id){
-            TimelineItem item=new TimelineItem();
-           item.setDate("29.05.12");
+
+        private TimelineItem generateRandomItem(int id) {
+            TimelineItem item = new TimelineItem();
+            item.setDate("29.05.12");
             item.setName("Станислав");
-            Log.d("Timeline",item.getName());
+            Log.d("Timeline", item.getName());
 //            item.setProject("NAMED");
 //
 //            final Random random = new Random();

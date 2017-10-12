@@ -6,6 +6,8 @@ package org.styleru.styleruapp.view;
 
 public interface View {
     void showError(Throwable throwable);
+
     void startProgressBar();
+
     void stopProgressBar();
 }

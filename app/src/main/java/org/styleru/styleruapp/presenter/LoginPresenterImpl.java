@@ -24,11 +24,11 @@ public class LoginPresenterImpl implements LoginPresenter {
     private LoginView view;
     private LoginModel model;
 
-    private Disposable disposable= Disposables.empty();
+    private Disposable disposable = Disposables.empty();
 
     public LoginPresenterImpl(LoginView view) {
-        this.view=view;
-        model=new LoginModelImpl();
+        this.view = view;
+        model = new LoginModelImpl();
     }
 
     @Override
@@ -39,28 +39,28 @@ public class LoginPresenterImpl implements LoginPresenter {
     @Override
     public void onLogin(String email, String password) {
         view.startProgressBar();
-        LoginRequest request=new LoginRequest(email,password);
+        LoginRequest request = new LoginRequest(email, password);
         OneSignal.idsAvailable(new OneSignal.IdsAvailableHandler() {
             @Override
             public void idsAvailable(String userId, String registrationId) {
-                    request.setOnesignalUserId(userId);
-                    disposable = model.getLoginResponse(request)
-                            .subscribe(response ->
-                                    {
-                                        Singletons.setUserInfo(new UserInfo(response));
-                                        Singletons.getPreferencesManager().setAuthToken(response.getToken());
-                                        view.switchToMainPage();
-                                    },
-                                    throwable ->
-                                    {
-                                        view.stopProgressBar();
-                                        view.showError(throwable);
-                                    },
-                                    () -> {
-                                        if(!disposable.isDisposed()) {
-                                            disposable.dispose();
-                                        }
-                                    });
+                request.setOnesignalUserId(userId);
+                disposable = model.getLoginResponse(request)
+                        .subscribe(response ->
+                                {
+                                    Singletons.setUserInfo(new UserInfo(response));
+                                    Singletons.getPreferencesManager().setAuthToken(response.getToken());
+                                    view.switchToMainPage();
+                                },
+                                throwable ->
+                                {
+                                    view.stopProgressBar();
+                                    view.showError(throwable);
+                                },
+                                () -> {
+                                    if (!disposable.isDisposed()) {
+                                        disposable.dispose();
+                                    }
+                                });
 
             }
         });
@@ -68,8 +68,8 @@ public class LoginPresenterImpl implements LoginPresenter {
 
     @Override
     public void onValidateToken() {
-        String token=Singletons.getPreferencesManager().getAuthToken();
-        if(!token.equals("")) {
+        String token = Singletons.getPreferencesManager().getAuthToken();
+        if (!token.equals("")) {
             view.startProgressBar();
             disposable = model.validateToken(new ValidateTokenRequest(token))
                     .subscribe(response ->

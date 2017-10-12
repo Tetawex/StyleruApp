@@ -17,14 +17,14 @@ public class ProfileProjectsPresenterImpl implements ProfileProjectsPresenter {
     private ProfileProjectsView view;
     private ProfileModel model;
 
-    private Disposable disposable= Disposables.empty();
+    private Disposable disposable = Disposables.empty();
 
-    private int currentId=0;
+    private int currentId = 0;
 
     public ProfileProjectsPresenterImpl(ProfileProjectsView view) {
-        this.view=view;
+        this.view = view;
         //TODO: заменить тестовую модель на настоящую, когда сделают api
-        this.model=new ProfileModelImpl();
+        this.model = new ProfileModelImpl();
     }
 
 //    @Override

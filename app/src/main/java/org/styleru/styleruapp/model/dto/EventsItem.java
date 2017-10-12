@@ -1,4 +1,5 @@
 package org.styleru.styleruapp.model.dto;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -10,7 +11,7 @@ import org.styleru.styleruapp.model.dto.support.IdItem;
  */
 
 
-public class EventsItem implements IdItem{
+public class EventsItem implements IdItem {
 
     @SerializedName("id")
     @Expose
@@ -35,7 +36,7 @@ public class EventsItem implements IdItem{
     private String location;
     @SerializedName("author")
     @Expose
-    private String  author;
+    private String author;
     @SerializedName("attendants_count")
     @Expose
     private int attendantsCount;

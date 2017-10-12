@@ -4,7 +4,7 @@ package org.styleru.styleruapp.model.dto.support;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Experience implements FilterItem{
+public class Experience implements FilterItem {
     private boolean checked;
     @SerializedName("id")
     @Expose
@@ -28,6 +28,7 @@ public class Experience implements FilterItem{
     public void setName(String name) {
         this.name = name;
     }
+
     @Override
     public boolean isChecked() {
         return checked;
@@ -35,6 +36,6 @@ public class Experience implements FilterItem{
 
     @Override
     public void setChecked(boolean checked) {
-        this.checked=checked;
+        this.checked = checked;
     }
 }

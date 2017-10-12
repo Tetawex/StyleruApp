@@ -15,7 +15,7 @@ import retrofit2.Retrofit;
 public class TestLoginModelImpl implements LoginModel {
     @Override
     public Observable<LoginResponse> getLoginResponse(LoginRequest request) {
-        if(request.getUserEmail().equals("admin")&&request.getUserPassword().equals("admin"))
+        if (request.getUserEmail().equals("admin") && request.getUserPassword().equals("admin"))
             return Observable.just(generateLoginResponse());
         else
             return Observable.error(new Exception("meh"));
@@ -25,8 +25,9 @@ public class TestLoginModelImpl implements LoginModel {
     public Observable<LoginResponse> validateToken(ValidateTokenRequest request) {
         return Observable.just(generateLoginResponse());
     }
-    public LoginResponse generateLoginResponse(){
-        LoginResponse response=new LoginResponse();
+
+    public LoginResponse generateLoginResponse() {
+        LoginResponse response = new LoginResponse();
         response.setFirstName("Иван");
         response.setLastName("Иванов");
         response.setEmail("blazerhero@coockle.ua");

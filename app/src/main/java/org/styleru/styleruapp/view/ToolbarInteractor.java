@@ -9,11 +9,17 @@ import android.widget.SpinnerAdapter;
  */
 
 public interface ToolbarInteractor {
-    enum Mode{BASIC,SPINNER}
+    enum Mode {BASIC, SPINNER}
+
     void setToolbarTitleMode(Mode mode);
+
     void setToolbarElevationDp(float elevationDp);
+
     void setToolbarVisible(boolean visible);
+
     void setToolbarTitle(String title);
+
     void setToolbarSpinnerAdapter(SpinnerAdapter adapter);
+
     void setToolbarSpinnerListener(AdapterView.OnItemSelectedListener listener);
 }

@@ -27,9 +27,10 @@ public class SettingsPresenterImpl implements SettingsPresenter {
         this.model = new SettingsModelImpl();
         this.view = view;
     }
+
     @Override
     public void onSettingsSync(Settings settings) {
-        secondaryDisposable =model.setData(settings)
+        secondaryDisposable = model.setData(settings)
                 .subscribe(response ->
                         {
                             view.stopProgressBar();
@@ -41,7 +42,7 @@ public class SettingsPresenterImpl implements SettingsPresenter {
                             view.notifySyncState(0);
                         },
                         () -> {
-                            if(!secondaryDisposable.isDisposed()) {
+                            if (!secondaryDisposable.isDisposed()) {
                                 secondaryDisposable.dispose();
                             }
                         });
@@ -50,7 +51,7 @@ public class SettingsPresenterImpl implements SettingsPresenter {
     @Override
     public void onSettingsModelDownload() {
         view.startProgressBar();
-        disposable =model.getData()
+        disposable = model.getData()
                 .subscribe(response ->
                         {
                             view.setData(response.getSettingsDataModel());
@@ -60,7 +61,7 @@ public class SettingsPresenterImpl implements SettingsPresenter {
                             view.showError(throwable);
                         },
                         () -> {
-                            if(!disposable.isDisposed()) {
+                            if (!disposable.isDisposed()) {
                                 disposable.dispose();
                             }
                             view.stopProgressBar();

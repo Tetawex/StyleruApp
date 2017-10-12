@@ -21,24 +21,25 @@ public class VacancyModelImpl implements VacancyModel {
     private String token;
 
     public VacancyModelImpl() {
-        apiService= Singletons.getApiService();
-        token=Singletons.getPreferencesManager().getAuthToken();
+        apiService = Singletons.getApiService();
+        token = Singletons.getPreferencesManager().getAuthToken();
     }
+
     @Override
     public Observable<VacancyResponse> getVacancyData(int id) {
         return apiService.getApiInterface()
-                .getVacancyData(new VacancyRequest(id,token)).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+                .getVacancyData(new VacancyRequest(id, token)).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
     @Override
     public Completable approveVacancy(int id) {
         return apiService.getApiInterface()
-                .approveVacancy(new ApproveVacancyRequest(id,token)).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+                .approveVacancy(new ApproveVacancyRequest(id, token)).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
     @Override
     public Completable recommendVacancy(int id) {
         return apiService.getApiInterface()
-                .recommendVacancy(new RecommendVacancyRequest(id,token)).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+                .recommendVacancy(new RecommendVacancyRequest(id, token)).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 }

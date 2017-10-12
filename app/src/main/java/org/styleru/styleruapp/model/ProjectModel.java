@@ -12,5 +12,6 @@ import io.reactivex.Observable;
 
 public interface ProjectModel extends Model {
     Observable<ProjectResponse> getProjectData(int id);
+
     Completable requestVacancy(int id);
 }

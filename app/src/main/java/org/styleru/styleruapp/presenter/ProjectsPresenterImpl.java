@@ -19,25 +19,25 @@ import io.reactivex.disposables.Disposables;
 
 public class ProjectsPresenterImpl implements ProjectsPresenter {
     //TODO: заменить инъекцию через конструктор инъекцией дагером
-    public static final int BATCH_SIZE=30;
+    public static final int BATCH_SIZE = 30;
 
     private ProjectsView view;
     private ProjectsModel model;
 
-    private Disposable disposable= Disposables.empty();
+    private Disposable disposable = Disposables.empty();
 
-    private int currentId=0;
+    private int currentId = 0;
 
     public ProjectsPresenterImpl(ProjectsView view) {
-        this.view=view;
-        this.model=new ProjectsModelImpl();
-        model.setDataChangedListener(()->{
-            if(currentId==0) {
+        this.view = view;
+        this.model = new ProjectsModelImpl();
+        model.setDataChangedListener(() -> {
+            if (currentId == 0) {
                 onDataUpdate(BATCH_SIZE);
                 view.onDataUpdated();
             }
         });
-        model.setErrorListener((throwable)->
+        model.setErrorListener((throwable) ->
         {
             view.showError(throwable);
             view.stopProgressBar();
@@ -46,30 +46,32 @@ public class ProjectsPresenterImpl implements ProjectsPresenter {
 
     @Override
     public void onDataAppend(int offset, int batchSize) {
-        currentId=offset;
-        disposable = model.getData(batchSize,currentId)
+        currentId = offset;
+        disposable = model.getData(batchSize, currentId)
                 // .flatMap(Observable::from)
                 //.toList()
                 .subscribe(response -> view.appendData(response),
                         throwable -> view.showError(throwable),
                         () -> {
-                            if(!disposable.isDisposed()) {
+                            if (!disposable.isDisposed()) {
                                 disposable.dispose();
                             }
                         });
-        currentId+=batchSize;
+        currentId += batchSize;
     }
+
     @Override
-    public void onModelUpdateCachedData(){
+    public void onModelUpdateCachedData() {
         model.updateCachedData();
         view.setData(new ArrayList<>());
         view.startProgressBar();
-        currentId=0;
+        currentId = 0;
     }
+
     @Override
     public void onDataUpdate(int batchSize) {
-        currentId=0;
-        disposable = model.getData(batchSize,currentId)
+        currentId = 0;
+        disposable = model.getData(batchSize, currentId)
                 //.toList()
                 .subscribe(response ->
                         {
@@ -83,11 +85,11 @@ public class ProjectsPresenterImpl implements ProjectsPresenter {
                             view.showError(throwable);
                         },
                         () -> {
-                            if(!disposable.isDisposed()) {
+                            if (!disposable.isDisposed()) {
                                 disposable.dispose();
                             }
                         });
-        currentId+=batchSize;
+        currentId += batchSize;
     }
 
     @Override
@@ -96,15 +98,16 @@ public class ProjectsPresenterImpl implements ProjectsPresenter {
         view.setData(new ArrayList<>());
         view.startProgressBar();
         onDataUpdate(BATCH_SIZE);
-        currentId=0;
+        currentId = 0;
     }
+
     @Override
     public void onSetRequestString(String requestString) {
         model.setRequestString(requestString);
         view.setData(new ArrayList<>());
         view.startProgressBar();
         onDataUpdate(BATCH_SIZE);
-        currentId=0;
+        currentId = 0;
     }
 
     @Override

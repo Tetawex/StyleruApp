@@ -24,10 +24,11 @@ public class ProfileProjectsRecyclerAdapter extends BaseRecyclerAdapter<ProfileP
     public ProfileProjectsRecyclerAdapter(Context context, List<ProfileProjectsItem> data) {
         super(context, data);
     }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view=inflater.inflate(R.layout.card_person_project,parent,false);
-        ProfileProjectsViewHolder  holder;
+        View view = inflater.inflate(R.layout.card_person_project, parent, false);
+        ProfileProjectsViewHolder holder;
         holder = new ProfileProjectsViewHolder(view);
 
         return holder;
@@ -35,17 +36,15 @@ public class ProfileProjectsRecyclerAdapter extends BaseRecyclerAdapter<ProfileP
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder uncastedHolder, int position) {
-        ProfileProjectsItem item= getData().get(position);
-        ProfileProjectsViewHolder holder=(ProfileProjectsViewHolder) uncastedHolder;
+        ProfileProjectsItem item = getData().get(position);
+        ProfileProjectsViewHolder holder = (ProfileProjectsViewHolder) uncastedHolder;
 
 
-
-      holder.date.setText(item.getDate_finish());
+        holder.date.setText(item.getDate_finish());
         holder.manager_name.setText(item.getRole());
         holder.name.setText(item.getTitle());
         holder.vacant.setText(item.getStatus());
-        Log.d("LOGI",item.getTitle());
-
+        Log.d("LOGI", item.getTitle());
 
 
 //        if(item.isViewAttendants()) {
@@ -56,7 +55,6 @@ public class ProfileProjectsRecyclerAdapter extends BaseRecyclerAdapter<ProfileP
 //        }
 
     }
-
 
 
     class ProfileProjectsViewHolder extends RecyclerView.ViewHolder {
@@ -70,8 +68,6 @@ public class ProfileProjectsRecyclerAdapter extends BaseRecyclerAdapter<ProfileP
         TextView vacant;
         @BindView(R.id.date)
         TextView date;
-
-
 
 
 //        @BindView(R.id.attendance)

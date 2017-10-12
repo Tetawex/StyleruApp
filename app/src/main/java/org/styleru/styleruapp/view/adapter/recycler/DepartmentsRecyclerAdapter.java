@@ -25,10 +25,11 @@ public class DepartmentsRecyclerAdapter extends BaseRecyclerAdapter<DepartmentsI
     public DepartmentsRecyclerAdapter(Context context, List<DepartmentsItem> data) {
         super(context, data);
     }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view=inflater.inflate(R.layout.card_departments,parent,false);
-        DepartmentsViewHolder  holder;
+        View view = inflater.inflate(R.layout.card_departments, parent, false);
+        DepartmentsViewHolder holder;
         holder = new DepartmentsViewHolder(view);
 
         return holder;
@@ -36,8 +37,8 @@ public class DepartmentsRecyclerAdapter extends BaseRecyclerAdapter<DepartmentsI
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder uncastedHolder, int position) {
-        DepartmentsItem item= getData().get(position);
-        DepartmentsViewHolder holder=(DepartmentsViewHolder) uncastedHolder;
+        DepartmentsItem item = getData().get(position);
+        DepartmentsViewHolder holder = (DepartmentsViewHolder) uncastedHolder;
         holder.email.setText(item.getEmail());
         holder.managerName.setText(item.getManager());
         holder.name.setText(item.getName());
@@ -47,7 +48,7 @@ public class DepartmentsRecyclerAdapter extends BaseRecyclerAdapter<DepartmentsI
                 .load(item.getImgUrl())
                 .asBitmap().centerCrop()
                 .placeholder(R.drawable.placeholder_loading)
-                .into(holder.image) ;
+                .into(holder.image);
 
     }
 

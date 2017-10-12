@@ -33,10 +33,11 @@ public class PeopleRecyclerAdapter extends BaseRecyclerAdapter<PeopleItem> {
     public PeopleRecyclerAdapter(Context context, List<PeopleItem> data) {
         super(context, data);
     }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view=inflater.inflate(R.layout.card_people_vol2,parent,false);
-        PeopleViewHolder  holder;
+        View view = inflater.inflate(R.layout.card_people_vol2, parent, false);
+        PeopleViewHolder holder;
         holder = new PeopleViewHolder(view);
         return holder;
     }
@@ -44,28 +45,28 @@ public class PeopleRecyclerAdapter extends BaseRecyclerAdapter<PeopleItem> {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder uncastedHolder, int position) {
 
-        PeopleItem item= getData().get(position);
-        PeopleViewHolder holder=(PeopleViewHolder) uncastedHolder;
+        PeopleItem item = getData().get(position);
+        PeopleViewHolder holder = (PeopleViewHolder) uncastedHolder;
 
-        holder.name.setText(item.getFirstName()+" "+item.getLastName());
+        holder.name.setText(item.getFirstName() + " " + item.getLastName());
         holder.phone.setText(item.getPhone());
-        StringBuilder builder=new StringBuilder();
-        for (String s:item.getDepartmentNames()) {
+        StringBuilder builder = new StringBuilder();
+        for (String s : item.getDepartmentNames()) {
             builder.append(s).append(", ");
         }
-        for (String s:item.getSubdepartmentNames()) {
+        for (String s : item.getSubdepartmentNames()) {
             builder.append(s).append(", ");
         }
-        String result=builder.toString();
-        if(result!="")
-            result=result.substring(0, result.length()-2);
+        String result = builder.toString();
+        if (result != "")
+            result = result.substring(0, result.length() - 2);
         holder.departments.setText(result);
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bundle =new Bundle();
-                bundle.putInt("id",item.getId());
-                bundle.putString("name",item.getFirstName()+" "+item.getLastName());
+                Bundle bundle = new Bundle();
+                bundle.putInt("id", item.getId());
+                bundle.putString("name", item.getFirstName() + " " + item.getLastName());
                 Intent intent = new Intent(context, ProfileActivity2.class);
                 intent.putExtras(bundle);
                 context.startActivity(intent);
@@ -99,6 +100,7 @@ public class PeopleRecyclerAdapter extends BaseRecyclerAdapter<PeopleItem> {
         TextView phone;
         @BindView(R.id.departments)
         TextView departments;
+
         public PeopleViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);

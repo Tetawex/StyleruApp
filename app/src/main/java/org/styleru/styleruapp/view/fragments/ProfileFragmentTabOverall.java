@@ -19,7 +19,6 @@ import org.styleru.styleruapp.model.cache.Singletons;
 import org.styleru.styleruapp.model.cache.UserInfo;
 
 
-
 public class ProfileFragmentTabOverall extends Fragment {
 
 
@@ -35,7 +34,7 @@ public class ProfileFragmentTabOverall extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile_overall, container, false);
 
         ViewPager viewPager = (ViewPager) getActivity().findViewById(R.id.view_pager);
-        viewPager.setPadding(0,0,0,0);
+        viewPager.setPadding(0, 0, 0, 0);
 
 
         ImageView imageView = (ImageView) view.findViewById(R.id.image3);
@@ -62,7 +61,7 @@ public class ProfileFragmentTabOverall extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        Log.d("2","pause1");
+        Log.d("2", "pause1");
 //        ViewPager viewPager = (ViewPager) getActivity().findViewById(R.id.view_pager);
 //        viewPager.setPadding(0,0,0,0);
     }
@@ -70,7 +69,7 @@ public class ProfileFragmentTabOverall extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Log.d("2","resume1");
+        Log.d("2", "resume1");
 //        ViewPager viewPager = (ViewPager) getActivity().findViewById(R.id.view_pager);
 //        viewPager.setPadding(0,84,0,0);
     }
@@ -78,7 +77,7 @@ public class ProfileFragmentTabOverall extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        Log.d("FRAG","myprofile destr");
+        Log.d("FRAG", "myprofile destr");
 //            getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
     }
 }

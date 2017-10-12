@@ -6,5 +6,6 @@ package org.styleru.styleruapp.presenter;
 
 public interface ProjectPresenter extends Presenter {
     void onLoadData(int id);
+
     void onRequestVacancy(int id, boolean accepted);
 }

@@ -25,6 +25,7 @@ public class ProfileFragment1 extends Fragment {
     public ViewPager viewPager;
 
     private ToolbarInteractor toolbarInteractor;
+
     public ProfileFragment1() {
         // Required empty public constructor
     }
@@ -45,17 +46,17 @@ public class ProfileFragment1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-        toolbarInteractor=(ToolbarInteractor)getActivity();
+        toolbarInteractor = (ToolbarInteractor) getActivity();
         toolbarInteractor.setToolbarTitleMode(ToolbarInteractor.Mode.BASIC);
         toolbarInteractor.setToolbarTitle(getString(R.string.profile));
         toolbarInteractor.setToolbarElevationDp(0);
         setHasOptionsMenu(true);
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
         setupViewPager(viewPager);
-        if(android.os.Build.VERSION.SDK_INT >= 21)
+        if (android.os.Build.VERSION.SDK_INT >= 21)
             tabLayout.setElevation(TypedValue.applyDimension(TypedValue.
                     COMPLEX_UNIT_DIP, 2, getResources().getDisplayMetrics()));
-        if(android.os.Build.VERSION.SDK_INT >= 21)
+        if (android.os.Build.VERSION.SDK_INT >= 21)
             toolbarInteractor.setToolbarElevationDp(0);
         tabLayout.setupWithViewPager(viewPager);
         return view;

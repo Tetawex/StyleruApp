@@ -14,12 +14,15 @@ public interface VacancyView extends View {
 
     void setPrivileges(boolean canApprove, boolean canRecommend);
 
-    void onApproveVacancy(int id,String name);
-    void onRecommendVacancy(int id,String name,boolean status);
+    void onApproveVacancy(int id, String name);
+
+    void onRecommendVacancy(int id, String name, boolean status);
 
     void removeVacancy(int id);
+
     void tickVacancy(int id);
 
-    void notifyVacancyRecommended(String name,boolean status);
+    void notifyVacancyRecommended(String name, boolean status);
+
     void notifyVacancyApproved(String name);
 }

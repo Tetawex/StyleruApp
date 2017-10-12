@@ -38,15 +38,17 @@ public class ProjectVacanciesRecyclerAdapter extends MappedIdRecyclerAdapter<Vac
     }
 
     private boolean canViewSubmissions;
+
     public ProjectVacanciesRecyclerAdapter(
-            Context context, List<VacanciesItem> data,ProjectView projectView) {
+            Context context, List<VacanciesItem> data, ProjectView projectView) {
         super(context, data);
-        this.projectsView=projectView;
+        this.projectsView = projectView;
     }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view=inflater.inflate(R.layout.view_project_vacancies_recycleritem,parent,false);
-        ProjectVacanciesViewHolder  holder;
+        View view = inflater.inflate(R.layout.view_project_vacancies_recycleritem, parent, false);
+        ProjectVacanciesViewHolder holder;
         holder = new ProjectVacanciesViewHolder(view);
 
         return holder;
@@ -54,44 +56,47 @@ public class ProjectVacanciesRecyclerAdapter extends MappedIdRecyclerAdapter<Vac
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder uncastedHolder, int position) {
-        VacanciesItem item= getData().get(position);
-        ProjectVacanciesViewHolder holder=(ProjectVacanciesViewHolder) uncastedHolder;
-        holder.button.setText(item.getTitle()+" ("+item.getRequiredAmount()+")");
-        if(item.isEnabled())
+        VacanciesItem item = getData().get(position);
+        ProjectVacanciesViewHolder holder = (ProjectVacanciesViewHolder) uncastedHolder;
+        holder.button.setText(item.getTitle() + " (" + item.getRequiredAmount() + ")");
+        if (item.isEnabled())
             holder.indicator.setVisibility(View.VISIBLE);
         else
             holder.indicator.setVisibility(View.GONE);
-        if(canViewSubmissions)
+        if (canViewSubmissions)
             holder.button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Bundle bundle=new Bundle();
-                    bundle.putInt("id",item.getId());
-                    Intent intent = new Intent(context,VacancyActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("id", item.getId());
+                    Intent intent = new Intent(context, VacancyActivity.class);
                     intent.putExtras(bundle);
                     context.startActivity(intent);
                 }
             });
-        else if(item.isTransferToNextPage())
+        else if (item.isTransferToNextPage())
             holder.button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                projectsView.requestVacancy(item.getId(),item.isEnabled());
-            }
-        });
+                @Override
+                public void onClick(View v) {
+                    projectsView.requestVacancy(item.getId(), item.isEnabled());
+                }
+            });
         else
             holder.button.setEnabled(false);
     }
+
     public void tickVacancyByIdWithNotify(int id) {
-        VacanciesItem r=getItemById(id);
+        VacanciesItem r = getItemById(id);
         r.setEnabled(!r.isEnabled());
         notifyItemChanged(getData().indexOf(r));
     }
+
     class ProjectVacanciesViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.button)
         AppCompatButton button;
         @BindView(R.id.submitted_indicator)
         ImageView indicator;
+
         public ProjectVacanciesViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);

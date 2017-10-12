@@ -13,13 +13,11 @@ public class ApiService {
     private static String baseUrl = "http://api.in.styleru.org/api/";
     private ApiInterface apiInterface;
 
-    public ApiService()
-    {
+    public ApiService() {
         this(baseUrl);
     }
 
-    public ApiService(String baseUrl)
-    {
+    public ApiService(String baseUrl) {
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -32,11 +30,10 @@ public class ApiService {
                 .client(httpClient.build())
                 .build();
 
-        apiInterface = retrofit.create(ApiInterface.class);  
+        apiInterface = retrofit.create(ApiInterface.class);
     }
 
-    public ApiInterface getApiInterface()
-    {
+    public ApiInterface getApiInterface() {
         return apiInterface;
     }
 

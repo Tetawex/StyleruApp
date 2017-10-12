@@ -49,7 +49,7 @@ public class ProfileItem {
     private boolean canEdit;
     @SerializedName("summary")
     @Expose
-    private String  summary;
+    private String summary;
     @SerializedName("phone")
     @Expose
     private String phone;

@@ -21,12 +21,13 @@ public class LoginRequest {
     @Expose
     private String onesignalUserId;
 
-    public LoginRequest(String userEmail, String userPassword,String onesignalUserId) {
+    public LoginRequest(String userEmail, String userPassword, String onesignalUserId) {
         this.userEmail = userEmail;
         this.userPassword = userPassword;
-        this.onesignalUserId =onesignalUserId;
+        this.onesignalUserId = onesignalUserId;
     }
-    public LoginRequest(String userEmail, String userPassword){
+
+    public LoginRequest(String userEmail, String userPassword) {
         this.userEmail = userEmail;
         this.userPassword = userPassword;
     }

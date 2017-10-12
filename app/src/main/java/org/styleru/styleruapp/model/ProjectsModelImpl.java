@@ -29,10 +29,10 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class ProjectsModelImpl implements ProjectsModel {
-    public static final int BATCH_SIZE=16;
+    public static final int BATCH_SIZE = 16;
 
-    private String requestString="";
-    private ProjectsFilter filter=new ProjectsFilter();
+    private String requestString = "";
+    private ProjectsFilter filter = new ProjectsFilter();
 
     private String authToken;
 
@@ -40,37 +40,39 @@ public class ProjectsModelImpl implements ProjectsModel {
     private Action dataResetListener;
     private ErrorListener errorListener;
 
-    private boolean finishedLoading=false;
-    private Disposable disposable= Disposables.empty();
+    private boolean finishedLoading = false;
+    private Disposable disposable = Disposables.empty();
     private ApiService apiService;
 
     private List<ProjectsItem> filteredItemList;
     private List<ProjectsItem> itemList;
 
-    public ProjectsModelImpl(){
-        itemList =new ArrayList<>();
-        filteredItemList =new ArrayList<>();
-        apiService= Singletons.getApiService();
-        authToken=Singletons.getPreferencesManager().getAuthToken();
+    public ProjectsModelImpl() {
+        itemList = new ArrayList<>();
+        filteredItemList = new ArrayList<>();
+        apiService = Singletons.getApiService();
+        authToken = Singletons.getPreferencesManager().getAuthToken();
         appendData(0);
     }
+
     @Override
     public Observable<List<ProjectsItem>> getData(int batchSize, int currentId) {
-        int cap=currentId+batchSize;
-        int start=currentId;
-        if(cap>filteredItemList.size())
-            cap=filteredItemList.size();
-        if(currentId>=cap)
-            start=cap;
-        return Observable.just(new ArrayList<>(filteredItemList.subList(start,cap)));
+        int cap = currentId + batchSize;
+        int start = currentId;
+        if (cap > filteredItemList.size())
+            cap = filteredItemList.size();
+        if (currentId >= cap)
+            start = cap;
+        return Observable.just(new ArrayList<>(filteredItemList.subList(start, cap)));
     }
-    public void appendData(int offset){
-        Observable<ProjectsResponse> observable =apiService
+
+    public void appendData(int offset) {
+        Observable<ProjectsResponse> observable = apiService
                 .getApiInterface()
-                .getProjects(new ProjectsRequest(authToken,BATCH_SIZE,offset))
+                .getProjects(new ProjectsRequest(authToken, BATCH_SIZE, offset))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
-        disposable=observable.subscribe(
+        disposable = observable.subscribe(
                 response ->
                 {
                     itemList.addAll(response.getData());
@@ -80,58 +82,61 @@ public class ProjectsModelImpl implements ProjectsModel {
                 throwable ->
                 {
                     errorListener.accept(throwable);
-                    finishedLoading=true;
+                    finishedLoading = true;
                 },
                 () -> {
-                    if(!finishedLoading&&itemList.size()<1000)//TODO: убрать временный костыль
+                    if (!finishedLoading && itemList.size() < 1000)//TODO: убрать временный костыль
                     {
-                        appendData(itemList.size()+offset);
-                    }
-                    else {
-                        finishedLoading=true;
-                        if(!disposable.isDisposed()) {
+                        appendData(itemList.size() + offset);
+                    } else {
+                        finishedLoading = true;
+                        if (!disposable.isDisposed()) {
                             disposable.dispose();
-                    }
+                        }
                     }
                 });
     }
-    private List<ProjectsItem> filter(List<ProjectsItem> fullList){
-        List<ProjectsItem> fList=new ArrayList<>();
-        for (ProjectsItem item :fullList) {
-            if(filter.valid(item)&&
-            (item.getName()+item.getManagerName()).toLowerCase()
-                    .contains(requestString.toLowerCase())) {
+
+    private List<ProjectsItem> filter(List<ProjectsItem> fullList) {
+        List<ProjectsItem> fList = new ArrayList<>();
+        for (ProjectsItem item : fullList) {
+            if (filter.valid(item) &&
+                    (item.getName() + item.getManagerName()).toLowerCase()
+                            .contains(requestString.toLowerCase())) {
                 fList.add(item);
             }
         }
         return fList;
     }
-    private void filter(){
-        filteredItemList=new ArrayList<>();
-        for (ProjectsItem item :itemList) {
-            if(!filter.valid(item))
+
+    private void filter() {
+        filteredItemList = new ArrayList<>();
+        for (ProjectsItem item : itemList) {
+            if (!filter.valid(item))
                 continue;
-            if(!(item.getName()+item.getManagerName()).toLowerCase()
+            if (!(item.getName() + item.getManagerName()).toLowerCase()
                     .contains(requestString.toLowerCase()))
                 continue;
             filteredItemList.add(item);
         }
     }
+
     @Override
-    public void setFilter(ProjectsFilter filter){
-        this.filter=filter;
+    public void setFilter(ProjectsFilter filter) {
+        this.filter = filter;
         filter();
     }
+
     @Override
-    public void setRequestString(String requestString){
-        this.requestString=requestString;
+    public void setRequestString(String requestString) {
+        this.requestString = requestString;
         filter();
     }
 
     @Override
     public void updateCachedData() {
-        requestString="";
-        finishedLoading=false;
+        requestString = "";
+        finishedLoading = false;
         itemList.clear();
         filteredItemList.clear();
         appendData(0);
@@ -141,6 +146,7 @@ public class ProjectsModelImpl implements ProjectsModel {
     public void setDataChangedListener(Action dataChangedListener) {
         this.dataChangedListener = dataChangedListener;
     }
+
     @Override
     public void setErrorListener(ErrorListener errorListener) {
         this.errorListener = errorListener;

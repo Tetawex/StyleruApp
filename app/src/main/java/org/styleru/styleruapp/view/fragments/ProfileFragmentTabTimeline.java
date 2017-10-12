@@ -38,7 +38,8 @@ public class ProfileFragmentTabTimeline extends Fragment implements TimelineView
     public ProfileFragmentTabTimeline() {
         // Required empty public constructor
     }
-    private static final int DEFAULT_BATCH_SIZE=10;
+
+    private static final int DEFAULT_BATCH_SIZE = 10;
     private TimelineRecyclerAdapter recyclerAdapter;
     private OnFragmentInteractionListener mListener;
     private EndlessRecyclerViewScrollListener recyclerViewScrollListener;
@@ -48,32 +49,31 @@ public class ProfileFragmentTabTimeline extends Fragment implements TimelineView
     @BindView(R.id.date)
     protected TextView date1;
     @BindView(R.id.swipe)
-    protected SwipeRefreshLayout  swipeRefreshLayout;
+    protected SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile_timeline, container, false);
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
         ViewPager viewPager = (ViewPager) getActivity().findViewById(R.id.view_pager);
-        viewPager.setPadding(0,0,0,0);
+        viewPager.setPadding(0, 0, 0, 0);
         final Calendar c = Calendar.getInstance();
         int yy = c.get(Calendar.YEAR);
         int mm = c.get(Calendar.MONTH);
         int dd = c.get(Calendar.DAY_OF_MONTH);
-        if (mm<=8) {
+        if (mm <= 8) {
             date1.setText(new StringBuilder()
                     // Month is 0 based, just add 1
                     .append(dd).append(".0").append(mm + 1).append(".").append(yy));
-        }
-        else {
+        } else {
             date1.setText(new StringBuilder()
                     // Month is 0 based, just add 1
                     .append(dd).append(".").append(mm + 1).append(".").append(yy));
         }
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerAdapter=new TimelineRecyclerAdapter(getActivity(),new ArrayList<TimelineItem>());
+        recyclerAdapter = new TimelineRecyclerAdapter(getActivity(), new ArrayList<TimelineItem>());
         recyclerView.setAdapter(recyclerAdapter);
 
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark,
@@ -83,7 +83,7 @@ public class ProfileFragmentTabTimeline extends Fragment implements TimelineView
                 (LinearLayoutManager) recyclerView.getLayoutManager()) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-                presenter.onTimelineAppend(recyclerAdapter.getItemCount(),DEFAULT_BATCH_SIZE);
+                presenter.onTimelineAppend(recyclerAdapter.getItemCount(), DEFAULT_BATCH_SIZE);
             }
         };
         recyclerView.addOnScrollListener(recyclerViewScrollListener);
@@ -91,13 +91,12 @@ public class ProfileFragmentTabTimeline extends Fragment implements TimelineView
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onRefresh()
-            {
+            public void onRefresh() {
                 presenter.onTimelineUpdate(DEFAULT_BATCH_SIZE);
 
             }
         });
-        presenter=new TimelinePresenterImpl(this);
+        presenter = new TimelinePresenterImpl(this);
         presenter.onTimelineUpdate(DEFAULT_BATCH_SIZE);
         return view;
     }
@@ -110,7 +109,7 @@ public class ProfileFragmentTabTimeline extends Fragment implements TimelineView
 
     @Override
     public void showError(Throwable throwable) {
-        Toast.makeText(getContext(),throwable.getMessage(),Toast.LENGTH_SHORT);
+        Toast.makeText(getContext(), throwable.getMessage(), Toast.LENGTH_SHORT);
     }
 
     @Override
@@ -136,13 +135,10 @@ public class ProfileFragmentTabTimeline extends Fragment implements TimelineView
     }
 
 
-
-    public void onDataUpdated()
-    {
+    public void onDataUpdated() {
         swipeRefreshLayout.setRefreshing(false);
         recyclerViewScrollListener.resetState();
     }
-
 
 
     public interface OnFragmentInteractionListener {

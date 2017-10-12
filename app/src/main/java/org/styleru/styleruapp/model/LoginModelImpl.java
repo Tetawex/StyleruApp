@@ -16,12 +16,14 @@ import io.reactivex.schedulers.Schedulers;
 
 public class LoginModelImpl implements LoginModel {
     private ApiService apiService;
-    public LoginModelImpl(){
-        apiService= Singletons.getApiService();
+
+    public LoginModelImpl() {
+        apiService = Singletons.getApiService();
     }
+
     @Override
     public Observable<LoginResponse> getLoginResponse(LoginRequest request) {
-        Observable<LoginResponse> observable =apiService.getApiInterface().login(request)
+        Observable<LoginResponse> observable = apiService.getApiInterface().login(request)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
         return observable;
@@ -29,7 +31,7 @@ public class LoginModelImpl implements LoginModel {
 
     @Override
     public Observable<LoginResponse> validateToken(ValidateTokenRequest request) {
-        Observable<LoginResponse> observable =apiService.getApiInterface().validateToken(request)
+        Observable<LoginResponse> observable = apiService.getApiInterface().validateToken(request)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
         return observable;

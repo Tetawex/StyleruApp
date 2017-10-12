@@ -18,14 +18,16 @@ import io.reactivex.schedulers.Schedulers;
 public class ProfileModelImpl implements ProfileModel {
     private ApiService apiService;
     private String authToken;
+
     public ProfileModelImpl() {
-        apiService= Singletons.getApiService();
-        authToken=Singletons.getPreferencesManager().getAuthToken();
+        apiService = Singletons.getApiService();
+        authToken = Singletons.getPreferencesManager().getAuthToken();
     }
+
     @Override
     public Observable<ProfileResponse> getData(int id) {
-        ProfileRequest request=new ProfileRequest(authToken,id);
-        if(id<0)
+        ProfileRequest request = new ProfileRequest(authToken, id);
+        if (id < 0)
             request.setUser_id(null);
         return apiService.getApiInterface()
                 .getSingleProfileFull(request)

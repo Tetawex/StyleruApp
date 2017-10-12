@@ -25,14 +25,16 @@ import io.reactivex.schedulers.Schedulers;
 public class EventsModelImpl implements EventsModel {
     private ApiService apiService;
     private String authToken;
+
     public EventsModelImpl() {
-        apiService= Singletons.getApiService();
-        authToken=Singletons.getPreferencesManager().getAuthToken();
+        apiService = Singletons.getApiService();
+        authToken = Singletons.getPreferencesManager().getAuthToken();
     }
+
     @Override
-    public Observable<EventsResponse> getData(int offset,int batchSize) {
+    public Observable<EventsResponse> getData(int offset, int batchSize) {
         return apiService.getApiInterface()
-                .getEvents(new EventsRequest(authToken,batchSize,offset))
+                .getEvents(new EventsRequest(authToken, batchSize, offset))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
@@ -40,7 +42,7 @@ public class EventsModelImpl implements EventsModel {
     @Override
     public Observable<EventStateChangeResponse> getChangedState(int id) {
         return apiService.getApiInterface()
-                .changeEventState(new EventStateChangeRequest(authToken,id))
+                .changeEventState(new EventStateChangeRequest(authToken, id))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

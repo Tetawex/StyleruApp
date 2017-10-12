@@ -52,6 +52,7 @@ public class SettingsFragment extends Fragment implements SettingsView {
     public SettingsFragment() {
         // Required empty public constructor
     }
+
     public static SettingsFragment newInstance(String param1, String param2) {
         SettingsFragment fragment = new SettingsFragment();
         Bundle args = new Bundle();
@@ -68,8 +69,8 @@ public class SettingsFragment extends Fragment implements SettingsView {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
-        ButterKnife.bind(this,view);
-        toolbarInteractor=(ToolbarInteractor)getActivity();
+        ButterKnife.bind(this, view);
+        toolbarInteractor = (ToolbarInteractor) getActivity();
         toolbarInteractor.setToolbarTitleMode(ToolbarInteractor.Mode.BASIC);
         toolbarInteractor.setToolbarTitle(getString(R.string.settings));
         toolbarInteractor.setToolbarElevationDp(4);
@@ -81,9 +82,10 @@ public class SettingsFragment extends Fragment implements SettingsView {
                 presenter.onLogout();
             }
         });
-        presenter=new SettingsPresenterImpl(this);
+        presenter = new SettingsPresenterImpl(this);
         return view;
     }
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_fragment_settings, menu);
@@ -99,6 +101,7 @@ public class SettingsFragment extends Fragment implements SettingsView {
         super.onCreateOptionsMenu(menu, inflater);
         presenter.onSettingsModelDownload();
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
@@ -106,12 +109,12 @@ public class SettingsFragment extends Fragment implements SettingsView {
 
     @Override
     public void setData(SettingsDataModel data) {
-        settingsDataModel=data;
-        settings=new Settings();
+        settingsDataModel = data;
+        settings = new Settings();
         settings.setUniversityId(null);
         vuzTextView.setText(R.string.all);
-        for(University u:settingsDataModel.getUniversitiesList()){
-            if(u.isChecked()) {
+        for (University u : settingsDataModel.getUniversitiesList()) {
+            if (u.isChecked()) {
                 settings.setUniversityId(u.getId());
                 vuzTextView.setText(u.getName());
             }
@@ -125,11 +128,11 @@ public class SettingsFragment extends Fragment implements SettingsView {
 
                 final ArrayAdapter<University> arrayAdapter =
                         new ArrayAdapter<University>(getContext(), R.layout.view_dialog_item);
-                University university=new University();
+                University university = new University();
                 university.setChecked(false);
                 university.setId(null);
                 university.setName(getString(R.string.all));
-                for (University u:settingsDataModel.getUniversitiesList()) {
+                for (University u : settingsDataModel.getUniversitiesList()) {
                     arrayAdapter.add(u);
                 }
                 arrayAdapter.add(university);
@@ -167,22 +170,22 @@ public class SettingsFragment extends Fragment implements SettingsView {
     @Override
     public void switchToLoginPage() {
         Singletons.getPreferencesManager().setAuthToken("");
-        Intent intent = new Intent(getContext(),LoginActivity.class);
+        Intent intent = new Intent(getContext(), LoginActivity.class);
         startActivity(intent);
         getActivity().finish();
     }
 
     @Override
     public void notifySyncState(int state) {
-        if(state==1)
-            Toast.makeText(getContext(), R.string.settings_sync_success,Toast.LENGTH_SHORT).show();
+        if (state == 1)
+            Toast.makeText(getContext(), R.string.settings_sync_success, Toast.LENGTH_SHORT).show();
         else
-            Toast.makeText(getContext(), R.string.settings_sync_fail,Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.settings_sync_fail, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void showError(Throwable throwable) {
-        Toast.makeText(getContext(),throwable.getMessage(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), throwable.getMessage(), Toast.LENGTH_SHORT).show();
     }
 
     @Override

@@ -38,7 +38,7 @@ public class SettingsModelImpl implements SettingsModel {
     @Override
     public Observable<SettingsUploadResponse> setData(Settings data) {
         return service.getApiInterface()
-                .uploadSettings(new SettingsUploadRequest(authToken,data))
+                .uploadSettings(new SettingsUploadRequest(authToken, data))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

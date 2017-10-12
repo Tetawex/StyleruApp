@@ -17,8 +17,9 @@ import org.styleru.styleruapp.view.activity.LoginActivity;
 public class OneSignalNotificationOpenedHandler
         implements OneSignal.NotificationOpenedHandler {
     private Application application;
-    public OneSignalNotificationOpenedHandler(Application application){
-        this.application=application;
+
+    public OneSignalNotificationOpenedHandler(Application application) {
+        this.application = application;
     }
 
     @Override

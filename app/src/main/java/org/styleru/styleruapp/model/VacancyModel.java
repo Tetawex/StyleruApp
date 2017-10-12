@@ -9,8 +9,10 @@ import io.reactivex.Observable;
  * Created by tetawex on 25.04.17.
  */
 
-public interface VacancyModel extends Model{
+public interface VacancyModel extends Model {
     Observable<VacancyResponse> getVacancyData(int id);
+
     Completable approveVacancy(int id);
+
     Completable recommendVacancy(int id);
 }

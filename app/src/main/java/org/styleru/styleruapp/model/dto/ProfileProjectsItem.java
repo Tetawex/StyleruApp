@@ -36,15 +36,19 @@ public class ProfileProjectsItem {
     public String getRole() {
         return role;
     }
+
     public void setRole(String role) {
         this.role = role;
     }
+
     public void setId(int id) {
         this.id = id;
     }
+
     public String getStatus() {
         return status;
     }
+
     public void setStatus(String status) {
         this.status = status;
     }

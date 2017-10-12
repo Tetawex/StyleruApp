@@ -9,7 +9,7 @@ import org.styleru.styleruapp.model.dto.support.IdItem;
  * Created by Пользователь on 06.04.2017.
  */
 
-public class TimelineItem  {
+public class TimelineItem {
 
     @SerializedName("name")
     @Expose
@@ -46,6 +46,7 @@ public class TimelineItem  {
     public boolean is_projects() {
         return is_projects;
     }
+
     public boolean isDepartment_change() {
         return department_change;
     }

@@ -9,8 +9,10 @@ import java.util.List;
  * Created by tetawex on 29.03.17.
  */
 
-public interface ProjectsView extends View{
+public interface ProjectsView extends View {
     void appendData(List<ProjectsItem> data);
+
     void setData(List<ProjectsItem> data);
+
     void onDataUpdated();
 }

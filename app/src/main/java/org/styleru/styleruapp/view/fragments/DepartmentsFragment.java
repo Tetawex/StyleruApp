@@ -36,8 +36,8 @@ import butterknife.ButterKnife;
 /**
  * A screen responsible for viewing event feed, implements corresponding interface
  */
-public class DepartmentsFragment extends Fragment implements DepartmentsView{
-    private static final int DEFAULT_BATCH_SIZE=10;
+public class DepartmentsFragment extends Fragment implements DepartmentsView {
+    private static final int DEFAULT_BATCH_SIZE = 10;
     private OnFragmentInteractionListener mListener;
     private EndlessRecyclerViewScrollListener recyclerViewScrollListener;
     private DepartmentsRecyclerAdapter recyclerAdapter;
@@ -69,21 +69,21 @@ public class DepartmentsFragment extends Fragment implements DepartmentsView{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        super.onCreateView(inflater,container,savedInstanceState);
+        super.onCreateView(inflater, container, savedInstanceState);
 
-        View view=inflater.inflate(R.layout.fragment_departments, container, false);
-        toolbarInteractor=(ToolbarInteractor)getActivity();
+        View view = inflater.inflate(R.layout.fragment_departments, container, false);
+        toolbarInteractor = (ToolbarInteractor) getActivity();
         toolbarInteractor.setToolbarTitleMode(ToolbarInteractor.Mode.BASIC);
         toolbarInteractor.setToolbarTitle(getString(R.string.departments));
         toolbarInteractor.setToolbarElevationDp(4);
 
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
         progressbar.setVisibility(View.VISIBLE);
         //Адаптер
         //Тут можно сделать поддержку вертикальной ориентации, использовав GridLayoutManager
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         //Адаптер для ресайклера
-        recyclerAdapter=new DepartmentsRecyclerAdapter(getContext(),new ArrayList<DepartmentsItem>());
+        recyclerAdapter = new DepartmentsRecyclerAdapter(getContext(), new ArrayList<DepartmentsItem>());
         recyclerView.setAdapter(recyclerAdapter);
 
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark,
@@ -94,7 +94,7 @@ public class DepartmentsFragment extends Fragment implements DepartmentsView{
                 (LinearLayoutManager) recyclerView.getLayoutManager()) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-                presenter.onDataAppend(recyclerAdapter.getItemCount(),DEFAULT_BATCH_SIZE);
+                presenter.onDataAppend(recyclerAdapter.getItemCount(), DEFAULT_BATCH_SIZE);
             }
         };
         recyclerView.addOnScrollListener(recyclerViewScrollListener);
@@ -102,13 +102,12 @@ public class DepartmentsFragment extends Fragment implements DepartmentsView{
         //Рефреш-лэйаут сверху
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onRefresh()
-            {
+            public void onRefresh() {
                 presenter.onDataUpdate(DEFAULT_BATCH_SIZE);
 
             }
         });
-        presenter=new DepartmentsPresenterImpl(this);
+        presenter = new DepartmentsPresenterImpl(this);
         presenter.onDataUpdate(DEFAULT_BATCH_SIZE);
         return view;
     }
@@ -121,7 +120,7 @@ public class DepartmentsFragment extends Fragment implements DepartmentsView{
 
     @Override
     public void showError(Throwable throwable) {
-        Toast.makeText(getContext(),throwable.getMessage(),Toast.LENGTH_SHORT);
+        Toast.makeText(getContext(), throwable.getMessage(), Toast.LENGTH_SHORT);
     }
 
     @Override
@@ -146,8 +145,7 @@ public class DepartmentsFragment extends Fragment implements DepartmentsView{
         recyclerAdapter.setDataWithNotify(data);
     }
 
-    public void onDataUpdated()
-    {
+    public void onDataUpdated() {
         swipeRefreshLayout.setRefreshing(false);
         recyclerViewScrollListener.resetState();
     }

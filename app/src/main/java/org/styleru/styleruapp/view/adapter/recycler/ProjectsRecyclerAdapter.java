@@ -26,14 +26,16 @@ import butterknife.ButterKnife;
 
 public class ProjectsRecyclerAdapter extends BaseRecyclerAdapter<ProjectsItem> {
     private DateTimeFormatter formatter;
+
     public ProjectsRecyclerAdapter(Context context, List<ProjectsItem> data) {
         super(context, data);
         formatter = DateTimeFormat.forPattern("dd.MM.yyyy");
     }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view=inflater.inflate(R.layout.card_projects_vol2,parent,false);
-        ProjectsViewHolder  holder;
+        View view = inflater.inflate(R.layout.card_projects_vol2, parent, false);
+        ProjectsViewHolder holder;
         holder = new ProjectsViewHolder(view);
         return holder;
     }
@@ -41,13 +43,13 @@ public class ProjectsRecyclerAdapter extends BaseRecyclerAdapter<ProjectsItem> {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder uncastedHolder, int position) {
 
-        ProjectsItem item= getData().get(position);
-        ProjectsViewHolder holder=(ProjectsViewHolder) uncastedHolder;
+        ProjectsItem item = getData().get(position);
+        ProjectsViewHolder holder = (ProjectsViewHolder) uncastedHolder;
 
-        DateTime itemDateTime=new DateTime(item.getEndDateTime());
-        holder.date.setText(context.getString(R.string.until)+" "+itemDateTime.toString(formatter));
+        DateTime itemDateTime = new DateTime(item.getEndDateTime());
+        holder.date.setText(context.getString(R.string.until) + " " + itemDateTime.toString(formatter));
 
-        if(item.isVacantPlaces())
+        if (item.isVacantPlaces())
             holder.vacant.setVisibility(View.VISIBLE);
         else
             holder.vacant.setVisibility(View.INVISIBLE);
@@ -56,9 +58,9 @@ public class ProjectsRecyclerAdapter extends BaseRecyclerAdapter<ProjectsItem> {
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bundle=new Bundle();
-                bundle.putInt("id",item.getId());
-                bundle.putString("name",item.getName());
+                Bundle bundle = new Bundle();
+                bundle.putInt("id", item.getId());
+                bundle.putString("name", item.getName());
                 Intent intent = new Intent(context, ProjectActivity.class);
                 intent.putExtras(bundle);
                 context.startActivity(intent);

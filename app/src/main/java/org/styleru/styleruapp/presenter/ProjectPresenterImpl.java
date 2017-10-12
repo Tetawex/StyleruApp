@@ -14,15 +14,15 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class ProjectPresenterImpl implements ProjectPresenter {
-    private Disposable disposable= Disposables.empty();
-    private Disposable secDisposable=Disposables.empty();
+    private Disposable disposable = Disposables.empty();
+    private Disposable secDisposable = Disposables.empty();
 
     private ProjectModel model;
     private ProjectView view;
 
-    public ProjectPresenterImpl(ProjectView view){
-        this.view=view;
-        model=new ProjectModelImpl();
+    public ProjectPresenterImpl(ProjectView view) {
+        this.view = view;
+        model = new ProjectModelImpl();
     }
 
     @Override
@@ -46,7 +46,7 @@ public class ProjectPresenterImpl implements ProjectPresenter {
                             view.showError(throwable);
                         },
                         () -> {
-                            if(!disposable.isDisposed()) {
+                            if (!disposable.isDisposed()) {
                                 disposable.dispose();
                             }
                         });
@@ -54,8 +54,8 @@ public class ProjectPresenterImpl implements ProjectPresenter {
 
     @Override
     public void onRequestVacancy(int id, boolean accepted) {
-        secDisposable= model.requestVacancy(id).subscribe(
-                ()->view.notifyVacancyRequestCompleted(id,!accepted),
-                throwable->view.showError(throwable));
+        secDisposable = model.requestVacancy(id).subscribe(
+                () -> view.notifyVacancyRequestCompleted(id, !accepted),
+                throwable -> view.showError(throwable));
     }
 }

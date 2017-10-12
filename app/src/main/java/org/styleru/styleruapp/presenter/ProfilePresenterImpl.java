@@ -17,11 +17,11 @@ public class ProfilePresenterImpl implements ProfilePresenter {
     //TODO: заменить инъекцию через конструктор инъекцией дагером
     private ProfileView view;
     private ProfileModel model;
-    private Disposable disposable= Disposables.empty();
+    private Disposable disposable = Disposables.empty();
 
     public ProfilePresenterImpl(ProfileView view) {
-        this.view=view;
-        this.model=new ProfileModelImpl();
+        this.view = view;
+        this.model = new ProfileModelImpl();
     }
 
     @Override
@@ -32,10 +32,12 @@ public class ProfilePresenterImpl implements ProfilePresenter {
                             view.inflateData(response.getData());
                             view.stopProgressBar();
                         },
-                        throwable -> {view.showError(throwable);
-                            view.stopProgressBar();},
+                        throwable -> {
+                            view.showError(throwable);
+                            view.stopProgressBar();
+                        },
                         () -> {
-                            if(!disposable.isDisposed()) {
+                            if (!disposable.isDisposed()) {
                                 disposable.dispose();
                             }
                         });

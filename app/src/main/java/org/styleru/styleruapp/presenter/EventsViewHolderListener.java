@@ -5,5 +5,5 @@ package org.styleru.styleruapp.presenter;
  */
 
 public interface EventsViewHolderListener {
-    void onGoButtonClicked(boolean desiredStatus,int serverId,int viewId);
+    void onGoButtonClicked(boolean desiredStatus, int serverId, int viewId);
 }

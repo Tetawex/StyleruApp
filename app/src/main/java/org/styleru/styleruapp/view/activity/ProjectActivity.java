@@ -34,7 +34,7 @@ import butterknife.ButterKnife;
  * Created by Пользователь on 27.03.2017.
  */
 
-public class ProjectActivity extends AppCompatActivity implements ProjectView{
+public class ProjectActivity extends AppCompatActivity implements ProjectView {
     @BindView(R.id.toolbar)
     public Toolbar toolbar;
     @BindView(R.id.text_manager_name)
@@ -59,7 +59,7 @@ public class ProjectActivity extends AppCompatActivity implements ProjectView{
     private ProjectParticipantsRecyclerAdapter participantsRecyclerAdapter;
     private ProjectVacanciesRecyclerAdapter vacanciesRecyclerAdapter;
 
-    private DateTimeFormatter formatter= DateTimeFormat.forPattern("dd.MM.yyyy");
+    private DateTimeFormatter formatter = DateTimeFormat.forPattern("dd.MM.yyyy");
     private int id;
     private ProjectPresenter presenter;
 
@@ -71,16 +71,16 @@ public class ProjectActivity extends AppCompatActivity implements ProjectView{
         setContentView(R.layout.activity_project);
         ButterKnife.bind(this);
         startProgressBar();
-        
+
         toolbar.setTitle(getIntent().getExtras().getString("name"));
-        id=getIntent().getExtras().getInt("id");
+        id = getIntent().getExtras().getInt("id");
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        participantsRecyclerAdapter=new ProjectParticipantsRecyclerAdapter(this, Collections.emptyList());
-        vacanciesRecyclerAdapter=new ProjectVacanciesRecyclerAdapter(this, Collections.emptyList(),this);
+        participantsRecyclerAdapter = new ProjectParticipantsRecyclerAdapter(this, Collections.emptyList());
+        vacanciesRecyclerAdapter = new ProjectVacanciesRecyclerAdapter(this, Collections.emptyList(), this);
         participantsRecycler.setLayoutManager(new LinearLayoutManager(this));
         vacanciesRecycler.setLayoutManager(new LinearLayoutManager(this));
         participantsRecycler.setAdapter(participantsRecyclerAdapter);
@@ -93,11 +93,12 @@ public class ProjectActivity extends AppCompatActivity implements ProjectView{
                 presenter.onLoadData(id);
             }
         });
-        presenter=new ProjectPresenterImpl(this);
+        presenter = new ProjectPresenterImpl(this);
         presenter.onLoadData(id);
     }
+
     @Override
-    public void inflateData(ProjectResponse response){
+    public void inflateData(ProjectResponse response) {
         toolbar.setTitle(response.getName());
         textDateEnd.setText(new DateTime(response.getDateTimeEnd()).toString(formatter));
         textDateStart.setText(new DateTime(response.getDateTimeStart()).toString(formatter));
@@ -111,14 +112,15 @@ public class ProjectActivity extends AppCompatActivity implements ProjectView{
         textManagerName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Bundle bundle=new Bundle();
-                bundle.putInt("id",response.getManagerId());
-                Intent intent = new Intent(getBaseContext(),ProfileActivity2.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("id", response.getManagerId());
+                Intent intent = new Intent(getBaseContext(), ProfileActivity2.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         finish();
@@ -133,7 +135,7 @@ public class ProjectActivity extends AppCompatActivity implements ProjectView{
 
     @Override
     public void showError(Throwable throwable) {
-        Toast.makeText(this,throwable.getMessage(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, throwable.getMessage(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -148,15 +150,16 @@ public class ProjectActivity extends AppCompatActivity implements ProjectView{
     }
 
     @Override
-    public void requestVacancy(int id,boolean accepted) {
-        presenter.onRequestVacancy(id,accepted);
+    public void requestVacancy(int id, boolean accepted) {
+        presenter.onRequestVacancy(id, accepted);
     }
+
     @Override
-    public void notifyVacancyRequestCompleted(int id,boolean accepted){
-        if(accepted)
-            Toast.makeText(this, R.string.vacancy_request_submitted,Toast.LENGTH_SHORT).show();
+    public void notifyVacancyRequestCompleted(int id, boolean accepted) {
+        if (accepted)
+            Toast.makeText(this, R.string.vacancy_request_submitted, Toast.LENGTH_SHORT).show();
         else
-            Toast.makeText(this, R.string.vacancy_request_removed,Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.vacancy_request_removed, Toast.LENGTH_SHORT).show();
         vacanciesRecyclerAdapter.tickVacancyByIdWithNotify(id);
     }
 }

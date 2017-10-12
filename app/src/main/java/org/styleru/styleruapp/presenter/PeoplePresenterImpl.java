@@ -20,73 +20,75 @@ import io.reactivex.disposables.Disposables;
 
 public class PeoplePresenterImpl implements PeoplePresenter {
     //TODO: заменить инъекцию через конструктор инъекцией дагером
-    public static final int BATCH_SIZE=32;
+    public static final int BATCH_SIZE = 32;
 
     private PeopleView view;
     private PeopleModel model;
 
-    private Disposable disposable= Disposables.empty();
-    private Disposable secondaryDisposable= Disposables.empty();
+    private Disposable disposable = Disposables.empty();
+    private Disposable secondaryDisposable = Disposables.empty();
 
-    private int currentId=0;
+    private int currentId = 0;
 
     public PeoplePresenterImpl(PeopleView view) {
-        this.view=view;
-        this.model=new PeopleModelImpl();
-        model.setDataChangedListener(()->{
-            if(currentId!=0)
-                onDataAppend(currentId,BATCH_SIZE);
+        this.view = view;
+        this.model = new PeopleModelImpl();
+        model.setDataChangedListener(() -> {
+            if (currentId != 0)
+                onDataAppend(currentId, BATCH_SIZE);
             else
                 onDataUpdate(BATCH_SIZE);
         });
         model.setErrorListener(new ErrorListener() {
-                                   @Override
-                                   public void accept(Throwable throwable) {
-                                       view.showError(throwable);
-                                       view.stopProgressBar();
-                                   }});
+            @Override
+            public void accept(Throwable throwable) {
+                view.showError(throwable);
+                view.stopProgressBar();
+            }
+        });
     }
 
     @Override
     public void onDataAppend(int offset, int batchSize) {
-        currentId=offset;
-        disposable = model.getData(batchSize,currentId)
+        currentId = offset;
+        disposable = model.getData(batchSize, currentId)
                 // .flatMap(Observable::from)
                 //.toList()
                 .subscribe(response -> view.appendData(response),
                         throwable -> view.showError(throwable),
                         () -> {
-                            if(!disposable.isDisposed()) {
+                            if (!disposable.isDisposed()) {
                                 disposable.dispose();
                             }
                         });
-        currentId+=batchSize;
+        currentId += batchSize;
     }
 
     @Override
     public void onFilterModelLoad() {
-        secondaryDisposable=model.getFilterModel().subscribe(response -> view.setFilterModel(response),
+        secondaryDisposable = model.getFilterModel().subscribe(response -> view.setFilterModel(response),
                 throwable -> view.showError(throwable),
                 () -> {
-                    if(!secondaryDisposable.isDisposed()) {
+                    if (!secondaryDisposable.isDisposed()) {
                         secondaryDisposable.dispose();
                     }
                 });
     }
 
     @Override
-    public void onModelUpdateCachedData(){
+    public void onModelUpdateCachedData() {
         model.updateCachedData();
         model.setRequestString("");
         view.setData(new ArrayList<>());
         view.startProgressBar();
         onDataUpdate(BATCH_SIZE);
-        currentId=0;
+        currentId = 0;
     }
+
     @Override
     public void onDataUpdate(int batchSize) {
-        currentId=0;
-        disposable = model.getData(batchSize,currentId)
+        currentId = 0;
+        disposable = model.getData(batchSize, currentId)
                 //.toList()
                 .subscribe(response ->
                         {
@@ -100,11 +102,11 @@ public class PeoplePresenterImpl implements PeoplePresenter {
                             view.showError(throwable);
                         },
                         () -> {
-                            if(!disposable.isDisposed()) {
+                            if (!disposable.isDisposed()) {
                                 disposable.dispose();
                             }
                         });
-        currentId+=batchSize;
+        currentId += batchSize;
     }
 
     @Override
@@ -113,15 +115,16 @@ public class PeoplePresenterImpl implements PeoplePresenter {
         view.setData(new ArrayList<>());
         view.startProgressBar();
         onDataUpdate(BATCH_SIZE);
-        currentId=0;
+        currentId = 0;
     }
+
     @Override
     public void onSetRequestString(String requestString) {
         model.setRequestString(requestString);
         view.setData(new ArrayList<>());
         view.startProgressBar();
         onDataUpdate(BATCH_SIZE);
-        currentId=0;
+        currentId = 0;
     }
 
     @Override

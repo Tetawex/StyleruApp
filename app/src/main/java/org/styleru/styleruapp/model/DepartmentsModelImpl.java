@@ -19,14 +19,16 @@ import io.reactivex.schedulers.Schedulers;
 public class DepartmentsModelImpl implements DepartmentsModel {
     private ApiService apiService;
     private String authToken;
+
     public DepartmentsModelImpl() {
-        apiService= Singletons.getApiService();
-        authToken=Singletons.getPreferencesManager().getAuthToken();
+        apiService = Singletons.getApiService();
+        authToken = Singletons.getPreferencesManager().getAuthToken();
     }
+
     @Override
     public Observable<DepartmentsResponse> getData(int offset, int batchSize) {
         return apiService.getApiInterface()
-                .getDepartments(new DepartmentsRequest(authToken,batchSize,offset))
+                .getDepartments(new DepartmentsRequest(authToken, batchSize, offset))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

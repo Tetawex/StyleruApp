@@ -43,13 +43,14 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
 public class ProjectsFragment extends Fragment implements ProjectsView {
-    private static final int DEFAULT_BATCH_SIZE=10;
+    private static final int DEFAULT_BATCH_SIZE = 10;
     private ProjectsFragment.OnFragmentInteractionListener mListener;
     private EndlessRecyclerViewScrollListener recyclerViewScrollListener;
     private ProjectsRecyclerAdapter recyclerAdapter;
 
-    private ProjectsFilter filter=new ProjectsFilter();
+    private ProjectsFilter filter = new ProjectsFilter();
     private String[] spinnerOptions;
 
     private ProjectsPresenter presenter;
@@ -83,7 +84,7 @@ public class ProjectsFragment extends Fragment implements ProjectsView {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_projects, container, false);
-        toolbarInteractor=(ToolbarInteractor)getActivity();
+        toolbarInteractor = (ToolbarInteractor) getActivity();
         toolbarInteractor.setToolbarTitleMode(ToolbarInteractor.Mode.SPINNER);
         toolbarInteractor.setToolbarElevationDp(4);
         ArrayAdapter<?> adapter =
@@ -103,12 +104,12 @@ public class ProjectsFragment extends Fragment implements ProjectsView {
         });
         setHasOptionsMenu(true);
 
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
         progressbar.setVisibility(View.VISIBLE);
         //Тут можно сделать поддержку вертикальной ориентации, использовав GridLayoutManager
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         //Адаптер для ресайклера
-        recyclerAdapter=new ProjectsRecyclerAdapter(getContext(),new ArrayList<ProjectsItem>());
+        recyclerAdapter = new ProjectsRecyclerAdapter(getContext(), new ArrayList<ProjectsItem>());
         recyclerView.setAdapter(recyclerAdapter);
 
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark);
@@ -119,7 +120,7 @@ public class ProjectsFragment extends Fragment implements ProjectsView {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
                 presenter.onDataAppend(recyclerAdapter
-                        .getItemCount(),DEFAULT_BATCH_SIZE);
+                        .getItemCount(), DEFAULT_BATCH_SIZE);
             }
         };
         recyclerView.addOnScrollListener(recyclerViewScrollListener);
@@ -127,13 +128,12 @@ public class ProjectsFragment extends Fragment implements ProjectsView {
         //Рефреш-лэйаут сверху
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onRefresh()
-            {
+            public void onRefresh() {
                 searchItem.collapseActionView();
                 presenter.onModelUpdateCachedData();
             }
         });
-        presenter=new ProjectsPresenterImpl(this);
+        presenter = new ProjectsPresenterImpl(this);
         return view;
     }
 
@@ -171,9 +171,11 @@ public class ProjectsFragment extends Fragment implements ProjectsView {
         });
         super.onCreateOptionsMenu(menu, inflater);
     }
-    private void doQuery(String query){
+
+    private void doQuery(String query) {
         presenter.onSetRequestString(query.trim());
     }
+
     @Override
     public void onDetach() {
         super.onDetach();
@@ -182,7 +184,7 @@ public class ProjectsFragment extends Fragment implements ProjectsView {
 
     @Override
     public void showError(Throwable throwable) {
-        Toast.makeText(getContext(),throwable.getMessage(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), throwable.getMessage(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -207,8 +209,7 @@ public class ProjectsFragment extends Fragment implements ProjectsView {
         recyclerAdapter.setDataWithNotify(data);
     }
 
-    public void onDataUpdated()
-    {
+    public void onDataUpdated() {
         swipeRefreshLayout.setRefreshing(false);
         recyclerViewScrollListener.resetState();
     }

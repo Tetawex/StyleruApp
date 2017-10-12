@@ -8,6 +8,8 @@ import org.styleru.styleruapp.model.dto.support.Settings;
 
 public interface SettingsPresenter {
     void onSettingsSync(Settings settings);
+
     void onSettingsModelDownload();
+
     void onLogout();
 }

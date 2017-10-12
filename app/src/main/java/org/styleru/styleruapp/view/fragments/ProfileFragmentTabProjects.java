@@ -29,7 +29,7 @@ import butterknife.ButterKnife;
  * A screen responsible for viewing event feed, implements corresponding interface
  */
 public class ProfileFragmentTabProjects extends Fragment {
-    private static final int DEFAULT_BATCH_SIZE=10;
+    private static final int DEFAULT_BATCH_SIZE = 10;
     private OnFragmentInteractionListener mListener;
     private EndlessRecyclerViewScrollListener recyclerViewScrollListener;
     private ProfileProjectsRecyclerAdapter recyclerAdapter;
@@ -60,15 +60,15 @@ public class ProfileFragmentTabProjects extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        super.onCreateView(inflater,container,savedInstanceState);
+        super.onCreateView(inflater, container, savedInstanceState);
 
-        View view=inflater.inflate(R.layout.fragment_profile_projects, container, false);
+        View view = inflater.inflate(R.layout.fragment_profile_projects, container, false);
 
 
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
         progressbar.setVisibility(View.VISIBLE);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerAdapter=new ProfileProjectsRecyclerAdapter(getActivity(),new ArrayList<ProfileProjectsItem>());
+        recyclerAdapter = new ProfileProjectsRecyclerAdapter(getActivity(), new ArrayList<ProfileProjectsItem>());
         recyclerView.setAdapter(recyclerAdapter);
 
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark,
@@ -109,13 +109,10 @@ public class ProfileFragmentTabProjects extends Fragment {
 //
 
 
-
-    public void onDataUpdated()
-    {
+    public void onDataUpdated() {
         swipeRefreshLayout.setRefreshing(false);
         recyclerViewScrollListener.resetState();
     }
-
 
 
     public interface OnFragmentInteractionListener {

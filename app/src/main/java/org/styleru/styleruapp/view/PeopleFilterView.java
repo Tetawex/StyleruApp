@@ -10,5 +10,6 @@ import org.styleru.styleruapp.util.Consumer;
 
 public interface PeopleFilterView extends View {
     void setOnFilterDefinedListener(Consumer<PeopleFilter> listener);
+
     void setFilterModel();
 }

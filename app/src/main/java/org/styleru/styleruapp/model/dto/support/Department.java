@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Department implements FilterItem{
+public class Department implements FilterItem {
 
     private boolean checked;
     @SerializedName("id")
@@ -38,7 +38,7 @@ public class Department implements FilterItem{
 
     @Override
     public void setChecked(boolean checked) {
-        this.checked=checked;
+        this.checked = checked;
     }
 
     public void setName(String name) {

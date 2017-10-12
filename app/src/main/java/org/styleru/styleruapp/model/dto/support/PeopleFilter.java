@@ -60,28 +60,29 @@ public class PeopleFilter {
     }
 
     public PeopleFilter() {
-        this(Collections.emptyList(),Collections.emptyList(),Collections.emptyList(),Collections.emptyList());
+        this(Collections.emptyList(), Collections.emptyList(), Collections.emptyList(), Collections.emptyList());
     }
-    public boolean valid(PeopleItem item){
-        if(getDepartmentIds().size()!=0&&
+
+    public boolean valid(PeopleItem item) {
+        if (getDepartmentIds().size() != 0 &&
                 Collections.disjoint(getDepartmentIds(), item.getDepartmentIds()))
             return false;
-        if(getSubdepartmentIds().size()!=0&&
+        if (getSubdepartmentIds().size() != 0 &&
                 Collections.disjoint(getSubdepartmentIds(), item.getSubdepartmentIds()))
             return false;
-        if(getUniversityIds().size()!=0) {
-            boolean flag=false;
-            for (Integer integer:getUniversityIds()) {
-                if(integer.equals(item.getUniversityId()))
-                    flag=true;
+        if (getUniversityIds().size() != 0) {
+            boolean flag = false;
+            for (Integer integer : getUniversityIds()) {
+                if (integer.equals(item.getUniversityId()))
+                    flag = true;
             }
             return flag;
         }
-        if(getExperiences().size()!=0) {
-            boolean flag=false;
-            for (Integer integer:getExperiences()) {
-                if(integer.equals(item.getExperience()))
-                    flag=true;
+        if (getExperiences().size() != 0) {
+            boolean flag = false;
+            for (Integer integer : getExperiences()) {
+                if (integer.equals(item.getExperience()))
+                    flag = true;
             }
             return flag;
         }

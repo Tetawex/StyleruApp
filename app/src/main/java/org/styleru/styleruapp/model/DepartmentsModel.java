@@ -10,5 +10,5 @@ import io.reactivex.Observable;
  */
 
 public interface DepartmentsModel extends Model {
-    Observable<DepartmentsResponse> getData(int offset,int batchSize);
+    Observable<DepartmentsResponse> getData(int offset, int batchSize);
 }

@@ -13,7 +13,7 @@ public class LogoutRequest {
     private String onesignalUserId;
 
     public LogoutRequest(String onesignalUserId) {
-        this.onesignalUserId =onesignalUserId;
+        this.onesignalUserId = onesignalUserId;
     }
 
     public String getOnesignalUserId() {

@@ -34,10 +34,11 @@ public class ProjectParticipantsRecyclerAdapter extends BaseRecyclerAdapter<Part
     public ProjectParticipantsRecyclerAdapter(Context context, List<ParticipantsItem> data) {
         super(context, data);
     }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view=inflater.inflate(R.layout.view_project_participants_recycleritem,parent,false);
-        ProjectParticipantsViewHolder  holder;
+        View view = inflater.inflate(R.layout.view_project_participants_recycleritem, parent, false);
+        ProjectParticipantsViewHolder holder;
         holder = new ProjectParticipantsViewHolder(view);
 
         return holder;
@@ -45,17 +46,17 @@ public class ProjectParticipantsRecyclerAdapter extends BaseRecyclerAdapter<Part
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder uncastedHolder, int position) {
-        ParticipantsItem item= getData().get(position);
-        ProjectParticipantsViewHolder holder=(ProjectParticipantsViewHolder) uncastedHolder;
+        ParticipantsItem item = getData().get(position);
+        ProjectParticipantsViewHolder holder = (ProjectParticipantsViewHolder) uncastedHolder;
         holder.name.setText(item.getName());
         holder.duty.setText(item.getDuty());
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bundle=new Bundle();
-                bundle.putInt("id",item.getId());
-                bundle.putString("name",item.getName());
-                Intent intent = new Intent(context,ProfileActivity2.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("id", item.getId());
+                bundle.putString("name", item.getName());
+                Intent intent = new Intent(context, ProfileActivity2.class);
                 intent.putExtras(bundle);
                 context.startActivity(intent);
             }
@@ -69,6 +70,7 @@ public class ProjectParticipantsRecyclerAdapter extends BaseRecyclerAdapter<Part
         TextView name;
         @BindView(R.id.duty)
         TextView duty;
+
         public ProjectParticipantsViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);

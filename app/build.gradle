@@ -5,7 +5,6 @@ repositories {
         url "https://jitpack.io"
     }
 }
-
 android {
     compileSdkVersion 25
     aaptOptions.cruncherEnabled = false
@@ -74,7 +73,7 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.5.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     // rxjava2
-    compile 'io.reactivex.rxjava2:rxjava:2.0.5'
+    compile 'io.reactivex.rxjava2:rxjava:2.1.5'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     // retrofit2
     compile 'com.squareup.retrofit2:retrofit:2.1.0'

@@ -19,8 +19,8 @@ public class SettingsUploadRequest {
     @Expose
     private Integer universityId;
 
-    public SettingsUploadRequest(String token,Settings settings) {
+    public SettingsUploadRequest(String token, Settings settings) {
         this.token = token;
-        universityId=settings.getUniversityId();
+        universityId = settings.getUniversityId();
     }
 }

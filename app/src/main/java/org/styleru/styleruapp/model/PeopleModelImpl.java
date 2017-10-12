@@ -29,10 +29,10 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class PeopleModelImpl implements PeopleModel {
-    public static final int BATCH_SIZE=50;
+    public static final int BATCH_SIZE = 50;
 
-    private String requestString="";
-    private PeopleFilter filter=new PeopleFilter();
+    private String requestString = "";
+    private PeopleFilter filter = new PeopleFilter();
 
     private String authToken;
 
@@ -40,44 +40,47 @@ public class PeopleModelImpl implements PeopleModel {
     private Action dataResetListener;
     private ErrorListener errorListener;
 
-    private boolean finishedLoading=false;
-    private Disposable disposable= Disposables.empty();
+    private boolean finishedLoading = false;
+    private Disposable disposable = Disposables.empty();
     private ApiService apiService;
 
     private List<PeopleItem> filteredItemList;
     private List<PeopleItem> itemList;
 
-    public PeopleModelImpl(){
-        itemList =new ArrayList<>();
-        filteredItemList=new ArrayList<>();
-        apiService= Singletons.getApiService();
-        authToken=Singletons.getPreferencesManager().getAuthToken();
+    public PeopleModelImpl() {
+        itemList = new ArrayList<>();
+        filteredItemList = new ArrayList<>();
+        apiService = Singletons.getApiService();
+        authToken = Singletons.getPreferencesManager().getAuthToken();
         appendData(0);
     }
+
     @Override
-    public Observable<List<PeopleItem>> getData(int batchSize,int currentId) {
-        int cap=currentId+batchSize;
-        int start=currentId;
-        if(cap>filteredItemList.size())
-            cap=filteredItemList.size();
-        if(currentId>=cap)
-            start=cap;
-        return Observable.just(new ArrayList<>(filteredItemList.subList(start,cap)));
+    public Observable<List<PeopleItem>> getData(int batchSize, int currentId) {
+        int cap = currentId + batchSize;
+        int start = currentId;
+        if (cap > filteredItemList.size())
+            cap = filteredItemList.size();
+        if (currentId >= cap)
+            start = cap;
+        return Observable.just(new ArrayList<>(filteredItemList.subList(start, cap)));
     }
+
     @Override
-    public Observable<FilterModelResponse> getFilterModel(){
+    public Observable<FilterModelResponse> getFilterModel() {
         return apiService.getApiInterface()
                 .getFilterModel(new FilterModelRequest(authToken))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
-    public void appendData(int offset){
-        Observable<PeopleResponse> observable =apiService
+
+    public void appendData(int offset) {
+        Observable<PeopleResponse> observable = apiService
                 .getApiInterface()
-                .getPeople(new PeopleRequest(authToken,BATCH_SIZE,offset))
+                .getPeople(new PeopleRequest(authToken, BATCH_SIZE, offset))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
-        disposable=observable.subscribe(
+        disposable = observable.subscribe(
                 response ->
                 {
                     itemList.addAll(response.getData());
@@ -87,66 +90,71 @@ public class PeopleModelImpl implements PeopleModel {
                 throwable ->
                 {
                     errorListener.accept(throwable);
-                    finishedLoading=true;
+                    finishedLoading = true;
                 },
                 () -> {
-                    if(!finishedLoading&&itemList.size()<1000)//TODO: убрать временный костыль
+                    if (!finishedLoading && itemList.size() < 1000)//TODO: убрать временный костыль
                     {
-                        appendData(itemList.size()+offset);
-                    }
-                    else {
-                        finishedLoading=true;
-                        if(!disposable.isDisposed()) {
+                        appendData(itemList.size() + offset);
+                    } else {
+                        finishedLoading = true;
+                        if (!disposable.isDisposed()) {
                             disposable.dispose();
                         }
                     }
                 });
     }
-    private List<PeopleItem> filter(List<PeopleItem> fullList){
-        List<PeopleItem> fList=new ArrayList<>();
-        for (PeopleItem item :fullList) {
-            if(filter.valid(item)&&
-                    (item.getFirstName()+" "+item.getLastName())
+
+    private List<PeopleItem> filter(List<PeopleItem> fullList) {
+        List<PeopleItem> fList = new ArrayList<>();
+        for (PeopleItem item : fullList) {
+            if (filter.valid(item) &&
+                    (item.getFirstName() + " " + item.getLastName())
                             .toLowerCase().contains(requestString.toLowerCase())) {
                 fList.add(item);
             }
         }
         return fList;
     }
-    private void filter(){
-        filteredItemList=new ArrayList<>();
-        for (PeopleItem item :itemList) {
-            if(!(item.getFirstName()+" "+item.getLastName()).toLowerCase().contains(requestString.toLowerCase()))
+
+    private void filter() {
+        filteredItemList = new ArrayList<>();
+        for (PeopleItem item : itemList) {
+            if (!(item.getFirstName() + " " + item.getLastName()).toLowerCase().contains(requestString.toLowerCase()))
                 continue;
-            if(!filter.valid(item))
+            if (!filter.valid(item))
                 continue;
 
             filteredItemList.add(item);
         }
     }
+
     @Override
-    public void setFilter(PeopleFilter filter){
-        this.filter=filter;
+    public void setFilter(PeopleFilter filter) {
+        this.filter = filter;
         filter();
     }
+
     @Override
-    public void setRequestString(String requestString){
-        this.requestString=requestString;
+    public void setRequestString(String requestString) {
+        this.requestString = requestString;
         filter();
     }
 
     @Override
     public void updateCachedData() {
-        requestString="";
-        finishedLoading=false;
+        requestString = "";
+        finishedLoading = false;
         itemList.clear();
         filteredItemList.clear();
         appendData(0);
     }
+
     @Override
     public void setDataChangedListener(Action dataChangedListener) {
         this.dataChangedListener = dataChangedListener;
     }
+
     @Override
     public void setErrorListener(ErrorListener errorListener) {
         this.errorListener = errorListener;
